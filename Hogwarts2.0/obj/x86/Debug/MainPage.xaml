@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="Hogwarts2._0.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hogwarts2._0"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1920" Height="1080">
+
+    <Grid Margin="10,0,0,0" >
+        <Frame x:ConnectionId='2' x:Name="frameLoginPage"/>
+        <Image Source="Assets/hogwartstest1.jpg" Stretch="None"/>
+        <Border Background="#66000000" Margin="814,349,825,365"/>
+        <Button x:ConnectionId='3' Visibility="Visible" Name="Sound_On" Height="50" Width="72" Margin="40,31,0,0" VerticalAlignment="Top"                       >
+            <Image x:ConnectionId='10' Name="Sound_OnPic" Source="Assets/sound.png" />
+        </Button>
+        <Button x:ConnectionId='4' Visibility="Collapsed" Name="Sound_Off" Height="61" Margin="36,25,0,0" Width="80" VerticalAlignment="Top"                        >
+            <Image x:ConnectionId='9' Name="Sound_offPic" Source="Assets/nosound.png"/>
+        </Button>
+        <Grid Margin="0,10,0,0">
+            <Image Source="Assets/hogwartslogo.png" Stretch="none" Margin="-7,-274,7,274"/>
+            <TextBlock Text="USERNAME" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Margin="848,379,865,658" />
+            <TextBox x:ConnectionId='5' x:Name="Username" PlaceholderText="Enter Username" Margin="847,421,863,617" Width="200" RenderTransformOrigin="0.51,0.515"/>
+            <TextBlock Text="PASSWORD" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Margin="847,457,863,584" Width="200"/>
+            <PasswordBox x:ConnectionId='6' x:Name="Password" PlaceholderText="Enter Password" Margin="847,490,863,551" Width="200"/>
+            <Button x:ConnectionId='7' Name="Login" FontSize="36" Foreground="Black" Content="LOGIN" FontFamily="/Assets/HarryP__.TTF#Harry P" RenderTransformOrigin="6.7,1.692" Height="56" Width="198" Margin="849,535,0,0" VerticalAlignment="Top"                    />
+            <Button x:ConnectionId='8' Name="Register" FontSize="36" Foreground="Black" Content="REGISTER" FontFamily="/Assets/HarryP__.TTF#Harry P" Margin="848,617,0,0" VerticalAlignment="Top" Height="54" Width="200"                        />
+        </Grid>
+        <!--</Border>-->
+    </Grid>
+</Page>
+

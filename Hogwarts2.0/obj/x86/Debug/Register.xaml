@@ -1,0 +1,303 @@
+﻿<Page
+    x:Class="Hogwarts2._0.Register"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hogwarts2._0"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Image Source="Assets/RegisterBackground.png"/>
+        <Button x:ConnectionId='2' Name="goBack" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Go Back" Height="67" Width="112" FontSize="36" Margin="121,75,0,0" VerticalAlignment="Top"                     ></Button>
+        <Button x:ConnectionId='3' Name="StudentRegButton" Content="Student" Margin="907,424,0,0" VerticalAlignment="Top" Height="63" Width="130" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="50" RenderTransformOrigin="0.515,0.556"                       />
+        <Button x:ConnectionId='4' Name="FacultyRegButton" Content="Faculty" Height="63" Width="130" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="50" RenderTransformOrigin="0.515,0.556" Margin="907,521,0,0" VerticalAlignment="Top"                       />
+        <Border x:ConnectionId='5' x:Name="StudentRegisterForm" Background="#66000000"  Visibility="Collapsed" Margin="644,170,619,114">
+            <Grid>
+                <TextBlock x:ConnectionId='115' Name="StudentRegisterTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Registration" Foreground="Black" FontSize="120" FontWeight="Medium" Margin="33,0,5,570" />
+                <TextBlock x:ConnectionId='116' Name="sFirstNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="189,211,24,488"/>
+                <TextBlock x:ConnectionId='117' Name="sFirstName" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First Name:" Foreground="Black" FontSize="36" Margin="57,168,413,492"/>
+                <TextBox x:ConnectionId='118' Name="sFirstNameInput" PlaceholderText="Enter First Name" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,161,27,514" />
+                <TextBlock x:ConnectionId='119' Name="sLastNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="188,301,28,398"/>
+                <TextBlock x:ConnectionId='120' Name="sLastName" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last Name:" Foreground="Black" FontSize="36" Margin="59,258,412,398"/>
+                <TextBox x:ConnectionId='121' Name="sLastNameInput" PlaceholderText="Enter Last Name" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,248,27,425" />
+                <TextBlock x:ConnectionId='122' Name="sUsernameWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Username field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="201,397,11,303"/>
+                <TextBlock x:ConnectionId='123' Name="sUsername" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Username:" Foreground="Black" FontSize="36" Margin="59,353,428,260"/>
+                <TextBox x:ConnectionId='124' Name="sUsernameInput" PlaceholderText="Enter Username" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,346,27,327" />
+                <TextBlock x:ConnectionId='125' Name="sPasswordWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Passwords do not match. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="207,613,24,86"/>
+                <TextBlock x:ConnectionId='126' Name="sPasswordWarning2" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Password field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="204,503,14,198"/>
+                <TextBlock x:ConnectionId='127' Name="sPaswword" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Password:" Foreground="Black" FontSize="36" Margin="59,459,438,148"/>
+                <TextBox x:ConnectionId='128' Name="sPasswordInput" PlaceholderText="Enter Password" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,448,27,225"/>
+                <TextBlock x:ConnectionId='129' Name="sCPasswordWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Confirm Password field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="111,605,9,94"/>
+                <TextBlock x:ConnectionId='130' Name="sConfirmPassword" Text="Confirm Password:" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Margin="57,561,304,70"/>
+                <TextBox x:ConnectionId='131' Name="sConfirmPasswordInput" PlaceholderText="Re-Enter Password" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,550,27,123"/>
+                <Button x:ConnectionId='132' Name="StudentRegisterCancel" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Cancel" Height="50" Width="100" FontSize="36" Foreground="Black" Margin="57,658,0,0" VerticalAlignment="Top"                                     />
+                <Button x:ConnectionId='133' Name="StudentRegisterContinue" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Continue" Height="50" Width="140" FontSize="36" Foreground="Black" Margin="433,658,0,0" VerticalAlignment="Top"                                      />
+            </Grid>
+        </Border>
+
+        <Border x:ConnectionId='6' x:Name="StudentRegisterForm2" Background="#66000000" Margin="412,127,387,-2792" Visibility="Collapsed">
+            <!--<ScrollBar Orientation="Vertical" Width ="4in" Scroll="OnScroll" Minimum="1" Maximum="100"> -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,2806">
+                <Grid Height="3740">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="533*"/>
+                        <ColumnDefinition Width="588*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:ConnectionId='29' Name="SortingHatTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Sorting Hat Questions" Foreground="Black" FontSize="120" Margin="240,10,228,1392" Grid.ColumnSpan="2"/>
+                    <TextBlock x:ConnectionId='30' Name="Pet" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Pet:" Foreground="Black" FontSize="36" Margin="50,141,440,1352" RenderTransformOrigin="0.588,0.493"/>
+                    <ComboBox x:ConnectionId='31'  Name="PetInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Pick A Pet" FontSize="36" Margin="96,137,0,0" Height="40" Width="144">
+                        <x:String>Cat</x:String>
+                        <x:String>Owl</x:String>
+                        <x:String>Toad</x:String>
+                        <x:String>None</x:String>
+                    </ComboBox>
+                    <TextBlock x:ConnectionId='32' Name="Question1" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="1. Which of the following would you most hate people to call you?" Foreground="Black" FontSize="36" Margin="50,194,365,1592" Grid.ColumnSpan="2" />
+                    <RadioButton x:ConnectionId='33' Name="A1" GroupName="Question1Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,230,0,0" VerticalAlignment="Top" Width="78" Height="45">
+                        Ordinary
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='34' Name="B1" GroupName="Question1Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,271,0,0" VerticalAlignment="Top" >
+                        Ignorant
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='35' Name="C1"  GroupName="Question1Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="482,232,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" >
+                        Cowardly
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='36' Name ="D1" GroupName="Question1Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="482,271,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" >
+                        Selfish
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='37' Name="Question2" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="2. You can invent a potion that will guarantee you one of the following, which do you choose?" Foreground="Black" FontSize="36" Margin="50,317,53,1471" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='38' Name="A2" GroupName="Question2Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,358,0,0" VerticalAlignment="Top">
+                        Glory
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='39' Name="B2" GroupName="Question2Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,404,0,0" VerticalAlignment="Top">
+                        Wisdom
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='40' Name="C2" GroupName="Question2Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="482,408,0,0" VerticalAlignment="Top">
+                        Love
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='41' Name="D2" GroupName="Question2Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="482,367,0,0" VerticalAlignment="Top">
+                        Power
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='42' Name="Question3" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="3. How would you like to be known as throughtout history?" Foreground="Black" FontSize="36" Margin="50,454,429,3240" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='43' Name="A3" GroupName="Question3Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,495,0,0" VerticalAlignment="Top">
+                        The Wise
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='44' Name="B3" GroupName="Question3Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="482,495,0,0" VerticalAlignment="Top">
+                        The Good
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='45' Name="C3" GroupName="Question3Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,541,0,0" VerticalAlignment="Top">
+                        The Bold
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='46' Name="D3" GroupName="Question3Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="482,541,0,0" VerticalAlignment="Top">
+                        The Great
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='47' Name="Question4" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="4. Four boxes are placed before you. Which would you try and open?" Foreground="Black" FontSize="36" Margin="50,587,319,3105" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='48' Name="A4" GroupName="Question4Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="48,629,0,0" VerticalAlignment="Top" Width="968">
+                        The small tortoiseshell box, embellished with gold, inside which some small creature seems to be squeaking.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='49' Name="B4" GroupName="Question4Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="27" Foreground="Black" Grid.ColumnSpan="2" Margin="50,676,0,0" VerticalAlignment="Top">
+                        The gleaming jet black box with a silver lock and key, marked with a mysterious rune that you know to be the mark of Merlin.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='50' Name="C4" GroupName="Question4Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="25" Foreground="Black" Grid.ColumnSpan="2" Margin="50,722,0,0" VerticalAlignment="Top" Width="1036">
+                        The ornate golden casket, standing on clawed feet, whose inscription warns that both secret knowledge and unbearable temptation lie within.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='51' Name="D4" GroupName="Question4Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="27" Foreground="Black" Margin="50,768,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="1061">
+                        The small pewter box, unassuming and plain, with a scratched message upon it that reads "˜I open only for the worthy."
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='52' Name="Question5" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="5. You enter an enchanted garden. What would you be most curious to examine first?" Foreground="Black" FontSize="36" Margin="50,822,166,2869" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='53' Name="A5" GroupName="Question5Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="50,869,0,0" VerticalAlignment="Top">
+                        The silver leafed tree bearing golden apples.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='54' Name="B5" GroupName="Question5Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="50,912,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="589">
+                        The fat red toadstools that appear to be talking to each other.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='55' Name="C5" GroupName="Question5Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="50,959,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="779">
+                        The bubbling pool, in the depths of which something luminous is swirling.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='56' Name="D5" GroupName="Question5Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="50,1004,0,0" VerticalAlignment="Top" Width="670" Grid.ColumnSpan="2">
+                        The statue of an old wizard with a strangely twinkling eye.
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='57' Name="Question6" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="6. Late at night, walking alone down the street, you hear a peculiar cry that you believe to have a magical source. Do you: " TextWrapping="Wrap" Foreground="Black" FontSize="36" Margin="48,1060,42,2597" Grid.ColumnSpan="2" RenderTransformOrigin="0.492,0.512"/>
+                    <RadioButton x:ConnectionId='58' Name="A6" GroupName="Question6Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="1001" Margin="50,1147,0,0" VerticalAlignment="Top">
+                        Proceed with caution, keeping one hand on your concealed wand and an eye out for any disturbance?
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='59' Name="B6" GroupName="Question6Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="639" Margin="50,1197,0,0" VerticalAlignment="Top">
+                        Draw your wand and try to discover the source of the noise?
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='60' Name="C6" GroupName="Question6Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="50,1244,0,0" VerticalAlignment="Top">
+                        Draw your wand and stand your ground?
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='61' Name="D6" GroupName="Question6Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="958" Margin="50,1289,0,0" VerticalAlignment="Top">
+                        Withdraw into the shadows, while mentally reviewing the most appropriate defensive and offensive spells?
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='62' Name="Question7" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="7. You and two friends need to cross a bridge guarded by a river troll who insists on fighting one of you before he will let all of you pass. Do you:" TextWrapping="Wrap" Foreground="Black" FontSize="36" Margin="48,1349,23,2304" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='63' Name="A7" GroupName="Question7Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="862" Margin="50,1490,0,0" VerticalAlignment="Top">
+                        Attempt to confuse the troll into letting all three of you pass without fighting?
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='64' Name="B7" GroupName="Question7Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="50,1440,0,0" VerticalAlignment="Top">
+                        Suggest drawing lots to decide which of you will fight?
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='65' Name="C7" GroupName="Question7Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="748" Margin="50,1540,0,0" VerticalAlignment="Top">
+                        Suggest that all three of you should fight (without telling the troll)?
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='66' Name="D7" GroupName="Question7Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="50,1588,0,0" VerticalAlignment="Top">
+                        Volunteer to fight?
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='67' Name="Question8" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="8. What kind of instrument most pleases your ear?" FontSize="36" Foreground="black" Margin="50,1645,538,2050" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='68' Name="A8" GroupName="Question8Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,1686,0,0" VerticalAlignment="Top">
+                        The violin
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='69' Name="B8" GroupName="Question8Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,1726,0,0" VerticalAlignment="Top">
+                        The trumpet
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='70' Name="C8" GroupName="Question8Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="494,1686,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                        The piano
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='71' Name="D8" GroupName="Question8Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="494,1726,0,0" VerticalAlignment="Top">
+                        The drum
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='72' Name="Question9" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="9. Once every century, the Flutterby bush produces flowers that adapt their scent to attract the unwary. If it lured you, it would smell of:" TextWrapping="Wrap" FontSize="36" Foreground="Black" Margin="48,1784,25,1874" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='73' Name="A9" GroupName="Question9Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,1870,0,0" VerticalAlignment="Top">
+                        A crackling log fire
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='74' Name="B9" GroupName="Question9Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="188,1920,0,0" VerticalAlignment="Top">
+                        The sea
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='75' Name="C9" GroupName="Question9Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="494,1870,0,0" VerticalAlignment="Top">
+                        Fresh parchment
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='76' Name="D9" GroupName="Question9Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="494,1920,0,0" VerticalAlignment="Top">
+                        Home
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='77' Name="Question10" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="10. After you have died, what would you most like people to do when they hear your name?" FontSize="36" Foreground="Black" Margin="48,1984,30,1712" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='78' Name="A10" GroupName="Question10Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="50,2026,0,0" VerticalAlignment="Top">
+                        Miss you, but smile.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='79' Name="B10" GroupName="Question10Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="50,2069,0,0" VerticalAlignment="Top">
+                        Ask for more stories about your adventures.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='80' Name="C10" GroupName="Question10Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="50,2114,0,0" VerticalAlignment="Top">
+                        Think with admiration of your achievements.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='81' Name="D10" GroupName="Question10Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="1026" Margin="50,2158,0,0" VerticalAlignment="Top">
+                        I don't care what people think of me after I'm dead; its what they think of me while I'm alive that counts.
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='82' Name="Question11" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="11. Four goblets are placed before you. Which would you choose to drink?" FontSize="36" Foreground="Black" Margin="50,2212,89,1477" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='83' Name="A11" GroupName="Question11Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="50,2262,0,0" VerticalAlignment="Top">
+                        The foaming, frothing, silvery liquid that sparkles as though containing ground diamonds.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='84' Name="B11" GroupName="Question11Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="50,2304,0,0" VerticalAlignment="Top">
+                        The smooth, thick, richly purple drink that gives off a delicious smell of chocolate and plums.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='85' Name="C11" GroupName="Question11Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="50,2350,0,0" VerticalAlignment="Top">
+                        The golden liquid so bright that it hurts the eye, and which makes sunspots dance all around the room.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='86' Name="D11" GroupName="Question11Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="50,2394,0,0" VerticalAlignment="Top">
+                        The mysterious black liquid that gleams like ink, and gives off fumes that make you see strange visions.
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='87' Name="Question12" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="12. A Muggle confronts you and says that they are sure you are a witch or wizard. Do you:" FontSize="36" Foreground="Black" Margin="50,2442,62,1250" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='88' Name="A12" GroupName="Question12Input"  FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="48,2489,0,0" VerticalAlignment="Top">
+                        Ask what makes them think so?
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='89' Name="B12" GroupName="Question12Input"  FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="48,2533,0,0" VerticalAlignment="Top">
+                        Agree, and ask whether they'd like a free sample of a jinx?
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='90' Name="C12" GroupName="Question12Input"  FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="48,2577,0,0" VerticalAlignment="Top">
+                        Agree, and walk away, leaving them to wonder whether you are bluffing?
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='91' Name="D12" GroupName="Question12Input"  FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Margin="48,2625,0,0" VerticalAlignment="Top" Width="795">
+                        Tell them that you are worried about their mental health, and offer to call a doctor.
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='92' Name="Question13" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="13. One of your house mates has cheated in a Hogwarts exam by using a Self-Spelling Quill. Now he has come top of the class in Charms, beating you into second place. Professor Flitwick is suspicious of what happened. He draws you to one side after his lesson and asks you whether or not your classmate used a forbidden quill. What do you do?" TextWrapping="Wrap" FontSize="36" Foreground="Black" Margin="50,2678,14,908" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='93' Name="A13" GroupName="Question13Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="966" Margin="48,2829,0,0" VerticalAlignment="Top">
+                        Lie and say you don't know (but hope that somebody else tells Professor Flitwick the truth).
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='94' Name="B13" GroupName="Question13Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="1065" Margin="49,2882,0,0" VerticalAlignment="Top">
+                        Tell Professor Flitwick that he ought to ask your classmate (and resolve to tell your classmate that if he doesn't tell the truth, you will).
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='95' Name="C13" GroupName="Question13Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="1051" Margin="50,2955,0,0" VerticalAlignment="Top">
+                        Tell Professor Flitwick the truth. If your classmate is prepared to win by cheating, he deserves to be found out. Also, as you are both in the same house, any points he loses will be regained by you, for coming first in his place.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='96' Name="D13" GroupName="Question13Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="1062" Margin="50,3027,0,0" VerticalAlignment="Top">
+                        You would not wait to be asked to tell Professor Flitwick the truth. If you knew that somebody was using a forbidden quill, you would tell the teacher before the exam started.
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='97' Name="Question14" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="14. Which road tempts you most?" FontSize="36" Foreground="Black" Margin="50,3109,538,589" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='98' Name="A14" GroupName="Question14Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="91,3150,0,0" VerticalAlignment="Top">
+                        The wide, sunny, grassy lane.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='99' Name="B14" GroupName="Question14Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.Column="1" Margin="12,3150,0,0" VerticalAlignment="Top">
+                        The narrow, dark, lantern-lit alley.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='100' Name="C14" GroupName="Question14Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.Column="1" Margin="12,3187,0,0" VerticalAlignment="Top">
+                        The twisting, leaf-strewn path through woods.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='101' Name="D14" GroupName="Question14Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="91,3187,0,0" VerticalAlignment="Top">
+                        The cobbled street lined with ancient buildings.
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='102' Name="Question15" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="15. Which nightmare would frighten you most?" FontSize="36" Foreground="Black" Margin="50,3239,538,460" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='103' Name="A15" GroupName="Question15Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="1071" Margin="53,3283,0,0" VerticalAlignment="Top">
+                        Standing on top of something very high and realizing suddenly that there are no hand- or footholds, nor any barrier to stop you from falling.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='104' Name="B15" GroupName="Question15Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="781" Margin="53,3352,0,0" VerticalAlignment="Top">
+                        An eye at the keyhole of the dark, windowless room in which you are locked.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='105' Name="C15" GroupName="Question15Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="843" Margin="53,3397,0,0" VerticalAlignment="Top">
+                        Waking up to find that neither your friends nor your family have any idea who you are.
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='106' Name="D15" GroupName="Question15Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Grid.ColumnSpan="2" Width="1061" Margin="53,3441,0,0" VerticalAlignment="Top">
+                        Being forced to speak in such a silly voice that hardly anyone can understand you, and everyone laughs at you.
+                    </RadioButton>
+                    <TextBlock x:ConnectionId='107' Name="Question16" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="16. Which house would you most like to be in?" FontSize="36" Foreground="Black" Margin="59,3497,529,193" Grid.ColumnSpan="2"/>
+                    <RadioButton x:ConnectionId='108' Name="A16" GroupName="Question16Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="145,3546,0,0" VerticalAlignment="Top">
+                        Gryffindor
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='109' Name="B16" GroupName="Question16Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="186,3546,0,0" VerticalAlignment="Top" Grid.Column="1">
+                        Ravenclaw
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='110' Name="C16" GroupName="Question16Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="339,3546,0,0" VerticalAlignment="Top">
+                        Hufflepuff
+                    </RadioButton>
+                    <RadioButton x:ConnectionId='111' Name="D16" GroupName="Question16Input" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" Foreground="Black" Margin="2,3546,0,0" VerticalAlignment="Top" Grid.Column="1">
+                        Slytherin
+                    </RadioButton>
+                    <Button x:ConnectionId='112' Name="StudentBack" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Go Back" Height="50" Width="124" FontSize="36" Foreground="Black" Margin="143,3614,0,0" VerticalAlignment="Top"                           RenderTransformOrigin="0.484,0.56" />
+                    <Button x:ConnectionId='113' Name="StudentRegisterCancel2" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Cancel" Height="50" Width="100" FontSize="36" Foreground="Black" Margin="482,3614,0,0" VerticalAlignment="Top"                                      Grid.ColumnSpan="2" RenderTransformOrigin="0.53,0.51"/>
+                    <Button x:ConnectionId='114' Name="StudentRegister" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Register" Height="50" Width="150" FontSize="36" Foreground="Black" Margin="294,3614,0,0" VerticalAlignment="Top"                               Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+        <Border x:ConnectionId='7' x:Name="FacultyRegisterForm" Background="#66000000" Margin="644,170,619,106" Visibility="Visible">
+            <Grid>
+                <TextBlock x:ConnectionId='8' Name="FacultyRegisterTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Faculty Registration" Foreground="Black" FontSize="120" FontWeight="Medium" Margin="35,0,3,575" />
+                <TextBlock x:ConnectionId='9' Name="fFirstNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Visible" Margin="189,184,24,515"/>
+                <TextBlock x:ConnectionId='10' Name="fFirstName" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First Name:" Foreground="Black" FontSize="36" Margin="57,130,413,549"/>
+                <TextBox x:ConnectionId='11' Name="fFirstNameInput" PlaceholderText="Enter First Name" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,130,27,553" />
+                <TextBlock x:ConnectionId='12' Name="fLastNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Visible" Margin="190,288,26,411"/>
+                <TextBlock x:ConnectionId='13' Name="fLastName" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last Name:" Foreground="Black" FontSize="36" Margin="59,230,412,436"/>
+                <TextBox x:ConnectionId='14' Name="fLastNameInput" PlaceholderText="Enter Last Name" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,230,27,453" />
+                <TextBlock x:ConnectionId='15' Name="fUsernameWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Username field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Visible" Margin="203,384,9,316"/>
+                <TextBlock x:ConnectionId='16' Name="fUsername" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Username:" Foreground="Black" FontSize="36" Margin="59,332,428,331"/>
+                <TextBox x:ConnectionId='17' Name="fUsernameInput" PlaceholderText="Enter Username" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,332,27,351" />
+                <TextBlock x:ConnectionId='18' Name="fPasswordWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Passwords do not match. Please try again" Foreground="Red" FontSize="36" Visibility="Visible" Margin="206,573,25,126"/>
+                <TextBlock x:ConnectionId='19' Name="fPasswordWarning2" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Password field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="206,476,12,225"/>
+                <TextBlock x:ConnectionId='20' Name="fPaswword" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Password:" Foreground="Black" FontSize="36" Margin="59,425,438,201"/>
+                <TextBox x:ConnectionId='21' Name="fPasswordInput" PlaceholderText="Enter Password" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,425,27,258"/>
+                <TextBlock x:ConnectionId='22' Name="fCPasswordWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Confirm Password field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="110,571,10,13"/>
+                <TextBlock x:ConnectionId='23' Name="fConfirmPassword" Text="Confirm Password:" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Margin="57,524,396,151"/>
+                <TextBox x:ConnectionId='24' Name="fConfirmPasswordInput" PlaceholderText="Re-Enter Password" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,521,27,162" RenderTransformOrigin="0.508,0.52"/>
+                <TextBlock x:ConnectionId='25' Name="fRole" Text="Role:" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Margin="59,612,549,53" Foreground="Black"/>
+                <ComboBox x:ConnectionId='26'  Name="fRoleInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Pick Your Role" FontSize="36" Margin="256,610,0,0" Height="48" Width="191">
+                    <x:String>Professor</x:String>
+                    <x:String>Counselor</x:String>
+                    <x:String>Headmaster</x:String>
+                    <x:String>Headmistress</x:String>
+                    <x:String>Executive</x:String>
+                </ComboBox>
+                <Button x:ConnectionId='27' Name="FacultyRegisterCancel" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Cancel" Height="50" Width="100" FontSize="36" Foreground="Black" Margin="57,672,0,0" VerticalAlignment="Top"                                     />
+                <Button x:ConnectionId='28' Name="FacultyRegister" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Register" Height="50" Width="140" FontSize="36" Foreground="Black" Margin="433,672,0,0" VerticalAlignment="Top"                              />
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
+
