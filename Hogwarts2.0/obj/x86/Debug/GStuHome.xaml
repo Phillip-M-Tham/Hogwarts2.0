@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="Hogwarts2._0.GStuHome"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hogwarts2._0"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Image x:ConnectionId='2' Name="redbackground" Source="Assets/Gback.png" Stretch="Fill"/>
+        <Image x:ConnectionId='3' Name="Glogo" Stretch="none" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Glogo.png" Margin="0,341,0,0"/>
+        <TextBlock x:ConnectionId='4' Name="GSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="    YOU MIGHT BELONG IN GRYFFINDOR,&#x0a;   WHERE DWELL THE BRAVE AT HEART,&#x0a;   THEIR DARING, NERVE, AND CHIVALRY&#x0a;          SET GRYFFINDORS APART" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#f0b906" Margin="0,77,0,0" Width="1020"/>
+    </Grid>
+</Page>
+

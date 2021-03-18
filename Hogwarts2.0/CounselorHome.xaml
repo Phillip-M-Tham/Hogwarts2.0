@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="Hogwarts2._0.CounselorHome"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hogwarts2._0"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Image Name="Counselorbackground" Source="Assets/Counselor2back.png" Stretch="Fill"/>
+        <Grid>
+            
+        </Grid>
+        <TextBlock Name="GSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="                It MATTERS NOT&#x0a;           WHAT SOMEONE IS BORN,&#x0a;        BUT WHAT THEY GROW TO BE" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#f0b906" Margin="0,77,0,0" Width="1020"/>
+    </Grid>
+</Page>

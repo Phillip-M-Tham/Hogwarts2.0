@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="Hogwarts2._0.ProfCourses"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hogwarts2._0"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Image x:ConnectionId='2' Name="Profbackground" Source="Assets/ProfCourseback.png" Stretch="Fill"/>
+        <Grid>
+            <Button x:ConnectionId='26' x:Name="CreateCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Create A Course" Margin="0,290,0,0" VerticalAlignment="Top"                            />
+            <Button x:ConnectionId='27' x:Name="AssignCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Assign A Course" Margin="0,407,0,0" VerticalAlignment="Top"                           />
+            <Button x:ConnectionId='28' x:Name="GradeCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Grade My Courses" Margin="0,536,0,0" VerticalAlignment="Top"                          />
+        </Grid>
+        <Grid x:ConnectionId='3' Name="AssignCourseForm" Visibility="Visible">
+            <Image x:ConnectionId='15' x:Name="Form2Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Grid Margin="453,-44,459,572">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Assign Your Courses" Foreground="Black" FontWeight="Light"/>
+            </Grid>
+            <Grid>
+                <Button x:ConnectionId='24' Name="AssignCourseForm2" HorizontalAlignment="Center" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Assign Course" Margin="0,341,0,0" VerticalAlignment="Top"                                />
+                <Button x:ConnectionId='25' Name="UpdateCourseForm2" HorizontalAlignment="Center" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Update Course" Margin="0,531,0,0" VerticalAlignment="Top"                                 />
+            </Grid>
+            <Grid Margin="706,709,716,39">
+                <Button x:ConnectionId='23' x:Name="Cancelform2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Cancel"                           />
+            </Grid>
+            <Grid x:ConnectionId='16' x:Name="form2A" Visibility="Visible">
+                <Grid x:ConnectionId='17' x:Name="form2ALabels" Margin="-173,312,752,131">
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester:" Foreground="Black" Margin="0,-38,0,38" />
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course:" Foreground="Black" Margin="0,20,0,-20" />
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Days:" Foreground="Black" Margin="0,90,0,-90"/>
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Times:" Foreground="Black" Margin="0,154,0,-154" />
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Location:" Foreground="Black" Margin="0,214,0,-214"/>
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Required Materials:" Foreground="Black" Margin="0,284,0,-284" />
+                </Grid>
+                <Grid x:ConnectionId='18' x:Name="Form2AInputs">
+                    <Grid x:ConnectionId='21' x:Name="SemesterInput" Margin="29,-31,547,357">
+                        <ComboBox x:ConnectionId='22' Name="Form2ValidSemesters" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A semester"/>
+                    </Grid>
+                </Grid>
+                <Grid Margin="396,709,1026,39">
+                    <Button x:ConnectionId='20' x:Name="Cancelform2A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Cancel" />
+                </Grid>
+                <Grid Margin="1091,708,402,37">
+                    <Button x:ConnectionId='19' x:Name="Submitform2A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit"                           />
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid x:ConnectionId='4' Name="AddCourseForm" Visibility="Collapsed">
+            <Image x:ConnectionId='5' x:Name="FormBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Grid Margin="453,-44,459,572">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Course Creation" Foreground="Black" FontWeight="Light"/>
+            </Grid>
+            <Grid x:ConnectionId='6' x:Name="Inputfields">
+                <TextBox x:ConnectionId='11' x:Name="CourseInsertTitleInput" Height="50" Width="375" PlaceholderText="Enter Title" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Margin="0,153,0,553"/>
+                <TextBox x:ConnectionId='12' x:Name="CourseInsertTypeInput" Height="50" Width="375" PlaceholderText="Enter Course Type" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Margin="0,231,0,475"/>
+                <ComboBox x:ConnectionId='13' x:Name="ValidDepartmentsInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Pick A Department" FontSize="36" HorizontalAlignment="Center" Height="50" Width="375" Margin="0,422,0,0"/>
+                <ComboBox x:ConnectionId='14'  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" Height="40" Width="144" Margin="0,495,0,0" >
+                    <x:Int32>1</x:Int32>
+                    <x:Int32>2</x:Int32>
+                    <x:Int32>3</x:Int32>
+                    <x:Int32>4</x:Int32>
+                    <x:Int32>5</x:Int32>
+                    <x:Int32>6</x:Int32>
+                    <x:Int32>7</x:Int32>
+                </ComboBox>
+            </Grid>
+            <Grid Margin="414,414,183,26">
+                <TextBox x:ConnectionId='10' x:Name="CourseInsertInfoInput" Height="200" Width="850" PlaceholderText="Enter Course Info" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
+            </Grid>
+            <Grid x:ConnectionId='7' x:Name="Labels" Margin="-394,14,394,-14">
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text="        Title:" Margin="0,242,0,-242" />
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text=" Course Type:" Margin="0,323,0,-323" />
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text="   Department:" Margin="0,405,0,-405"/>
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text="  Year Level:" Margin="0,480,0,-480"/>
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text=" Course Info:" Margin="0,554,0,-554"/>
+            </Grid>
+            <Grid Margin="396,709,1026,39">
+                <Button x:ConnectionId='9' x:Name="Cancelform1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Cancel"                     />
+            </Grid>
+            <Grid Margin="1091,708,402,37">
+                <Button x:ConnectionId='8' x:Name="Submitform1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit"                            />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
+

@@ -9,27 +9,27 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Image Source="Assets/RegisterBackground.png"/>
+        <Image Source="Assets/RegisterBackground.png" Stretch="Fill"/>
         <Button Name="goBack" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Go Back" Height="67" Width="112" FontSize="36" Margin="121,75,0,0" VerticalAlignment="Top" Click="goBack_Click"></Button>
         <Button Name="StudentRegButton" Content="Student" Margin="907,424,0,0" VerticalAlignment="Top" Height="63" Width="130" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="50" RenderTransformOrigin="0.515,0.556" Click="Student_Click" />
         <Button Name="FacultyRegButton" Content="Faculty" Height="63" Width="130" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="50" RenderTransformOrigin="0.515,0.556" Margin="907,521,0,0" VerticalAlignment="Top" Click="Faculty_Click" />
         <Border x:Name="StudentRegisterForm" Background="#66000000"  Visibility="Collapsed" Margin="644,170,619,114">
             <Grid>
                 <TextBlock Name="StudentRegisterTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Registration" Foreground="Black" FontSize="120" FontWeight="Medium" Margin="33,0,5,570" />
-                <TextBlock Name="sFirstNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="189,211,24,488"/>
+                <TextBlock Name="sFirstNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="189,211,24,441"/>
                 <TextBlock Name="sFirstName" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First Name:" Foreground="Black" FontSize="36" Margin="57,168,413,492"/>
                 <TextBox Name="sFirstNameInput" PlaceholderText="Enter First Name" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,161,27,514" />
-                <TextBlock Name="sLastNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="188,301,28,398"/>
+                <TextBlock Name="sLastNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="188,301,28,337"/>
                 <TextBlock Name="sLastName" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last Name:" Foreground="Black" FontSize="36" Margin="59,258,412,398"/>
                 <TextBox Name="sLastNameInput" PlaceholderText="Enter Last Name" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,248,27,425" />
-                <TextBlock Name="sUsernameWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Username field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="201,397,11,303"/>
+                <TextBlock Name="sUsernameWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Username field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="201,397,11,241"/>
                 <TextBlock Name="sUsername" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Username:" Foreground="Black" FontSize="36" Margin="59,353,428,260"/>
                 <TextBox Name="sUsernameInput" PlaceholderText="Enter Username" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,346,27,327" />
-                <TextBlock Name="sPasswordWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Passwords do not match. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="207,613,24,86"/>
-                <TextBlock Name="sPasswordWarning2" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Password field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="204,503,14,198"/>
+                <TextBlock Name="sPasswordWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Passwords do not match. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="207,613,24,14"/>
+                <TextBlock Name="sPasswordWarning2" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Password field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="204,503,14,79"/>
                 <TextBlock Name="sPaswword" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Password:" Foreground="Black" FontSize="36" Margin="59,459,438,148"/>
                 <TextBox Name="sPasswordInput" PlaceholderText="Enter Password" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,448,27,225"/>
-                <TextBlock Name="sCPasswordWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Confirm Password field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="111,605,9,94"/>
+                <TextBlock Name="sCPasswordWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Confirm Password field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="111,605,9,27"/>
                 <TextBlock Name="sConfirmPassword" Text="Confirm Password:" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Margin="57,561,304,70"/>
                 <TextBox Name="sConfirmPasswordInput" PlaceholderText="Re-Enter Password" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,550,27,123"/>
                 <Button Name="StudentRegisterCancel" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Cancel" Height="50" Width="100" FontSize="36" Foreground="Black" Margin="57,658,0,0" VerticalAlignment="Top" Click="StudentRegisterCancel_Click" />
@@ -267,19 +267,19 @@
                 </Grid>
             </ScrollViewer>
         </Border>
-        <Border x:Name="FacultyRegisterForm" Background="#66000000" Margin="644,170,619,106" Visibility="Visible">
+        <Border x:Name="FacultyRegisterForm" Background="#66000000" Margin="644,170,619,106" Visibility="Collapsed">
             <Grid>
                 <TextBlock Name="FacultyRegisterTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Faculty Registration" Foreground="Black" FontSize="120" FontWeight="Medium" Margin="35,0,3,575" />
-                <TextBlock Name="fFirstNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Visible" Margin="189,184,24,515"/>
+                <TextBlock Name="fFirstNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="189,184,24,515"/>
                 <TextBlock Name="fFirstName" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="First Name:" Foreground="Black" FontSize="36" Margin="57,130,413,549"/>
                 <TextBox Name="fFirstNameInput" PlaceholderText="Enter First Name" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,130,27,553" />
-                <TextBlock Name="fLastNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Visible" Margin="190,288,26,411"/>
+                <TextBlock Name="fLastNameWarning" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last name field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="190,288,26,411"/>
                 <TextBlock Name="fLastName" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Last Name:" Foreground="Black" FontSize="36" Margin="59,230,412,436"/>
                 <TextBox Name="fLastNameInput" PlaceholderText="Enter Last Name" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,230,27,453" />
-                <TextBlock Name="fUsernameWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Username field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Visible" Margin="203,384,9,316"/>
+                <TextBlock Name="fUsernameWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Username field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="203,384,9,316"/>
                 <TextBlock Name="fUsername" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Username:" Foreground="Black" FontSize="36" Margin="59,332,428,331"/>
                 <TextBox Name="fUsernameInput" PlaceholderText="Enter Username" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,332,27,351" />
-                <TextBlock Name="fPasswordWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Passwords do not match. Please try again" Foreground="Red" FontSize="36" Visibility="Visible" Margin="206,573,25,126"/>
+                <TextBlock Name="fPasswordWarning" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Passwords do not match. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="206,573,25,126"/>
                 <TextBlock Name="fPasswordWarning2" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Password field is empty. Please try again" Foreground="Red" FontSize="36" Visibility="Collapsed" Margin="206,476,12,225"/>
                 <TextBlock Name="fPaswword" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Password:" Foreground="Black" FontSize="36" Margin="59,425,438,201"/>
                 <TextBox Name="fPasswordInput" PlaceholderText="Enter Password" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="256,425,27,258"/>

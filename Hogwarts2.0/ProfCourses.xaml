@@ -1,0 +1,1984 @@
+﻿<Page
+    x:Class="Hogwarts2._0.ProfCourses"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hogwarts2._0"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Image Name="Profbackground" Source="Assets/ProfCourseback.png" Stretch="Fill"/>
+        <Grid>
+            <Button x:Name="CreateCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Create A Course" Margin="0,290,0,0" VerticalAlignment="Top" Click="CreateCourse_Click" />
+            <Button x:Name="AssignCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Assign A Course" Margin="0,407,0,0" VerticalAlignment="Top" Click="AssignCourse_Click"/>
+            <Button x:Name="GradeCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Grade My Courses" Margin="0,536,0,0" VerticalAlignment="Top" Click="GradeCourse_Click"/>
+        </Grid>
+        <Grid Name="form2B" Visibility="Collapsed">
+            <Image x:Name="Form2BBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Grid Margin="453,-44,459,572">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Update Your Courses" Foreground="Black" FontWeight="Light"/>
+            </Grid>
+            <Grid Margin="-58,155,1070,529">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester" Foreground="Black"/>
+            </Grid>
+            <Grid Margin="288,95,288,459">
+                <ComboBox Name="AssignedSemesters" SelectionChanged="SetupCourses" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Semester"/>
+            </Grid>
+            <Grid Margin="-58,248,1070,436">
+                <TextBlock x:Name="Form2BCourseLabel" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course" Foreground="Black"/>
+            </Grid>
+            <Grid Margin="288,183,288,371">
+                <ComboBox Name="AssignedCourses" Visibility="Collapsed" SelectionChanged="SetupCourseInfo" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Course"/>
+            </Grid>
+            <Grid Margin="-58,343,1070,341">
+                <TextBlock x:Name="Form2BDaysLabel" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Days" Foreground="Black"/>
+            </Grid>
+            <Grid x:Name="Form2BDayInputs" Visibility="Collapsed">
+                <Grid x:Name="Form2BMondayCheck" Margin="240,458,968,458">
+                    <CheckBox 
+                        x:Name="Form2BMoInput" 
+                        Checked="Form2BTurnOnMondayTimes"
+                        Unchecked="Form2BTurnOffMondayTimes"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" 
+                    >
+                        <TextBlock Foreground="Black">Monday</TextBlock>
+                    </CheckBox>
+                </Grid>
+                <Grid x:Name="Form2BTuesdayCheck" Margin="402,458,806,458">
+                    <CheckBox 
+                        x:Name="Form2BTuInput"
+                        Checked="Form2BTurnOnTuesdayTimes"
+                        Unchecked="Form2BTurnOffTuesdayTimes"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" 
+                    >
+                        <TextBlock Foreground="Black">Tuesday</TextBlock>
+                    </CheckBox>
+                </Grid>
+                <Grid x:Name="Form2BWednesdayCheck" Margin="570,458,638,458">
+                    <CheckBox 
+                        x:Name="Form2BWeInput"
+                        Checked="Form2BTurnOnWednesdayTimes"
+                        Unchecked="Form2BTurnOffWednesdayTimes"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" 
+                    >
+                        <TextBlock Foreground="Black">Wednesday</TextBlock>
+                    </CheckBox>
+                </Grid>
+                <Grid x:Name="Form2BThursdayCheck" Margin="746,458,462,458">
+                    <CheckBox 
+                        x:Name="Form2BThInput"
+                        Checked="Form2BTurnOnThursdayTimes"
+                        Unchecked="Form2BTurnOffThursdayTimes"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" 
+                    >
+                        <TextBlock Foreground="Black">Thursday</TextBlock>
+                    </CheckBox>
+                </Grid>
+                <Grid x:Name="Form2BFridayCheck" Margin="920,458,288,458">
+                    <CheckBox 
+                        x:Name="Form2BFrInput"
+                        Checked="Form2BTurnOnFridayTimes"
+                        Unchecked="Form2BTurnOffFridayTimes"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                    >
+                        <TextBlock Foreground="Black">Friday</TextBlock>
+                    </CheckBox>
+                </Grid>
+            </Grid>
+            <Grid Margin="-58,433,1070,251">
+                <TextBlock x:Name="Form2BTimeLabel" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Times" Foreground="Black"/>
+            </Grid>
+            <Grid Margin="282,419,1051,244">
+                <ComboBox x:Name="Form2BMondayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Monday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput0" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput1" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput3" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput4" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput5" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput6" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput7" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput8" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput9" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput10" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput11" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput12" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput13" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput14" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput15" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput16" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput17" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput18" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput19" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput20" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput21" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput22" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BMondayTimeInput23" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2300"
+                    >
+                    </CheckBox>
+                </ComboBox>
+            </Grid>
+            <Grid Margin="466,423,867,240">
+                <ComboBox x:Name="Form2BTuesdayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Tuesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput0" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput1" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput3" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput4" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput5" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput6" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput7" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput8" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput9" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput10" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput11" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput12" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput13" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput14" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput15" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput16" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput17" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput18" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput19" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput20" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput21" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput22" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BTuesdayTimeInput23" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2300"
+                    >
+                    </CheckBox>
+                </ComboBox>
+            </Grid>
+            <Grid Margin="644,423,689,240">
+                <ComboBox x:Name="Form2BWednesdayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Wednesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput0" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput1" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput3" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput4" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput5" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput6" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput7" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput8" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput9" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput10" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput11" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput12" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput13" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput14" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput15" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput16" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput17" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput18" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput19" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput20" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput21" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput22" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BWednesdayTimeInput23" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2300"
+                    >
+                    </CheckBox>
+                </ComboBox>
+            </Grid>
+            <Grid Margin="824,423,509,240">
+                <ComboBox x:Name="Form2BThursdayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Thursday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput0" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput1" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput3" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput4" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput5" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput6" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput7" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput8" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput9" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput10" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput11" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput12" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput13" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput14" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput15" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput16" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput17" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput18" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput19" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput20" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput21" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput22" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BThursdayTimeInput23" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2300"
+                    >
+                    </CheckBox>
+                </ComboBox>
+            </Grid>
+            <Grid Margin="968,423,365,240">
+                <ComboBox x:Name="Form2BFridayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Friday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput0" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput1" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput3" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput4" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput5" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput6" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput7" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput8" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput9" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="0900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput10" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput11" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput12" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput13" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1300"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput14" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1400"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput15" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1500"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput16" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1600"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput17" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1700"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput18" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1800"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput19" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="1900"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput20" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2000"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput21" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2100"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput22" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2200"
+                    >
+                    </CheckBox>
+                    <CheckBox 
+                        x:Name="Form2BFridayTimeInput23" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                        Content="2300"
+                    >
+                    </CheckBox>
+                </ComboBox>
+            </Grid>
+            <ScrollViewer Name="ReallyAnnoyingScrollBarForm2B" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Top" Height="150" Margin="0,628,0,0" Width="1282">
+                <Grid  Width="1281" Height="628">
+                    <Grid Margin="0,-32,1109,537">
+                        <TextBlock x:Name="Form2BLocationLabel" HorizontalAlignment="center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Location" Foreground="Black"/>
+                    </Grid>
+                    <Grid Margin="-554,-192,554,192">
+                        <TextBlock x:Name="Form2BCourseInfoLabel" HorizontalAlignment="center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course Info" Foreground="Black" />
+                    </Grid>
+                    <Grid Margin="-526,50,526,-50">
+                        <TextBlock x:Name="Form2BRequiredMaterialLabel" HorizontalAlignment="center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Required Material" Foreground="Black" />
+                    </Grid>
+                    <Grid Margin="0,-279,0,279">
+                        <TextBox x:Name="Form2BLocationInput" Height="50" Width="375" PlaceholderText="Enter A Location" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36"/>
+                    </Grid>
+                    <Grid Margin="0,-111,0,111">
+                        <TextBox x:Name="Form2BCourseInfoInput" Height="200" Width="850" PlaceholderText="Enter Course Info" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
+                    </Grid>
+                    <Grid Margin="0,135,0,-135">
+                        <TextBox x:Name="Form2BReqMaterialInput" Height="200" Width="850" PlaceholderText="Enter Required Material" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+            <Grid Margin="396,709,1026,39">
+                <Button x:Name="Cancelform2B" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Cancel" Click="Cancelform2B_Click" />
+            </Grid>
+            <Grid Margin="1091,708,402,37">
+                <Button x:Name="Submitform2B" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit" Click="Submitform2B_Click" />
+            </Grid>
+        </Grid>
+        <Grid Name="AssignCourseForm" Visibility="Collapsed">
+            <Image x:Name="Form2Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Grid Margin="453,-44,459,572">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Assign Your Courses" Foreground="Black" FontWeight="Light"/>
+            </Grid>
+            <Grid>
+                <Button Name="AssignCourseForm2" HorizontalAlignment="Center" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Assign Course" Margin="0,341,0,0" VerticalAlignment="Top" Click="AssignCourseForm2_Click"/>
+                <Button Name="UpdateCourseForm2" HorizontalAlignment="Center" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Update Course" Margin="0,531,0,0" VerticalAlignment="Top" Click="UpdateCourseForm2_Click" />
+            </Grid>
+            <Grid Margin="706,709,716,39">
+                <Button x:Name="Cancelform2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Cancel" Click="Cancelform2_Click" />
+            </Grid>
+            <Grid x:Name="form2A" Visibility="Collapsed">
+                <Grid x:Name="form2ALabels" Margin="-173,312,752,131">
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester:" Foreground="Black" Margin="0,-38,0,38" />
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course:" Foreground="Black" Margin="0,20,0,-20" />
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Days:" Foreground="Black" Margin="0,90,0,-90"/>
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Times:" Foreground="Black" Margin="0,154,0,-154" />
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Location:" Foreground="Black" Margin="0,228,0,-228"/>
+                    <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Required Materials:" Foreground="Black" Margin="0,298,0,-298" />
+                </Grid>
+                <Grid x:Name="Form2AInputs">
+                    <Grid x:Name="SemesterInput" Margin="287,-31,289,357">
+                        <ComboBox Name="Form2ValidSemesters" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A semester"/>
+                    </Grid>
+                    <Grid x:Name="CourseInput" Margin="289,111,287,356">
+                        <ComboBox x:Name="Form2Mycourses" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose the Course" />
+                    </Grid>
+                    <Grid x:Name="DayInputs">
+                        <Grid x:Name="MondayCheck" Margin="274,400,934,516">
+                            <CheckBox 
+                            x:Name="Form2MoInput" 
+                            Checked="TurnOnMondayTimes"
+                            Unchecked="TurnOffMondayTimes"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" 
+                            >
+                                <TextBlock Foreground="Black">Monday</TextBlock>
+                            </CheckBox>
+                        </Grid>
+                        <Grid x:Name="TuesdayCheck" Margin="396,400,812,516">
+                            <CheckBox 
+                            x:Name="Form2TuInput"
+                            Checked="TurnOnTuesdayTimes"
+                            Unchecked="TurnOffTuesdayTimes"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" 
+                            >
+                                <TextBlock Foreground="Black">Tuesday</TextBlock>
+                            </CheckBox>
+                        </Grid>
+                        <Grid x:Name="WednesdayCheck" Margin="516,400,692,516">
+                            <CheckBox 
+                            x:Name="Form2WeInput"
+                            Checked="TurnOnWednesdayTimes"
+                            Unchecked="TurnOffWednesdayTimes"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" 
+                            >
+                                <TextBlock Foreground="Black">Wednesday</TextBlock>
+                            </CheckBox>
+                        </Grid>
+                        <Grid x:Name="ThursdayCheck" Margin="650,400,558,516">
+                            <CheckBox 
+                            x:Name="Form2ThInput"
+                            Checked="TurnOnThursdayTimes"
+                            Unchecked="TurnOffThursdayTimes"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30" 
+                            >
+                                <TextBlock Foreground="Black">Thursday</TextBlock>
+                            </CheckBox>
+                        </Grid>
+                        <Grid x:Name="FridayCheck" Margin="782,400,426,516">
+                            <CheckBox 
+                            x:Name="Form2FrInput"
+                            Checked="TurnOnFridayTimes"
+                            Unchecked="TurnOffFridayTimes"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                            >
+                                <TextBlock Foreground="Black">Friday</TextBlock>
+                            </CheckBox>
+                        </Grid>
+                        <Grid Margin="322,337,1011,326">
+                            <ComboBox x:Name="MondayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Monday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput0" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput1" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0100"    
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput2" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput3" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput4" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput5" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput6" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput7" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput8" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput9" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput10" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput11" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput12" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput13" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput14" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput15" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput16" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput17" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput18" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput19" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput20" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput21" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput22" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2MondayTimeInput23" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2300"
+                                >
+                                </CheckBox>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="466,337,867,326">
+                            <ComboBox x:Name="TuesdayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Tuesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput0" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput1" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput2" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput3" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput4" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput5" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput6" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput7" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput8" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput9" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput10" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput11" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput12" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                 Content="1200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput13" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                 Content="1300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput14" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput15" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput16" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput17" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput18" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput19" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput20" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput21" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput22" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2TuesdayTimeInput23" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2300"
+                                >
+                                </CheckBox>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="624,337,709,326">
+                            <ComboBox x:Name="WednesdayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Wednesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput0" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput1" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput2" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput3" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput4" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput5" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput6" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput7" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput8" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput9" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput10" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput11" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput12" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput13" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput14" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput15" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput16" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput17" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput18" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput19" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput20" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput21" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput22" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2WednesdayTimeInput23" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2300"
+                                >
+                                </CheckBox>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="776,337,557,326">
+                            <ComboBox x:Name="ThursdayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Thursday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput0" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput1" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput2" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput3" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput4" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput5" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput6" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput7" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput8" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput9" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput10" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput11" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput12" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput13" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput14" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput15" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput16" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput17" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput18" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput19" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput20" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput21" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput22" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2ThursdayTimeInput23" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2300"
+                                >
+                                </CheckBox>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="916,337,417,326">
+                            <ComboBox x:Name="FridayTimes" Visibility="Collapsed" SelectionChanged="Weesnaw" PlaceholderText="Friday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput0" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput1" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput2" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput3" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput4" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput5" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput6" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput7" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput8" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput9" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="0900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput10" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput11" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput12" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput13" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1300"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput14" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1400"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput15" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1500"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput16" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1600"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput17" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1700"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput18" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1800"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput19" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="1900"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput20" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2000"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput21" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2100"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput22" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2200"
+                                >
+                                </CheckBox>
+                                <CheckBox 
+                                x:Name="Form2FridayTimeInput23" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
+                                Content="2300"
+                                >
+                                </CheckBox>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="283,492,297,342">
+                            <TextBox x:Name="Form2LocationInput" PlaceholderText="Enter Location" Height="50" Width="500" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Margin="297,488,283,68">
+                            <TextBox x:Name="Form2RequiredMaterialsInput" PlaceholderText="Enter Required Materials" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" HorizontalAlignment="Center" VerticalAlignment="Center" Height="175" Width="700" TextWrapping="Wrap"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Margin="396,709,1026,39">
+                    <Button x:Name="Cancelform2A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Cancel" Click="Cancelform2A_Click"/>
+                </Grid>
+                <Grid Margin="1091,708,402,37">
+                    <Button x:Name="Submitform2A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit" Click="Submitform2A_Click" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Name="AddCourseForm" Visibility="Collapsed">
+            <Image x:Name="FormBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Grid Margin="453,-44,459,572">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Course Creation" Foreground="Black" FontWeight="Light"/>
+            </Grid>
+            <Grid x:Name="Inputfields">
+                <TextBox x:Name="CourseInsertTitleInput" Height="50" Width="375" PlaceholderText="Enter Title" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Margin="0,153,0,553"/>
+                <TextBox x:Name="CourseInsertTypeInput" Height="50" Width="375" PlaceholderText="Enter Course Type" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Margin="0,231,0,475"/>
+                <ComboBox x:Name="ValidDepartmentsInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Pick A Department" FontSize="36" HorizontalAlignment="Center" Height="50" Width="375" Margin="0,422,0,0"/>
+                <ComboBox  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" Height="40" Width="144" Margin="0,495,0,0" >
+                    <x:Int32>1</x:Int32>
+                    <x:Int32>2</x:Int32>
+                    <x:Int32>3</x:Int32>
+                    <x:Int32>4</x:Int32>
+                    <x:Int32>5</x:Int32>
+                    <x:Int32>6</x:Int32>
+                    <x:Int32>7</x:Int32>
+                </ComboBox>
+            </Grid>
+            <Grid Margin="414,414,183,26">
+                <TextBox x:Name="CourseInsertInfoInput" Height="200" Width="850" PlaceholderText="Enter Course Info" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
+            </Grid>
+            <Grid x:Name="Labels" Margin="-394,14,394,-14">
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text="        Title:" Margin="0,242,0,-242" />
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text=" Course Type:" Margin="0,323,0,-323" />
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text="   Department:" Margin="0,405,0,-405"/>
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text="  Year Level:" Margin="0,480,0,-480"/>
+                <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text=" Course Info:" Margin="0,554,0,-554"/>
+            </Grid>
+            <Grid Margin="396,709,1026,39">
+                <Button x:Name="Cancelform1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Cancel" Click="Cancel_Click"/>
+            </Grid>
+            <Grid Margin="1091,708,402,37">
+                <Button x:Name="Submitform1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit" Click="SubmitCourse_Click" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

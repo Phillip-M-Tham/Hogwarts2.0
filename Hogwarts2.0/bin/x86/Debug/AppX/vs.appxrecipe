@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>169F79197A72E10E85E507CE3FEA6BFCA4CE53DE1D96BA3AF45A96BAD60B9F45</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>004B6AA7117EF3446647CE0F608E415F76491A74BD81075F4772E88E41CE5729</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>0b7e002f-cb2a-4fd6-9cab-2c38dc7bbc4a_1.0.0.0_x86__n1y92kvc7s0ae</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>0b7e002f-cb2a-4fd6-9cab-2c38dc7bbc4a_n1y92kvc7s0ae!App</RegisteredUserModeAppID>
     <RegisteredPackageID>0b7e002f-cb2a-4fd6-9cab-2c38dc7bbc4a</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-02-13T20:59:35.055</Modified>
+      <Modified>2021-03-18T00:04:39.118</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\Hogwarts2.0.exe">
       <PackagePath>entrypoint\Hogwarts2.0.exe</PackagePath>
-      <Modified>2021-02-13T20:59:34.681</Modified>
+      <Modified>2021-03-18T00:04:38.677</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.10\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -46,9 +46,153 @@
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2019-03-18T09:36:56.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\testsong.wav">
-      <PackagePath>Assets\testsong.wav</PackagePath>
-      <Modified>2021-02-06T23:08:55.745</Modified>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\accountsettings2back.png">
+      <PackagePath>Assets\accountsettings2back.png</PackagePath>
+      <Modified>2021-03-17T17:34:01.560</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\accountsettingsback.png">
+      <PackagePath>Assets\accountsettingsback.png</PackagePath>
+      <Modified>2021-03-17T17:34:01.577</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\c3test.png">
+      <PackagePath>Assets\c3test.png</PackagePath>
+      <Modified>2021-03-16T14:33:15.122</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Counselor2back.png">
+      <PackagePath>Assets\Counselor2back.png</PackagePath>
+      <Modified>2021-03-16T14:19:07.645</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\counselor3back.png">
+      <PackagePath>Assets\counselor3back.png</PackagePath>
+      <Modified>2021-03-16T20:53:24.823</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Counselorback.png">
+      <PackagePath>Assets\Counselorback.png</PackagePath>
+      <Modified>2021-03-15T22:25:46.191</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\enrollback.png">
+      <PackagePath>Assets\enrollback.png</PackagePath>
+      <Modified>2021-03-17T17:53:56.106</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\enrollback2.png">
+      <PackagePath>Assets\enrollback2.png</PackagePath>
+      <Modified>2021-03-17T17:55:16.324</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\form1background.png">
+      <PackagePath>Assets\form1background.png</PackagePath>
+      <Modified>2021-03-05T17:16:32.554</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Gback.png">
+      <PackagePath>Assets\Gback.png</PackagePath>
+      <Modified>2021-02-18T14:18:42.024</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Glogo.png">
+      <PackagePath>Assets\Glogo.png</PackagePath>
+      <Modified>2021-03-07T02:12:40.091</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\gryffindorbanner.png">
+      <PackagePath>Assets\gryffindorbanner.png</PackagePath>
+      <Modified>2021-03-17T18:05:47.598</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Gstudefaultpic.png">
+      <PackagePath>Assets\Gstudefaultpic.png</PackagePath>
+      <Modified>2021-03-03T00:35:41.180</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Hback.png">
+      <PackagePath>Assets\Hback.png</PackagePath>
+      <Modified>2021-03-06T21:36:15.781</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Hback2.png">
+      <PackagePath>Assets\Hback2.png</PackagePath>
+      <Modified>2021-03-06T21:36:15.784</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Hback3.png">
+      <PackagePath>Assets\Hback3.png</PackagePath>
+      <Modified>2021-03-07T01:44:16.001</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Hlogo.png">
+      <PackagePath>Assets\Hlogo.png</PackagePath>
+      <Modified>2021-03-06T20:46:08.333</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Hstudefaultpic.png">
+      <PackagePath>Assets\Hstudefaultpic.png</PackagePath>
+      <Modified>2021-03-03T00:35:41.251</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\hufflepuffbanner.png">
+      <PackagePath>Assets\hufflepuffbanner.png</PackagePath>
+      <Modified>2021-03-17T21:19:49.768</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\PLogo.png">
+      <PackagePath>Assets\PLogo.png</PackagePath>
+      <Modified>2021-03-07T05:56:57.604</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Prof1back.png">
+      <PackagePath>Assets\Prof1back.png</PackagePath>
+      <Modified>2021-03-07T03:24:23.698</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\ProfAccount.png">
+      <PackagePath>Assets\ProfAccount.png</PackagePath>
+      <Modified>2021-03-07T07:10:06.394</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\ProfAccountSettingsBack.png">
+      <PackagePath>Assets\ProfAccountSettingsBack.png</PackagePath>
+      <Modified>2021-03-07T18:49:40.703</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\ProfCourseback.png">
+      <PackagePath>Assets\ProfCourseback.png</PackagePath>
+      <Modified>2021-03-07T19:05:59.630</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Profdefaultpic.png">
+      <PackagePath>Assets\Profdefaultpic.png</PackagePath>
+      <Modified>2021-03-07T07:37:39.891</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Proftest.png">
+      <PackagePath>Assets\Proftest.png</PackagePath>
+      <Modified>2021-03-07T05:05:26.310</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\ravenclawbanner.png">
+      <PackagePath>Assets\ravenclawbanner.png</PackagePath>
+      <Modified>2021-03-17T21:19:49.771</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Rback.png">
+      <PackagePath>Assets\Rback.png</PackagePath>
+      <Modified>2021-03-07T00:02:40.538</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Rback2.png">
+      <PackagePath>Assets\Rback2.png</PackagePath>
+      <Modified>2021-03-07T00:02:40.542</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Rlogo.png">
+      <PackagePath>Assets\Rlogo.png</PackagePath>
+      <Modified>2021-03-07T00:21:08.004</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Rstudefaultpic.png">
+      <PackagePath>Assets\Rstudefaultpic.png</PackagePath>
+      <Modified>2021-03-07T01:27:58.589</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Sback.png">
+      <PackagePath>Assets\Sback.png</PackagePath>
+      <Modified>2021-03-04T17:30:19.127</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Sback2.png">
+      <PackagePath>Assets\Sback2.png</PackagePath>
+      <Modified>2021-03-06T03:17:28.217</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Sback3.png">
+      <PackagePath>Assets\Sback3.png</PackagePath>
+      <Modified>2021-03-06T21:05:50.479</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Slogo.png">
+      <PackagePath>Assets\Slogo.png</PackagePath>
+      <Modified>2021-03-06T04:28:53.146</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\slytherinbanner.png">
+      <PackagePath>Assets\slytherinbanner.png</PackagePath>
+      <Modified>2021-03-17T21:11:21.028</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Sstudefaultpic.png">
+      <PackagePath>Assets\Sstudefaultpic.png</PackagePath>
+      <Modified>2021-03-03T00:35:41.255</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\hogwartslogo.png">
       <PackagePath>Assets\hogwartslogo.png</PackagePath>
@@ -100,6 +244,10 @@
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2021-01-08T16:00:32.260</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\testsong.wav">
+      <PackagePath>Assets\testsong.wav</PackagePath>
+      <Modified>2021-02-06T23:08:55.745</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\hogwartstest1.jpg">
       <PackagePath>Assets\hogwartstest1.jpg</PackagePath>
       <Modified>2021-01-15T16:14:57.548</Modified>
@@ -116,21 +264,149 @@
       <PackagePath>Assets\ReginaScript.ttf</PackagePath>
       <Modified>2021-01-16T23:00:34.246</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Reggae.ttf">
+      <PackagePath>Assets\Reggae.ttf</PackagePath>
+      <Modified>2021-02-28T16:26:11.094</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\AbrilFatface-Regular.ttf">
+      <PackagePath>Assets\AbrilFatface-Regular.ttf</PackagePath>
+      <Modified>2021-02-28T17:08:03.804</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\Hogwarts2.0.xr.xml">
       <PackagePath>Hogwarts2.0.xr.xml</PackagePath>
-      <Modified>2021-02-13T19:44:34.155</Modified>
+      <Modified>2021-03-17T21:04:49.453</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-02-13T20:46:43.142</Modified>
+      <Modified>2021-03-18T00:04:38.396</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\CounselorAccount.xbf">
+      <PackagePath>CounselorAccount.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.396</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\CounselorAccountSettings.xbf">
+      <PackagePath>CounselorAccountSettings.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.396</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\CounselorEnrollStudents.xbf">
+      <PackagePath>CounselorEnrollStudents.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.396</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\CounselorHome.xbf">
+      <PackagePath>CounselorHome.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.396</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\CounselorMain.xbf">
+      <PackagePath>CounselorMain.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.315</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\GryffindorStu.xbf">
+      <PackagePath>GryffindorStu.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.396</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\GStuAccount.xbf">
+      <PackagePath>GStuAccount.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.396</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\GStuAccountSettings.xbf">
+      <PackagePath>GStuAccountSettings.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\GStuCourses.xbf">
+      <PackagePath>GStuCourses.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\GStuHome.xbf">
+      <PackagePath>GStuHome.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HStuAccount.xbf">
+      <PackagePath>HStuAccount.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HStuAccountSettings.xbf">
+      <PackagePath>HStuAccountSettings.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HStuCourses.xbf">
+      <PackagePath>HStuCourses.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HStuHome.xbf">
+      <PackagePath>HStuHome.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HufflepuffStu.xbf">
+      <PackagePath>HufflepuffStu.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.397</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2021-02-13T20:46:43.142</Modified>
+      <Modified>2021-03-18T00:04:38.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\ProfAccount.xbf">
+      <PackagePath>ProfAccount.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\ProfAccountSettings.xbf">
+      <PackagePath>ProfAccountSettings.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.398</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\ProfCourses.xbf">
+      <PackagePath>ProfCourses.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.366</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\ProfessorMain.xbf">
+      <PackagePath>ProfessorMain.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.398</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\ProfHome.xbf">
+      <PackagePath>ProfHome.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.398</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\RavenclawStu.xbf">
+      <PackagePath>RavenclawStu.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.398</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\Register.xbf">
       <PackagePath>Register.xbf</PackagePath>
-      <Modified>2021-02-13T20:59:34.590</Modified>
+      <Modified>2021-03-18T00:04:38.386</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\RStuAccount.xbf">
+      <PackagePath>RStuAccount.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.398</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\RStuAccountSettings.xbf">
+      <PackagePath>RStuAccountSettings.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.398</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\RStuCourses.xbf">
+      <PackagePath>RStuCourses.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.398</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\RStuHome.xbf">
+      <PackagePath>RStuHome.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.399</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\SlytherinStu.xbf">
+      <PackagePath>SlytherinStu.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.399</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\SStuAccount.xbf">
+      <PackagePath>SStuAccount.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.399</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\SStuAccountSettings.xbf">
+      <PackagePath>SStuAccountSettings.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.399</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\SStuCourses.xbf">
+      <PackagePath>SStuCourses.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.399</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\SStuHome.xbf">
+      <PackagePath>SStuHome.xbf</PackagePath>
+      <Modified>2021-03-18T00:04:38.399</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -138,11 +414,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-02-06T23:14:26.164</Modified>
+      <Modified>2021-03-17T21:20:56.128</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\Core\Hogwarts2.0.exe">
       <PackagePath>Hogwarts2.0.exe</PackagePath>
-      <Modified>2021-02-13T20:59:35.050</Modified>
+      <Modified>2021-03-18T00:04:39.113</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

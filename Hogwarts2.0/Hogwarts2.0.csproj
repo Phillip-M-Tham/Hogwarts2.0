@@ -119,12 +119,102 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CounselorAccount.xaml.cs">
+      <DependentUpon>CounselorAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CounselorAccountSettings.xaml.cs">
+      <DependentUpon>CounselorAccountSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CounselorEnrollStudents.xaml.cs">
+      <DependentUpon>CounselorEnrollStudents.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CounselorHome.xaml.cs">
+      <DependentUpon>CounselorHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CounselorMain.xaml.cs">
+      <DependentUpon>CounselorMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GryffindorStu.xaml.cs">
+      <DependentUpon>GryffindorStu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GStuAccount.xaml.cs">
+      <DependentUpon>GStuAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GStuAccountSettings.xaml.cs">
+      <DependentUpon>GStuAccountSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GStuCourses.xaml.cs">
+      <DependentUpon>GStuCourses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GStuHome.xaml.cs">
+      <DependentUpon>GStuHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HStuAccount.xaml.cs">
+      <DependentUpon>HStuAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HStuAccountSettings.xaml.cs">
+      <DependentUpon>HStuAccountSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HStuCourses.xaml.cs">
+      <DependentUpon>HStuCourses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HStuHome.xaml.cs">
+      <DependentUpon>HStuHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HufflepuffStu.xaml.cs">
+      <DependentUpon>HufflepuffStu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProfAccount.xaml.cs">
+      <DependentUpon>ProfAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfAccountSettings.xaml.cs">
+      <DependentUpon>ProfAccountSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfCourses.xaml.cs">
+      <DependentUpon>ProfCourses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfessorMain.xaml.cs">
+      <DependentUpon>ProfessorMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfHome.xaml.cs">
+      <DependentUpon>ProfHome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RavenclawStu.xaml.cs">
+      <DependentUpon>RavenclawStu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RStuAccount.xaml.cs">
+      <DependentUpon>RStuAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RStuAccountSettings.xaml.cs">
+      <DependentUpon>RStuAccountSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RStuCourses.xaml.cs">
+      <DependentUpon>RStuCourses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RStuHome.xaml.cs">
+      <DependentUpon>RStuHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SlytherinStu.xaml.cs">
+      <DependentUpon>SlytherinStu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SStuAccount.xaml.cs">
+      <DependentUpon>SStuAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SStuAccountSettings.xaml.cs">
+      <DependentUpon>SStuAccountSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SStuCourses.xaml.cs">
+      <DependentUpon>SStuCourses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SStuHome.xaml.cs">
+      <DependentUpon>SStuHome.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +223,43 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\accountsettings2back.png" />
+    <Content Include="Assets\accountsettingsback.png" />
+    <Content Include="Assets\c3test.png" />
+    <Content Include="Assets\Counselor2back.png" />
+    <Content Include="Assets\counselor3back.png" />
+    <Content Include="Assets\Counselorback.png" />
+    <Content Include="Assets\enrollback.png" />
+    <Content Include="Assets\enrollback2.png" />
+    <Content Include="Assets\form1background.png" />
+    <Content Include="Assets\Gback.png" />
+    <Content Include="Assets\Glogo.png" />
+    <Content Include="Assets\gryffindorbanner.png" />
+    <Content Include="Assets\Gstudefaultpic.png" />
+    <Content Include="Assets\Hback.png" />
+    <Content Include="Assets\Hback2.png" />
+    <Content Include="Assets\Hback3.png" />
+    <Content Include="Assets\Hlogo.png" />
+    <Content Include="Assets\Hstudefaultpic.png" />
+    <Content Include="Assets\hufflepuffbanner.png" />
+    <Content Include="Assets\PLogo.png" />
+    <Content Include="Assets\Prof1back.png" />
+    <Content Include="Assets\ProfAccount.png" />
+    <Content Include="Assets\ProfAccountSettingsBack.png" />
+    <Content Include="Assets\ProfCourseback.png" />
+    <Content Include="Assets\Profdefaultpic.png" />
+    <Content Include="Assets\Proftest.png" />
+    <Content Include="Assets\ravenclawbanner.png" />
+    <Content Include="Assets\Rback.png" />
+    <Content Include="Assets\Rback2.png" />
+    <Content Include="Assets\Rlogo.png" />
+    <Content Include="Assets\Rstudefaultpic.png" />
+    <Content Include="Assets\Sback.png" />
+    <Content Include="Assets\Sback2.png" />
+    <Content Include="Assets\Sback3.png" />
+    <Content Include="Assets\Slogo.png" />
+    <Content Include="Assets\slytherinbanner.png" />
+    <Content Include="Assets\Sstudefaultpic.png" />
     <Content Include="Assets\testsong.wav" />
     <Content Include="Assets\hogwartslogo.png" />
     <Content Include="Assets\hogwartstest1.jpg" />
@@ -153,11 +280,131 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CounselorAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CounselorAccountSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CounselorEnrollStudents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CounselorHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CounselorMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GryffindorStu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GStuAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GStuAccountSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GStuCourses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GStuHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HStuAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HStuAccountSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HStuCourses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HStuHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HufflepuffStu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ProfAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProfAccountSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProfCourses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProfessorMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProfHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RavenclawStu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RStuAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RStuAccountSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RStuCourses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RStuHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SlytherinStu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SStuAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SStuAccountSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SStuCourses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SStuHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,6 +419,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\ReginaScript.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Reggae.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\AbrilFatface-Regular.ttf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

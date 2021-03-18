@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="Hogwarts2._0.GStuAccount"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hogwarts2._0"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Grid>
+        <Image Name="red" Source="Assets/Gback.png" Stretch="Fill" />
+        <Grid>
+            <Image Name="paperback" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" Stretch="Uniform" VerticalAlignment="Center" Height="857" />
+            <Grid>
+                <Grid>
+                    <Image Name="StudentProfilePic" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Gstudefaultpic.png" Height="369" Width="432" Margin="0,129,0,0"/>
+                </Grid>
+                <TextBlock Name="UserInfoBox" TextWrapping="Wrap" Margin="0,540,0,0" Text=" Hello World" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" FontSize="30" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Width="1372" Height="349"></TextBlock>
+                <Grid Margin="-157,41,1359,848">
+                    <Button Name="EditInfo" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Edit" Margin="52,0,0,0" Click="EditInfo_Click" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid x:Name="Editform" Visibility="Collapsed" Margin="201,111,201,111">
+            <Grid Margin="-205,333,1032,313">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Name="EditUserInfo" Text="User Info:" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" Foreground="Black"  />
+            </Grid>
+            <Grid Margin="-126,390,-124,-44">
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Enter Your Information Here" TextWrapping="Wrap" Name="EditUserInfoInput" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Width="1371" Height="363"/>
+            </Grid>
+            <Grid Margin="719,-404,-719,404">
+                <Button VerticalAlignment="Center" HorizontalAlignment="Center" Name="CancelUpdate" Content="Cancel" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Click="CancelUpdate_Click"/>
+            </Grid>
+            <Grid Margin="-1,627,1,-284">
+                <Button VerticalAlignment="Center" HorizontalAlignment="Center" Name="SubmitStuUpdate" Content="Submit" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Click="SubmitStuUpdate_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

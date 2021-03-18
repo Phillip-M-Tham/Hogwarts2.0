@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Popups;
-using Windows.Media.Playback;
-using Windows.Media.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,34 +19,44 @@ namespace Hogwarts2._0
         private string facUserName = "";
         private string facPassword = "";
         private string facCPassword = "";
-        
+        private char facPosType = ' ';
+
         private string stuFirstName = "";
         private string stuLastName = "";
         private string stuUserName = "";
         private string stuPassword = "";
         private string stuCPassword = "";
 
+        private int HUID = 0;
         private string mymessage = "";
         private string house = "";
         private string pet = "";
         private int Rpoints, Gpoints, Spoints, Hpoints;
+        private bool usernameexist = false;
+        private bool huid = false;
 
         private string frole = "";
         private Random _random = new Random();
+        const string ConnectionString = "SERVER = DESKTOP-R3J82OF\\SQLEXPRESS2019; DATABASE= Hogwarts2.0; USER ID=Cohort7; PASSWORD=tuesday313";
         public Register()
         {
             this.InitializeComponent();
-            //Frame.Navigate(typeof(Register));
+            //SetDataConn();
+
         }
-                        
+
+        public void SetDataConn()
+        {
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                /*var message = new MessageDialog(sqlConn.State.ToString());
+                await message.ShowAsync();*/
+            }
+        }
         private void goBack_Click(object sender, RoutedEventArgs e)
         {
-            //MainPage Login = new MainPage();
-            //Window.Current.Content=
             Frame.Navigate(typeof(MainPage));
-            //this.Frame.Navigate(typeof(MainPage));
-            //this.Content = Login;
-            
         }
 
         private void Student_Click(object sender, RoutedEventArgs e)
@@ -95,7 +94,7 @@ namespace Hogwarts2._0
             stuCPassword = sConfirmPasswordInput.Text;
             int stuValid = 0;
             //CHeck for blanks first
-            if(stuFirstName == "")
+            if (stuFirstName == "")
             {
                 sFirstNameWarning.Visibility = Visibility.Visible;
                 stuValid--;
@@ -115,7 +114,7 @@ namespace Hogwarts2._0
                 sLastNameWarning.Visibility = Visibility.Collapsed;
                 stuValid++;
             }
-            if(stuUserName == "")
+            if (stuUserName == "")
             {
                 sUsernameWarning.Visibility = Visibility.Visible;
                 stuValid--;
@@ -125,7 +124,7 @@ namespace Hogwarts2._0
                 sUsernameWarning.Visibility = Visibility.Collapsed;
                 stuValid++;
             }
-            if(stuPassword == "")
+            if (stuPassword == "")
             {
                 sPasswordWarning2.Visibility = Visibility.Visible;
                 sPasswordWarning.Visibility = Visibility.Collapsed;
@@ -162,12 +161,62 @@ namespace Hogwarts2._0
                     stuValid--;
                 }
             }
-            //This checks username
-            if (stuValid == 6){
-                var validStuMessage1 = new MessageDialog($"first name is {stuFirstName} \nlast name is {stuLastName} \nusername is {stuUserName} \npassword is {stuPassword}");
-                await validStuMessage1.ShowAsync();
-                StudentRegisterForm.Visibility = Visibility.Collapsed;
-                StudentRegisterForm2.Visibility = Visibility.Visible;
+            //This checks if username already exists in database
+            if (stuValid == 6)
+            {
+                string queryresult = " ";
+                try
+                {
+                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                    {
+                        sqlConn.Open();
+                        if (sqlConn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT * FROM Users WHERE Username = '{stuUserName}';";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        queryresult += reader.GetValue(0).ToString();
+                                    }
+                                    if (queryresult == " ")
+                                    {
+                                        usernameexist = false;
+                                    }
+                                    else
+                                    {
+                                        usernameexist = true;
+                                    }
+                                }
+                            }
+                            sqlConn.Close();
+                        }
+                        else
+                        {
+                            var validMessage = new MessageDialog("Hoopla");
+                            await validMessage.ShowAsync();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var errormes = new MessageDialog(ex.Message);
+                    await errormes.ShowAsync();
+                }
+                if (usernameexist == true)
+                {
+                    var validStuMessage1 = new MessageDialog($"\nusername is {stuUserName} is already taken");
+                    await validStuMessage1.ShowAsync();
+                }
+                else
+                {
+                    var validStuMessage1 = new MessageDialog($"first name is {stuFirstName} \nlast name is {stuLastName} \nusername is {stuUserName} \npassword is {stuPassword}");
+                    await validStuMessage1.ShowAsync();
+                    StudentRegisterForm.Visibility = Visibility.Collapsed;
+                    StudentRegisterForm2.Visibility = Visibility.Visible;
+                }
             }
         }
         private void Faculty_Click(object sender, RoutedEventArgs e)
@@ -175,7 +224,7 @@ namespace Hogwarts2._0
             FacultyRegisterForm.Visibility = Visibility.Visible;
             StudentRegisterForm.Visibility = Visibility.Collapsed;
             StudentRegButton.Visibility = Visibility.Collapsed;
-            FacultyRegButton.Visibility = Visibility.Collapsed;   
+            FacultyRegButton.Visibility = Visibility.Collapsed;
         }
         private void FacultyRegisterCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -196,22 +245,21 @@ namespace Hogwarts2._0
         }
         private async void FacultyRegister_Click(object sender, RoutedEventArgs e)
         {
-            facFirstName=fFirstNameInput.Text;
-            facLastName=fLastNameInput.Text;
-            facUserName=fUsernameInput.Text;
-            facPassword=fPasswordInput.Text;
-            facCPassword=fConfirmPasswordInput.Text;
+            facFirstName = fFirstNameInput.Text;
+            facLastName = fLastNameInput.Text;
+            facUserName = fUsernameInput.Text;
+            facPassword = fPasswordInput.Text;
+            facCPassword = fConfirmPasswordInput.Text;
             if (fRoleInput.SelectedValue == null)
             {
                 var fRoleError = new MessageDialog("You need to select a role");
                 await fRoleError.ShowAsync();
-                //frole = "None";
             }
             else
             {
                 frole = fRoleInput.SelectedValue.ToString();
             }
-            int facValid= 0;
+            int facValid = 0;
             //CHECKS FOR BLANK VALUES IN FORM FIRST
             if (facFirstName == "")
             {
@@ -223,7 +271,7 @@ namespace Hogwarts2._0
                 fFirstNameWarning.Visibility = Visibility.Collapsed;
                 facValid++;
             }
-            
+
             if (facLastName == "")
             {
                 fLastNameWarning.Visibility = Visibility.Visible;
@@ -234,7 +282,7 @@ namespace Hogwarts2._0
                 fLastNameWarning.Visibility = Visibility.Collapsed;
                 facValid++;
             }
-            if(facUserName == "")
+            if (facUserName == "")
             {
                 fUsernameWarning.Visibility = Visibility.Visible;
                 facValid--;
@@ -262,16 +310,16 @@ namespace Hogwarts2._0
                 facValid--;
             }
             else
-            { 
+            {
                 fCPasswordWarning.Visibility = Visibility.Collapsed;
                 facValid++;
             }
             //THIS CHECKS FOR PASSWORD TO BE EQUAL TO EACH OTHER
-            if(facCPassword !="" && facPassword != "")
+            if (facCPassword != "" && facPassword != "")
             {
                 fCPasswordWarning.Visibility = Visibility.Collapsed;
                 fPasswordWarning2.Visibility = Visibility.Collapsed;
-                if(facPassword == facCPassword)
+                if (facPassword == facCPassword)
                 {
                     fPasswordWarning.Visibility = Visibility.Collapsed;
                     facValid++;
@@ -282,15 +330,140 @@ namespace Hogwarts2._0
                     facValid--;
                 }
             }
-            //Checks for username to be valid needs to be updated
-            if(facValid==6)
+            //Checks for username to be valid 
+            if (facValid == 6)
             {
-                var ValidFacMessage = new MessageDialog($"first name is {facFirstName} \nlast name is {facLastName} \nusername is {facUserName}\nrole is {frole}");
-                await ValidFacMessage.ShowAsync();
-                //MainPage Login = new MainPage();
-                //this.Content = Login;
-                Frame.Navigate(typeof(MainPage));
+                facPosType = GetFacPosType(frole);
+                if (facPosType != 'X')
+                {
+                    string queryresult = " ";
+                    try
+                    {
+                        using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                        {
+                            sqlConn.Open();
+                            if (sqlConn.State == System.Data.ConnectionState.Open)
+                            {
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {
+                                    //Checks if username is already in the users table
+                                    cmd.CommandText = $"SELECT * FROM Users WHERE Username = '{facUserName}';";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            queryresult += reader.GetValue(0).ToString();
+                                        }
+                                        if (queryresult == " ")
+                                        {
+                                            usernameexist = false;
+                                        }
+                                        else
+                                        {
+                                            usernameexist = true;
+                                        }
+                                    }
+                                    if (usernameexist == true)
+                                    {
+                                        var validStuMessage1 = new MessageDialog($"\nusername is {facUserName} is already taken");
+                                        await validStuMessage1.ShowAsync();
+                                    }
+                                    else
+                                    {
+                                        //username is not taken and we can insert user input into database
+                                        SqlDataAdapter adapter = new SqlDataAdapter();
+                                        SqlCommand command = new SqlCommand($"INSERT INTO Users VALUES ('{facFirstName}','{facLastName}','{facUserName}','{facPassword}',NULL);", sqlConn);
+                                        adapter.InsertCommand = command;
+                                        adapter.InsertCommand.ExecuteNonQuery();
+                                        //add constraint unique to username so we can id user by unique username 
+                                        cmd.CommandText = $"SELECT HUID FROM Users WHERE Username = '{facUserName}';";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                //Set HUID TO AN ACTUAL HUID HERE
+                                                huid = Int32.TryParse(reader.GetValue(0).ToString(), out HUID);
+                                                if (huid == true)
+                                                {
+                                                    var vmessage = new MessageDialog($"Inserted Index is {HUID}");
+                                                    await vmessage.ShowAsync();
+                                                }
+                                                else
+                                                {
+                                                    //Parse the HUID did not work and will trigger this
+                                                    var ermessage = new MessageDialog("Weesnaw");
+                                                    await ermessage.ShowAsync();
+                                                }
+                                            }
+                                        }
+                                        SqlCommand command2 = new SqlCommand($"INSERT INTO Positions VALUES ({HUID},'{frole}','{facPosType}');", sqlConn);
+                                        adapter.InsertCommand = command2;
+                                        adapter.InsertCommand.ExecuteNonQuery();
+                                        SqlCommand command3 = new SqlCommand($"INSERT INTO Faculty VALUES({ HUID },'{facPosType}');", sqlConn);
+                                        adapter.InsertCommand = command3;
+                                        adapter.InsertCommand.ExecuteNonQuery();
+                                    }
+                                }
+                                sqlConn.Close();
+                            }
+                            else
+                            {
+                                //Print this if the connection cannot be made 
+                                var validMessage = new MessageDialog("FIX ME FIX ME FIX ME FIX ME");
+                                await validMessage.ShowAsync();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        var errormes = new MessageDialog(ex.Message);
+                        await errormes.ShowAsync();
+                    }
+                    if (huid == true && usernameexist == false)
+                    {
+                        var ValidFacMessage = new MessageDialog("Faculty Account Successfully Created");
+                        await ValidFacMessage.ShowAsync();
+                        //INSERT DATA TO THE DATABASE HERE
+                        Frame.Navigate(typeof(MainPage));
+                    }
+                    else
+                    {
+                        var FacultyFailCreation = new MessageDialog("Faculty Account Not Successfully Created");
+                        await FacultyFailCreation.ShowAsync();
+                    }
+                }
+                else
+                {
+                    var validMessage = new MessageDialog("THAT IS NOT A CORRECT POSITION ROLE TYPE");
+                    await validMessage.ShowAsync();
+                }
             }
+        }
+
+        private char GetFacPosType(string fRole)
+        {
+            char type = ' ';
+            if (frole == "Professor")
+            {
+                type = 'P';
+            }
+            else if (frole == "Counselor")
+            {
+                type = 'C';
+            }
+            else if (frole == "Headmaster" || frole == "Headmistress")
+            {
+                type = 'H';
+            }
+            else if (frole == "Executive")
+            {
+                type = 'E';
+            }
+            else
+            {
+                type = 'X';
+            }
+            return type;
         }
 
         private void StudentBack_Click(object sender, RoutedEventArgs e)
@@ -318,8 +491,9 @@ namespace Hogwarts2._0
             FacultyRegButton.Visibility = Visibility.Visible;
         }
 
-        private void StudentRegister_Click(object sender, RoutedEventArgs e)
+        private async void StudentRegister_Click(object sender, RoutedEventArgs e)
         {
+
             mymessage = "";
             Gpoints = 0;
             Spoints = 0;
@@ -329,32 +503,33 @@ namespace Hogwarts2._0
             {
                 pet = "None";
             }
-            else {
+            else
+            {
                 pet = PetInput.SelectedValue.ToString();
             }
             //Weghted question process
             if (A1.IsChecked == true)
             {
-                Spoints += 5;           
-            } 
+                Spoints += 5;
+            }
             else if (B1.IsChecked == true)
             {
                 Rpoints += 5;
-            } 
+            }
             else if (C1.IsChecked == true)
             {
                 Gpoints += 5;
             }
-            else if(D1.IsChecked == true)
+            else if (D1.IsChecked == true)
             {
                 Hpoints += 5;
             }
             else
             {
                 mymessage += "You forgot to answer question 1";
-            
+
             }
-            
+
             if (A2.IsChecked == true)
             {
                 Gpoints += 5;
@@ -373,18 +548,18 @@ namespace Hogwarts2._0
             }
             else
             {
-                if (mymessage!="")
+                if (mymessage != "")
                 {
                     mymessage += "\n";
                 }
                 mymessage += "You forgot to answer question 2";
             }
-            
-            if(A3.IsChecked == true)
+
+            if (A3.IsChecked == true)
             {
                 Rpoints += 5;
             }
-            else if(B3.IsChecked==true)
+            else if (B3.IsChecked == true)
             {
                 Hpoints += 5;
             }
@@ -404,8 +579,8 @@ namespace Hogwarts2._0
                 }
                 mymessage += "You forgot to answer question 3";
             }
-            
-            if(A4.IsChecked == true)
+
+            if (A4.IsChecked == true)
             {
                 Hpoints += 10;
             }
@@ -413,7 +588,7 @@ namespace Hogwarts2._0
             {
                 Spoints += 10;
             }
-            else if(C4.IsChecked == true)
+            else if (C4.IsChecked == true)
             {
                 Rpoints += 10;
             }
@@ -430,7 +605,7 @@ namespace Hogwarts2._0
                 mymessage += "You forgot to answer question 4";
             }
 
-            if(A5.IsChecked == true)
+            if (A5.IsChecked == true)
             {
                 Rpoints += 10;
             }
@@ -732,24 +907,95 @@ namespace Hogwarts2._0
 
             if (mymessage != "")
             {
-                var NotValidStuMessage = new MessageDialog((mymessage));
-                NotValidStuMessage.ShowAsync();
+                var NotValidStuMessage = new MessageDialog(mymessage);
+                await NotValidStuMessage.ShowAsync();
             }
             else
             {
                 calculateHouse(Gpoints, Rpoints, Spoints, Hpoints);
-                mymessage += $"\npet is {pet} Slytherin is {Spoints}, Ravenclaw is {Rpoints}, Gryffindor is {Gpoints} and Hufflepuff is {Hpoints}\nYOU ARE IN {house}";
+                mymessage += $"\npet is {pet} Slytherin is {Spoints}, Ravenclaw is {Rpoints}, Gryffindor is {Gpoints} and Hufflepuff is {Hpoints}\nYOU ARE IN {house}\n {stuFirstName}, {stuLastName},{stuUserName},{stuPassword}";
                 var ValidStuMessage = new MessageDialog(mymessage);
-                ValidStuMessage.ShowAsync();
+                await ValidStuMessage.ShowAsync();
+                //INSERT THE DATA TO THE DATABASE HERE
+                string InsertUserQuery = $"INSERT INTO Users VALUES ('{stuFirstName}','{stuLastName}','{stuUserName}','{stuPassword}',NULL);";
+                try
+                {
+                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                    {
+                        sqlConn.Open();
+                        if (sqlConn.State == System.Data.ConnectionState.Open)
+                        {
+                            SqlDataAdapter adapter = new SqlDataAdapter();
+                            SqlCommand command = new SqlCommand(InsertUserQuery, sqlConn);
+                            adapter.InsertCommand = command;
+                            adapter.InsertCommand.ExecuteNonQuery();
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                //add constraint unique to username so we can id user by unique username 
+                                cmd.CommandText = $"SELECT HUID FROM Users WHERE Username = '{stuUserName}';";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        //Set HUID TO AN ACTUAL HUID HERE
+                                        huid = Int32.TryParse(reader.GetValue(0).ToString(), out HUID);
+                                        if (huid == true)
+                                        {
+                                            var vmessage = new MessageDialog($"Inserted Index is {HUID}");
+                                            await vmessage.ShowAsync();
+                                        }
+                                        else
+                                        {
+                                            var ermessage = new MessageDialog("Weesnaw");
+                                            await ermessage.ShowAsync();
+                                        }
+                                    }
+                                }
+                            }
+                            //MIGHT ADD STUDENT YEAR HERE 
+                            SqlCommand command2 = new SqlCommand($"INSERT INTO Positions VALUES ({HUID},'Student','S');", sqlConn);
+                            adapter.InsertCommand = command2;
+                            adapter.InsertCommand.ExecuteNonQuery();
+                            SqlCommand command3 = new SqlCommand($"INSERT INTO Students VALUES({ HUID })", sqlConn);
+                            adapter.InsertCommand = command3;
+                            adapter.InsertCommand.ExecuteNonQuery();
+                            SqlCommand command4 = new SqlCommand($"INSERT INTO Houses VALUES ({HUID},'{house}')", sqlConn);
+                            adapter.InsertCommand = command4;
+                            adapter.InsertCommand.ExecuteNonQuery();
+                            sqlConn.Close();
+                        }
+                        else
+                        {
+                            var validMessage = new MessageDialog("Weesnaw");
+                            await validMessage.ShowAsync();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var errormes = new MessageDialog(ex.Message);
+                    await errormes.ShowAsync();
+                }
+                if (huid == true)
+                {
+                    var StudentSuccessCreation = new MessageDialog("Student Account Successfully Created");
+                    await StudentSuccessCreation.ShowAsync();
+                    Frame.Navigate(typeof(MainPage));
+                }
+                else
+                {
+                    var StudentFailCreation = new MessageDialog("Student Account Not Successfully Created");
+                    await StudentFailCreation.ShowAsync();
+                }
             }
         }
 
         private async void calculateHouse(int gpoints, int rpoints, int spoints, int hpoints)
         {
-            int[] numbers = new int[] { gpoints, rpoints, spoints,hpoints };
+            int[] numbers = new int[] { gpoints, rpoints, spoints, hpoints };
             int maximumNumber = numbers.Max();
             //CHECKS FOR 4 HOUSE TIE BREAKER
-            if (gpoints == rpoints && rpoints == spoints && spoints == hpoints)
+            if (maximumNumber == gpoints && gpoints == rpoints && rpoints == spoints && spoints == hpoints)
             {
                 int mytiebreaker = RandomHouse(1, 5);
                 if (mytiebreaker == 1)
@@ -777,21 +1023,21 @@ namespace Hogwarts2._0
             else
             {
                 //check for 3 house tie breaker
-                if ((gpoints == rpoints && rpoints == spoints) || (gpoints == rpoints && rpoints == hpoints) || (gpoints == spoints && spoints == hpoints) || (rpoints == spoints && spoints == hpoints))
+                if ((maximumNumber == gpoints && gpoints == rpoints && rpoints == spoints) || (maximumNumber == gpoints && gpoints == rpoints && rpoints == hpoints) || (maximumNumber == gpoints && gpoints == spoints && spoints == hpoints) || (maximumNumber == rpoints && rpoints == spoints && spoints == hpoints))
                 {
                     int mytiebreaker = RandomHouse(1, 4);
                     //tie with gryffindor, ravenclaw and slytherin
                     if (gpoints == rpoints && rpoints == spoints)
                     {
-                       if( mytiebreaker == 1)
+                        if (mytiebreaker == 1)
                         {
                             house = "Gryffindor";
                         }
-                        else if(mytiebreaker == 2)
+                        else if (mytiebreaker == 2)
                         {
                             house = "Ravenclaw";
                         }
-                        else if(mytiebreaker == 3)
+                        else if (mytiebreaker == 3)
                         {
                             house = "Slytherin";
                         }
@@ -803,7 +1049,7 @@ namespace Hogwarts2._0
 
                     }
                     //tie with gryffindor, ravenclaw and hufflepuff
-                    else if(gpoints == rpoints && rpoints == hpoints)
+                    else if (gpoints == rpoints && rpoints == hpoints)
                     {
                         if (mytiebreaker == 1)
                         {
@@ -824,7 +1070,7 @@ namespace Hogwarts2._0
                         }
                     }
                     //tie with grffindor, slytherin and hufflepuff
-                    else if(gpoints==spoints && spoints== hpoints)
+                    else if (gpoints == spoints && spoints == hpoints)
                     {
                         if (mytiebreaker == 1)
                         {
@@ -845,7 +1091,7 @@ namespace Hogwarts2._0
                         }
                     }
                     //tie with ravenclaw, slytherin and hufflepuff
-                    else if(rpoints==spoints && spoints == hpoints)
+                    else if (rpoints == spoints && spoints == hpoints)
                     {
                         if (mytiebreaker == 1)
                         {
@@ -874,7 +1120,7 @@ namespace Hogwarts2._0
                 else
                 {
                     //check for 2 house tiebreaker
-                    if (gpoints == rpoints || gpoints == spoints || gpoints == hpoints || rpoints == spoints || rpoints == hpoints || spoints == hpoints)
+                    if (maximumNumber == gpoints && gpoints == rpoints || maximumNumber == gpoints && gpoints == spoints || maximumNumber == gpoints && gpoints == hpoints || maximumNumber == rpoints && rpoints == spoints || maximumNumber == rpoints && rpoints == hpoints || maximumNumber == spoints && spoints == hpoints)
                     {
                         int mytiebreaker = RandomHouse(1, 3);
                         //if Gryffindor and ravenclaw tie
@@ -884,7 +1130,7 @@ namespace Hogwarts2._0
                             {
                                 house = "Gryffindor";
                             }
-                            else if(mytiebreaker ==2) 
+                            else if (mytiebreaker == 2)
                             {
                                 house = "Ravenclaw";
                             }
@@ -895,7 +1141,7 @@ namespace Hogwarts2._0
                             }
                         }
                         //if Gryffindor and Slytherin tie
-                        else if(gpoints == spoints)
+                        else if (gpoints == spoints)
                         {
                             if (mytiebreaker == 1)
                             {
@@ -912,7 +1158,7 @@ namespace Hogwarts2._0
                             }
                         }
                         //if  Gryffindor and Hufflepuff tie
-                        else if(gpoints == hpoints)
+                        else if (gpoints == hpoints)
                         {
                             if (mytiebreaker == 1)
                             {
@@ -946,7 +1192,7 @@ namespace Hogwarts2._0
                             }
                         }
                         // if Ravenclaw and Hufflepuff tie 
-                        else if(rpoints == hpoints)
+                        else if (rpoints == hpoints)
                         {
                             if (mytiebreaker == 1)
                             {
@@ -963,7 +1209,7 @@ namespace Hogwarts2._0
                             }
                         }
                         //if  Slytherin and Hufflepuff tie
-                        else if(spoints == hpoints)
+                        else if (spoints == hpoints)
                         {
                             if (mytiebreaker == 1)
                             {
@@ -1011,8 +1257,12 @@ namespace Hogwarts2._0
         //fixes tie breaker scenerio
         private int RandomHouse(int min, int max)
         {
-            int tiebreaker=_random.Next(min, max);
+            int tiebreaker = _random.Next(min, max);
             return tiebreaker;
+
+
         }
     }
 }
+
+

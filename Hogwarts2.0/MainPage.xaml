@@ -9,7 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1920" Height="1080">
 
     <Grid Margin="10,0,0,0" >
-        <Frame x:Name="frameLoginPage"/>
         <Image Source="Assets/hogwartstest1.jpg" Stretch="None"/>
         <Border Background="#66000000" Margin="814,349,825,365"/>
         <Button Visibility="Visible" Name="Sound_On" Height="50" Width="72" Margin="40,31,0,0" VerticalAlignment="Top" Click="Sound_On_Click">
