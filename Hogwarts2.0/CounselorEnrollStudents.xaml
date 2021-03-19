@@ -45,16 +45,55 @@
                 <Button x:Name="DisenrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll" Click="DisenrollGryffindor_Click" />
             </Grid>
         </Grid>
-        <Grid x:Name="GryffindorEnroll" Visibility="Collapsed" >
+        <Grid x:Name="GryffindorEnroll" Visibility="Visible" >
             <Image x:Name="FormAbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="472,19,473,689">
                 <TextBlock x:Name="EnrollTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="Enroll Student" FontSize="120"/>
             </Grid>
+            <Grid Margin="1291,87,63,602">
+                <Button x:Name="FilterGryffindorEnroll" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Filter" FontSize="42"/>
+            </Grid>
+            <Grid Margin="549,288,756,617" >
+                <TextBlock x:Name="TableHeadername" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Name" FontSize="36" Foreground="Black"/>
+            </Grid>
+            <Grid Margin="755,288,550,617">
+                <TextBlock x:Name="TableHeaderyear" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+            </Grid>
+            <Grid Margin="861,288,444,617">
+                <TextBlock x:Name="TableHeaderHUID" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="HUID" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+            </Grid>
+            <ScrollViewer Margin="198,334,198,220">
+                <Grid x:Name="MainScrollGrid" Height="auto">
+                    <Grid x:Name="StudentTable" HorizontalAlignment="Center" Height="auto">
+                        <!--<Grid.RowDefinitions>
+                            <RowDefinition Height="75"/>
+                            <RowDefinition Height="75"/>
+                        </Grid.RowDefinitions>-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <!--<Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="2">
+                            <Button Content="test"/>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="2">
+                            <TextBlock Text="1"  FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" HorizontalAlignment="Center" Foreground="Black"/>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="2">
+                            <Button Content="test2"/>
+                        </Border>-->
+                    </Grid>
+                    <!--<Grid Margin="0,387,0,-387">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="test" Margin="0,333,0,-333"/>
+                    </Grid>-->
+                </Grid>
+            </ScrollViewer>
             <Grid Margin="207,741,1204,2">
-                <Button x:Name="GryffindorEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Cancel" Click="GryffindorEnrollCancel_Click"/>
+                <Button x:Name="GryffindorEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Cancel" Click="GryffindorEnrollCancel_Click"/>
             </Grid>
             <Grid Margin="1205,741,206,2">
-                <Button x:Name="GryffindorEnrollSubmit" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Submit" Click="GryffindorEnrollSubmit_Click"/>
+                <Button x:Name="GryffindorEnrollSubmit" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Submit" Click="GryffindorEnrollSubmit_Click"/>
             </Grid>
         </Grid>
     </Grid>

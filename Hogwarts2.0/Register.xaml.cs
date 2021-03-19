@@ -956,7 +956,7 @@ namespace Hogwarts2._0
                             SqlCommand command2 = new SqlCommand($"INSERT INTO Positions VALUES ({HUID},'Student','S');", sqlConn);
                             adapter.InsertCommand = command2;
                             adapter.InsertCommand.ExecuteNonQuery();
-                            SqlCommand command3 = new SqlCommand($"INSERT INTO Students VALUES({ HUID })", sqlConn);
+                            SqlCommand command3 = new SqlCommand($"INSERT INTO Students VALUES({ HUID },1,'{pet}')", sqlConn);
                             adapter.InsertCommand = command3;
                             adapter.InsertCommand.ExecuteNonQuery();
                             SqlCommand command4 = new SqlCommand($"INSERT INTO Houses VALUES ({HUID},'{house}')", sqlConn);
