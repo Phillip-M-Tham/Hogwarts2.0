@@ -45,7 +45,7 @@
                 <Button x:Name="DisenrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll" Click="DisenrollGryffindor_Click" />
             </Grid>
         </Grid>
-        <Grid x:Name="GryffindorEnroll" Visibility="Visible" >
+        <Grid x:Name="GryffindorEnroll" Visibility="Collapsed" >
             <Image x:Name="FormAbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="472,19,473,689">
                 <TextBlock x:Name="EnrollTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="Enroll Student" FontSize="120"/>
@@ -65,35 +65,84 @@
             <ScrollViewer Margin="198,334,198,220">
                 <Grid x:Name="MainScrollGrid" Height="auto">
                     <Grid x:Name="StudentTable" HorizontalAlignment="Center" Height="auto">
-                        <!--<Grid.RowDefinitions>
-                            <RowDefinition Height="75"/>
-                            <RowDefinition Height="75"/>
-                        </Grid.RowDefinitions>-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="300"/>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
-                        <!--<Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="2">
-                            <Button Content="test"/>
-                        </Border>
-                        <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="2">
-                            <TextBlock Text="1"  FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" HorizontalAlignment="Center" Foreground="Black"/>
-                        </Border>
-                        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="2">
-                            <Button Content="test2"/>
-                        </Border>-->
                     </Grid>
-                    <!--<Grid Margin="0,387,0,-387">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="test" Margin="0,333,0,-333"/>
-                    </Grid>-->
                 </Grid>
             </ScrollViewer>
-            <Grid Margin="207,741,1204,2">
-                <Button x:Name="GryffindorEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Cancel" Click="GryffindorEnrollCancel_Click"/>
+            <Grid Margin="1449,-31,-38,774">
+                <Button x:Name="GryffindorEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X" Click="GryffindorEnrollCancel_Click"/>
             </Grid>
-            <Grid Margin="1205,741,206,2">
-                <Button x:Name="GryffindorEnrollSubmit" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Submit" Click="GryffindorEnrollSubmit_Click"/>
+        </Grid>
+        <Grid x:Name="StudentEnrollSchedule" Visibility="Visible">
+            <Image x:Name="FormA2background" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
+            <Grid Margin="198,32,198,711">
+                <TextBlock x:Name="StudentScheduleTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Hello World" FontSize="120" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Margin="290,203,960,696">
+                <TextBlock x:Name="FormA2SemesterLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester:" Foreground="Black"/>
+            </Grid>
+            <Grid Margin="388,118,588,613">
+                <ComboBox Name="FormA2ValidSemesters" SelectionChanged="SetupCourses" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Semester"/>
+            </Grid>
+            <Grid Margin="225,171,885,513">
+                <TextBlock x:Name="FormA2CourseLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course:" Foreground="Black" />
+            </Grid>
+            <Grid Margin="408,254,592,593">
+                <ComboBox Name="FormA2AssignedCourses" SelectionChanged="PreviewEnrollment" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" MaxWidth="300" Width="300" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Course" />
+            </Grid>
+            <Grid Margin="1339,148,32,711">
+                <CheckBox x:Name="TimeTurnerEnabler" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P">
+                    <TextBlock Text="Time Turner" Foreground="Black"/>
+                </CheckBox>
+            </Grid>
+            <Grid Margin="415,282,636,508">
+                <Button x:Name="StudentEnrollStudent" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll" />
+            </Grid>
+            <ScrollViewer x:Name="ScrollveiwerNormal" Margin="198,432,198,166">
+                <Grid x:Name="MainScrollGrid2" Height="auto">
+                    <Grid x:Name="StudentSemesterCalendar" HorizontalAlignment="Center" Visibility="Collapsed" Height="Auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="75"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="6" >
+                            <TextBlock x:Name="TableTitle" Foreground="Black" HorizontalAlignment="Center" FontSize="26" Text="Hello World" FontFamily="/Assets/HARRYP__.TTF#Harry P" />
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="0" >
+                            <TextBlock x:Name="C0Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Time" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="1" >
+                            <TextBlock x:Name="C1Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Monday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="2" >
+                            <TextBlock x:Name="C2Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Tuesday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="3" >
+                            <TextBlock x:Name="C3Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Wednesday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="4" >
+                            <TextBlock x:Name="C4Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Thursday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="5" >
+                            <TextBlock x:Name="C5Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Friday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+            <Grid Margin="1449,-31,-38,774">
+                <Button x:Name="StudentEnrollScheduleCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X" Click="StudentEnrollScheduleCancel_Click" />
             </Grid>
         </Grid>
     </Grid>

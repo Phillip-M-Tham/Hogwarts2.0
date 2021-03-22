@@ -74,9 +74,8 @@ namespace Hogwarts2._0
                                 }
                             }
                         }
-                        //puts info from database for semesters in a list
                         using (SqlCommand cmd = sqlConn.CreateCommand())
-                        {
+                        {//puts info from database for semesters in a list
                             cmd.CommandText = $"SELECT Semester FROM Semesters;";
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
@@ -450,8 +449,7 @@ namespace Hogwarts2._0
                             }
 
                             if (form2validcourseID != "" && form2validsemesterID != "")
-                            {
-                                //check to see if semesterid and course id already exists
+                            {//check to see if semesterid and course id already exists
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {
                                     cmd.CommandText = $"SELECT SemesterID,CourseID FROM SemesterCourses WHERE SemesterID = {mysemesterID} AND CourseID = {mycourseID};";
@@ -954,7 +952,7 @@ namespace Hogwarts2._0
                                 if (MondayExist == false)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},\'Monday\');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},'Monday');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -963,7 +961,7 @@ namespace Hogwarts2._0
                                 foreach(var time in Form2BValidMondayTimes)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},\'Monday\','{time}');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},'Monday','{time}');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -974,7 +972,7 @@ namespace Hogwarts2._0
                                 if(MondayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = \'Monday\';", sqlConn);
+                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Monday';", sqlConn);
                                     adapter.DeleteCommand = command;
                                     adapter.DeleteCommand.ExecuteNonQuery();
                                 }
@@ -988,7 +986,7 @@ namespace Hogwarts2._0
                                 {
                                     //add it if it doesnt already exist
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},\'Tuesday\');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},'Tuesday');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -996,7 +994,7 @@ namespace Hogwarts2._0
                                 foreach (var time in Form2BValidTuesdayTimes)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},\'Tuesday\','{time}');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},'Tuesday','{time}');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -1006,7 +1004,7 @@ namespace Hogwarts2._0
                                 if(TuesdayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = \'Tuesday\';", sqlConn);
+                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Tuesday';", sqlConn);
                                     adapter.DeleteCommand = command;
                                     adapter.DeleteCommand.ExecuteNonQuery();
                                 }
@@ -1018,7 +1016,7 @@ namespace Hogwarts2._0
                                 if(WednesdayExist == false)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},\'Wednesday\');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},'Wednesday');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -1026,7 +1024,7 @@ namespace Hogwarts2._0
                                 foreach (var time in Form2BValidWednesdayTimes)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},\'Wednesday\','{time}');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},'Wednesday','{time}');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -1036,7 +1034,7 @@ namespace Hogwarts2._0
                                 if(WednesdayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = \'Wednesday\';", sqlConn);
+                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Wednesday';", sqlConn);
                                     adapter.DeleteCommand = command;
                                     adapter.DeleteCommand.ExecuteNonQuery();
                                 }
@@ -1048,7 +1046,7 @@ namespace Hogwarts2._0
                                 if(ThursdayExist == false)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},\'Thursday\');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},'Thursday');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -1056,7 +1054,7 @@ namespace Hogwarts2._0
                                 foreach (var time in Form2BValidThursdayTimes)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},\'Thursday\','{time}');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},'Thursday','{time}');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -1066,7 +1064,7 @@ namespace Hogwarts2._0
                                 if(ThursdayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = \'Thursday\';", sqlConn);
+                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Thursday';", sqlConn);
                                     adapter.DeleteCommand = command;
                                     adapter.DeleteCommand.ExecuteNonQuery();
                                 }
@@ -1078,7 +1076,7 @@ namespace Hogwarts2._0
                                 if(FridayExist == false)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},\'Friday\');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},'Friday');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -1086,7 +1084,7 @@ namespace Hogwarts2._0
                                 foreach(var time in Form2BValidFridayTimes)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},\'Friday\','{time}');", sqlConn);
+                                    SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},'Friday','{time}');", sqlConn);
                                     adapter.InsertCommand = command;
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
@@ -1096,7 +1094,7 @@ namespace Hogwarts2._0
                                 if(FridayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = \'Friday\';", sqlConn);
+                                    SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Friday';", sqlConn);
                                     adapter.DeleteCommand = command;
                                     adapter.DeleteCommand.ExecuteNonQuery();
                                 }
@@ -1141,7 +1139,7 @@ namespace Hogwarts2._0
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = \'Friday\';", sqlConn);
+                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Friday';", sqlConn);
                         adapter.DeleteCommand = command;
                         adapter.DeleteCommand.ExecuteNonQuery();
                     }
@@ -1161,7 +1159,7 @@ namespace Hogwarts2._0
                 {
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE CourseID = {semesterid} AND SemesterID = {courseid} AND DaysName = \'Friday\';";
+                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Friday';";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -1190,7 +1188,7 @@ namespace Hogwarts2._0
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = \'Thursday\';", sqlConn);
+                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Thursday';", sqlConn);
                         adapter.DeleteCommand = command;
                         adapter.DeleteCommand.ExecuteNonQuery();
                     }
@@ -1210,7 +1208,7 @@ namespace Hogwarts2._0
                 {
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE CourseID = {semesterid} AND SemesterID = {courseid} AND DaysName = \'Thursday\';";
+                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Thursday';";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -1239,7 +1237,7 @@ namespace Hogwarts2._0
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = \'Wednesday\';", sqlConn);
+                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Wednesday';", sqlConn);
                         adapter.DeleteCommand = command;
                         adapter.DeleteCommand.ExecuteNonQuery();
                     }
@@ -1259,7 +1257,7 @@ namespace Hogwarts2._0
                 {
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE CourseID = {semesterid} AND SemesterID = {courseid} AND DaysName = \'Wednesday\';";
+                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Wednesday';";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -1288,7 +1286,7 @@ namespace Hogwarts2._0
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = \'Tuesday\';", sqlConn);
+                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Tuesday';", sqlConn);
                         adapter.DeleteCommand = command;
                         adapter.DeleteCommand.ExecuteNonQuery();
                     }
@@ -1308,7 +1306,7 @@ namespace Hogwarts2._0
                 {
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE CourseID = {semesterid} AND SemesterID = {courseid} AND DaysName = \'Tuesday\';";
+                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Tuesday';";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -1337,7 +1335,7 @@ namespace Hogwarts2._0
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = \'Monday\';", sqlConn);
+                        SqlCommand command = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Monday';", sqlConn);
                         adapter.DeleteCommand = command;
                         adapter.DeleteCommand.ExecuteNonQuery();
                     }
@@ -1357,7 +1355,7 @@ namespace Hogwarts2._0
                 {
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE CourseID = {semesterid} AND SemesterID = {courseid} AND DaysName = \'Monday\';";
+                        cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE SemesterID = {semesterid} AND CourseID = {courseid} AND DaysName = 'Monday';";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -1557,7 +1555,6 @@ namespace Hogwarts2._0
                     }
                     if (coursetitles.Count > 0)
                     {
-
                         foreach (var title in coursetitles)
                         {
                             AssignedCourses.Items.Add(title);
@@ -1591,12 +1588,13 @@ namespace Hogwarts2._0
         }
         private void ResetCourses()
         {
-            int index = 0;
+            //int index = 0;needs more testing but should not need any the commented things
             if (AssignedCourses.SelectedItem != null)
             {
                 AssignedCourses.SelectedItem = null;
             }
-            foreach (var item in AssignedCourses.Items)
+            AssignedCourses.Items.Clear();
+            /*foreach (var item in AssignedCourses.Items)
             {
                 AssignedCourses.Items.Remove(item);
             }
@@ -1604,7 +1602,7 @@ namespace Hogwarts2._0
             {
                 AssignedCourses.Items.RemoveAt(index);
                 index++;
-            }
+            }*/
         }
         private void SetupCourseInfo(object sender, SelectionChangedEventArgs e)
         {
