@@ -100,7 +100,7 @@
                 </CheckBox>
             </Grid>
             <Grid Margin="415,282,636,508">
-                <Button x:ConnectionId='18' x:Name="StudentEnrollStudent" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll" />
+                <Button x:ConnectionId='18' x:Name="StudentEnrollStudent" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll"                                    />
             </Grid>
             <ScrollViewer x:ConnectionId='7' x:Name="ScrollveiwerNormal" Margin="198,432,198,166">
                 <Grid x:ConnectionId='9' x:Name="MainScrollGrid2" Height="auto">

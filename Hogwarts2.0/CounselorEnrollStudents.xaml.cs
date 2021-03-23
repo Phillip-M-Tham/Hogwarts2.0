@@ -19,7 +19,14 @@ namespace Hogwarts2._0
     {
         private string _userHuid;
         const string ConnectionString = "SERVER = DESKTOP-R3J82OF\\SQLEXPRESS2019; DATABASE= Hogwarts2.0; USER ID=Cohort7; PASSWORD=tuesday313";
-
+        private bool ValidEnrollment = true;
+        List<string> days = new List<string>();
+        List<string> MTimes = new List<string>();
+        List<string> TuTimes = new List<string>();
+        List<string> WTimes = new List<string>();
+        List<string> ThTimes = new List<string>();
+        List<string> FTimes = new List<string>();
+        private int SelectedStudentHUID;
         public CounselorEnrollStudents()
         {
             this.InitializeComponent();
@@ -36,62 +43,6 @@ namespace Hogwarts2._0
         {
             Queue<string> mytimes = GetAllTimes();
             int count = 2;
-            //int daycount =0;
-            //this should add the title of the calendar
-            /*Border titleheader = new Border();
-            titleheader.BorderThickness = new Thickness(2);
-            titleheader.BorderBrush = new SolidColorBrush(Colors.Black);
-            titleheader.SetValue(Grid.ColumnSpanProperty, 6);
-
-            TextBlock title = new TextBlock();
-            title.FontSize = 26;
-            title.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-            title.Text = "Hello World";
-            title.HorizontalAlignment = HorizontalAlignment.Center;
-            title.Foreground = new SolidColorBrush(Colors.Black);
-            title.Name = "TableTitle";
-
-            titleheader.Child = title;
-            StudentSemesterCalendar.Children.Add(titleheader);
-
-            while(daycount != 6)
-            {
-                Border dayborder = new Border();
-                dayborder.BorderThickness = new Thickness(2);
-                dayborder.BorderBrush = new SolidColorBrush(Colors.Black);
-                dayborder.SetValue(Grid.RowProperty, 1);
-                dayborder.SetValue(Grid.ColumnProperty, count);
-                if(daycount == 0)
-                {
-
-                }
-                else if (daycount == 1)
-                {
-                    TextBlock dayblock = new TextBlock();
-                    dayblock.HorizontalAlignment = HorizontalAlignment.Center;
-                    dayblock.VerticalAlignment = VerticalAlignment.Center;
-                    dayblock.Foreground = new SolidColorBrush(Colors.Black);
-                    dayblock.FontSize = 40;
-                    dayblock.Text = "Monday";
-                }
-                else if (daycount == 2)
-                {
-
-                }
-                else if (daycount == 3)
-                {
-
-                }
-                else if (daycount == 4)
-                {
-
-                }
-                else if (daycount == 5)
-                {
-
-                }
-            }*/
-
             while (count != 26)
             {//creates new row
                 RowDefinition newrow = new RowDefinition();
@@ -115,6 +66,18 @@ namespace Hogwarts2._0
                         txtblock.HorizontalAlignment = HorizontalAlignment.Center;
                         txtblock.VerticalAlignment = VerticalAlignment.Center;
                         newborder.Child = txtblock;
+                    }
+                    else
+                    {//adds an empty course value block to every other spot
+                        TextBlock courseblock = new TextBlock();
+                        courseblock.FontSize = 36;
+                        courseblock.Name = "CalendarDayBlockValue";
+                        courseblock.Text = "";
+                        courseblock.Foreground = new SolidColorBrush(Colors.Black);
+                        courseblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                        courseblock.HorizontalAlignment = HorizontalAlignment.Center;
+                        courseblock.VerticalAlignment = VerticalAlignment.Center;
+                        newborder.Child = courseblock;
                     }
                     StudentSemesterCalendar.Children.Add(newborder);
                 }
@@ -184,6 +147,9 @@ namespace Hogwarts2._0
             StudentEnrollSchedule.Visibility = Visibility.Collapsed;
             //reset student schedule here
             resetenrollStudentschedule();
+            resetenrollStudentschedule();
+            TableTitle.Text = "";
+            StudentSemesterCalendar.Visibility = Visibility.Collapsed;
         }
 
         private void EnrollGryffindor_Click(object sender, RoutedEventArgs e)
@@ -321,16 +287,9 @@ namespace Hogwarts2._0
                     StudentTable.Children.Add(myborder);
                     rowposition++;
                 }
-                //ColumnDefinition col2 = new ColumnDefinition();
-                //col2.Width = new GridLength(100.00);
-                // StudentTable.ColumnDefinitions.Add(col2);
                 int rowposition2 = 0;
                 foreach (var year in yearlevel)
                 {
-                    /*RowDefinition row = new RowDefinition();
-                    row.Height = new GridLength(75.00);
-                    StudentTable.RowDefinitions.Add(row);*/
-
                     TextBlock txtblock = new TextBlock();
                     txtblock.FontSize = 36;
                     txtblock.Text = year.ToString();
@@ -349,15 +308,9 @@ namespace Hogwarts2._0
                     StudentTable.Children.Add(myborder);
                     rowposition2++;
                 }
-                //ColumnDefinition col3 = new ColumnDefinition();
-                //col3.Width = new GridLength(100.00);
-                //StudentTable.ColumnDefinitions.Add(col3);
                 int rowposition3 = 0;
                 foreach (var id in myids)
                 {
-                    /*RowDefinition row = new RowDefinition();
-                    row.Height = new GridLength(75.00);
-                    StudentTable.RowDefinitions.Add(row);*/
                     TextBlock txtblock = new TextBlock();
                     txtblock.FontSize = 36;
                     txtblock.Text = id.ToString();
@@ -385,7 +338,9 @@ namespace Hogwarts2._0
             GryffindorEnroll.Visibility = Visibility.Collapsed;
             StudentEnrollSchedule.Visibility = Visibility.Visible;
             Button mybutton = (sender as Button);
+            Int32.TryParse(mybutton.Name, out SelectedStudentHUID);
             StudentScheduleTitle.Text = mybutton.Content.ToString() + "'s Schedule";
+
             //find out if the student is using time turner here
             //Setup students schedule from the database
             if (TimeTurnerEnabler.IsChecked == true)
@@ -394,11 +349,10 @@ namespace Hogwarts2._0
             }
             else
             {
-                
+
             }
 
         }
-
         private Queue<string> GetAllTimes()
         {
             Queue<string> emptyqueue = new Queue<string>();
@@ -465,11 +419,16 @@ namespace Hogwarts2._0
             }
         }
 
-        private void SetupCourses(object sender, SelectionChangedEventArgs e)
+        private async void SetupCourses(object sender, SelectionChangedEventArgs e)
         {//populates courses from the selected semester and shows schedule for that semester
+            List<int> CurrentlyEnrolledCourseIDs = new List<int>();//for updateing prior enrolled courses
+            List<bool> TimeTableflag = new List<bool>();//for updating prior enrolled courses
+            List<string> TotalEnrolledCourseTimes = new List<string>();
+            string Enrolledresults = "";
+
             int _semesterID;
-            List<int> mycourseIDs = new List<int>();
-            List<string> coursetitles = new List<string>();
+            List<int> mycourseIDs = new List<int>();//for course combo box
+            List<string> coursetitles = new List<string>();//for course combo box
             resetcourses();
             if (FormA2ValidSemesters.SelectedItem != null)
             {
@@ -478,7 +437,7 @@ namespace Hogwarts2._0
                     StudentSemesterCalendar.Visibility = Visibility.Visible;
                     TableTitle.Text = $"Semester {FormA2ValidSemesters.SelectedValue}";
                     using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
-                    {
+                    {//updates the combo box for the courses for the selected semester
                         sqlConn.Open();
                         if (sqlConn.State == System.Data.ConnectionState.Open)
                         {//acquire the semesterid from the name of the semester
@@ -520,6 +479,60 @@ namespace Hogwarts2._0
                             {
                                 FormA2AssignedCourses.Items.Add("Please Assign Some Courses");
                             }
+                            //Updates the students calendar for the selected semester
+                            //find out the courses the student is currently enrolled in
+                            try
+                            {
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all courseids for selected semester for this particular student
+                                    cmd.CommandText = $"SELECT CourseID,TimeTurnerFlag FROM StudentEnrolledCourses WHERE StudentID = {SelectedStudentHUID} AND SemesterID = {_semesterID};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            CurrentlyEnrolledCourseIDs.Add((int)reader.GetValue(0));
+                                            TimeTableflag.Add((bool)reader.GetValue(1));
+                                        }
+                                    }
+                                }
+                                if (CurrentlyEnrolledCourseIDs.Count > 0 && TimeTableflag.Count > 0)
+                                {//found courses the student already enrolled in
+                                    foreach (var item in CurrentlyEnrolledCourseIDs)
+                                    {
+                                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                                        {//gets the course names and types for each courseid 
+                                            cmd.CommandText = $"SELECT Title, CourseType FROM Courses WHERE CourseID = {item};";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    Enrolledresults += (reader.GetValue(0).ToString())+" ";
+                                                    Enrolledresults += (reader.GetValue(1).ToString())+"\n";
+                                                }
+                                            }
+                                        }
+                                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                                        {//gets the times and day for each courseid
+                                            cmd.CommandText = $"SELECT DaysName,Times FROM Times WHERE SemesterID ={_semesterID} AND CourseID = {item};";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    Enrolledresults += reader.GetValue(0).ToString()+" ";
+                                                    Enrolledresults += reader.GetValue(1).ToString()+"\n";
+                                                }
+                                            }
+                                        }
+                                        TotalEnrolledCourseTimes.Add(Enrolledresults);
+                                        Enrolledresults = "";
+                                    }
+                                }
+                            }
+                            catch(Exception ex)
+                            {
+                                var errorMessage = new MessageDialog(ex.Message);
+                                await errorMessage.ShowAsync();
+                            }
                             sqlConn.Close();
                         }
                     }
@@ -530,12 +543,21 @@ namespace Hogwarts2._0
                             FormA2AssignedCourses.Items.Add(title);
                         }
                     }
+                    if(CurrentlyEnrolledCourseIDs.Count > 0)
+                    {
+                        foreach (var course in TotalEnrolledCourseTimes)
+                        {//we have to parse this message
+                            var Message = new MessageDialog(course);
+                            await Message.ShowAsync();
+                        } 
+                    }
                 }
             }
             else
             {
                 FormA2AssignedCourses.Items.Add("Please pick a Semester");
             }
+
         }
 
         private int GetSemesterID()
@@ -574,43 +596,26 @@ namespace Hogwarts2._0
             FormA2AssignedCourses.Items.Clear();
         }
 
-        private async void PreviewEnrollment(object sender, SelectionChangedEventArgs e)
+        private void PreviewEnrollment(object sender, SelectionChangedEventArgs e)
         {
+            resetListEnrollments();
             purgePreview();
-            string _courseid = "";
-            int _courseID = 0;
-            int _semesterID = 0;
-            List<string> days = new List<string>();
-            List<string> MTimes = new List<string>();
-            List<string> TuTimes = new List<string>();
-            List<string> WTimes = new List<string>();
-            List<string> ThTimes = new List<string>();
-            List<string> FTimes = new List<string>();
-            if(FormA2AssignedCourses.SelectedItem != null)
+            int _CID;
+            int _SID;
+            if (FormA2AssignedCourses.SelectedItem != null)
             {
-                if(FormA2AssignedCourses.SelectedValue.ToString() != "Please Assign Some Courses")
+                if (FormA2AssignedCourses.SelectedValue.ToString() != "Please Assign Some Courses")
                 {//get the courseid from the name of the course
                     using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
                     {
                         sqlConn.Open();
                         if (sqlConn.State == System.Data.ConnectionState.Open)
                         {
-                            using (SqlCommand cmd = sqlConn.CreateCommand())
-                            {
-                                cmd.CommandText = $"SELECT CourseID FROM Courses WHERE Title ='{FormA2AssignedCourses.SelectedValue}';";
-                                using (SqlDataReader reader = cmd.ExecuteReader())
-                                {
-                                    while (reader.Read())
-                                    {
-                                        _courseid += reader.GetValue(0).ToString();
-                                    }
-                                }
-                            }
-                            Int32.TryParse(_courseid, out _courseID);
-                            _semesterID = GetSemesterID();
+                            _CID = getCourseID();
+                            _SID = GetSemesterID();
                             using (SqlCommand cmd = sqlConn.CreateCommand())
                             { //get the days from the courseid
-                                cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE CourseID = {_courseID} AND SemesterID = {_semesterID};";
+                                cmd.CommandText = $"SELECT DaysName FROM DayTypes WHERE CourseID = {_CID} AND SemesterID = {_SID};";
                                 using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
                                     while (reader.Read())
@@ -619,1204 +624,667 @@ namespace Hogwarts2._0
                                     }
                                 }
                             }
-                            try
-                            {
-                                if (days.Count > 0)
-                                {//get times from the days
-                                    foreach (var day in days)
+                            if (days.Count > 0)
+                            {//get times from the days might be able to make this into a function
+                                foreach (var day in days)
+                                {
+                                    if (day == "Monday")
                                     {
-                                        if (day == "Monday")
+                                        using (SqlCommand cmd = sqlConn.CreateCommand())
                                         {
-                                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                                            cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_CID} AND SemesterID = {_SID} AND DaysName = 'Monday';";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
                                             {
-                                                cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_courseID} AND SemesterID = {_semesterID} AND DaysName = 'Monday';";
-                                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                                while (reader.Read())
                                                 {
-                                                    while (reader.Read())
-                                                    {
-                                                        MTimes.Add(reader.GetValue(0).ToString());
-                                                    }
+                                                    MTimes.Add(reader.GetValue(0).ToString());
                                                 }
                                             }
                                         }
-                                        else if (day == "Tuesday")
+                                    }
+                                    else if (day == "Tuesday")
+                                    {
+                                        using (SqlCommand cmd = sqlConn.CreateCommand())
                                         {
-                                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                                            cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_CID} AND SemesterID = {_SID} AND DaysName = 'Tuesday';";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
                                             {
-                                                cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_courseID} AND SemesterID = {_semesterID} AND DaysName = 'Tuesday';";
-                                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                                while (reader.Read())
                                                 {
-                                                    while (reader.Read())
-                                                    {
-                                                        TuTimes.Add(reader.GetValue(0).ToString());
-                                                    }
+                                                    TuTimes.Add(reader.GetValue(0).ToString());
                                                 }
                                             }
                                         }
-                                        else if (day == "Wednesday")
+                                    }
+                                    else if (day == "Wednesday")
+                                    {
+                                        using (SqlCommand cmd = sqlConn.CreateCommand())
                                         {
-                                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                                            cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_CID} AND SemesterID = {_SID} AND DaysName = 'Wednesday';";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
                                             {
-                                                cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_courseID} AND SemesterID = {_semesterID} AND DaysName = 'Wednesday';";
-                                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                                while (reader.Read())
                                                 {
-                                                    while (reader.Read())
-                                                    {
-                                                        WTimes.Add(reader.GetValue(0).ToString());
-                                                    }
+                                                    WTimes.Add(reader.GetValue(0).ToString());
                                                 }
                                             }
                                         }
-                                        else if (day == "Thursday")
+                                    }
+                                    else if (day == "Thursday")
+                                    {
+                                        using (SqlCommand cmd = sqlConn.CreateCommand())
                                         {
-                                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                                            cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_CID} AND SemesterID = {_SID} AND DaysName = 'Thursday';";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
                                             {
-                                                cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_courseID} AND SemesterID = {_semesterID} AND DaysName = 'Thursday';";
-                                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                                while (reader.Read())
                                                 {
-                                                    while (reader.Read())
-                                                    {
-                                                        ThTimes.Add(reader.GetValue(0).ToString());
-                                                    }
+                                                    ThTimes.Add(reader.GetValue(0).ToString());
                                                 }
                                             }
                                         }
-                                        else if (day == "Friday")
+                                    }
+                                    else if (day == "Friday")
+                                    {
+                                        using (SqlCommand cmd = sqlConn.CreateCommand())
                                         {
-                                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                                            cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_CID} AND SemesterID = {_SID} AND DaysName = 'Friday';";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
                                             {
-                                                cmd.CommandText = $"SELECT Times FROM Times WHERE CourseID = {_courseID} AND SemesterID = {_semesterID} AND DaysName = 'Friday';";
-                                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                                while (reader.Read())
                                                 {
-                                                    while (reader.Read())
-                                                    {
-                                                        FTimes.Add(reader.GetValue(0).ToString());
-                                                    }
+                                                    FTimes.Add(reader.GetValue(0).ToString());
                                                 }
                                             }
                                         }
                                     }
                                 }
-                            }catch(Exception ex)
-                            {
-                                var errorMessage = new MessageDialog(ex.Message);
-                                await errorMessage.ShowAsync();
                             }
                             sqlConn.Close();
                         }
                     }
                     //used the times and days list to populate green boxes on calendar or red if spot is already taken
-                    if(MTimes.Count > 0)
+                    if (MTimes.Count > 0)
                     {
-                        foreach(var time in MTimes)
+                        foreach (var time in MTimes)
                         {
-                            if(time == "0000")
+                            if (time == "0000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview0m";
-                                myblock.SetValue(Grid.RowProperty, 2);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(2, 1, "preview");
                             }
                             else if (time == "0100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview1m";
-                                myblock.SetValue(Grid.RowProperty, 3);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(3, 1, "preview");
                             }
                             else if (time == "0200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview2m";
-                                myblock.SetValue(Grid.RowProperty, 4);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(4, 1, "preview");
                             }
                             else if (time == "0300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview3m";
-                                myblock.SetValue(Grid.RowProperty, 5);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(5, 1, "preview");
                             }
                             else if (time == "0400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview4m";
-                                myblock.SetValue(Grid.RowProperty, 6);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(6, 1, "preview");
                             }
                             else if (time == "0500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview5m";
-                                myblock.SetValue(Grid.RowProperty, 7);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(7, 1, "preview");
                             }
                             else if (time == "0600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview6m";
-                                myblock.SetValue(Grid.RowProperty, 8);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(8, 1, "preview");
                             }
                             else if (time == "0700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview7m";
-                                myblock.SetValue(Grid.RowProperty, 9);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(9, 1, "preview");
                             }
                             else if (time == "0800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview8m";
-                                myblock.SetValue(Grid.RowProperty, 10);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(10, 1, "preview");
                             }
                             else if (time == "0900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview9m";
-                                myblock.SetValue(Grid.RowProperty, 11);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(11, 1, "preview");
                             }
                             else if (time == "1000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview10m";
-                                myblock.SetValue(Grid.RowProperty, 12);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(12, 1, "preview");
                             }
                             else if (time == "1100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview11m";
-                                myblock.SetValue(Grid.RowProperty, 13);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
-                            }else if (time == "1200")
+                                CreatePreviewBlock(13, 1, "preview");
+                            }
+                            else if (time == "1200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview12m";
-                                myblock.SetValue(Grid.RowProperty, 14);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(14, 1, "preview");
                             }
                             else if (time == "1300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview13m";
-                                myblock.SetValue(Grid.RowProperty, 15);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(15, 1, "preview");
                             }
                             else if (time == "1400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview14m";
-                                myblock.SetValue(Grid.RowProperty, 16);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(16, 1, "preview");
                             }
                             else if (time == "1500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview15m";
-                                myblock.SetValue(Grid.RowProperty, 17);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(17, 1, "preview");
                             }
                             else if (time == "1600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview16m";
-                                myblock.SetValue(Grid.RowProperty, 18);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(18, 1, "preview");
                             }
                             else if (time == "1700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview17m";
-                                myblock.SetValue(Grid.RowProperty, 19);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(19, 1, "preview");
                             }
                             else if (time == "1800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview18m";
-                                myblock.SetValue(Grid.RowProperty, 20);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(20, 1, "preview");
                             }
                             else if (time == "1900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview19m";
-                                myblock.SetValue(Grid.RowProperty, 21);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(21, 1, "preview");
                             }
                             else if (time == "2000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview20m";
-                                myblock.SetValue(Grid.RowProperty, 22);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(22, 1, "preview");
                             }
                             else if (time == "2100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview21m";
-                                myblock.SetValue(Grid.RowProperty, 23);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(23, 1, "preview");
                             }
                             else if (time == "2200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview22m";
-                                myblock.SetValue(Grid.RowProperty, 24);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(24, 1, "preview");
                             }
                             else if (time == "2300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview23m";
-                                myblock.SetValue(Grid.RowProperty, 25);
-                                myblock.SetValue(Grid.ColumnProperty, 1);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(25, 1, "preview");
                             }
                         }
                     }
-                    if(TuTimes.Count > 0)
+                    if (TuTimes.Count > 0)
                     {
                         foreach (var time in TuTimes)
                         {
                             if (time == "0000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview0tu";
-                                myblock.SetValue(Grid.RowProperty, 2);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(2, 2, "preview");
                             }
                             else if (time == "0100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview1tu";
-                                myblock.SetValue(Grid.RowProperty, 3);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(3, 2, "preview");
                             }
                             else if (time == "0200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview2tu";
-                                myblock.SetValue(Grid.RowProperty, 4);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(4, 2, "preview");
                             }
                             else if (time == "0300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview3tu";
-                                myblock.SetValue(Grid.RowProperty, 5);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(5, 2, "preview");
                             }
                             else if (time == "0400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview4tu";
-                                myblock.SetValue(Grid.RowProperty, 6);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(6, 2, "preview");
                             }
                             else if (time == "0500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview5tu";
-                                myblock.SetValue(Grid.RowProperty, 7);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(7, 2, "preview");
                             }
                             else if (time == "0600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview6t";
-                                myblock.SetValue(Grid.RowProperty, 8);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(8, 2, "preview");
                             }
                             else if (time == "0700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview7tu";
-                                myblock.SetValue(Grid.RowProperty, 9);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(9, 2, "preview");
                             }
                             else if (time == "0800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview8tu";
-                                myblock.SetValue(Grid.RowProperty, 10);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(10, 2, "preview");
                             }
                             else if (time == "0900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview9tu";
-                                myblock.SetValue(Grid.RowProperty, 11);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(11, 2, "preview");
                             }
                             else if (time == "1000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview10tu";
-                                myblock.SetValue(Grid.RowProperty, 12);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(12, 2, "preview");
                             }
                             else if (time == "1100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview11tu";
-                                myblock.SetValue(Grid.RowProperty, 13);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(13, 2, "preview");
                             }
                             else if (time == "1200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview12tu";
-                                myblock.SetValue(Grid.RowProperty, 14);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(14, 2, "preview");
                             }
                             else if (time == "1300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview13tu";
-                                myblock.SetValue(Grid.RowProperty, 15);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(15, 2, "preview");
                             }
                             else if (time == "1400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview14tu";
-                                myblock.SetValue(Grid.RowProperty, 16);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(16, 2, "preview");
                             }
                             else if (time == "1500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview15tu";
-                                myblock.SetValue(Grid.RowProperty, 17);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(17, 2, "preview");
                             }
                             else if (time == "1600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview16tu";
-                                myblock.SetValue(Grid.RowProperty, 18);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(18, 2, "preview");
                             }
                             else if (time == "1700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview17tu";
-                                myblock.SetValue(Grid.RowProperty, 19);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(19, 2, "preview");
                             }
                             else if (time == "1800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview18tu";
-                                myblock.SetValue(Grid.RowProperty, 20);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(20, 2, "preview");
                             }
                             else if (time == "1900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview19tu";
-                                myblock.SetValue(Grid.RowProperty, 21);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(21, 2, "preview");
                             }
                             else if (time == "2000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview20tu";
-                                myblock.SetValue(Grid.RowProperty, 22);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(22, 2, "preview");
                             }
                             else if (time == "2100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview21tu";
-                                myblock.SetValue(Grid.RowProperty, 23);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(23, 2, "preview");
                             }
                             else if (time == "2200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview22tu";
-                                myblock.SetValue(Grid.RowProperty, 24);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(24, 2, "preview");
                             }
                             else if (time == "2300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview23tu";
-                                myblock.SetValue(Grid.RowProperty, 25);
-                                myblock.SetValue(Grid.ColumnProperty, 2);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(25, 2, "preview");
                             }
                         }
                     }
-                    if(WTimes.Count > 0)
+                    if (WTimes.Count > 0)
                     {
                         foreach (var time in WTimes)
                         {
                             if (time == "0000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview0w";
-                                myblock.SetValue(Grid.RowProperty, 2);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(2, 3, "preview");
                             }
                             else if (time == "0100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview1w";
-                                myblock.SetValue(Grid.RowProperty, 3);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(3, 3, "preview");
                             }
                             else if (time == "0200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview2w";
-                                myblock.SetValue(Grid.RowProperty, 4);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(4, 3, "preview");
                             }
                             else if (time == "0300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview3w";
-                                myblock.SetValue(Grid.RowProperty, 5);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(5, 3, "preview");
                             }
                             else if (time == "0400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview4w";
-                                myblock.SetValue(Grid.RowProperty, 6);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(6, 3, "preview");
                             }
                             else if (time == "0500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview5w";
-                                myblock.SetValue(Grid.RowProperty, 7);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(7, 3, "preview");
                             }
                             else if (time == "0600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview6w";
-                                myblock.SetValue(Grid.RowProperty, 8);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(8, 3, "preview");
                             }
                             else if (time == "0700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview7w";
-                                myblock.SetValue(Grid.RowProperty, 9);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(9, 3, "preview");
                             }
                             else if (time == "0800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview8w";
-                                myblock.SetValue(Grid.RowProperty, 10);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(10, 3, "preview");
                             }
                             else if (time == "0900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview9w";
-                                myblock.SetValue(Grid.RowProperty, 11);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(11, 3, "preview");
                             }
                             else if (time == "1000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview10w";
-                                myblock.SetValue(Grid.RowProperty, 12);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(12, 3, "preview");
                             }
                             else if (time == "1100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview11w";
-                                myblock.SetValue(Grid.RowProperty, 13);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(13, 3, "preview");
                             }
                             else if (time == "1200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview12w";
-                                myblock.SetValue(Grid.RowProperty, 14);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(14, 3, "preview");
                             }
                             else if (time == "1300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview13w";
-                                myblock.SetValue(Grid.RowProperty, 15);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(15, 3, "preview");
                             }
                             else if (time == "1400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview14w";
-                                myblock.SetValue(Grid.RowProperty, 16);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(16, 3, "preview");
                             }
                             else if (time == "1500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview15w";
-                                myblock.SetValue(Grid.RowProperty, 17);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(17, 3, "preview");
                             }
                             else if (time == "1600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview16w";
-                                myblock.SetValue(Grid.RowProperty, 18);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(18, 3, "preview");
                             }
                             else if (time == "1700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview17w";
-                                myblock.SetValue(Grid.RowProperty, 19);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(19, 3, "preview");
                             }
                             else if (time == "1800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview18w";
-                                myblock.SetValue(Grid.RowProperty, 20);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(20, 3, "preview");
                             }
                             else if (time == "1900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview19w";
-                                myblock.SetValue(Grid.RowProperty, 21);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(21, 3, "preview");
                             }
                             else if (time == "2000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview20w";
-                                myblock.SetValue(Grid.RowProperty, 22);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(22, 3, "preview");
                             }
                             else if (time == "2100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview21w";
-                                myblock.SetValue(Grid.RowProperty, 23);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(23, 3, "preview");
                             }
                             else if (time == "2200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview22w";
-                                myblock.SetValue(Grid.RowProperty, 24);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(24, 3, "preview");
                             }
                             else if (time == "2300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview23w";
-                                myblock.SetValue(Grid.RowProperty, 25);
-                                myblock.SetValue(Grid.ColumnProperty, 3);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(25, 3, "preview");
                             }
                         }
                     }
-                    if(ThTimes.Count > 0)
+                    if (ThTimes.Count > 0)
                     {
                         foreach (var time in ThTimes)
                         {
                             if (time == "0000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 2);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(2, 4, "preview");
                             }
                             else if (time == "0100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 3);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(3, 4, "preview");
                             }
                             else if (time == "0200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 4);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(4, 4, "preview");
                             }
                             else if (time == "0300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 5);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(5, 4, "preview");
                             }
                             else if (time == "0400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 6);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(6, 4, "preview");
                             }
                             else if (time == "0500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 7);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(7, 4, "preview");
                             }
                             else if (time == "0600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 8);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(8, 4, "preview");
                             }
                             else if (time == "0700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 9);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(9, 4, "preview");
                             }
                             else if (time == "0800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 10);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(10, 4, "preview");
                             }
                             else if (time == "0900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 11);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(11, 4, "preview");
                             }
                             else if (time == "1000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 12);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(12, 4, "preview");
                             }
                             else if (time == "1100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 13);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(13, 4, "preview");
                             }
                             else if (time == "1200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 14);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(14, 4, "preview");
                             }
                             else if (time == "1300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 15);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(15, 4, "preview");
                             }
                             else if (time == "1400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 16);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(16, 4, "preview");
                             }
                             else if (time == "1500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 17);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(17, 4, "preview");
                             }
                             else if (time == "1600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 18);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(18, 4, "preview");
                             }
                             else if (time == "1700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 19);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(19, 4, "preview");
                             }
                             else if (time == "1800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 20);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(20, 4, "preview");
                             }
                             else if (time == "1900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 21);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(21, 4, "preview");
                             }
                             else if (time == "2000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 22);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(22, 4, "preview");
                             }
                             else if (time == "2100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 23);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(23, 4, "preview");
                             }
                             else if (time == "2200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 24);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(24, 4, "preview");
                             }
                             else if (time == "2300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 25);
-                                myblock.SetValue(Grid.ColumnProperty, 4);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(25, 4, "preview");
                             }
                         }
                     }
-                    if(FTimes.Count > 0)
+                    if (FTimes.Count > 0)
                     {
                         foreach (var time in FTimes)
                         {
                             if (time == "0000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 2);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(2, 5, "preview");
                             }
                             else if (time == "0100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 3);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(3, 5, "preview");
                             }
                             else if (time == "0200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 4);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(4, 5, "preview");
                             }
                             else if (time == "0300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 5);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(5, 5, "preview");
                             }
                             else if (time == "0400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 6);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(6, 5, "preview");
                             }
                             else if (time == "0500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 7);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(7, 5, "preview");
                             }
                             else if (time == "0600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 8);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(8, 5, "preview");
                             }
                             else if (time == "0700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 9);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(9, 5, "preview");
                             }
                             else if (time == "0800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 10);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(10, 5, "preview");
                             }
                             else if (time == "0900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 11);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(11, 5, "preview");
                             }
                             else if (time == "1000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 12);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(12, 5, "preview");
                             }
                             else if (time == "1100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 13);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(13, 5, "preview");
                             }
                             else if (time == "1200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 14);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(14, 5, "preview");
                             }
                             else if (time == "1300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 15);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(15, 5, "preview");
                             }
                             else if (time == "1400")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 16);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(16, 5, "preview");
                             }
                             else if (time == "1500")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 17);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(17, 5, "preview");
                             }
                             else if (time == "1600")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 18);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(18, 5, "preview");
                             }
                             else if (time == "1700")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 19);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(19, 5, "preview");
                             }
                             else if (time == "1800")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 20);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(20, 5, "preview");
                             }
                             else if (time == "1900")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 21);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(21, 5, "preview");
                             }
                             else if (time == "2000")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 22);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(22, 5, "preview");
                             }
                             else if (time == "2100")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 23);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(23, 5, "preview");
                             }
                             else if (time == "2200")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 24);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(24, 5, "preview");
                             }
                             else if (time == "2300")
                             {
-                                Border myblock = new Border();
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                myblock.Name = "preview";
-                                myblock.SetValue(Grid.RowProperty, 25);
-                                myblock.SetValue(Grid.ColumnProperty, 5);
-                                StudentSemesterCalendar.Children.Add(myblock);
+                                CreatePreviewBlock(25, 5, "preview");
                             }
                         }
                     }
                 }
             }
+        }
+
+        private int getCourseID()
+        {
+            string _courseid = "";
+            int _courseID;
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT CourseID FROM Courses WHERE Title ='{FormA2AssignedCourses.SelectedValue}';";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                _courseid += reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            Int32.TryParse(_courseid, out _courseID);
+            return _courseID;
+        }
+
+        private void resetListEnrollments()
+        {
+            if (days.Count > 0)
+            {
+                days.Clear();
+            }
+            if (MTimes.Count > 0)
+            {
+                MTimes.Clear();
+            }
+            if (TuTimes.Count > 0)
+            {
+                TuTimes.Clear();
+            }
+            if (WTimes.Count > 0)
+            {
+                WTimes.Clear();
+            }
+            if (ThTimes.Count > 0)
+            {
+                ThTimes.Clear();
+            }
+            if (FTimes.Count > 0)
+            {
+                FTimes.Clear();
+            }
+        }
+
+        private void CreatePreviewBlock(int row, int column, string name)
+        {
+            Border myblock = new Border();
+            myblock.Background = new SolidColorBrush(Colors.LightGreen);
+            myblock.Name = name;
+            myblock.SetValue(Grid.RowProperty, row);
+            myblock.SetValue(Grid.ColumnProperty, column);
+            /* foreach (TextBlock text in StudentSemesterCalendar.Children)
+             {
+
+             }*/
+            StudentSemesterCalendar.Children.Add(myblock);
         }
 
         private void purgePreview()
@@ -1825,15 +1293,87 @@ namespace Hogwarts2._0
             {
                 foreach (Border item2 in StudentSemesterCalendar.Children)
                 {
-                    if (item2.Name != "")
+                    if (item2.Name == "preview")
                     {
                         StudentSemesterCalendar.Children.Remove(item2);
                     }
                 }
-                if(item.Name != "")
-                {
-                    StudentSemesterCalendar.Children.Remove(item);
+            }
+        }
+
+        private async void StudentEnrollStudent_Click(object sender, RoutedEventArgs e)
+        {//checks the input is valid
+            int notvalidenroll = 0;
+            string notvalidenrollmessage = "";
+            int timeturner;
+            int SemID = GetSemesterID();
+            int CrsID = getCourseID();
+            if (FormA2ValidSemesters.SelectedItem == null)
+            {
+                notvalidenrollmessage += "Please Select a Semester\n";
+                notvalidenroll++;
+            }
+            else if (FormA2ValidSemesters.SelectedValue.ToString() == "There Are No Semesters")
+            {
+                notvalidenrollmessage += "Please add semesters \n";
+                notvalidenroll++;
+            }
+            if (FormA2AssignedCourses.SelectedItem == null)
+            {
+                notvalidenrollmessage += "Please Select a Course\n";
+                notvalidenroll++;
+            }
+            else if (FormA2AssignedCourses.SelectedValue.ToString() == "Please Assign Some Courses")
+            {//this might be a duplicate
+                notvalidenrollmessage += "Please Assign Some Courses\n";
+                notvalidenroll++;
+            }
+            if (TimeTurnerEnabler.IsChecked == true)
+            {
+                timeturner = 1;
+            }
+            else
+            {
+                timeturner = 0;
+            }
+
+            if (notvalidenroll == 0)
+            {
+                if (ValidEnrollment == true)
+                {//insert the selected day,time,course, and semester to StudentEnrolledCourses
+                    try
+                    {
+                        using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                        {
+                            sqlConn.Open();
+                            if (sqlConn.State == System.Data.ConnectionState.Open)
+                            {//convert HUID to StudentID
+                                SqlDataAdapter adapter = new SqlDataAdapter();
+                                SqlCommand command = new SqlCommand($"INSERT INTO StudentEnrolledCourses VALUES ({SemID},{CrsID},{SelectedStudentHUID},{timeturner});", sqlConn);
+                                adapter.InsertCommand = command;
+                                adapter.InsertCommand.ExecuteNonQuery();
+
+                                sqlConn.Close();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        var error = new MessageDialog(ex.Message);
+                        await error.ShowAsync();
+                    }
+
+                    //tell the user the insert was success and move them to reload the page
                 }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                var NotValidMessage = new MessageDialog(notvalidenrollmessage);
+                await NotValidMessage.ShowAsync();
             }
         }
     }

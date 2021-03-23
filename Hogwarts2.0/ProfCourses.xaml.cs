@@ -395,183 +395,172 @@ namespace Hogwarts2._0
             }
             else
             {
-                //we can insert some stuff
-                //First add course to semcourses
-                try
-                {
-                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
-                    {
-                        sqlConn.Open();
-                        if (sqlConn.State == System.Data.ConnectionState.Open)
+                using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                {//First add course to semcourses
+                    sqlConn.Open();
+                    if (sqlConn.State == System.Data.ConnectionState.Open)
+                    {//retrive the semesterID from semesters
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
                         {
-                            //retrive the semesterID from semesters
-                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            cmd.CommandText = $"SELECT SemesterID FROM Semesters WHERE Semester ='{form2semester}';";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
                             {
-                                cmd.CommandText = $"SELECT SemesterID FROM Semesters WHERE Semester ='{form2semester}';";
-                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                while (reader.Read())
                                 {
-                                    while (reader.Read())
-                                    {
-                                        form2validsemesterID += reader.GetValue(0).ToString();
-                                    }
+                                    form2validsemesterID += reader.GetValue(0).ToString();
                                 }
                             }
-                            //retrieve courseID from courses
-                            using (SqlCommand cmd = sqlConn.CreateCommand())
-                            {
-                                cmd.CommandText = $"SELECT CourseID FROM Courses WHERE Title = '{form2course}';";
-                                using (SqlDataReader reader = cmd.ExecuteReader())
-                                {
-                                    while (reader.Read())
-                                    {
-                                        form2validcourseID += reader.GetValue(0).ToString();
-                                    }
-                                }
-                            }
-                            if (form2validcourseID == "")
-                            {
-                                var nocourse = new MessageDialog("No Course was found");
-                                await nocourse.ShowAsync();
-                            }
-                            else
-                            {
-                                Int32.TryParse(form2validcourseID, out mycourseID);
-                            }
-
-                            if (form2validsemesterID == "")
-                            {
-                                var nosemester = new MessageDialog("No Semester was found");
-                                await nosemester.ShowAsync();
-                            }
-                            else
-                            {
-                                Int32.TryParse(form2validsemesterID, out mysemesterID);
-                            }
-
-                            if (form2validcourseID != "" && form2validsemesterID != "")
-                            {//check to see if semesterid and course id already exists
-                                using (SqlCommand cmd = sqlConn.CreateCommand())
-                                {
-                                    cmd.CommandText = $"SELECT SemesterID,CourseID FROM SemesterCourses WHERE SemesterID = {mysemesterID} AND CourseID = {mycourseID};";
-                                    using (SqlDataReader reader = cmd.ExecuteReader())
-                                    {
-                                        while (reader.Read())
-                                        {
-                                            form2validsemestercourse += reader.GetValue(0).ToString();
-                                        }
-                                    }
-                                }
-                                if (form2validsemestercourse != "")
-                                {
-                                    var nosemestercourse = new MessageDialog("Course is already assigned");
-                                    await nosemestercourse.ShowAsync();
-                                }
-                                else
-                                {
-                                    //continue insert
-                                    SqlDataAdapter adapter = new SqlDataAdapter();
-                                    SqlCommand command = new SqlCommand($"INSERT INTO SemesterCourses VALUES ({mysemesterID},{mycourseID});", sqlConn);
-                                    adapter.InsertCommand = command;
-                                    adapter.InsertCommand.ExecuteNonQuery();
-                                    //insert days for this semester course
-                                    if (ValidMondayTimes.Count() > 0)
-                                    {
-                                        //add monday to daytypes
-                                        adapter = new SqlDataAdapter();
-                                        command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Monday\');", sqlConn);
-                                        adapter.InsertCommand = command;
-                                        adapter.InsertCommand.ExecuteNonQuery();
-                                        //insert monday times
-                                        foreach (var time in ValidMondayTimes)
-                                        {
-                                            adapter = new SqlDataAdapter();
-                                            command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Monday\','{time}');", sqlConn);
-                                            adapter.InsertCommand = command;
-                                            adapter.InsertCommand.ExecuteNonQuery();
-                                        }
-                                    }
-                                    if (ValidTuesdayTimes.Count() > 0)
-                                    {
-                                        //add tuesday to daytypes
-                                        adapter = new SqlDataAdapter();
-                                        command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Tuesday\');", sqlConn);
-                                        adapter.InsertCommand = command;
-                                        adapter.InsertCommand.ExecuteNonQuery();
-                                        //insert tuesday times
-                                        foreach (var time in ValidTuesdayTimes)
-                                        {
-                                            adapter = new SqlDataAdapter();
-                                            command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Tuesday\','{time}');", sqlConn);
-                                            adapter.InsertCommand = command;
-                                            adapter.InsertCommand.ExecuteNonQuery();
-                                        }
-                                    }
-                                    if (ValidWednesdayTimes.Count() > 0)
-                                    {
-                                        adapter = new SqlDataAdapter();
-                                        command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Wednesday\');", sqlConn);
-                                        adapter.InsertCommand = command;
-                                        adapter.InsertCommand.ExecuteNonQuery();
-                                        foreach (var time in ValidWednesdayTimes)
-                                        {
-                                            adapter = new SqlDataAdapter();
-                                            command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Wednesday\','{time}');", sqlConn);
-                                            adapter.InsertCommand = command;
-                                            adapter.InsertCommand.ExecuteNonQuery();
-                                        }
-                                    }
-                                    if (ValidThursdayTimes.Count() > 0)
-                                    {
-                                        adapter = new SqlDataAdapter();
-                                        command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Thursday\');", sqlConn);
-                                        adapter.InsertCommand = command;
-                                        adapter.InsertCommand.ExecuteNonQuery();
-                                        foreach (var time in ValidThursdayTimes)
-                                        {
-                                            adapter = new SqlDataAdapter();
-                                            command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Thursday\','{time}');", sqlConn);
-                                            adapter.InsertCommand = command;
-                                            adapter.InsertCommand.ExecuteNonQuery();
-                                        }
-                                    }
-                                    if (ValidFridayTimes.Count() > 0)
-                                    {
-                                        adapter = new SqlDataAdapter();
-                                        command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Friday\');", sqlConn);
-                                        adapter.InsertCommand = command;
-                                        adapter.InsertCommand.ExecuteNonQuery();
-                                        foreach (var time in ValidFridayTimes)
-                                        {
-                                            adapter = new SqlDataAdapter();
-                                            command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Friday\','{time}');", sqlConn);
-                                            adapter.InsertCommand = command;
-                                            adapter.InsertCommand.ExecuteNonQuery();
-                                        }
-                                    }
-                                    //Insert Location
-                                    adapter = new SqlDataAdapter();
-                                    command = new SqlCommand($"INSERT INTO Locations VALUES ({mysemesterID},{mycourseID},'{Form2LocationInput.Text}');", sqlConn);
-                                    adapter.InsertCommand = command;
-                                    adapter.InsertCommand.ExecuteNonQuery();
-                                    //Insert RequiredMaterial
-                                    adapter = new SqlDataAdapter();
-                                    command = new SqlCommand($"INSERT INTO ReqMaterials VALUES ({mysemesterID},{mycourseID},'{Form2RequiredMaterialsInput.Text}');", sqlConn);
-                                    adapter.InsertCommand = command;
-                                    adapter.InsertCommand.ExecuteNonQuery();
-                                    var semester = new MessageDialog($"Course {form2course} was successfully assigned to {form2semester}");
-                                    await semester.ShowAsync();
-                                    sqlConn.Close();
-                                    Frame.Navigate(typeof(ProfCourses), UserHuid);
-                                }
-                            }
-                            sqlConn.Close();
                         }
+                        //retrieve courseID from courses
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {
+                            cmd.CommandText = $"SELECT CourseID FROM Courses WHERE Title = '{form2course}';";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    form2validcourseID += reader.GetValue(0).ToString();
+                                }
+                            }
+                        }
+                        if (form2validcourseID == "")
+                        {
+                            var nocourse = new MessageDialog("No Course was found");
+                            await nocourse.ShowAsync();
+                        }
+                        else
+                        {
+                            Int32.TryParse(form2validcourseID, out mycourseID);
+                        }
+
+                        if (form2validsemesterID == "")
+                        {
+                            var nosemester = new MessageDialog("No Semester was found");
+                            await nosemester.ShowAsync();
+                        }
+                        else
+                        {
+                            Int32.TryParse(form2validsemesterID, out mysemesterID);
+                        }
+
+                        if (form2validcourseID != "" && form2validsemesterID != "")
+                        {//check to see if semesterid and course id already exists
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT SemesterID,CourseID FROM SemesterCourses WHERE SemesterID = {mysemesterID} AND CourseID = {mycourseID};";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        form2validsemestercourse += reader.GetValue(0).ToString();
+                                    }
+                                }
+                            }
+                            if (form2validsemestercourse != "")
+                            {
+                                var nosemestercourse = new MessageDialog("Course is already assigned");
+                                await nosemestercourse.ShowAsync();
+                            }
+                            else
+                            {
+                                //continue insert
+                                SqlDataAdapter adapter = new SqlDataAdapter();
+                                SqlCommand command = new SqlCommand($"INSERT INTO SemesterCourses VALUES ({mysemesterID},{mycourseID});", sqlConn);
+                                adapter.InsertCommand = command;
+                                adapter.InsertCommand.ExecuteNonQuery();
+                                //insert days for this semester course
+                                if (ValidMondayTimes.Count() > 0)
+                                {
+                                    //add monday to daytypes
+                                    adapter = new SqlDataAdapter();
+                                    command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Monday\');", sqlConn);
+                                    adapter.InsertCommand = command;
+                                    adapter.InsertCommand.ExecuteNonQuery();
+                                    //insert monday times
+                                    foreach (var time in ValidMondayTimes)
+                                    {
+                                        adapter = new SqlDataAdapter();
+                                        command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Monday\','{time}');", sqlConn);
+                                        adapter.InsertCommand = command;
+                                        adapter.InsertCommand.ExecuteNonQuery();
+                                    }
+                                }
+                                if (ValidTuesdayTimes.Count() > 0)
+                                {
+                                    //add tuesday to daytypes
+                                    adapter = new SqlDataAdapter();
+                                    command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Tuesday\');", sqlConn);
+                                    adapter.InsertCommand = command;
+                                    adapter.InsertCommand.ExecuteNonQuery();
+                                    //insert tuesday times
+                                    foreach (var time in ValidTuesdayTimes)
+                                    {
+                                        adapter = new SqlDataAdapter();
+                                        command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Tuesday\','{time}');", sqlConn);
+                                        adapter.InsertCommand = command;
+                                        adapter.InsertCommand.ExecuteNonQuery();
+                                    }
+                                }
+                                if (ValidWednesdayTimes.Count() > 0)
+                                {
+                                    adapter = new SqlDataAdapter();
+                                    command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Wednesday\');", sqlConn);
+                                    adapter.InsertCommand = command;
+                                    adapter.InsertCommand.ExecuteNonQuery();
+                                    foreach (var time in ValidWednesdayTimes)
+                                    {
+                                        adapter = new SqlDataAdapter();
+                                        command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Wednesday\','{time}');", sqlConn);
+                                        adapter.InsertCommand = command;
+                                        adapter.InsertCommand.ExecuteNonQuery();
+                                    }
+                                }
+                                if (ValidThursdayTimes.Count() > 0)
+                                {
+                                    adapter = new SqlDataAdapter();
+                                    command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Thursday\');", sqlConn);
+                                    adapter.InsertCommand = command;
+                                    adapter.InsertCommand.ExecuteNonQuery();
+                                    foreach (var time in ValidThursdayTimes)
+                                    {
+                                        adapter = new SqlDataAdapter();
+                                        command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Thursday\','{time}');", sqlConn);
+                                        adapter.InsertCommand = command;
+                                        adapter.InsertCommand.ExecuteNonQuery();
+                                    }
+                                }
+                                if (ValidFridayTimes.Count() > 0)
+                                {
+                                    adapter = new SqlDataAdapter();
+                                    command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Friday\');", sqlConn);
+                                    adapter.InsertCommand = command;
+                                    adapter.InsertCommand.ExecuteNonQuery();
+                                    foreach (var time in ValidFridayTimes)
+                                    {
+                                        adapter = new SqlDataAdapter();
+                                        command = new SqlCommand($"INSERT INTO Times VALUES ({mysemesterID},{mycourseID},\'Friday\','{time}');", sqlConn);
+                                        adapter.InsertCommand = command;
+                                        adapter.InsertCommand.ExecuteNonQuery();
+                                    }
+                                }
+                                //Insert Location
+                                adapter = new SqlDataAdapter();
+                                command = new SqlCommand($"INSERT INTO Locations VALUES ({mysemesterID},{mycourseID},'{Form2LocationInput.Text}');", sqlConn);
+                                adapter.InsertCommand = command;
+                                adapter.InsertCommand.ExecuteNonQuery();
+                                //Insert RequiredMaterial
+                                adapter = new SqlDataAdapter();
+                                command = new SqlCommand($"INSERT INTO ReqMaterials VALUES ({mysemesterID},{mycourseID},'{Form2RequiredMaterialsInput.Text}');", sqlConn);
+                                adapter.InsertCommand = command;
+                                adapter.InsertCommand.ExecuteNonQuery();
+                                var semester = new MessageDialog($"Course {form2course} was successfully assigned to {form2semester}");
+                                await semester.ShowAsync();
+                                sqlConn.Close();
+                                Frame.Navigate(typeof(ProfCourses), UserHuid);
+                            }
+                        }
+                        sqlConn.Close();
                     }
-                }
-                catch (Exception ex)
-                {
-                    var ermessage = new MessageDialog(ex.Message);
-                    await ermessage.ShowAsync();
                 }
             }
         }
@@ -717,7 +706,7 @@ namespace Hogwarts2._0
             {
                 item.IsChecked = false;
             }
-            foreach(CheckBox item in Form2BMondayTimes.Items)
+            foreach (CheckBox item in Form2BMondayTimes.Items)
             {
                 item.IsChecked = false;
             }
@@ -737,7 +726,7 @@ namespace Hogwarts2._0
             {
                 item.IsChecked = false;
             }
-            foreach(CheckBox item in Form2BTuesdayTimes.Items)
+            foreach (CheckBox item in Form2BTuesdayTimes.Items)
             {
                 item.IsChecked = false;
             }
@@ -781,7 +770,7 @@ namespace Hogwarts2._0
             {
                 item.IsChecked = false;
             }
-            
+
         }
         private void TurnOnFridayTimes(object sender, RoutedEventArgs e)
         {
@@ -941,12 +930,12 @@ namespace Hogwarts2._0
                         {
                             SqlDataAdapter adapter = new SqlDataAdapter();
                             //SqlCommand command = new SqlCommand("",sqlConn);
-                            MondayExist = CheckMonday(SemesterID,CourseID);
+                            MondayExist = CheckMonday(SemesterID, CourseID);
                             TuesdayExist = CheckTuesday(SemesterID, CourseID);
                             WednesdayExist = CheckWednesday(SemesterID, CourseID);
                             ThursdayExist = CheckThursday(SemesterID, CourseID);
                             FridayExist = CheckFriday(SemesterID, CourseID);
-                            
+
                             if (Form2BValidMondayTimes.Count > 0)
                             {//this doesnt check if it already exist
                                 if (MondayExist == false)
@@ -957,8 +946,8 @@ namespace Hogwarts2._0
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
                                 //update the times take care of times purge all original monday times
-                                purgeMondayTimes(SemesterID,CourseID);
-                                foreach(var time in Form2BValidMondayTimes)
+                                purgeMondayTimes(SemesterID, CourseID);
+                                foreach (var time in Form2BValidMondayTimes)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},'Monday','{time}');", sqlConn);
@@ -969,7 +958,7 @@ namespace Hogwarts2._0
                             else
                             {
                                 //remove monday from the daytypes table
-                                if(MondayExist == true)
+                                if (MondayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Monday';", sqlConn);
@@ -980,9 +969,9 @@ namespace Hogwarts2._0
                                 purgeMondayTimes(SemesterID, CourseID);
                             }
 
-                            if(Form2BValidTuesdayTimes.Count > 0)
+                            if (Form2BValidTuesdayTimes.Count > 0)
                             {
-                                if(TuesdayExist == false)
+                                if (TuesdayExist == false)
                                 {
                                     //add it if it doesnt already exist
                                     adapter = new SqlDataAdapter();
@@ -1001,19 +990,19 @@ namespace Hogwarts2._0
                             }
                             else
                             {
-                                if(TuesdayExist == true)
+                                if (TuesdayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Tuesday';", sqlConn);
                                     adapter.DeleteCommand = command;
                                     adapter.DeleteCommand.ExecuteNonQuery();
                                 }
-                                purgeTuesdayTimes(SemesterID,CourseID);
+                                purgeTuesdayTimes(SemesterID, CourseID);
                             }
 
-                            if(Form2BValidWednesdayTimes.Count > 0)
+                            if (Form2BValidWednesdayTimes.Count > 0)
                             {
-                                if(WednesdayExist == false)
+                                if (WednesdayExist == false)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},'Wednesday');", sqlConn);
@@ -1031,19 +1020,19 @@ namespace Hogwarts2._0
                             }
                             else
                             {
-                                if(WednesdayExist == true)
+                                if (WednesdayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Wednesday';", sqlConn);
                                     adapter.DeleteCommand = command;
                                     adapter.DeleteCommand.ExecuteNonQuery();
                                 }
-                                purgeWednesdayTimes(SemesterID,CourseID);
+                                purgeWednesdayTimes(SemesterID, CourseID);
                             }
 
-                            if(Form2BValidThursdayTimes.Count > 0)
+                            if (Form2BValidThursdayTimes.Count > 0)
                             {
-                                if(ThursdayExist == false)
+                                if (ThursdayExist == false)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},'Thursday');", sqlConn);
@@ -1061,7 +1050,7 @@ namespace Hogwarts2._0
                             }
                             else
                             {
-                                if(ThursdayExist == true)
+                                if (ThursdayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Thursday';", sqlConn);
@@ -1071,9 +1060,9 @@ namespace Hogwarts2._0
                                 purgeThursdayTimes(SemesterID, CourseID);
                             }
 
-                            if(Form2BValidFridayTimes.Count > 0)
+                            if (Form2BValidFridayTimes.Count > 0)
                             {
-                                if(FridayExist == false)
+                                if (FridayExist == false)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},'Friday');", sqlConn);
@@ -1081,7 +1070,7 @@ namespace Hogwarts2._0
                                     adapter.InsertCommand.ExecuteNonQuery();
                                 }
                                 purgeFridayTimes(SemesterID, CourseID);
-                                foreach(var time in Form2BValidFridayTimes)
+                                foreach (var time in Form2BValidFridayTimes)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"INSERT INTO Times VALUES ({SemesterID},{CourseID},'Friday','{time}');", sqlConn);
@@ -1091,7 +1080,7 @@ namespace Hogwarts2._0
                             }
                             else
                             {
-                                if(FridayExist == true)
+                                if (FridayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {SemesterID} AND CourseID = {CourseID} AND DaysName = 'Friday';", sqlConn);
@@ -1121,7 +1110,8 @@ namespace Hogwarts2._0
                             Frame.Navigate(typeof(ProfCourses), UserHuid);
                         }
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     var message = new MessageDialog(ex.Message);
                     await message.ShowAsync();
@@ -1347,8 +1337,8 @@ namespace Hogwarts2._0
         private bool CheckMonday(int semesterid, int courseid)
         {
             bool doesexist = false;
-            string result = "";           
-            using(SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            string result = "";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
                 if (sqlConn.State == System.Data.ConnectionState.Open)
@@ -1367,7 +1357,7 @@ namespace Hogwarts2._0
                     sqlConn.Close();
                 }
             }
-            if(result == "Monday")
+            if (result == "Monday")
             {
                 doesexist = true;
             }
@@ -1379,7 +1369,7 @@ namespace Hogwarts2._0
             List<string> mylist = new List<string>();
             foreach (CheckBox item in Form2BFridayTimes.Items)
             {
-                if(item.IsChecked == true)
+                if (item.IsChecked == true)
                 {
                     mylist.Add(item.Content.ToString());
                 }
@@ -1485,7 +1475,7 @@ namespace Hogwarts2._0
             {
                 Form2BTimeLabel.Visibility = Visibility.Collapsed;
             }
-            if(ReallyAnnoyingScrollBarForm2B.Visibility == Visibility.Visible)
+            if (ReallyAnnoyingScrollBarForm2B.Visibility == Visibility.Visible)
             {
                 ReallyAnnoyingScrollBarForm2B.Visibility = Visibility.Collapsed;
             }
@@ -1640,7 +1630,7 @@ namespace Hogwarts2._0
                                     }
                                 }
                             }//acquire Location
-                            using(SqlCommand cmd = sqlConn.CreateCommand())
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
                             {
                                 cmd.CommandText = $"SELECT Locations FROM Locations WHERE SemesterID = {semesterID} AND CourseID = {courseID};";
                                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -1709,7 +1699,7 @@ namespace Hogwarts2._0
                         //no days were found 
                     }
                     //Sets up location
-                    if(location == "")
+                    if (location == "")
                     {
                         //this should be possible
                     }
@@ -1718,7 +1708,7 @@ namespace Hogwarts2._0
                         Form2BLocationInput.Text = location;
                     }
                     //sets up course info
-                    if(CourseInfo == "")
+                    if (CourseInfo == "")
                     {
                         Form2BCourseInfoInput.Text = "";
                     }
@@ -1727,7 +1717,7 @@ namespace Hogwarts2._0
                         Form2BCourseInfoInput.Text = CourseInfo;
                     }
                     //sets up reqmaterials
-                    if(materials == "")
+                    if (materials == "")
                     {
                         Form2BReqMaterialInput.Text = "";
                     }
