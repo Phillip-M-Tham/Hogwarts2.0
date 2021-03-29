@@ -7,6 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Text.RegularExpressions;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -70,8 +71,8 @@ namespace Hogwarts2._0
                     else
                     {//adds an empty course value block to every other spot
                         TextBlock courseblock = new TextBlock();
+                        courseblock.Name = $"{count2}{count}";//sets name of txtblock to the position in the table
                         courseblock.FontSize = 36;
-                        courseblock.Name = "CalendarDayBlockValue";
                         courseblock.Text = "";
                         courseblock.Foreground = new SolidColorBrush(Colors.Black);
                         courseblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
@@ -146,7 +147,6 @@ namespace Hogwarts2._0
             GryffindorEnroll.Visibility = Visibility.Collapsed;
             StudentEnrollSchedule.Visibility = Visibility.Collapsed;
             //reset student schedule here
-            resetenrollStudentschedule();
             resetenrollStudentschedule();
             TableTitle.Text = "";
             StudentSemesterCalendar.Visibility = Visibility.Collapsed;
@@ -340,7 +340,6 @@ namespace Hogwarts2._0
             Button mybutton = (sender as Button);
             Int32.TryParse(mybutton.Name, out SelectedStudentHUID);
             StudentScheduleTitle.Text = mybutton.Content.ToString() + "'s Schedule";
-
             //find out if the student is using time turner here
             //Setup students schedule from the database
             if (TimeTurnerEnabler.IsChecked == true)
@@ -506,8 +505,8 @@ namespace Hogwarts2._0
                                             {
                                                 while (reader.Read())
                                                 {
-                                                    Enrolledresults += (reader.GetValue(0).ToString())+" ";
-                                                    Enrolledresults += (reader.GetValue(1).ToString())+"\n";
+                                                    Enrolledresults += (reader.GetValue(0).ToString()) + "+?";
+                                                    Enrolledresults += (reader.GetValue(1).ToString()) + "+?";
                                                 }
                                             }
                                         }
@@ -518,8 +517,8 @@ namespace Hogwarts2._0
                                             {
                                                 while (reader.Read())
                                                 {
-                                                    Enrolledresults += reader.GetValue(0).ToString()+" ";
-                                                    Enrolledresults += reader.GetValue(1).ToString()+"\n";
+                                                    Enrolledresults += "|" + reader.GetValue(0).ToString() + " ";
+                                                    Enrolledresults += reader.GetValue(1).ToString();
                                                 }
                                             }
                                         }
@@ -528,7 +527,7 @@ namespace Hogwarts2._0
                                     }
                                 }
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
                                 var errorMessage = new MessageDialog(ex.Message);
                                 await errorMessage.ShowAsync();
@@ -543,13 +542,12 @@ namespace Hogwarts2._0
                             FormA2AssignedCourses.Items.Add(title);
                         }
                     }
-                    if(CurrentlyEnrolledCourseIDs.Count > 0)
+                    if (CurrentlyEnrolledCourseIDs.Count > 0)
                     {
                         foreach (var course in TotalEnrolledCourseTimes)
                         {//we have to parse this message
-                            var Message = new MessageDialog(course);
-                            await Message.ShowAsync();
-                        } 
+                            Parsecourseinfo(course);
+                        }
                     }
                 }
             }
@@ -558,6 +556,171 @@ namespace Hogwarts2._0
                 FormA2AssignedCourses.Items.Add("Please pick a Semester");
             }
 
+        }
+
+        private void Parsecourseinfo(string courseinfo)
+        {//FIX THESE VARIABLES NAMES
+            string[] ParseCourseInfo = courseinfo.Split("+?");
+            string coursetitle = ParseCourseInfo[0];
+            string coursetype = ParseCourseInfo[1];
+            string therest = ParseCourseInfo[2];
+            SetupEnrolledCourses(coursetitle, coursetype, therest);
+        }
+
+        private void SetupEnrolledCourses(string coursetitle, string coursetype, string therest)
+        {
+            string[] coordinates = therest.Split("|");
+            foreach (var item in coordinates)
+            {
+                if (item != "")
+                {
+                    string[] rowcolumn = item.Split(" ");
+                    string column = rowcolumn[0];
+                    string row = rowcolumn[1];
+                    column = ConvertDayTOnumber(column);
+                    row = ConvertTimeToNumber(row);
+                    string name = column + row;
+                    foreach (var spot in StudentSemesterCalendar.Children)
+                    {
+                        if (spot.GetType() == typeof(Border))
+                        {
+                            TextBlock tb = (spot as Border).Child as TextBlock;
+                            if (tb.Name == name)
+                            {
+                                tb.FontSize = 20;
+                                tb.Text = coursetype + "\n" + coursetitle;
+                                tb.TextWrapping = TextWrapping.Wrap;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private string ConvertTimeToNumber(string row)
+        {
+            if (row == "0000")
+            {
+                row = "2";
+            }
+            else if (row == "0100")
+            {
+                row = "3";
+            }
+            else if (row == "0200")
+            {
+                row = "4";
+            }
+            else if (row == "0300")
+            {
+                row = "5";
+            }
+            else if (row == "0400")
+            {
+                row = "6";
+            }
+            else if (row == "0500")
+            {
+                row = "7";
+            }
+            else if (row == "0600")
+            {
+                row = "8";
+            }
+            else if (row == "0700")
+            {
+                row = "9";
+            }
+            else if (row == "0800")
+            {
+                row = "10";
+            }
+            else if (row == "0900")
+            {
+                row = "11";
+            }
+            else if (row == "1000")
+            {
+                row = "12";
+            }
+            else if (row == "1100")
+            {
+                row = "13";
+            }
+            else if (row == "1200")
+            {
+                row = "14";
+            }
+            else if (row == "1300")
+            {
+                row = "15";
+            }
+            else if (row == "1400")
+            {
+                row = "16";
+            }
+            else if (row == "1500")
+            {
+                row = "17";
+            }
+            else if (row == "1600")
+            {
+                row = "18";
+            }
+            else if (row == "1700")
+            {
+                row = "19";
+            }
+            else if (row == "1800")
+            {
+                row = "20";
+            }
+            else if (row == "1900")
+            {
+                row = "21";
+            }
+            else if (row == "2000")
+            {
+                row = "22";
+            }
+            else if (row == "2100")
+            {
+                row = "23";
+            }
+            else if (row == "2200")
+            {
+                row = "24";
+            }
+            else
+            {
+                row = "25";
+            }
+            return row;
+        }
+
+        private string ConvertDayTOnumber(string column)
+        {
+            if (column == "Monday")
+            {
+                column = "1";
+            }
+            else if (column == "Tuesday")
+            {
+                column = "2";
+            }
+            else if (column == "Wednesday")
+            {
+                column = "3";
+            }
+            else if (column == "Thursday")
+            {
+                column = "4";
+            }
+            else
+            {
+                column = "5";
+            }
+            return column;
         }
 
         private int GetSemesterID()
@@ -594,10 +757,28 @@ namespace Hogwarts2._0
                 FormA2AssignedCourses.SelectedItem = null;
             }
             FormA2AssignedCourses.Items.Clear();
+            foreach (var spot in StudentSemesterCalendar.Children)
+            {
+                if (spot.GetType() == typeof(Border))
+                {
+                    TextBlock tb = (spot as Border).Child as TextBlock;
+                    if (tb != null)
+                    {
+                        if (Regex.IsMatch(tb.Name, @"^[0-9]+$") == true)
+                        {
+                            if (tb.Text != "")
+                            {
+                                tb.Text = "";
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void PreviewEnrollment(object sender, SelectionChangedEventArgs e)
         {
+            ValidEnrollment = true;
             resetListEnrollments();
             purgePreview();
             int _CID;
@@ -1276,14 +1457,35 @@ namespace Hogwarts2._0
         private void CreatePreviewBlock(int row, int column, string name)
         {
             Border myblock = new Border();
-            myblock.Background = new SolidColorBrush(Colors.LightGreen);
+            string txtboxname = "";
             myblock.Name = name;
             myblock.SetValue(Grid.RowProperty, row);
             myblock.SetValue(Grid.ColumnProperty, column);
-            /* foreach (TextBlock text in StudentSemesterCalendar.Children)
-             {
-
-             }*/
+            txtboxname = column.ToString() + row.ToString();
+            foreach (var spot in StudentSemesterCalendar.Children)
+            {
+                if (spot.GetType() == typeof(Border))
+                {
+                    TextBlock tb = (spot as Border).Child as TextBlock;
+                    if (tb != null)
+                    {
+                        if (tb.Name == txtboxname)
+                        {
+                            if (tb.Text != "")
+                            {
+                                myblock.Background = new SolidColorBrush(Colors.Red);
+                                ValidEnrollment = false;
+                                break;
+                            }
+                            else
+                            {
+                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
             StudentSemesterCalendar.Children.Add(myblock);
         }
 
@@ -1292,11 +1494,15 @@ namespace Hogwarts2._0
             foreach (Border item in StudentSemesterCalendar.Children)
             {
                 foreach (Border item2 in StudentSemesterCalendar.Children)
-                {
+                {//i dont understand why this works
                     if (item2.Name == "preview")
                     {
                         StudentSemesterCalendar.Children.Remove(item2);
                     }
+                }
+                if (item.Name == "preview")
+                {
+                    StudentSemesterCalendar.Children.Remove(item);
                 }
             }
         }
@@ -1336,34 +1542,106 @@ namespace Hogwarts2._0
             {
                 timeturner = 0;
             }
+            if (ValidEnrollment == false)
+            {
+                notvalidenrollmessage += "This spot is already taken\n";
+                notvalidenroll++;
+            }
 
             if (notvalidenroll == 0)
             {
                 if (ValidEnrollment == true)
                 {//insert the selected day,time,course, and semester to StudentEnrolledCourses
-                    try
+                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
                     {
-                        using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
-                        {
-                            sqlConn.Open();
-                            if (sqlConn.State == System.Data.ConnectionState.Open)
-                            {//convert HUID to StudentID
-                                SqlDataAdapter adapter = new SqlDataAdapter();
-                                SqlCommand command = new SqlCommand($"INSERT INTO StudentEnrolledCourses VALUES ({SemID},{CrsID},{SelectedStudentHUID},{timeturner});", sqlConn);
-                                adapter.InsertCommand = command;
-                                adapter.InsertCommand.ExecuteNonQuery();
-
-                                sqlConn.Close();
-                            }
+                        sqlConn.Open();
+                        if (sqlConn.State == System.Data.ConnectionState.Open)
+                        {//convert HUID to StudentID
+                            SqlDataAdapter adapter = new SqlDataAdapter();
+                            SqlCommand command = new SqlCommand($"INSERT INTO StudentEnrolledCourses VALUES ({SemID},{CrsID},{SelectedStudentHUID},{timeturner});", sqlConn);
+                            adapter.InsertCommand = command;
+                            adapter.InsertCommand.ExecuteNonQuery();
+                            sqlConn.Close();
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        var error = new MessageDialog(ex.Message);
-                        await error.ShowAsync();
-                    }
+                    var CourseEnrolled = new MessageDialog("Successfully enrolled student in course");
+                    await CourseEnrolled.ShowAsync();
+                    Frame.Navigate(typeof(CounselorEnrollStudents), _userHuid);
+                }
+            }
+            else
+            {
+                var NotValidMessage = new MessageDialog(notvalidenrollmessage);
+                await NotValidMessage.ShowAsync();
+            }
+        }
 
-                    //tell the user the insert was success and move them to reload the page
+        private async void TryToEnableTimeTurner(object sender, RoutedEventArgs e)
+        {//first we need to see if this person is already enrolled in any courses for the selected semester
+         //if they are enrolled
+         //warn user they will disenroll of the current courses to rebuild schedule
+         //if yes, 
+         //disenroll, set up the
+         //if no 
+         //dont do anythin
+         //if not enrolled
+         //set up the time turner version
+            bool iscourses = true;
+            int semesterid;
+            List<int> enrolledcourses = new List<int>(); 
+            if (FormA2ValidSemesters.SelectedValue != null)
+            {
+                if (FormA2ValidSemesters.SelectedItem.ToString() != "There Are No Semesters")
+                {
+                    semesterid = GetSemesterID();
+
+                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                    {
+                        sqlConn.Open();
+                        if (sqlConn.State == System.Data.ConnectionState.Open)
+                        {//convert HUID to StudentID
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT CourseID FROM StudentEnrolledCourses WHERE SemesterID = {semesterid} AND StudentID = {SelectedStudentHUID};";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                         enrolledcourses.Add((int)reader.GetValue(0));
+                                    }
+                                }
+                            }
+                            sqlConn.Close();
+                        }
+                    }
+                    if(enrolledcourses.Count > 0)
+                    {
+                        iscourses = true;
+                    }
+                    else
+                    {
+                        iscourses = false;
+                    }
+                }
+            }
+            else
+            {
+                var NotValidMessage = new MessageDialog("Please Select A Semester To Enable Time Turner");
+                await NotValidMessage.ShowAsync();
+                if(TimeTurnerEnabler.IsChecked == true)
+                {
+                    TimeTurnerEnabler.IsChecked = null;
+                }
+                else
+                {
+                    TimeTurnerEnabler.IsChecked = null;
+                }
+            }
+            if (TimeTurnerEnabler.IsChecked == true)
+            {
+                if(iscourses == true)
+                {//we need to prompt user if they wish to disenroll user from all currently enrolled courses
+
                 }
                 else
                 {
@@ -1372,9 +1650,15 @@ namespace Hogwarts2._0
             }
             else
             {
-                var NotValidMessage = new MessageDialog(notvalidenrollmessage);
-                await NotValidMessage.ShowAsync();
-            }
+                if(iscourses == true)
+                {
+
+                }
+                else
+                {
+
+                }
+            }    
         }
     }
 }

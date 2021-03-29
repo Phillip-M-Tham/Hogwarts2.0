@@ -1259,10 +1259,6 @@ namespace Hogwarts2._0
         {
             int tiebreaker = _random.Next(min, max);
             return tiebreaker;
-
-
         }
     }
 }
-
-

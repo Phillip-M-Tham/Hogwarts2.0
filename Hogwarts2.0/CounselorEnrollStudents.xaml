@@ -95,7 +95,7 @@
                 <ComboBox Name="FormA2AssignedCourses" SelectionChanged="PreviewEnrollment" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" MaxWidth="300" Width="300" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Course" />
             </Grid>
             <Grid Margin="1339,148,32,711">
-                <CheckBox x:Name="TimeTurnerEnabler" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P">
+                <CheckBox x:Name="TimeTurnerEnabler" Checked="TryToEnableTimeTurner" Unchecked="TryToEnableTimeTurner" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P">
                     <TextBlock Text="Time Turner" Foreground="Black"/>
                 </CheckBox>
             </Grid>
