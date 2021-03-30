@@ -11,60 +11,60 @@
     <Grid>
         <Image x:ConnectionId='2' x:Name="backgroundpic" Source="Assets/enrollback2.png" Stretch="Fill" />
         <Grid Margin="16,0,1275,117">
-            <Button x:ConnectionId='41' HorizontalAlignment="Center"                          Background="Transparent" >
-                <Image x:ConnectionId='42' x:Name="Gbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/gryffindorbanner.png" Height="870" Width="284"/>
+            <Button x:ConnectionId='56' HorizontalAlignment="Center"                          Background="Transparent" >
+                <Image x:ConnectionId='57' x:Name="Gbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/gryffindorbanner.png" Height="870" Width="284"/>
             </Button>
         </Grid>
         <Grid Margin="436,0,855,117">
             <Button HorizontalAlignment="Center" Background="Transparent">
-                <Image x:ConnectionId='40' x:Name="Sbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/slytherinbanner.png" Height="870" Width="284" />
+                <Image x:ConnectionId='55' x:Name="Sbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/slytherinbanner.png" Height="870" Width="284" />
             </Button>
         </Grid>
         <Grid Margin="858,0,433,117">
             <Button HorizontalAlignment="Center" Background="Transparent">
-                <Image x:ConnectionId='39' x:Name="hbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/hufflepuffbanner.png" Height="870" Width="284" />
+                <Image x:ConnectionId='54' x:Name="hbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/hufflepuffbanner.png" Height="870" Width="284" />
             </Button>
         </Grid>
         <Grid Margin="1280,0,11,117">
             <Button HorizontalAlignment="Center" Background="Transparent">
-                <Image x:ConnectionId='38' x:Name="rbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/ravenclawbanner.png" Height="870" Width="284" />
+                <Image x:ConnectionId='53' x:Name="rbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/ravenclawbanner.png" Height="870" Width="284" />
             </Button>
         </Grid>
         <Grid x:ConnectionId='3' x:Name="GryffindorOptions" Visibility="Collapsed">
-            <Image x:ConnectionId='34' x:Name="FormBackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
+            <Image x:ConnectionId='49' x:Name="FormBackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="327,39,303,702">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Gryffindor Managment"/>
             </Grid>
             <Grid Margin="699,741,712,2">
-                <Button x:ConnectionId='37' x:Name="GryffindorCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Cancel"                                      />
+                <Button x:ConnectionId='52' x:Name="GryffindorCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Cancel"                                      />
             </Grid>
             <Grid Margin="705,229,706,514">
-                <Button x:ConnectionId='36' x:Name="EnrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll"                                />
+                <Button x:ConnectionId='51' x:Name="EnrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll"                                />
             </Grid>
             <Grid Margin="705,465,706,278">
-                <Button x:ConnectionId='35' x:Name="DisenrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll"                                   />
+                <Button x:ConnectionId='50' x:Name="DisenrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll"                                   />
             </Grid>
         </Grid>
         <Grid x:ConnectionId='4' x:Name="GryffindorEnroll" Visibility="Collapsed" >
-            <Image x:ConnectionId='25' x:Name="FormAbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
+            <Image x:ConnectionId='40' x:Name="FormAbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="472,19,473,689">
-                <TextBlock x:ConnectionId='33' x:Name="EnrollTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="Enroll Student" FontSize="120"/>
+                <TextBlock x:ConnectionId='48' x:Name="EnrollTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="Enroll Student" FontSize="120"/>
             </Grid>
             <Grid Margin="1291,87,63,602">
-                <Button x:ConnectionId='32' x:Name="FilterGryffindorEnroll" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Filter" FontSize="42"/>
+                <Button x:ConnectionId='47' x:Name="FilterGryffindorEnroll" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Filter" FontSize="42"/>
             </Grid>
             <Grid Margin="549,288,756,617" >
-                <TextBlock x:ConnectionId='31' x:Name="TableHeadername" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Name" FontSize="36" Foreground="Black"/>
+                <TextBlock x:ConnectionId='46' x:Name="TableHeadername" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Name" FontSize="36" Foreground="Black"/>
             </Grid>
             <Grid Margin="755,288,550,617">
-                <TextBlock x:ConnectionId='30' x:Name="TableHeaderyear" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                <TextBlock x:ConnectionId='45' x:Name="TableHeaderyear" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
             </Grid>
             <Grid Margin="861,288,444,617">
-                <TextBlock x:ConnectionId='29' x:Name="TableHeaderHUID" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="HUID" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                <TextBlock x:ConnectionId='44' x:Name="TableHeaderHUID" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="HUID" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
             </Grid>
             <ScrollViewer Margin="198,334,198,220">
-                <Grid x:ConnectionId='27' x:Name="MainScrollGrid" Height="auto">
-                    <Grid x:ConnectionId='28' x:Name="StudentTable" HorizontalAlignment="Center" Height="auto">
+                <Grid x:ConnectionId='42' x:Name="MainScrollGrid" Height="auto">
+                    <Grid x:ConnectionId='43' x:Name="StudentTable" HorizontalAlignment="Center" Height="auto">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="300"/>
                             <ColumnDefinition Width="100"/>
@@ -74,37 +74,72 @@
                 </Grid>
             </ScrollViewer>
             <Grid Margin="1449,-31,-38,774">
-                <Button x:ConnectionId='26' x:Name="GryffindorEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X"                                     />
+                <Button x:ConnectionId='41' x:Name="GryffindorEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X"                                     />
             </Grid>
         </Grid>
         <Grid x:ConnectionId='5' x:Name="StudentEnrollSchedule" Visibility="Visible">
-            <Image x:ConnectionId='6' x:Name="FormA2background" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
+            <Image x:ConnectionId='12' x:Name="FormA2background" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="198,32,198,711">
-                <TextBlock x:ConnectionId='24' x:Name="StudentScheduleTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Hello World" FontSize="120" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:ConnectionId='39' x:Name="StudentScheduleTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Hello World" FontSize="120" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
             <Grid Margin="290,203,960,696">
-                <TextBlock x:ConnectionId='23' x:Name="FormA2SemesterLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester:" Foreground="Black"/>
+                <TextBlock x:ConnectionId='38' x:Name="FormA2SemesterLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester:" Foreground="Black"/>
             </Grid>
             <Grid Margin="388,118,588,613">
-                <ComboBox x:ConnectionId='22' Name="FormA2ValidSemesters"                                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Semester"/>
+                <ComboBox x:ConnectionId='37' Name="FormA2ValidSemesters"                                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Semester"/>
             </Grid>
             <Grid Margin="225,171,885,513">
-                <TextBlock x:ConnectionId='21' x:Name="FormA2CourseLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course:" Foreground="Black" />
+                <TextBlock x:ConnectionId='36' x:Name="FormA2CourseLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course:" Foreground="Black" />
             </Grid>
             <Grid Margin="408,254,592,593">
-                <ComboBox x:ConnectionId='20' Name="FormA2AssignedCourses"                                      HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" MaxWidth="300" Width="300" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Course" />
+                <ComboBox x:ConnectionId='35' Name="FormA2AssignedCourses"                                      HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" MaxWidth="300" Width="300" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Course" />
             </Grid>
             <Grid Margin="1339,148,32,711">
-                <CheckBox x:ConnectionId='19' x:Name="TimeTurnerEnabler"                                                                   FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P">
+                <CheckBox x:ConnectionId='34' x:Name="TimeTurnerEnabler"                                                                   FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P">
                     <TextBlock Text="Time Turner" Foreground="Black"/>
                 </CheckBox>
             </Grid>
             <Grid Margin="415,282,636,508">
-                <Button x:ConnectionId='18' x:Name="StudentEnrollStudent" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll"                                    />
+                <Button x:ConnectionId='33' x:Name="StudentEnrollStudent" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll"                                    />
             </Grid>
-            <ScrollViewer x:ConnectionId='7' x:Name="ScrollveiwerNormal" Margin="198,432,198,166">
-                <Grid x:ConnectionId='9' x:Name="MainScrollGrid2" Height="auto">
-                    <Grid x:ConnectionId='10' x:Name="StudentSemesterCalendar" HorizontalAlignment="Center" Visibility="Collapsed" Height="Auto">
+            <ScrollViewer x:ConnectionId='13' x:Name="ScrollVeiwerTimeTurner" Margin="198,432,198,166" >
+                <Grid x:ConnectionId='25' x:Name="ScrollViewerTurner" Height="auto" >
+                    <Grid x:ConnectionId='26' x:Name="StudentSemesterCalendarTT" HorizontalAlignment="Center" Visibility="Collapsed" Height="auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="75"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="6" >
+                            <TextBlock x:ConnectionId='32' x:Name="TableTitleTT" Foreground="Black" HorizontalAlignment="Center" FontSize="26" Text="Hello World" FontFamily="/Assets/HARRYP__.TTF#Harry P" />
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="0" >
+                            <TextBlock x:ConnectionId='31' x:Name="C1HeaderTT" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Monday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="1" >
+                            <TextBlock x:ConnectionId='30' x:Name="C2HeaderTT" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Tuesday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="2" >
+                            <TextBlock x:ConnectionId='29' x:Name="C3HeaderTT" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Wednesday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="3" >
+                            <TextBlock x:ConnectionId='28' x:Name="C4HeaderTT" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Thursday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="4" >
+                            <TextBlock x:ConnectionId='27' x:Name="C5HeaderTT" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Friday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+            <ScrollViewer x:ConnectionId='14' x:Name="ScrollveiwerNormal" Margin="198,432,198,166">
+                <Grid x:ConnectionId='16' x:Name="MainScrollGrid2" Height="auto">
+                    <Grid x:ConnectionId='17' x:Name="StudentSemesterCalendar" HorizontalAlignment="Center" Visibility="Collapsed" Height="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="75"/>
@@ -118,31 +153,49 @@
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
                         <Border BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="6" >
-                            <TextBlock x:ConnectionId='17' x:Name="TableTitle" Foreground="Black" HorizontalAlignment="Center" FontSize="26" Text="Hello World" FontFamily="/Assets/HARRYP__.TTF#Harry P" />
+                            <TextBlock x:ConnectionId='24' x:Name="TableTitle" Foreground="Black" HorizontalAlignment="Center" FontSize="26" Text="Hello World" FontFamily="/Assets/HARRYP__.TTF#Harry P" />
                         </Border>
                         <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="0" >
-                            <TextBlock x:ConnectionId='16' x:Name="C0Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Time" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                            <TextBlock x:ConnectionId='23' x:Name="C0Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Time" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
                         </Border>
                         <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="1" >
-                            <TextBlock x:ConnectionId='15' x:Name="C1Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Monday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                            <TextBlock x:ConnectionId='22' x:Name="C1Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Monday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
                         </Border>
                         <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="2" >
-                            <TextBlock x:ConnectionId='14' x:Name="C2Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Tuesday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                            <TextBlock x:ConnectionId='21' x:Name="C2Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Tuesday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
                         </Border>
                         <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="3" >
-                            <TextBlock x:ConnectionId='13' x:Name="C3Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Wednesday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                            <TextBlock x:ConnectionId='20' x:Name="C3Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Wednesday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
                         </Border>
                         <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="4" >
-                            <TextBlock x:ConnectionId='12' x:Name="C4Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Thursday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                            <TextBlock x:ConnectionId='19' x:Name="C4Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Thursday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
                         </Border>
                         <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="5" >
-                            <TextBlock x:ConnectionId='11' x:Name="C5Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Friday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                            <TextBlock x:ConnectionId='18' x:Name="C5Header" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" Text="Friday" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
                         </Border>
                     </Grid>
                 </Grid>
             </ScrollViewer>
             <Grid Margin="1449,-31,-38,774">
-                <Button x:ConnectionId='8' x:Name="StudentEnrollScheduleCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X"                                           />
+                <Button x:ConnectionId='15' x:Name="StudentEnrollScheduleCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X"                                           />
+            </Grid>
+        </Grid>
+        <Grid x:ConnectionId='6' x:Name="TimeTurnerEnablerWarning" Visibility="Collapsed" >
+            <Image x:ConnectionId='7' x:Name="WarningBackground" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/TimeTunerBackground.png" Height="300" Width="500" />
+            <Grid Margin="539,276,538,504">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" FontSize="36" Text="WARNING" FontFamily="Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid x:ConnectionId='8' x:Name="TurnOnTimeTurner" Margin="251,380,253,400" Visibility="Collapsed">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="User has already enrolled in some courses. If you &#x0a;wish to enable Time Turner you will be disenrolling &#x0a; the student in all currently enrolled courses for this&#x0a; semester. Do you wish to conitnue?" />
+            </Grid>
+            <Grid x:ConnectionId='9' x:Name="TurnOffTimeTurner" Margin="251,380,253,400" Visibility="Collapsed">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="User has already enrolled in some courses. If you &#x0a;wish to disable Time Turner you will be disenrolling &#x0a; the student in all currently enrolled courses for this&#x0a; semester. Do you wish to conitnue?" />
+            </Grid>
+            <Grid Margin="532,528,753,309">
+                <Button x:ConnectionId='11' x:Name="DisEnrollStudent" Foreground="Black" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Yes"                                />
+            </Grid>
+            <Grid Margin="725,520,489,308">
+                <Button x:ConnectionId='10' x:Name="CancelTimeTurner" Foreground="Black" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="No"                                />
             </Grid>
         </Grid>
     </Grid>

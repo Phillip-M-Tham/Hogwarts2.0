@@ -157,6 +157,9 @@
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\sound.png">
       <PackagePath>Assets\sound.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\TimeTunerBackground.png">
+      <PackagePath>Assets\TimeTunerBackground.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
