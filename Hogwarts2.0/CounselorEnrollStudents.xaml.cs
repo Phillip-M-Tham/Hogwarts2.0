@@ -144,6 +144,14 @@ namespace Hogwarts2._0
             GryffindorEnroll.Visibility = Visibility.Collapsed;
             StudentEnrollSchedule.Visibility = Visibility.Collapsed;
             //reset student schedule here
+            if(StudentSemesterCalendar.Visibility == Visibility.Visible)
+            {
+                StudentSemesterCalendar.Visibility = Visibility.Collapsed;
+            }
+            if(StudentSemesterCalendarTT.Visibility == Visibility.Visible)
+            {
+                StudentSemesterCalendarTT.Visibility = Visibility.Collapsed;
+            }
             resetTimeTurner();
             resetenrollStudentschedule();
             TableTitle.Text = "";
@@ -395,6 +403,14 @@ namespace Hogwarts2._0
         {
             StudentEnrollSchedule.Visibility = Visibility.Collapsed;
             GryffindorEnroll.Visibility = Visibility.Visible;
+            if(StudentSemesterCalendar.Visibility == Visibility.Visible)
+            {
+                StudentSemesterCalendar.Visibility = Visibility.Collapsed;
+            }
+            if(StudentSemesterCalendarTT.Visibility == Visibility.Visible)
+            {
+                StudentSemesterCalendarTT.Visibility = Visibility.Collapsed;
+            }
             //resetschedulehere
             resetTimeTurner();
             resetenrollStudentschedule();
@@ -419,6 +435,19 @@ namespace Hogwarts2._0
         }
         private async void SetupCourses(object sender, SelectionChangedEventArgs e)
         {//populates courses from the selected semester and shows schedule for that semester
+            if(StudentSemesterCalendarTT.Visibility == Visibility.Visible)
+            {
+                StudentSemesterCalendarTT.Visibility = Visibility.Collapsed;
+            }
+            if(StudentSemesterCalendar.Visibility == Visibility.Visible)
+            {
+                StudentSemesterCalendar.Visibility = Visibility.Collapsed;
+            }
+            if(TimeTurnerEnabler.IsChecked != null)
+            {
+                TimeTurnerEnabler.IsChecked = null;
+            }
+
             List<int> CurrentlyEnrolledCourseIDs = new List<int>();//for updateing prior enrolled courses
             List<bool> TimeTableflag = new List<bool>();//for updating prior enrolled courses
             List<string> TotalEnrolledCourseTimes = new List<string>();
@@ -1488,37 +1517,44 @@ namespace Hogwarts2._0
 
         private void CreatePreviewBlock(int row, int column, string name)
         {
-            Border myblock = new Border();
-            string txtboxname = "";
-            myblock.Name = name;
-            myblock.SetValue(Grid.RowProperty, row);
-            myblock.SetValue(Grid.ColumnProperty, column);
-            txtboxname = column.ToString() + row.ToString();
-            foreach (var spot in StudentSemesterCalendar.Children)
+            if (StudentSemesterCalendar.Visibility == Visibility.Visible)
             {
-                if (spot.GetType() == typeof(Border))
+                Border myblock = new Border();
+                string txtboxname = "";
+                myblock.Name = name;
+                myblock.SetValue(Grid.RowProperty, row);
+                myblock.SetValue(Grid.ColumnProperty, column);
+                txtboxname = column.ToString() + row.ToString();
+                foreach (var spot in StudentSemesterCalendar.Children)
                 {
-                    TextBlock tb = (spot as Border).Child as TextBlock;
-                    if (tb != null)
+                    if (spot.GetType() == typeof(Border))
                     {
-                        if (tb.Name == txtboxname)
+                        TextBlock tb = (spot as Border).Child as TextBlock;
+                        if (tb != null)
                         {
-                            if (tb.Text != "")
+                            if (tb.Name == txtboxname)
                             {
-                                myblock.Background = new SolidColorBrush(Colors.Red);
-                                ValidEnrollment = false;
-                                break;
-                            }
-                            else
-                            {
-                                myblock.Background = new SolidColorBrush(Colors.LightGreen);
-                                break;
+                                if (tb.Text != "")
+                                {
+                                    myblock.Background = new SolidColorBrush(Colors.Red);
+                                    ValidEnrollment = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    myblock.Background = new SolidColorBrush(Colors.LightGreen);
+                                    break;
+                                }
                             }
                         }
                     }
                 }
+                StudentSemesterCalendar.Children.Add(myblock);
             }
-            StudentSemesterCalendar.Children.Add(myblock);
+            else
+            {
+                purgePreview();
+            }
         }
         private void purgePreview()
         {
