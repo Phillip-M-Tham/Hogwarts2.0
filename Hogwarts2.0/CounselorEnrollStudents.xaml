@@ -77,7 +77,7 @@
                 <Button x:Name="GryffindorEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X" Click="GryffindorEnrollCancel_Click"/>
             </Grid>
         </Grid>
-        <Grid x:Name="StudentEnrollSchedule" Visibility="Visible">
+        <Grid x:Name="StudentEnrollSchedule" Visibility="Collapsed">
             <Image x:Name="FormA2background" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="198,32,198,711">
                 <TextBlock x:Name="StudentScheduleTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Hello World" FontSize="120" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -102,9 +102,9 @@
             <Grid Margin="415,282,636,508">
                 <Button x:Name="StudentEnrollStudent" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll" Click="StudentEnrollStudent_Click" />
             </Grid>
-            <ScrollViewer x:Name="ScrollVeiwerTimeTurner" Margin="198,432,198,166" >
-                <Grid x:Name="ScrollViewerTurner" Height="auto" >
-                    <Grid x:Name="StudentSemesterCalendarTT" HorizontalAlignment="Center" Visibility="Collapsed" Height="auto">
+            <ScrollViewer x:Name="ScrollVeiwerTimeTurner" Visibility="Collapsed" Margin="198,432,198,166">
+                <Grid x:Name="ScrollViewerTurner" Height="Auto">
+                    <Grid x:Name="StudentSemesterCalendarTT" HorizontalAlignment="Center" Visibility="Visible" Height="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="75"/>
@@ -116,7 +116,7 @@
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
-                        <Border BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="6" >
+                        <Border BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="5" >
                             <TextBlock x:Name="TableTitleTT" Foreground="Black" HorizontalAlignment="Center" FontSize="26" Text="Hello World" FontFamily="/Assets/HARRYP__.TTF#Harry P" />
                         </Border>
                         <Border BorderThickness="2" BorderBrush="Black" Grid.Row="1" Grid.Column="0" >
@@ -137,9 +137,9 @@
                     </Grid>
                 </Grid>
             </ScrollViewer>
-            <ScrollViewer x:Name="ScrollveiwerNormal" Margin="198,432,198,166">
+            <ScrollViewer x:Name="ScrollveiwerNormal" Margin="198,432,198,166" Visibility="Collapsed">
                 <Grid x:Name="MainScrollGrid2" Height="auto">
-                    <Grid x:Name="StudentSemesterCalendar" HorizontalAlignment="Center" Visibility="Collapsed" Height="Auto">
+                    <Grid x:Name="StudentSemesterCalendar" HorizontalAlignment="Center" Visibility="Visible" Height="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="75"/>

@@ -101,10 +101,10 @@
     </RootType>
     <RootType FullName="Hogwarts2._0.CounselorAccountSettings" />
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
+      <RootProperty Name="Visibility" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Content" />
       <RootProperty Name="Name" />
-      <RootProperty Name="Visibility" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Height" />
