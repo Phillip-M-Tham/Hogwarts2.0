@@ -11,42 +11,42 @@
     <Grid>
         <Image x:Name="backgroundpic" Source="Assets/enrollback2.png" Stretch="Fill" />
         <Grid Margin="16,0,1275,117">
-            <Button HorizontalAlignment="Center" Click="EnableGryffindor" Background="Transparent" >
+            <Button x:Name="Gryffindor" HorizontalAlignment="Center" Click="EnableHouseOptions" Background="Transparent" >
                 <Image x:Name="Gbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/gryffindorbanner.png" Height="870" Width="284"/>
             </Button>
         </Grid>
         <Grid Margin="436,0,855,117">
-            <Button HorizontalAlignment="Center" Background="Transparent">
+            <Button x:Name="Slytherin" HorizontalAlignment="Center" Click="EnableHouseOptions" Background="Transparent">
                 <Image x:Name="Sbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/slytherinbanner.png" Height="870" Width="284" />
             </Button>
         </Grid>
         <Grid Margin="858,0,433,117">
-            <Button HorizontalAlignment="Center" Background="Transparent">
+            <Button x:Name="Hufflepuff" Click="EnableHouseOptions" HorizontalAlignment="Center" Background="Transparent">
                 <Image x:Name="hbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/hufflepuffbanner.png" Height="870" Width="284" />
             </Button>
         </Grid>
         <Grid Margin="1280,0,11,117">
-            <Button HorizontalAlignment="Center" Background="Transparent">
+            <Button x:Name="Ravenclaw" Click="EnableHouseOptions" HorizontalAlignment="Center" Background="Transparent">
                 <Image x:Name="rbanner" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Source="Assets/ravenclawbanner.png" Height="870" Width="284" />
             </Button>
         </Grid>
-        <Grid x:Name="GryffindorOptions" Visibility="Collapsed">
+        <Grid x:Name="HouseOptions" Visibility="Collapsed">
             <Image x:Name="FormBackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="327,39,303,702">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Gryffindor Managment"/>
+                <TextBlock x:Name="HouseOptionsTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Hello World"/>
             </Grid>
             <Grid Margin="699,741,712,2">
-                <Button x:Name="GryffindorCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Cancel" Click="EnrollGryffindorCancel_Click" />
+                <Button x:Name="HouseOptionsCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Cancel" Click="EnrollHouseCancel_Click" />
             </Grid>
             <Grid Margin="705,229,706,514">
-                <Button x:Name="EnrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll" Click="EnrollGryffindor_Click" />
+                <Button x:Name="EnrollSelectedHouse" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll" Click="EnrollSelectedHouse_Click" />
             </Grid>
             <Grid Margin="705,465,706,278">
                 <Button x:Name="DisenrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll" Click="DisenrollGryffindor_Click" />
             </Grid>
         </Grid>
        
-        <Grid x:Name="GryffindorEnroll" Visibility="Collapsed" >
+        <Grid x:Name="HouseEnroll" Visibility="Collapsed" >
             <Image x:Name="FormAbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="472,19,473,689">
                 <TextBlock x:Name="EnrollTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="Enroll Student" FontSize="120"/>

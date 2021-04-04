@@ -37,6 +37,7 @@ namespace Hogwarts2._0
         private int TTThursdayCount = 2;
         private int TTFridayCount = 2;
         private int TTTotoalRowCount = 0;
+        private string SelectedHouse;
         public CounselorEnrollStudents()
         {
             this.InitializeComponent();
@@ -140,15 +141,32 @@ namespace Hogwarts2._0
                 FormA2AssignedCourses.Items.Add("Please Pick A Semester");
             }
         }
-        private void EnrollGryffindorCancel_Click(object sender, RoutedEventArgs e)
+        private void EnrollHouseCancel_Click(object sender, RoutedEventArgs e)
         {
-            GryffindorOptions.Visibility = Visibility.Collapsed;
+            HouseOptions.Visibility = Visibility.Collapsed;
         }
-        private void EnableGryffindor(object sender, RoutedEventArgs e)
+        private void EnableHouseOptions(object sender, RoutedEventArgs e)
         {
+            SelectedHouse = "";
             PurgeStudentTable();
-            GryffindorOptions.Visibility = Visibility.Visible;
-            GryffindorEnroll.Visibility = Visibility.Collapsed;
+            if((sender as Button).Name == "Gryffindor")
+            {
+                HouseOptionsTitle.Text = "Gryffindor Managment";
+                SelectedHouse = "Gryffindor";
+            }else if((sender as Button).Name == "Slytherin"){
+                HouseOptionsTitle.Text = "Slytherin Management";
+                SelectedHouse = "Slytherin";
+            }else if((sender as Button).Name == "Ravenclaw")
+            {
+                HouseOptionsTitle.Text = "Ravenclaw Management";
+                SelectedHouse = "Ravenclaw";
+            }else if((sender as Button).Name == "Hufflepuff")
+            {
+                HouseOptionsTitle.Text = "Hufflepuff Management";
+                SelectedHouse = "Hufflepuff";
+            }
+            HouseOptions.Visibility = Visibility.Visible;
+            HouseEnroll.Visibility = Visibility.Collapsed;
             StudentEnrollSchedule.Visibility = Visibility.Collapsed;
             //reset student schedule here
             if (ScrollveiwerNormal.Visibility == Visibility.Visible)
@@ -173,10 +191,10 @@ namespace Hogwarts2._0
             YearlevelInput.SelectedValue = "All years";
         }
 
-        private void EnrollGryffindor_Click(object sender, RoutedEventArgs e)
+        private void EnrollSelectedHouse_Click(object sender, RoutedEventArgs e)
         {
-            GryffindorEnroll.Visibility = Visibility.Visible;
-            GryffindorOptions.Visibility = Visibility.Collapsed;
+            HouseEnroll.Visibility = Visibility.Visible;
+            HouseOptions.Visibility = Visibility.Collapsed;
             YearlevelInput.SelectedValue = "All years";
             FilterbyReg.IsChecked = true;
         }
@@ -428,7 +446,7 @@ namespace Hogwarts2._0
                     btn.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
                     btn.HorizontalAlignment = HorizontalAlignment.Center;
                     btn.VerticalAlignment = VerticalAlignment.Center;
-                    if (mode == "default" && yearfilter == 0)
+                    if (mode == "default" && yearfilter == 0)//sets up the name of the button with the matching ID based on the filter applied
                     {
                         btn.SetValue(NameProperty, myids[rowposition].ToString());
                     } else if (mode == "alph" && yearfilter == 0)
@@ -479,7 +497,7 @@ namespace Hogwarts2._0
         }
         private void EnableStudentSchedule(object sender, RoutedEventArgs e)
         {
-            GryffindorEnroll.Visibility = Visibility.Collapsed;
+            HouseEnroll.Visibility = Visibility.Collapsed;
             StudentEnrollSchedule.Visibility = Visibility.Visible;
             Button mybutton = (sender as Button);
             Int32.TryParse(mybutton.Name, out SelectedStudentHUID);
@@ -520,8 +538,8 @@ namespace Hogwarts2._0
         }
         private void GryffindorEnrollCancel_Click(object sender, RoutedEventArgs e)
         {
-            GryffindorEnroll.Visibility = Visibility.Collapsed;
-            GryffindorOptions.Visibility = Visibility.Visible;
+            HouseEnroll.Visibility = Visibility.Collapsed;
+            HouseOptions.Visibility = Visibility.Visible;
             PurgeStudentTable();
             resetfilter();
         }
@@ -533,7 +551,7 @@ namespace Hogwarts2._0
         private void StudentEnrollScheduleCancel_Click(object sender, RoutedEventArgs e)
         {
             StudentEnrollSchedule.Visibility = Visibility.Collapsed;
-            GryffindorEnroll.Visibility = Visibility.Visible;
+            HouseEnroll.Visibility = Visibility.Visible;
             if (ScrollveiwerNormal.Visibility == Visibility.Visible)
             {
                 ScrollveiwerNormal.Visibility = Visibility.Collapsed;
@@ -2090,13 +2108,37 @@ namespace Hogwarts2._0
                 FilterbyAlph.IsChecked = true;
                 FilterbyReg.IsChecked = false;
                 PurgeStudentTable();
-                PopulateTableAll(1, "alph", year);
+                if (SelectedHouse == "Gryffindor")
+                {
+                    PopulateTableAll(1, "alph", year);
+                }else if(SelectedHouse == "Slytherin")
+                {
+                    PopulateTableAll(2, "alph", year);
+                }else if(SelectedHouse == "Ravenclaw")
+                {
+                    PopulateTableAll(3, "alph", year);
+                }else if(SelectedHouse == "Hufflepuff")
+                {
+                    PopulateTableAll(4, "alph", year);
+                }
             }
             else if ((sender as CheckBox).Name == "FilterbyReg")
             {
                 FilterbyAlph.IsChecked = false;
                 PurgeStudentTable();
-                PopulateTableAll(1, "default", year);
+                if (SelectedHouse == "Gryffindor")
+                {
+                    PopulateTableAll(1, "default", year);
+                }else if(SelectedHouse == "Slytherin")
+                {
+                    PopulateTableAll(2, "default", year);
+                }else if(SelectedHouse == "Ravenclaw")
+                {
+                    PopulateTableAll(3, "default", year);
+                }else if(SelectedHouse == "Hufflepuff")
+                {
+                    PopulateTableAll(4, "default", year);
+                }
             }
 
         }
@@ -2108,11 +2150,35 @@ namespace Hogwarts2._0
             PurgeStudentTable();
             if (FilterbyReg.IsChecked == true)
             {
-                PopulateTableAll(1, "default", year);
+                if (SelectedHouse == "Gryffindor")
+                {
+                    PopulateTableAll(1, "default", year);
+                }else if(SelectedHouse == "Slytherin")
+                {
+                    PopulateTableAll(2, "default", year);
+                }else if(SelectedHouse == "Ravenclaw")
+                {
+                    PopulateTableAll(3, "default", year);
+                }else if(SelectedHouse == "Hufflepuff")
+                {
+                    PopulateTableAll(4, "default", year);
+                }
             }
             else
             {
-                PopulateTableAll(1, "alph", year);
+                if (SelectedHouse == "Gryffindor")
+                {
+                    PopulateTableAll(1, "alph", year);
+                }else if(SelectedHouse == "Slytherin")
+                {
+                    PopulateTableAll(2, "alph", year);
+                }else if(SelectedHouse == "Ravenclaw")
+                {
+                    PopulateTableAll(3, "alph", year);
+                }else if(SelectedHouse == "Hufflepuff")
+                {
+                    PopulateTableAll(4, "alph", year);
+                }
             }
         }
     }
