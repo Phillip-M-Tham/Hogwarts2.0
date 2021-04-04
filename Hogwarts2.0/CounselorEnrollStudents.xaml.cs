@@ -128,17 +128,23 @@ namespace Hogwarts2._0
             if (mysemesters.Count == 0)
             {
                 FormA2ValidSemesters.Items.Add("There Are No Semesters");
+                FormStudentDisenrollValidSemesters.Items.Add("There Are No Semesters");
             }
             else
             {
                 foreach (var semester in mysemesters)
                 {
                     FormA2ValidSemesters.Items.Add(semester);
+                    FormStudentDisenrollValidSemesters.Items.Add(semester);
                 }
             }
             if (FormA2AssignedCourses.SelectedItem == null)
             {
                 FormA2AssignedCourses.Items.Add("Please Pick A Semester");
+            }
+            if (FormStudentDisenrollAssignedCourses.SelectedItem == null)
+            {
+                FormStudentDisenrollAssignedCourses.Items.Add("Please Pick A Semester");
             }
         }
         private void EnrollHouseCancel_Click(object sender, RoutedEventArgs e)
@@ -149,25 +155,31 @@ namespace Hogwarts2._0
         {
             SelectedHouse = "";
             PurgeStudentTable();
-            if((sender as Button).Name == "Gryffindor")
+            if ((sender as Button).Name == "Gryffindor")
             {
                 HouseOptionsTitle.Text = "Gryffindor Managment";
                 SelectedHouse = "Gryffindor";
-            }else if((sender as Button).Name == "Slytherin"){
+            }
+            else if ((sender as Button).Name == "Slytherin")
+            {
                 HouseOptionsTitle.Text = "Slytherin Management";
                 SelectedHouse = "Slytherin";
-            }else if((sender as Button).Name == "Ravenclaw")
+            }
+            else if ((sender as Button).Name == "Ravenclaw")
             {
                 HouseOptionsTitle.Text = "Ravenclaw Management";
                 SelectedHouse = "Ravenclaw";
-            }else if((sender as Button).Name == "Hufflepuff")
+            }
+            else if ((sender as Button).Name == "Hufflepuff")
             {
                 HouseOptionsTitle.Text = "Hufflepuff Management";
                 SelectedHouse = "Hufflepuff";
             }
             HouseOptions.Visibility = Visibility.Visible;
             HouseEnroll.Visibility = Visibility.Collapsed;
+            HouseDisenroll.Visibility = Visibility.Collapsed;
             StudentEnrollSchedule.Visibility = Visibility.Collapsed;
+            StudentDisenrollCourse.Visibility = Visibility.Collapsed;
             //reset student schedule here
             if (ScrollveiwerNormal.Visibility == Visibility.Visible)
             {
@@ -189,6 +201,11 @@ namespace Hogwarts2._0
             FilterbyAlph.IsChecked = default;
             FilterbyReg.IsChecked = default;
             YearlevelInput.SelectedValue = "All years";
+
+            HouseFilterDisnerollOptions.Visibility = Visibility.Collapsed;
+            DisenrollFilterbyReg.IsChecked = default;
+            DisenrollFilterbyAlph.IsChecked = default;
+            DisenrollYearlevelInput.SelectedValue = "All years";
         }
 
         private void EnrollSelectedHouse_Click(object sender, RoutedEventArgs e)
@@ -198,7 +215,7 @@ namespace Hogwarts2._0
             YearlevelInput.SelectedValue = "All years";
             FilterbyReg.IsChecked = true;
         }
-        private async void PopulateTableAll(int house, string mode, int yearfilter)
+        private async void PopulateTableAll(int house, string mode, int yearfilter, string modetype)
         {
             List<int> UnfilteredyearIDs = new List<int>();
             List<int> sortedIDs = new List<int>();
@@ -437,8 +454,14 @@ namespace Hogwarts2._0
                 {
                     RowDefinition row = new RowDefinition();
                     row.Height = new GridLength(75.00);
-                    StudentTable.RowDefinitions.Add(row);
-
+                    if (modetype == "enroll")
+                    {
+                        StudentTable.RowDefinitions.Add(row);
+                    }
+                    else if (modetype == "disenroll")
+                    {
+                        StudentTableA3.RowDefinitions.Add(row);
+                    }
                     Button btn = new Button();
                     btn.FontSize = 36;
                     btn.Content = student.ToString();
@@ -449,26 +472,41 @@ namespace Hogwarts2._0
                     if (mode == "default" && yearfilter == 0)//sets up the name of the button with the matching ID based on the filter applied
                     {
                         btn.SetValue(NameProperty, myids[rowposition].ToString());
-                    } else if (mode == "alph" && yearfilter == 0)
-                    {
-                        btn.SetValue(NameProperty, sortedIDs[rowposition].ToString());
-                    }else if(mode == "default" && yearfilter != 0)
-                    {
-                        btn.SetValue(NameProperty, UnfilteredyearIDs[rowposition].ToString());
-                    }else if(mode =="alph" && yearfilter != 0)
+                    }
+                    else if (mode == "alph" && yearfilter == 0)
                     {
                         btn.SetValue(NameProperty, sortedIDs[rowposition].ToString());
                     }
-                    btn.Click += EnableStudentSchedule;
-
+                    else if (mode == "default" && yearfilter != 0)
+                    {
+                        btn.SetValue(NameProperty, UnfilteredyearIDs[rowposition].ToString());
+                    }
+                    else if (mode == "alph" && yearfilter != 0)
+                    {
+                        btn.SetValue(NameProperty, sortedIDs[rowposition].ToString());
+                    }
+                    if (modetype == "enroll")
+                    {//sets button for enroll
+                        btn.Click += EnableStudentSchedule;
+                    }
+                    else if (modetype == "disenroll")
+                    {
+                        btn.Click += EnableDisenrollCourse;
+                    }
                     Border myborder = new Border();
                     myborder.BorderThickness = new Thickness(2);
                     myborder.BorderBrush = new SolidColorBrush(Colors.Black);
                     myborder.SetValue(Grid.RowProperty, rowposition);
                     myborder.SetValue(Grid.ColumnProperty, 0);
                     myborder.Child = btn;
-
-                    StudentTable.Children.Add(myborder);
+                    if (modetype == "enroll")
+                    {//adds border button to enroll table 
+                        StudentTable.Children.Add(myborder);
+                    }
+                    else if (modetype == "disenroll")
+                    {
+                        StudentTableA3.Children.Add(myborder);
+                    }
                     rowposition++;
                 }
                 int rowposition2 = 0;
@@ -488,18 +526,35 @@ namespace Hogwarts2._0
                     myborder.SetValue(Grid.RowProperty, rowposition2);
                     myborder.SetValue(Grid.ColumnProperty, 1);
                     myborder.Child = txtblock;
-
-                    StudentTable.Children.Add(myborder);
+                    if (modetype == "enroll")
+                    {
+                        StudentTable.Children.Add(myborder);
+                    }
+                    else if (modetype == "disenroll")
+                    {
+                        StudentTableA3.Children.Add(myborder);
+                    }
                     rowposition2++;
                 }
             }
-
         }
+
+        private void EnableDisenrollCourse(object sender, RoutedEventArgs e)
+        {
+            HouseDisenroll.Visibility = Visibility.Collapsed;
+            HouseFilterDisnerollOptions.Visibility = Visibility.Collapsed;
+            StudentDisenrollCourse.Visibility = Visibility.Visible;
+            Button mybutton = sender as Button;
+            Int32.TryParse(mybutton.Name, out SelectedStudentHUID);
+            StudentDisenrollTitle.Text = mybutton.Content.ToString();
+        }
+
         private void EnableStudentSchedule(object sender, RoutedEventArgs e)
         {
             HouseEnroll.Visibility = Visibility.Collapsed;
+            HouseFilterEnrollOptions.Visibility = Visibility.Collapsed;
             StudentEnrollSchedule.Visibility = Visibility.Visible;
-            Button mybutton = (sender as Button);
+            Button mybutton = sender as Button;
             Int32.TryParse(mybutton.Name, out SelectedStudentHUID);
             StudentScheduleTitle.Text = mybutton.Content.ToString() + "'s Schedule";
         }
@@ -534,7 +589,10 @@ namespace Hogwarts2._0
         }
         private void DisenrollSelectedHouse_Click(object sender, RoutedEventArgs e)
         {
-
+            HouseDisenroll.Visibility = Visibility.Visible;
+            HouseOptions.Visibility = Visibility.Collapsed;
+            DisenrollYearlevelInput.SelectedValue = "All years";
+            DisenrollFilterbyReg.IsChecked = true;
         }
         private void SelectedHouseEnrollCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -580,11 +638,14 @@ namespace Hogwarts2._0
             {
                 FormA2ValidSemesters.SelectedItem = null;
             }
+            if (FormStudentDisenrollValidSemesters.SelectedItem != null)
+            {
+                FormStudentDisenrollValidSemesters.SelectedItem = null;
+            }
         }
         private async void SetupCourses(object sender, SelectionChangedEventArgs e)
         {//populates courses from the selected semester and shows schedule for that semester
-
-            List<int> CurrentlyEnrolledCourseIDs = new List<int>();//for updateing prior enrolled courses
+            List<int> CurrentlyEnrolledCourseIDs = new List<int>();//for updating prior enrolled courses
             List<bool> TimeTableflag = new List<bool>();//for updating prior enrolled courses
             List<string> TotalEnrolledCourseTimes = new List<string>();
             string Enrolledresults = "";
@@ -2095,7 +2156,6 @@ namespace Hogwarts2._0
                 var NotValidMessage = new MessageDialog("Please select a filter that is not currently in use.");
                 await NotValidMessage.ShowAsync();
             }
-
         }
 
         private void SetFilter(object sender, RoutedEventArgs e)
@@ -2105,21 +2165,23 @@ namespace Hogwarts2._0
 
             if ((sender as CheckBox).Name == "FilterbyAlph")
             {
-                FilterbyAlph.IsChecked = true;
                 FilterbyReg.IsChecked = false;
                 PurgeStudentTable();
                 if (SelectedHouse == "Gryffindor")
                 {
-                    PopulateTableAll(1, "alph", year);
-                }else if(SelectedHouse == "Slytherin")
+                    PopulateTableAll(1, "alph", year, "enroll");
+                }
+                else if (SelectedHouse == "Slytherin")
                 {
-                    PopulateTableAll(2, "alph", year);
-                }else if(SelectedHouse == "Ravenclaw")
+                    PopulateTableAll(2, "alph", year, "enroll");
+                }
+                else if (SelectedHouse == "Ravenclaw")
                 {
-                    PopulateTableAll(3, "alph", year);
-                }else if(SelectedHouse == "Hufflepuff")
+                    PopulateTableAll(3, "alph", year, "enroll");
+                }
+                else if (SelectedHouse == "Hufflepuff")
                 {
-                    PopulateTableAll(4, "alph", year);
+                    PopulateTableAll(4, "alph", year, "enroll");
                 }
             }
             else if ((sender as CheckBox).Name == "FilterbyReg")
@@ -2128,19 +2190,21 @@ namespace Hogwarts2._0
                 PurgeStudentTable();
                 if (SelectedHouse == "Gryffindor")
                 {
-                    PopulateTableAll(1, "default", year);
-                }else if(SelectedHouse == "Slytherin")
+                    PopulateTableAll(1, "default", year, "enroll");
+                }
+                else if (SelectedHouse == "Slytherin")
                 {
-                    PopulateTableAll(2, "default", year);
-                }else if(SelectedHouse == "Ravenclaw")
+                    PopulateTableAll(2, "default", year, "enroll");
+                }
+                else if (SelectedHouse == "Ravenclaw")
                 {
-                    PopulateTableAll(3, "default", year);
-                }else if(SelectedHouse == "Hufflepuff")
+                    PopulateTableAll(3, "default", year, "enroll");
+                }
+                else if (SelectedHouse == "Hufflepuff")
                 {
-                    PopulateTableAll(4, "default", year);
+                    PopulateTableAll(4, "default", year, "enroll");
                 }
             }
-
         }
 
         private void YearlevelInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2152,34 +2216,274 @@ namespace Hogwarts2._0
             {
                 if (SelectedHouse == "Gryffindor")
                 {
-                    PopulateTableAll(1, "default", year);
-                }else if(SelectedHouse == "Slytherin")
+                    PopulateTableAll(1, "default", year, "enroll");
+                }
+                else if (SelectedHouse == "Slytherin")
                 {
-                    PopulateTableAll(2, "default", year);
-                }else if(SelectedHouse == "Ravenclaw")
+                    PopulateTableAll(2, "default", year, "enroll");
+                }
+                else if (SelectedHouse == "Ravenclaw")
                 {
-                    PopulateTableAll(3, "default", year);
-                }else if(SelectedHouse == "Hufflepuff")
+                    PopulateTableAll(3, "default", year, "enroll");
+                }
+                else if (SelectedHouse == "Hufflepuff")
                 {
-                    PopulateTableAll(4, "default", year);
+                    PopulateTableAll(4, "default", year, "enroll");
                 }
             }
             else
             {
                 if (SelectedHouse == "Gryffindor")
                 {
-                    PopulateTableAll(1, "alph", year);
-                }else if(SelectedHouse == "Slytherin")
+                    PopulateTableAll(1, "alph", year, "enroll");
+                }
+                else if (SelectedHouse == "Slytherin")
                 {
-                    PopulateTableAll(2, "alph", year);
-                }else if(SelectedHouse == "Ravenclaw")
+                    PopulateTableAll(2, "alph", year, "enroll");
+                }
+                else if (SelectedHouse == "Ravenclaw")
                 {
-                    PopulateTableAll(3, "alph", year);
-                }else if(SelectedHouse == "Hufflepuff")
+                    PopulateTableAll(3, "alph", year, "enroll");
+                }
+                else if (SelectedHouse == "Hufflepuff")
                 {
-                    PopulateTableAll(4, "alph", year);
+                    PopulateTableAll(4, "alph", year, "enroll");
                 }
             }
+        }
+
+        private void SelectedHouseDisenrollCancel_Click(object sender, RoutedEventArgs e)
+        {
+            HouseDisenroll.Visibility = Visibility.Collapsed;
+            HouseOptions.Visibility = Visibility.Visible;
+            DisenrollPurgeStudentTable();
+            resetfilter();
+        }
+
+        private void DisenrollPurgeStudentTable()
+        {
+            StudentTableA3.RowDefinitions.Clear();
+            StudentTableA3.Children.Clear();
+        }
+
+        private void DisenrollCancelFilter_Click(object sender, RoutedEventArgs e)
+        {
+            HouseFilterDisnerollOptions.Visibility = Visibility.Collapsed;
+        }
+
+        private void FilterSelectedHouseDisenroll_Click(object sender, RoutedEventArgs e)
+        {
+            HouseFilterDisnerollOptions.Visibility = Visibility.Visible;
+        }
+
+        private void DisenrollSetFilter(object sender, RoutedEventArgs e)
+        {
+            int year;
+            Int32.TryParse(DisenrollYearlevelInput.SelectedValue.ToString(), out year);
+
+            if ((sender as CheckBox).Name == "DisenrollFilterbyAlph")
+            {
+                DisenrollFilterbyReg.IsChecked = false;
+                DisenrollPurgeStudentTable();
+                if (SelectedHouse == "Gryffindor")
+                {
+                    PopulateTableAll(1, "alph", year, "disenroll");
+                }
+                else if (SelectedHouse == "Slytherin")
+                {
+                    PopulateTableAll(2, "alph", year, "disenroll");
+                }
+                else if (SelectedHouse == "Ravenclaw")
+                {
+                    PopulateTableAll(3, "alph", year, "disenroll");
+                }
+                else if (SelectedHouse == "Hufflepuff")
+                {
+                    PopulateTableAll(4, "alph", year, "disenroll");
+                }
+            }
+            else if ((sender as CheckBox).Name == "DisenrollFilterbyReg")
+            {
+                DisenrollFilterbyAlph.IsChecked = false;
+                DisenrollPurgeStudentTable();
+                if (SelectedHouse == "Gryffindor")
+                {
+                    PopulateTableAll(1, "default", year, "disenroll");
+                }
+                else if (SelectedHouse == "Slytherin")
+                {
+                    PopulateTableAll(2, "default", year, "disenroll");
+                }
+                else if (SelectedHouse == "Ravenclaw")
+                {
+                    PopulateTableAll(3, "default", year, "disenroll");
+                }
+                else if (SelectedHouse == "Hufflepuff")
+                {
+                    PopulateTableAll(4, "default", year, "disenroll");
+                }
+            }
+        }
+        private async void DisenrollFilterAttemptUncheck(object sender, RoutedEventArgs e)
+        {
+            if (DisenrollFilterbyAlph.IsChecked == false && DisenrollFilterbyReg.IsChecked == false)
+            {
+                (sender as CheckBox).IsChecked = true;
+                var NotValidMessage = new MessageDialog("Please select a filter that is not currently in use.");
+                await NotValidMessage.ShowAsync();
+            }
+        }
+
+        private void DisenrollYearlevelInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int year;
+            Int32.TryParse(DisenrollYearlevelInput.SelectedValue.ToString(), out year);
+            DisenrollPurgeStudentTable();
+            if (FilterbyReg.IsChecked == true)
+            {
+                if (SelectedHouse == "Gryffindor")
+                {
+                    PopulateTableAll(1, "default", year, "disenroll");
+                }
+                else if (SelectedHouse == "Slytherin")
+                {
+                    PopulateTableAll(2, "default", year, "disenroll");
+                }
+                else if (SelectedHouse == "Ravenclaw")
+                {
+                    PopulateTableAll(3, "default", year, "disenroll");
+                }
+                else if (SelectedHouse == "Hufflepuff")
+                {
+                    PopulateTableAll(4, "default", year, "disenroll");
+                }
+            }
+            else
+            {
+                if (SelectedHouse == "Gryffindor")
+                {
+                    PopulateTableAll(1, "alph", year, "disenroll");
+                }
+                else if (SelectedHouse == "Slytherin")
+                {
+                    PopulateTableAll(2, "alph", year, "disenroll");
+                }
+                else if (SelectedHouse == "Ravenclaw")
+                {
+                    PopulateTableAll(3, "alph", year, "disenroll");
+                }
+                else if (SelectedHouse == "Hufflepuff")
+                {
+                    PopulateTableAll(4, "alph", year, "disenroll");
+                }
+            }
+        }
+
+        private void StudentDisenrollScheduleCancel_Click(object sender, RoutedEventArgs e)
+        {
+            StudentDisenrollCourse.Visibility = Visibility.Collapsed;
+            HouseDisenroll.Visibility = Visibility.Visible;
+            FormStudentDisenrollValidSemesters.SelectedItem = null;
+            FormStudentDisenrollAssignedCourses.SelectedItem = null;
+        }
+
+        private void SetUpDisenrollCourses(object sender, SelectionChangedEventArgs e)
+        {
+            int _semesterID;
+            List<int> mycourseIDs = new List<int>();
+            List<string> coursetitles = new List<string>();
+            resetcourses();
+            if (FormStudentDisenrollAssignedCourses.SelectedItem != null)
+            {
+                FormStudentDisenrollAssignedCourses.SelectedItem = null;
+            }
+            FormStudentDisenrollAssignedCourses.Items.Clear();
+            if (FormStudentDisenrollValidSemesters.SelectedItem != null)
+            {
+                if (FormStudentDisenrollValidSemesters.SelectedValue.ToString() != "There Are No Semesters")
+                { 
+                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                    {//updates the combo box for the courses for the selected semester
+                        sqlConn.Open();
+                        if (sqlConn.State == System.Data.ConnectionState.Open)
+                        {//acquire the semesterid from the name of the semester
+                            _semesterID = GetDisenrollSemesterID();
+                            if (_semesterID != 0)
+                            {
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {
+                                    cmd.CommandText = $"SELECT CourseID FROM StudentEnrolledCourses WHERE SemesterID = {_semesterID} AND StudentID = {SelectedStudentHUID};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            Int32.TryParse(reader.GetValue(0).ToString(), out int _courseID);
+                                            mycourseIDs.Add(_courseID);
+                                        }
+                                    }
+                                }
+                            }
+                            if (mycourseIDs.Count > 0)
+                            {
+                                //acquire the courses name with course ID
+                                foreach (var courseID in mycourseIDs)
+                                {
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {
+                                        cmd.CommandText = $"SELECT Title FROM Courses WHERE CourseID = {courseID};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                coursetitles.Add(reader.GetValue(0).ToString());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                FormStudentDisenrollAssignedCourses.Items.Add("Please Enroll Student in a course");
+                            }
+                            sqlConn.Close();
+                        }
+                    }
+                    if (coursetitles.Count > 0)
+                    {
+                        foreach (var title in coursetitles)
+                        {
+                            FormStudentDisenrollAssignedCourses.Items.Add(title);
+                        }
+                    }
+                }
+            }
+        }
+
+        private int GetDisenrollSemesterID()
+        {
+            int _semesterID = 0;
+            string _semesterid = "";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//acquire the semesterid from the name of the semester
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT SemesterID FROM Semesters WHERE Semester ='{FormStudentDisenrollValidSemesters.SelectedValue}';";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                _semesterid += reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                    Int32.TryParse(_semesterid, out _semesterID);
+                    sqlConn.Close();
+                }
+            }
+            return _semesterID;
         }
     }
 }
