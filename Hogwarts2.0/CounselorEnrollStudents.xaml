@@ -46,7 +46,7 @@
             </Grid>
         </Grid>
        
-        <Grid x:Name="GryffindorEnroll" Visibility="Collapsed" >
+        <Grid x:Name="GryffindorEnroll" Visibility="Visible" >
             <Image x:Name="FormAbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="472,19,473,689">
                 <TextBlock x:Name="EnrollTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="Enroll Student" FontSize="120"/>
@@ -86,7 +86,7 @@
                 <TextBlock x:Name="TableHeadernameA3" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Name" FontSize="36" Foreground="Black"/>
             </Grid>
         </Grid>
-        <Grid x:Name="GFilterEnroll" Visibility="Visible">
+        <Grid x:Name="GFilterEnroll" Visibility="Collapsed">
             <Grid Margin="1138,241,0,256">
                 <Image x:Name="FilterBack" Source="Assets/EnrollFilterBack.png" HorizontalAlignment="Center" Stretch="UniformToFill" Height="400" Width="250" VerticalAlignment="Center" />
             </Grid>

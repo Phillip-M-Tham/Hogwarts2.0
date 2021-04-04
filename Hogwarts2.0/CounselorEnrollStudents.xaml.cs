@@ -161,8 +161,18 @@ namespace Hogwarts2._0
             }
             resetTimeTurner();
             resetenrollStudentschedule();
+            resetfilter();
             TableTitle.Text = "";
         }
+
+        private void resetfilter()
+        {
+            GFilterEnroll.Visibility = Visibility.Collapsed;
+            FilterbyAlph.IsChecked = default;
+            FilterbyReg.IsChecked = default;
+            YearlevelInput.SelectedValue = "All years";
+        }
+
         private void EnrollGryffindor_Click(object sender, RoutedEventArgs e)
         {
             GryffindorEnroll.Visibility = Visibility.Visible;
@@ -172,6 +182,11 @@ namespace Hogwarts2._0
         }
         private async void PopulateTableAll(int house, string mode, int yearfilter)
         {
+            List<int> UnfilteredyearIDs = new List<int>();
+            List<int> sortedIDs = new List<int>();
+            List<string> studentnames = new List<string>();
+            List<int> yearlevel = new List<int>();
+            List<int> myids = new List<int>();
             //Grab all students from gryffindor
             string housename = "";
             if (house == 1)
@@ -190,33 +205,27 @@ namespace Hogwarts2._0
             {
                 housename = "Hufflepuff";
             }
-            //Dictionary<int, string> alph = new Dictionary<int, string>();
-            //Dictionary<int, int> alphyears = new Dictionary<int, int>();
-            List<int> sortedIDs = new List<int>();
-            List<string> studentnames = new List<string>();
-            List<int> yearlevel = new List<int>();
-            List<int> myids = new List<int>();
-            if (mode != "year")
+            try
             {
-                try
+                using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
                 {
-                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                    sqlConn.Open();
+                    if (sqlConn.State == System.Data.ConnectionState.Open)
                     {
-                        sqlConn.Open();
-                        if (sqlConn.State == System.Data.ConnectionState.Open)
-                        {
-                            using (SqlCommand cmd = sqlConn.CreateCommand())
-                            {//get all student ids in selected house
-                                cmd.CommandText = $"SELECT HUID FROM Houses WHERE HouseName ='{housename}';";
-                                using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {//get all student ids in selected house
+                            cmd.CommandText = $"SELECT HUID FROM Houses WHERE HouseName ='{housename}';";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
                                 {
-                                    while (reader.Read())
-                                    {
-                                        myids.Add((int)reader.GetValue(0));
-                                    }
+                                    myids.Add((int)reader.GetValue(0));
                                 }
                             }
-                            if (myids.Count > 0)
+                        }
+                        if (myids.Count > 0)
+                        {
+                            if (yearfilter == 0)
                             {
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {//get all names from the acquired ids
@@ -250,14 +259,13 @@ namespace Hogwarts2._0
                                     }
                                 }
                                 else
-                                {
+                                {//alphabettically sorted
                                     studentnames.Sort();
                                     using (SqlCommand cmd = sqlConn.CreateCommand())
                                     {//get all names from the acquired ids
                                         foreach (var name in studentnames)
                                         {//sort the names alphabetically and get all users HUID with matching names
                                             string[] firstlast = name.Split(" ");
-
                                             cmd.CommandText = $"SELECT HUID FROM Users WHERE FirstName = '{firstlast[0]}' AND LastName = '{firstlast[1]}';";
                                             using (SqlDataReader reader = cmd.ExecuteReader())
                                             {
@@ -267,9 +275,8 @@ namespace Hogwarts2._0
                                                 }
                                             }
                                         }
-                                        //filter ids against students table incase we got a HUID thats not a student
                                         foreach (var unfilteredID in sortedIDs.ToList())
-                                        {
+                                        {//filter ids against students table incase we got a HUID thats not a student
                                             if (myids.Contains(unfilteredID) == false)
                                             {
                                                 sortedIDs.Remove(unfilteredID);
@@ -292,81 +299,171 @@ namespace Hogwarts2._0
                                     }
                                 }
                             }
-                            sqlConn.Close();
+                            else
+                            {
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all ids from the selected year
+                                    cmd.CommandText = $"SELECT HUID FROM Students WHERE StudentYear = {yearfilter};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            UnfilteredyearIDs.Add((int)reader.GetValue(0));
+                                        }
+                                    }
+                                }
+                                foreach (var unfilteredid in UnfilteredyearIDs.ToList())
+                                {//filter the yearIDS to the studentIDs in the selected house
+                                    if (myids.Contains(unfilteredid) == false)
+                                    {
+                                        UnfilteredyearIDs.Remove(unfilteredid);
+                                    }
+                                }
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all names from the acquired ids
+                                    foreach (var id in UnfilteredyearIDs)
+                                    {
+                                        cmd.CommandText = $"SELECT FirstName, LastName FROM Users WHERE HUID = {id};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                studentnames.Add(reader.GetValue(0).ToString() + " " + reader.GetValue(1).ToString());
+                                            }
+                                        }
+                                    }
+                                }
+                                if (FilterbyReg.IsChecked == true)
+                                {
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {//get all year levels from acquired ids
+                                        foreach (var id in UnfilteredyearIDs)
+                                        {//ensures we only grab the student years from the selected year filter
+                                            cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id} AND StudentYear = {yearfilter};";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    yearlevel.Add((int)reader.GetValue(0));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {//alpah is checked
+                                    studentnames.Sort();
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {//get all names from the acquired ids
+                                        foreach (var name in studentnames)
+                                        {//sort the names alphabetically and get all users HUID with matching names
+                                            string[] firstlast = name.Split(" ");
+                                            cmd.CommandText = $"SELECT HUID FROM Users WHERE FirstName = '{firstlast[0]}' AND LastName = '{firstlast[1]}';";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    sortedIDs.Add((int)reader.GetValue(0));
+                                                }
+                                            }
+                                        }
+                                        foreach (var unfilteredID in sortedIDs.ToList())
+                                        {//filter ids against yearids incase we got a HUID thats not a student of the selected year
+                                            if (UnfilteredyearIDs.Contains(unfilteredID) == false)
+                                            {
+                                                sortedIDs.Remove(unfilteredID);
+                                            }
+                                        }
+                                    }
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {//get all year levels from acquired ids
+                                        foreach (var id in UnfilteredyearIDs)
+                                        {
+                                            cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id} AND StudentYear = {yearfilter};";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    yearlevel.Add((int)reader.GetValue(0));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
                         }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    var errorMessage = new MessageDialog(ex.Message);
-                    await errorMessage.ShowAsync();
-                }
-                if (studentnames.Count == 0)
-                {
-                    var errorMessage = new MessageDialog("Failed to get the names");
-                    await errorMessage.ShowAsync();
-                }
-                if (yearlevel.Count == 0)
-                {
-                    var errorMessage2 = new MessageDialog("Failed to get the years");
-                    await errorMessage2.ShowAsync();
-                }
-                if (yearlevel.Count > 0 && studentnames.Count > 0)
-                {
-                    int rowposition = 0;
-                    foreach (var student in studentnames)
-                    {
-                        RowDefinition row = new RowDefinition();
-                        row.Height = new GridLength(75.00);
-                        StudentTable.RowDefinitions.Add(row);
-
-                        Button btn = new Button();
-                        btn.FontSize = 36;
-                        btn.Content = student.ToString();
-                        btn.Foreground = new SolidColorBrush(Colors.Black);
-                        btn.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                        btn.HorizontalAlignment = HorizontalAlignment.Center;
-                        btn.VerticalAlignment = VerticalAlignment.Center;
-                        btn.SetValue(NameProperty, myids[rowposition].ToString());
-                        btn.Click += EnableStudentSchedule;
-
-                        Border myborder = new Border();
-                        myborder.BorderThickness = new Thickness(2);
-                        myborder.BorderBrush = new SolidColorBrush(Colors.Black);
-                        myborder.SetValue(Grid.RowProperty, rowposition);
-                        myborder.SetValue(Grid.ColumnProperty, 0);
-                        myborder.Child = btn;
-
-                        StudentTable.Children.Add(myborder);
-                        rowposition++;
-                    }
-                    int rowposition2 = 0;
-                    foreach (var year in yearlevel)
-                    {
-                        TextBlock txtblock = new TextBlock();
-                        txtblock.FontSize = 36;
-                        txtblock.Text = year.ToString();
-                        txtblock.Foreground = new SolidColorBrush(Colors.Black);
-                        txtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                        txtblock.HorizontalAlignment = HorizontalAlignment.Center;
-                        txtblock.VerticalAlignment = VerticalAlignment.Center;
-
-                        Border myborder = new Border();
-                        myborder.BorderThickness = new Thickness(2);
-                        myborder.BorderBrush = new SolidColorBrush(Colors.Black);
-                        myborder.SetValue(Grid.RowProperty, rowposition2);
-                        myborder.SetValue(Grid.ColumnProperty, 1);
-                        myborder.Child = txtblock;
-
-                        StudentTable.Children.Add(myborder);
-                        rowposition2++;
+                        sqlConn.Close();
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-
+                var errorMessage = new MessageDialog(ex.Message);
+                await errorMessage.ShowAsync();
             }
+            if (studentnames.Count == 0)
+            {
+                var errorMessage = new MessageDialog("Failed to get the names");
+                await errorMessage.ShowAsync();
+            }
+            if (yearlevel.Count == 0)
+            {
+                var errorMessage2 = new MessageDialog("Failed to get the years");
+                await errorMessage2.ShowAsync();
+            }
+            if (yearlevel.Count > 0 && studentnames.Count > 0)
+            {
+                int rowposition = 0;
+                foreach (var student in studentnames)
+                {
+                    RowDefinition row = new RowDefinition();
+                    row.Height = new GridLength(75.00);
+                    StudentTable.RowDefinitions.Add(row);
+
+                    Button btn = new Button();
+                    btn.FontSize = 36;
+                    btn.Content = student.ToString();
+                    btn.Foreground = new SolidColorBrush(Colors.Black);
+                    btn.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                    btn.HorizontalAlignment = HorizontalAlignment.Center;
+                    btn.VerticalAlignment = VerticalAlignment.Center;
+                    btn.SetValue(NameProperty, myids[rowposition].ToString());
+                    btn.Click += EnableStudentSchedule;
+
+                    Border myborder = new Border();
+                    myborder.BorderThickness = new Thickness(2);
+                    myborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                    myborder.SetValue(Grid.RowProperty, rowposition);
+                    myborder.SetValue(Grid.ColumnProperty, 0);
+                    myborder.Child = btn;
+
+                    StudentTable.Children.Add(myborder);
+                    rowposition++;
+                }
+                int rowposition2 = 0;
+                foreach (var year in yearlevel)
+                {
+                    TextBlock txtblock = new TextBlock();
+                    txtblock.FontSize = 36;
+                    txtblock.Text = year.ToString();
+                    txtblock.Foreground = new SolidColorBrush(Colors.Black);
+                    txtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                    txtblock.HorizontalAlignment = HorizontalAlignment.Center;
+                    txtblock.VerticalAlignment = VerticalAlignment.Center;
+
+                    Border myborder = new Border();
+                    myborder.BorderThickness = new Thickness(2);
+                    myborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                    myborder.SetValue(Grid.RowProperty, rowposition2);
+                    myborder.SetValue(Grid.ColumnProperty, 1);
+                    myborder.Child = txtblock;
+
+                    StudentTable.Children.Add(myborder);
+                    rowposition2++;
+                }
+            }
+
         }
         private void EnableStudentSchedule(object sender, RoutedEventArgs e)
         {
@@ -414,8 +511,7 @@ namespace Hogwarts2._0
             GryffindorEnroll.Visibility = Visibility.Collapsed;
             GryffindorOptions.Visibility = Visibility.Visible;
             PurgeStudentTable();
-            FilterbyReg.IsChecked = default;
-            FilterbyAlph.IsChecked = false;
+            resetfilter();
         }
         private void PurgeStudentTable()
         {
@@ -434,8 +530,6 @@ namespace Hogwarts2._0
             {
                 ScrollVeiwerTimeTurner.Visibility = Visibility.Collapsed;
             }
-            TurnOffTimeTurner.Visibility = Visibility.Collapsed;
-            TurnOnTimeTurner.Visibility = Visibility.Collapsed;
             //resetschedulehere
             resetTimeTurner();
             resetenrollStudentschedule();
@@ -1618,8 +1712,8 @@ namespace Hogwarts2._0
                             }
                         }
                     }
+                    sqlConn.Close();
                 }
-                sqlConn.Close();
             }
             Int32.TryParse(_courseid, out _courseID);
             return _courseID;
@@ -1718,6 +1812,7 @@ namespace Hogwarts2._0
             int timeturner;
             int SemID = GetSemesterID();
             int CrsID = getCourseID();
+            List<int> courseidchecker = new List<int>();
             if (FormA2ValidSemesters.SelectedItem == null)
             {
                 notvalidenrollmessage += "Please Select a Semester\n";
@@ -1760,16 +1855,45 @@ namespace Hogwarts2._0
                         sqlConn.Open();
                         if (sqlConn.State == System.Data.ConnectionState.Open)
                         {//convert HUID to StudentID
-                            SqlDataAdapter adapter = new SqlDataAdapter();
-                            SqlCommand command = new SqlCommand($"INSERT INTO StudentEnrolledCourses VALUES ({SemID},{CrsID},{SelectedStudentHUID},{timeturner});", sqlConn);
-                            adapter.InsertCommand = command;
-                            adapter.InsertCommand.ExecuteNonQuery();
+                            if (TimeTurnerEnabler.IsChecked == true)
+                            {
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {
+                                    cmd.CommandText = $"SELECT SECID FROM StudentEnrolledCourses WHERE StudentID = {SelectedStudentHUID} AND SemesterID = {SemID} AND CourseID = {CrsID};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            courseidchecker.Add((int)reader.GetValue(0));
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {//ensure that this is 0 to actually insert if TT is off
+                                courseidchecker.Clear();
+                            }
+                            if (courseidchecker.Count > 0)
+                            {//inform user that they already are inserted in the course
+                                var BadTTCourseEnroll = new MessageDialog("Student is already enrolled in course.");
+                                await BadTTCourseEnroll.ShowAsync();
+                            }
+                            else
+                            {//if they are not already enrolled they can insert into the course
+                                SqlDataAdapter adapter = new SqlDataAdapter();
+                                SqlCommand command = new SqlCommand($"INSERT INTO StudentEnrolledCourses VALUES ({SemID},{CrsID},{SelectedStudentHUID},{timeturner});", sqlConn);
+                                adapter.InsertCommand = command;
+                                adapter.InsertCommand.ExecuteNonQuery();
+                            }
                             sqlConn.Close();
                         }
                     }
-                    var CourseEnrolled = new MessageDialog("Successfully enrolled student in course");
-                    await CourseEnrolled.ShowAsync();
-                    Frame.Navigate(typeof(CounselorEnrollStudents), _userHuid);
+                    if (courseidchecker.Count == 0)
+                    {//safety check to move to next page after inserting the course
+                        var CourseEnrolled = new MessageDialog("Successfully enrolled student in course");
+                        await CourseEnrolled.ShowAsync();
+                        Frame.Navigate(typeof(CounselorEnrollStudents), _userHuid);
+                    }
                 }
             }
             else
@@ -1779,28 +1903,20 @@ namespace Hogwarts2._0
             }
         }
         private async void TryToEnableTimeTurner(object sender, RoutedEventArgs e)
-        {//first we need to see if this person is already enrolled in any courses for the selected semester
-         //if they are enrolled
-         //warn user they will disenroll of the current courses to rebuild schedule
-         //if yes, 
-         //disenroll, set up the
-         //if no 
-         //dont do anythin
-         //if not enrolled
-         //set up the time turner version
+        {
             bool iscourses;
             int semesterid;
             List<int> enrolledcourses = new List<int>();
             if (FormA2ValidSemesters.SelectedValue != null)
-            {
+            {//can only set the TimeTurner if they select a semester
                 if (FormA2ValidSemesters.SelectedItem.ToString() != "There Are No Semesters")
-                {
+                {//can only set the TimeTurner if the semester selected is a valid semester
                     semesterid = GetSemesterID();
                     using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
                     {
                         sqlConn.Open();
                         if (sqlConn.State == System.Data.ConnectionState.Open)
-                        {//convert HUID to StudentID
+                        {//first we need to see if this person is already enrolled in any courses for the selected semester
                             using (SqlCommand cmd = sqlConn.CreateCommand())
                             {
                                 cmd.CommandText = $"SELECT CourseID FROM StudentEnrolledCourses WHERE SemesterID = {semesterid} AND StudentID = {SelectedStudentHUID};";
@@ -1827,7 +1943,7 @@ namespace Hogwarts2._0
                     {
                         TimeTurnerEnabler.IsChecked = null;
                         if (iscourses == true)
-                        {//we need to prompt user if they wish to disenroll user from all currently enrolled courses
+                        {//they are currenetly enrolled in normal classes we need to prompt user if they wish to disenroll user from all currently enrolled courses 
                             TimeTurnerSafety = false;
                             TimeTurnerEnabler.IsChecked = false;
                             TimeTurnerSafety = true;
@@ -1839,7 +1955,7 @@ namespace Hogwarts2._0
                     {
                         TimeTurnerEnabler.IsChecked = null;
                         if (iscourses == true)
-                        {//they are currenetly enrolled 
+                        {//they are currenetly enrolled in TimeTurner classes we need to prompt user if they wish to disenroll user from all currently enrolled courses 
                             TimeTurnerSafety = false;
                             TimeTurnerEnabler.IsChecked = true;
                             TimeTurnerSafety = true;
@@ -1848,7 +1964,7 @@ namespace Hogwarts2._0
                         }
                     }
                     else
-                    {
+                    {//if not enrolled
                         if (TimeTurnerEnabler.IsChecked == true)
                         {//setup tt calendar
                             ScrollveiwerNormal.Visibility = Visibility.Collapsed;
@@ -1956,21 +2072,21 @@ namespace Hogwarts2._0
         {//Set all filters to false
             int year;
             Int32.TryParse(YearlevelInput.SelectedValue.ToString(), out year);
-            
-                if ((sender as CheckBox).Name == "FilterbyAlph")
-                {
-                    FilterbyAlph.IsChecked = true;
-                    FilterbyReg.IsChecked = false;
-                    PurgeStudentTable();
-                    PopulateTableAll(1, "alph",year);
-                }
-                else if ((sender as CheckBox).Name == "FilterbyReg")
-                {
-                    FilterbyAlph.IsChecked = false;
-                    PurgeStudentTable();
-                    PopulateTableAll(1, "default",year);
-                }
-            
+
+            if ((sender as CheckBox).Name == "FilterbyAlph")
+            {
+                FilterbyAlph.IsChecked = true;
+                FilterbyReg.IsChecked = false;
+                PurgeStudentTable();
+                PopulateTableAll(1, "alph", year);
+            }
+            else if ((sender as CheckBox).Name == "FilterbyReg")
+            {
+                FilterbyAlph.IsChecked = false;
+                PurgeStudentTable();
+                PopulateTableAll(1, "default", year);
+            }
+
         }
 
         private void YearlevelInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1980,10 +2096,11 @@ namespace Hogwarts2._0
             PurgeStudentTable();
             if (FilterbyReg.IsChecked == true)
             {
-                PopulateTableAll(1, "default",year);
-            }else
+                PopulateTableAll(1, "default", year);
+            }
+            else
             {
-                PopulateTableAll(1, "alph",year);
+                PopulateTableAll(1, "alph", year);
             }
         }
     }
