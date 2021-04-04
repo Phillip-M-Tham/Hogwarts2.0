@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-04-04T15:02:35.933</Modified>
+      <Modified>2021-04-04T16:24:15.992</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\Hogwarts2.0.exe">
       <PackagePath>entrypoint\Hogwarts2.0.exe</PackagePath>
-      <Modified>2021-04-04T15:02:35.465</Modified>
+      <Modified>2021-04-04T16:24:15.267</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.10\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -298,7 +298,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\CounselorEnrollStudents.xbf">
       <PackagePath>CounselorEnrollStudents.xbf</PackagePath>
-      <Modified>2021-04-04T15:02:35.192</Modified>
+      <Modified>2021-04-04T16:24:14.962</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\CounselorHome.xbf">
       <PackagePath>CounselorHome.xbf</PackagePath>
@@ -426,7 +426,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\Core\Hogwarts2.0.exe">
       <PackagePath>Hogwarts2.0.exe</PackagePath>
-      <Modified>2021-04-04T15:02:35.929</Modified>
+      <Modified>2021-04-04T16:24:15.982</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

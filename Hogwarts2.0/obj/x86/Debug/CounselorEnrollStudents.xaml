@@ -42,17 +42,17 @@
                 <Button x:ConnectionId='61' x:Name="EnrollSelectedHouse" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Enroll"                                   />
             </Grid>
             <Grid Margin="705,465,706,278">
-                <Button x:ConnectionId='60' x:Name="DisenrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll"                                   />
+                <Button x:ConnectionId='60' x:Name="DisenrollSelectedHouse" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll"                                      />
             </Grid>
         </Grid>
        
-        <Grid x:ConnectionId='4' x:Name="HouseEnroll" Visibility="Collapsed" >
+        <Grid x:ConnectionId='4' x:Name="HouseEnroll" Visibility="Visible" >
             <Image x:ConnectionId='51' x:Name="FormAbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="472,19,473,689">
                 <TextBlock x:ConnectionId='58' x:Name="EnrollTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="Enroll Student" FontSize="120"/>
             </Grid>
             <Grid Margin="1291,87,63,602">
-                <Button x:ConnectionId='57' x:Name="FilterGryffindorEnroll" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Filter" FontSize="42"                                     />
+                <Button x:ConnectionId='57' x:Name="FilterHouseEnroll" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Filter" FontSize="42"                                />
             </Grid>
             <Grid Margin="569,288,736,617" >
                 <TextBlock x:ConnectionId='56' x:Name="TableHeadername" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Name" FontSize="36" Foreground="Black"/>
@@ -71,7 +71,7 @@
                 </Grid>
             </ScrollViewer>
             <Grid Margin="1449,-31,-38,774">
-                <Button x:ConnectionId='52' x:Name="GryffindorEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X"                                     />
+                <Button x:ConnectionId='52' x:Name="HouseEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X"                                        />
             </Grid>
         </Grid>
         <Grid x:ConnectionId='5' x:Name="GryffindorDisenroll" Visibility="Collapsed">
@@ -86,7 +86,7 @@
                 <TextBlock x:ConnectionId='48' x:Name="TableHeadernameA3" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Name" FontSize="36" Foreground="Black"/>
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='6' x:Name="GFilterEnroll" Visibility="Collapsed">
+        <Grid x:ConnectionId='6' x:Name="HouseFilterEnrollOptions" Visibility="Collapsed">
             <Grid Margin="1138,241,0,256">
                 <Image x:ConnectionId='46' x:Name="FilterBack" Source="Assets/EnrollFilterBack.png" HorizontalAlignment="Center" Stretch="UniformToFill" Height="400" Width="250" VerticalAlignment="Center" />
             </Grid>

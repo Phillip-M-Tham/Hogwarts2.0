@@ -185,7 +185,7 @@ namespace Hogwarts2._0
 
         private void resetfilter()
         {
-            GFilterEnroll.Visibility = Visibility.Collapsed;
+            HouseFilterEnrollOptions.Visibility = Visibility.Collapsed;
             FilterbyAlph.IsChecked = default;
             FilterbyReg.IsChecked = default;
             YearlevelInput.SelectedValue = "All years";
@@ -532,11 +532,11 @@ namespace Hogwarts2._0
             emptyqueue.Enqueue("2300");
             return emptyqueue;
         }
-        private void DisenrollGryffindor_Click(object sender, RoutedEventArgs e)
+        private void DisenrollSelectedHouse_Click(object sender, RoutedEventArgs e)
         {
 
         }
-        private void GryffindorEnrollCancel_Click(object sender, RoutedEventArgs e)
+        private void SelectedHouseEnrollCancel_Click(object sender, RoutedEventArgs e)
         {
             HouseEnroll.Visibility = Visibility.Collapsed;
             HouseOptions.Visibility = Visibility.Visible;
@@ -2077,14 +2077,14 @@ namespace Hogwarts2._0
             await NotValidMessage.ShowAsync();
         }
 
-        private void FilterGryffindorEnroll_Click(object sender, RoutedEventArgs e)
+        private void FilterHouseEnroll_Click(object sender, RoutedEventArgs e)
         {
-            GFilterEnroll.Visibility = Visibility.Visible;
+            HouseFilterEnrollOptions.Visibility = Visibility.Visible;
         }
 
         private void CancelFilter_Click(object sender, RoutedEventArgs e)
         {
-            GFilterEnroll.Visibility = Visibility.Collapsed;
+            HouseFilterEnrollOptions.Visibility = Visibility.Collapsed;
         }
 
         private async void FilterAttemptUncheck(object sender, RoutedEventArgs e)
