@@ -226,7 +226,7 @@ namespace Hogwarts2._0
                         if (myids.Count > 0)
                         {
                             if (yearfilter == 0)
-                            {
+                            {//do this if the year filter is default
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {//get all names from the acquired ids
                                     foreach (var id in myids)
@@ -300,7 +300,7 @@ namespace Hogwarts2._0
                                 }
                             }
                             else
-                            {
+                            {// do this if the user selects a year filter
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {//get all ids from the selected year
                                     cmd.CommandText = $"SELECT HUID FROM Students WHERE StudentYear = {yearfilter};";
@@ -334,7 +334,7 @@ namespace Hogwarts2._0
                                     }
                                 }
                                 if (FilterbyReg.IsChecked == true)
-                                {
+                                {//do this if they choose to filter by HUID
                                     using (SqlCommand cmd = sqlConn.CreateCommand())
                                     {//get all year levels from acquired ids
                                         foreach (var id in UnfilteredyearIDs)
@@ -351,7 +351,7 @@ namespace Hogwarts2._0
                                     }
                                 }
                                 else
-                                {//alpah is checked
+                                {//alphabetically is checked
                                     studentnames.Sort();
                                     using (SqlCommand cmd = sqlConn.CreateCommand())
                                     {//get all names from the acquired ids
@@ -378,7 +378,7 @@ namespace Hogwarts2._0
                                     using (SqlCommand cmd = sqlConn.CreateCommand())
                                     {//get all year levels from acquired ids
                                         foreach (var id in UnfilteredyearIDs)
-                                        {
+                                        {//double tap by ensuring we select by specified student year
                                             cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id} AND StudentYear = {yearfilter};";
                                             using (SqlDataReader reader = cmd.ExecuteReader())
                                             {
@@ -428,7 +428,19 @@ namespace Hogwarts2._0
                     btn.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
                     btn.HorizontalAlignment = HorizontalAlignment.Center;
                     btn.VerticalAlignment = VerticalAlignment.Center;
-                    btn.SetValue(NameProperty, myids[rowposition].ToString());
+                    if (mode == "default" && yearfilter == 0)
+                    {
+                        btn.SetValue(NameProperty, myids[rowposition].ToString());
+                    } else if (mode == "alph" && yearfilter == 0)
+                    {
+                        btn.SetValue(NameProperty, sortedIDs[rowposition].ToString());
+                    }else if(mode == "default" && yearfilter != 0)
+                    {
+                        btn.SetValue(NameProperty, UnfilteredyearIDs[rowposition].ToString());
+                    }else if(mode =="alph" && yearfilter != 0)
+                    {
+                        btn.SetValue(NameProperty, sortedIDs[rowposition].ToString());
+                    }
                     btn.Click += EnableStudentSchedule;
 
                     Border myborder = new Border();
