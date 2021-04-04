@@ -45,22 +45,20 @@
                 <Button x:Name="DisenrollGryffindor" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll" Click="DisenrollGryffindor_Click" />
             </Grid>
         </Grid>
+       
         <Grid x:Name="GryffindorEnroll" Visibility="Collapsed" >
             <Image x:Name="FormAbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="472,19,473,689">
                 <TextBlock x:Name="EnrollTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="Enroll Student" FontSize="120"/>
             </Grid>
             <Grid Margin="1291,87,63,602">
-                <Button x:Name="FilterGryffindorEnroll" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Filter" FontSize="42"/>
+                <Button x:Name="FilterGryffindorEnroll" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Filter" FontSize="42" Click="FilterGryffindorEnroll_Click"/>
             </Grid>
-            <Grid Margin="549,288,756,617" >
+            <Grid Margin="569,288,736,617" >
                 <TextBlock x:Name="TableHeadername" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Name" FontSize="36" Foreground="Black"/>
             </Grid>
-            <Grid Margin="755,288,550,617">
+            <Grid Margin="817,288,488,617">
                 <TextBlock x:Name="TableHeaderyear" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
-            </Grid>
-            <Grid Margin="861,288,444,617">
-                <TextBlock x:Name="TableHeaderHUID" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="HUID" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
             </Grid>
             <ScrollViewer Margin="198,334,198,220">
                 <Grid x:Name="MainScrollGrid" Height="auto">
@@ -68,13 +66,57 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="300"/>
                             <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
                     </Grid>
                 </Grid>
             </ScrollViewer>
             <Grid Margin="1449,-31,-38,774">
                 <Button x:Name="GryffindorEnrollCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X" Click="GryffindorEnrollCancel_Click"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="GryffindorDisenroll" Visibility="Collapsed">
+            <Image x:Name="FormA3background" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
+            <Grid Margin="472,19,473,689">
+                <TextBlock x:Name="DisEnrollTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="Disenroll Student" FontSize="120"/>
+            </Grid>
+            <Grid Margin="1291,87,63,602">
+                <Button x:Name="FilterGryffindorDisenroll" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Filter" FontSize="42"/>
+            </Grid>
+            <Grid Margin="549,288,756,617" >
+                <TextBlock x:Name="TableHeadernameA3" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Name" FontSize="36" Foreground="Black"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="GFilterEnroll" Visibility="Visible">
+            <Grid Margin="1138,241,0,256">
+                <Image x:Name="FilterBack" Source="Assets/EnrollFilterBack.png" HorizontalAlignment="Center" Stretch="UniformToFill" Height="400" Width="250" VerticalAlignment="Center" />
+            </Grid>
+            <Grid Margin="1378,189,42,541">
+                <Button x:Name="CancelFilter" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="X" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CancelFilter_Click"/>
+            </Grid>
+            <Grid Margin="1276,251,144,479">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Filter By"/>
+            </Grid>
+            <Grid Margin="1280,325,140,405" >
+                <CheckBox x:Name="FilterbyReg" HorizontalAlignment="Center" Checked="SetFilter" Unchecked="FilterAttemptUncheck" VerticalAlignment="Center">
+                    <TextBlock FontSize="33" Text="Registration Order"  Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                </CheckBox>
+            </Grid>
+            <Grid Margin="1260,393,160,337" >
+                <CheckBox  x:Name="FilterbyAlph" HorizontalAlignment="Center" Checked="SetFilter" Unchecked="FilterAttemptUncheck" VerticalAlignment="Center">
+                    <TextBlock FontSize="33" Text="Alphabetical"  Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                </CheckBox>
+            </Grid>
+            <Grid Margin="1182,475,48,274">
+                <ComboBox  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="144" SelectionChanged="YearlevelInput_SelectionChanged"  >
+                    <x:Int32>1</x:Int32>
+                    <x:Int32>2</x:Int32>
+                    <x:Int32>3</x:Int32>
+                    <x:Int32>4</x:Int32>
+                    <x:Int32>5</x:Int32>
+                    <x:Int32>6</x:Int32>
+                    <x:Int32>7</x:Int32>
+                    <x:String>All years</x:String>
+                </ComboBox>
             </Grid>
         </Grid>
         <Grid x:Name="StudentEnrollSchedule" Visibility="Collapsed">

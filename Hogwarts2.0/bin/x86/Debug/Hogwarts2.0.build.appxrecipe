@@ -58,6 +58,9 @@
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\enrollback2.png">
       <PackagePath>Assets\enrollback2.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\EnrollFilterBack.png">
+      <PackagePath>Assets\EnrollFilterBack.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\form1background.png">
       <PackagePath>Assets\form1background.png</PackagePath>
     </AppxPackagedFile>

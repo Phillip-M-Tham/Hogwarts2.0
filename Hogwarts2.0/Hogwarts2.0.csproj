@@ -231,6 +231,7 @@
     <Content Include="Assets\Counselorback.png" />
     <Content Include="Assets\enrollback.png" />
     <Content Include="Assets\enrollback2.png" />
+    <Content Include="Assets\EnrollFilterBack.png" />
     <Content Include="Assets\form1background.png" />
     <Content Include="Assets\Gback.png" />
     <Content Include="Assets\Glogo.png" />

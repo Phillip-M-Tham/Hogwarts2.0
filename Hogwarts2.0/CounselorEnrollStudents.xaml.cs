@@ -162,15 +162,15 @@ namespace Hogwarts2._0
             resetTimeTurner();
             resetenrollStudentschedule();
             TableTitle.Text = "";
-            //StudentSemesterCalendar.Visibility = Visibility.Collapsed;
         }
         private void EnrollGryffindor_Click(object sender, RoutedEventArgs e)
         {
             GryffindorEnroll.Visibility = Visibility.Visible;
             GryffindorOptions.Visibility = Visibility.Collapsed;
-            PopulateTableAll(1);
+            YearlevelInput.SelectedValue = "All years";
+            FilterbyReg.IsChecked = true;
         }
-        private async void PopulateTableAll(int house)
+        private async void PopulateTableAll(int house, string mode, int yearfilter)
         {
             //Grab all students from gryffindor
             string housename = "";
@@ -186,182 +186,195 @@ namespace Hogwarts2._0
             {
                 housename = "Ravenclaw";
             }
-            else if (house == 4)
+            else
             {
                 housename = "Hufflepuff";
+            }
+            //Dictionary<int, string> alph = new Dictionary<int, string>();
+            //Dictionary<int, int> alphyears = new Dictionary<int, int>();
+            List<int> sortedIDs = new List<int>();
+            List<string> studentnames = new List<string>();
+            List<int> yearlevel = new List<int>();
+            List<int> myids = new List<int>();
+            if (mode != "year")
+            {
+                try
+                {
+                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                    {
+                        sqlConn.Open();
+                        if (sqlConn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {//get all student ids in selected house
+                                cmd.CommandText = $"SELECT HUID FROM Houses WHERE HouseName ='{housename}';";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        myids.Add((int)reader.GetValue(0));
+                                    }
+                                }
+                            }
+                            if (myids.Count > 0)
+                            {
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all names from the acquired ids
+                                    foreach (var id in myids)
+                                    {
+                                        cmd.CommandText = $"SELECT FirstName, LastName FROM Users WHERE HUID = {id};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                studentnames.Add(reader.GetValue(0).ToString() + " " + reader.GetValue(1).ToString());
+                                            }
+                                        }
+                                    }
+                                }
+                                if (mode == "default")
+                                {
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {//get all year levels from acquired ids
+                                        foreach (var id in myids)
+                                        {
+                                            cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id};";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    yearlevel.Add((int)reader.GetValue(0));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    studentnames.Sort();
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {//get all names from the acquired ids
+                                        foreach (var name in studentnames)
+                                        {//sort the names alphabetically and get all users HUID with matching names
+                                            string[] firstlast = name.Split(" ");
+
+                                            cmd.CommandText = $"SELECT HUID FROM Users WHERE FirstName = '{firstlast[0]}' AND LastName = '{firstlast[1]}';";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    sortedIDs.Add((int)reader.GetValue(0));
+                                                }
+                                            }
+                                        }
+                                        //filter ids against students table incase we got a HUID thats not a student
+                                        foreach (var unfilteredID in sortedIDs.ToList())
+                                        {
+                                            if (myids.Contains(unfilteredID) == false)
+                                            {
+                                                sortedIDs.Remove(unfilteredID);
+                                            }
+                                        }
+                                    }
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {//get all year levels from acquired ids
+                                        foreach (var id in sortedIDs)
+                                        {
+                                            cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id};";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    yearlevel.Add((int)reader.GetValue(0));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            sqlConn.Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var errorMessage = new MessageDialog(ex.Message);
+                    await errorMessage.ShowAsync();
+                }
+                if (studentnames.Count == 0)
+                {
+                    var errorMessage = new MessageDialog("Failed to get the names");
+                    await errorMessage.ShowAsync();
+                }
+                if (yearlevel.Count == 0)
+                {
+                    var errorMessage2 = new MessageDialog("Failed to get the years");
+                    await errorMessage2.ShowAsync();
+                }
+                if (yearlevel.Count > 0 && studentnames.Count > 0)
+                {
+                    int rowposition = 0;
+                    foreach (var student in studentnames)
+                    {
+                        RowDefinition row = new RowDefinition();
+                        row.Height = new GridLength(75.00);
+                        StudentTable.RowDefinitions.Add(row);
+
+                        Button btn = new Button();
+                        btn.FontSize = 36;
+                        btn.Content = student.ToString();
+                        btn.Foreground = new SolidColorBrush(Colors.Black);
+                        btn.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                        btn.HorizontalAlignment = HorizontalAlignment.Center;
+                        btn.VerticalAlignment = VerticalAlignment.Center;
+                        btn.SetValue(NameProperty, myids[rowposition].ToString());
+                        btn.Click += EnableStudentSchedule;
+
+                        Border myborder = new Border();
+                        myborder.BorderThickness = new Thickness(2);
+                        myborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                        myborder.SetValue(Grid.RowProperty, rowposition);
+                        myborder.SetValue(Grid.ColumnProperty, 0);
+                        myborder.Child = btn;
+
+                        StudentTable.Children.Add(myborder);
+                        rowposition++;
+                    }
+                    int rowposition2 = 0;
+                    foreach (var year in yearlevel)
+                    {
+                        TextBlock txtblock = new TextBlock();
+                        txtblock.FontSize = 36;
+                        txtblock.Text = year.ToString();
+                        txtblock.Foreground = new SolidColorBrush(Colors.Black);
+                        txtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                        txtblock.HorizontalAlignment = HorizontalAlignment.Center;
+                        txtblock.VerticalAlignment = VerticalAlignment.Center;
+
+                        Border myborder = new Border();
+                        myborder.BorderThickness = new Thickness(2);
+                        myborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                        myborder.SetValue(Grid.RowProperty, rowposition2);
+                        myborder.SetValue(Grid.ColumnProperty, 1);
+                        myborder.Child = txtblock;
+
+                        StudentTable.Children.Add(myborder);
+                        rowposition2++;
+                    }
+                }
             }
             else
             {
 
             }
-            List<string> studentnames = new List<string>();
-            List<int> yearlevel = new List<int>();
-            List<int> myids = new List<int>();
-            try
-            {
-                using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
-                {
-                    sqlConn.Open();
-                    if (sqlConn.State == System.Data.ConnectionState.Open)
-                    {
-                        using (SqlCommand cmd = sqlConn.CreateCommand())
-                        {//get all student ids in Gryffindor
-                            cmd.CommandText = $"SELECT HUID FROM Houses WHERE HouseName ='{housename}';";
-                            using (SqlDataReader reader = cmd.ExecuteReader())
-                            {
-                                while (reader.Read())
-                                {
-                                    myids.Add((int)reader.GetValue(0));
-                                }
-                            }
-                        }
-                        if (myids.Count > 0)
-                        {
-                            using (SqlCommand cmd = sqlConn.CreateCommand())
-                            {//get all names from the acquired ids
-                                foreach (var id in myids)
-                                {
-                                    cmd.CommandText = $"SELECT FirstName, LastName FROM Users WHERE HUID = {id};";
-                                    using (SqlDataReader reader = cmd.ExecuteReader())
-                                    {
-                                        while (reader.Read())
-                                        {
-                                            studentnames.Add(reader.GetValue(0).ToString() + " " + reader.GetValue(1).ToString());
-                                        }
-                                    }
-                                }
-
-                            }
-                            using (SqlCommand cmd = sqlConn.CreateCommand())
-                            {//get all year levels from acquired ids
-                                foreach (var id in myids)
-                                {
-                                    cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id};";
-                                    using (SqlDataReader reader = cmd.ExecuteReader())
-                                    {
-                                        while (reader.Read())
-                                        {
-                                            yearlevel.Add((int)reader.GetValue(0));
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        sqlConn.Close();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                var errorMessage = new MessageDialog(ex.Message);
-                await errorMessage.ShowAsync();
-            }
-
-            if (studentnames.Count == 0)
-            {
-                var errorMessage = new MessageDialog("Failed to get the names");
-                await errorMessage.ShowAsync();
-            }
-            if (yearlevel.Count == 0)
-            {
-                var errorMessage2 = new MessageDialog("Failed to get the years");
-                await errorMessage2.ShowAsync();
-            }
-
-            if (yearlevel.Count > 0 && studentnames.Count > 0)
-            {
-                int rowposition = 0;
-
-                foreach (var student in studentnames)
-                {
-                    RowDefinition row = new RowDefinition();
-                    row.Height = new GridLength(75.00);
-                    StudentTable.RowDefinitions.Add(row);
-
-                    Button btn = new Button();
-                    btn.FontSize = 36;
-                    btn.Content = student.ToString();
-                    btn.Foreground = new SolidColorBrush(Colors.Black);
-                    btn.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                    btn.HorizontalAlignment = HorizontalAlignment.Center;
-                    btn.VerticalAlignment = VerticalAlignment.Center;
-                    btn.SetValue(NameProperty, myids[rowposition].ToString());
-                    btn.Click += EnableStudentSchedule;
-
-                    Border myborder = new Border();
-                    myborder.BorderThickness = new Thickness(2);
-                    myborder.BorderBrush = new SolidColorBrush(Colors.Black);
-                    myborder.SetValue(Grid.RowProperty, rowposition);
-                    myborder.SetValue(Grid.ColumnProperty, 0);
-                    myborder.Child = btn;
-
-                    StudentTable.Children.Add(myborder);
-                    rowposition++;
-                }
-                int rowposition2 = 0;
-                foreach (var year in yearlevel)
-                {
-                    TextBlock txtblock = new TextBlock();
-                    txtblock.FontSize = 36;
-                    txtblock.Text = year.ToString();
-                    txtblock.Foreground = new SolidColorBrush(Colors.Black);
-                    txtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                    txtblock.HorizontalAlignment = HorizontalAlignment.Center;
-                    txtblock.VerticalAlignment = VerticalAlignment.Center;
-
-                    Border myborder = new Border();
-                    myborder.BorderThickness = new Thickness(2);
-                    myborder.BorderBrush = new SolidColorBrush(Colors.Black);
-                    myborder.SetValue(Grid.RowProperty, rowposition2);
-                    myborder.SetValue(Grid.ColumnProperty, 1);
-                    myborder.Child = txtblock;
-
-                    StudentTable.Children.Add(myborder);
-                    rowposition2++;
-                }
-                int rowposition3 = 0;
-                foreach (var id in myids)
-                {
-                    TextBlock txtblock = new TextBlock();
-                    txtblock.FontSize = 36;
-                    txtblock.Text = id.ToString();
-                    txtblock.Foreground = new SolidColorBrush(Colors.Black);
-                    txtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                    txtblock.HorizontalAlignment = HorizontalAlignment.Center;
-                    txtblock.VerticalAlignment = VerticalAlignment.Center;
-
-                    Border myborder = new Border();
-                    myborder.BorderThickness = new Thickness(2);
-                    myborder.BorderBrush = new SolidColorBrush(Colors.Black);
-                    myborder.SetValue(Grid.RowProperty, rowposition3);
-                    myborder.SetValue(Grid.ColumnProperty, 2);
-                    myborder.Child = txtblock;
-
-                    StudentTable.Children.Add(myborder);
-                    rowposition3++;
-                }
-            }
         }
         private void EnableStudentSchedule(object sender, RoutedEventArgs e)
         {
-            //resetcalendar
             GryffindorEnroll.Visibility = Visibility.Collapsed;
             StudentEnrollSchedule.Visibility = Visibility.Visible;
             Button mybutton = (sender as Button);
             Int32.TryParse(mybutton.Name, out SelectedStudentHUID);
             StudentScheduleTitle.Text = mybutton.Content.ToString() + "'s Schedule";
-            //find out if the student is using time turner here
-            //Setup students schedule from the database
-            //IS THIS EVEN NEEDED ???
-            if (TimeTurnerEnabler.IsChecked == true)
-            {
-
-            }
-            else
-            {
-
-            }
-
         }
         private Queue<string> GetAllTimes()
         {
@@ -401,6 +414,8 @@ namespace Hogwarts2._0
             GryffindorEnroll.Visibility = Visibility.Collapsed;
             GryffindorOptions.Visibility = Visibility.Visible;
             PurgeStudentTable();
+            FilterbyReg.IsChecked = default;
+            FilterbyAlph.IsChecked = false;
         }
         private void PurgeStudentTable()
         {
@@ -444,7 +459,7 @@ namespace Hogwarts2._0
         }
         private async void SetupCourses(object sender, SelectionChangedEventArgs e)
         {//populates courses from the selected semester and shows schedule for that semester
-            
+
             List<int> CurrentlyEnrolledCourseIDs = new List<int>();//for updateing prior enrolled courses
             List<bool> TimeTableflag = new List<bool>();//for updating prior enrolled courses
             List<string> TotalEnrolledCourseTimes = new List<string>();
@@ -656,16 +671,20 @@ namespace Hogwarts2._0
                         if (TTrowcolum[0] == "Monday")
                         {
                             MCount++;
-                        }else if (TTrowcolum[0] == "Tuesday")
+                        }
+                        else if (TTrowcolum[0] == "Tuesday")
                         {
                             TCount++;
-                        }else if (TTrowcolum[0] == "Wednesday")
+                        }
+                        else if (TTrowcolum[0] == "Wednesday")
                         {
                             WCount++;
-                        }else if(TTrowcolum[0] == "Thursday")
+                        }
+                        else if (TTrowcolum[0] == "Thursday")
                         {
                             ThCount++;
-                        }else if (TTrowcolum[0] == "Friday")
+                        }
+                        else if (TTrowcolum[0] == "Friday")
                         {
                             FCount++;
                         }
@@ -678,15 +697,15 @@ namespace Hogwarts2._0
                 daycounter.Add(ThCount);
                 daycounter.Add(FCount);
                 TTTotoalRowCount += daycounter.Max();
-                for(int newrows = 0; newrows < daycounter.Max(); newrows++)
+                for (int newrows = 0; newrows < daycounter.Max(); newrows++)
                 {//adds new rows to match max total rows
                     RowDefinition row = new RowDefinition();
                     row.Height = new GridLength(75.00);
                     StudentSemesterCalendarTT.RowDefinitions.Add(row);
                 }
-                foreach(var item in coordinates)
+                foreach (var item in coordinates)
                 {//I WISH I COULD FIND A BETTER WAY TO DO THIS
-                    if(item != "")
+                    if (item != "")
                     {
                         string[] TTrowcolum = item.Split(" ");
                         Border hopethisworks = new Border();
@@ -702,10 +721,10 @@ namespace Hogwarts2._0
                         txtblock.VerticalAlignment = VerticalAlignment.Center;
                         txtblock.TextWrapping = TextWrapping.Wrap;
                         if (TTrowcolum[0] == "Monday")
-                        { 
+                        {
                             txtblock.Text = coursetype + "\n" + coursetitle + "\n" + TTrowcolum[1];
                             hopethisworks.SetValue(Grid.RowProperty, TTMondayCount);
-                            hopethisworks.SetValue(Grid.ColumnProperty,0);
+                            hopethisworks.SetValue(Grid.ColumnProperty, 0);
                             TTMondayCount++;
                         }
                         else if (TTrowcolum[0] == "Tuesday")
@@ -937,7 +956,7 @@ namespace Hogwarts2._0
             TTThursdayCount = 2;
             TTFridayCount = 2;
             TTTotoalRowCount = 0;
-            foreach(Border spot in StudentSemesterCalendarTT.Children)
+            foreach (Border spot in StudentSemesterCalendarTT.Children)
             {
                 foreach (Border spot2 in StudentSemesterCalendarTT.Children)
                 {
@@ -950,7 +969,7 @@ namespace Hogwarts2._0
             }
             //removes row definitions
             int num = StudentSemesterCalendarTT.RowDefinitions.Count();
-            while(num != 2)
+            while (num != 2)
             {
                 --num;
                 StudentSemesterCalendarTT.RowDefinitions.RemoveAt(num);
@@ -1910,6 +1929,62 @@ namespace Hogwarts2._0
             }
             var NotValidMessage = new MessageDialog("All courses for this semester has been disenrolled");
             await NotValidMessage.ShowAsync();
+        }
+
+        private void FilterGryffindorEnroll_Click(object sender, RoutedEventArgs e)
+        {
+            GFilterEnroll.Visibility = Visibility.Visible;
+        }
+
+        private void CancelFilter_Click(object sender, RoutedEventArgs e)
+        {
+            GFilterEnroll.Visibility = Visibility.Collapsed;
+        }
+
+        private async void FilterAttemptUncheck(object sender, RoutedEventArgs e)
+        {
+            if (FilterbyAlph.IsChecked == false && FilterbyReg.IsChecked == false)
+            {
+                (sender as CheckBox).IsChecked = true;
+                var NotValidMessage = new MessageDialog("Please select a filter that is not currently in use.");
+                await NotValidMessage.ShowAsync();
+            }
+
+        }
+
+        private void SetFilter(object sender, RoutedEventArgs e)
+        {//Set all filters to false
+            int year;
+            Int32.TryParse(YearlevelInput.SelectedValue.ToString(), out year);
+            
+                if ((sender as CheckBox).Name == "FilterbyAlph")
+                {
+                    FilterbyAlph.IsChecked = true;
+                    FilterbyReg.IsChecked = false;
+                    PurgeStudentTable();
+                    PopulateTableAll(1, "alph",year);
+                }
+                else if ((sender as CheckBox).Name == "FilterbyReg")
+                {
+                    FilterbyAlph.IsChecked = false;
+                    PurgeStudentTable();
+                    PopulateTableAll(1, "default",year);
+                }
+            
+        }
+
+        private void YearlevelInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int year;
+            Int32.TryParse(YearlevelInput.SelectedValue.ToString(), out year);
+            PurgeStudentTable();
+            if (FilterbyReg.IsChecked == true)
+            {
+                PopulateTableAll(1, "default",year);
+            }else
+            {
+                PopulateTableAll(1, "alph",year);
+            }
         }
     }
 }

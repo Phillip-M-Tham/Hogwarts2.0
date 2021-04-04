@@ -144,11 +144,13 @@
       <RootProperty Name="FontFamily" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="PlaceholderText" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Items" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="Visibility" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
+    <RootType FullName="System.Int32" />
+    <RootType FullName="System.String" />
     <RootType FullName="Hogwarts2._0.CounselorEnrollStudents" />
     <RootType FullName="Hogwarts2._0.CounselorHome" />
     <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
@@ -197,12 +199,10 @@
     <RootType FullName="Hogwarts2._0.MainPage" />
     <RootType FullName="Hogwarts2._0.ProfAccount" />
     <RootType FullName="Hogwarts2._0.ProfAccountSettings" />
-    <RootType FullName="System.Int32" />
     <RootType FullName="Hogwarts2._0.ProfCourses" />
     <RootType FullName="Hogwarts2._0.ProfessorMain" />
     <RootType FullName="Hogwarts2._0.ProfHome" />
     <RootType FullName="Hogwarts2._0.RavenclawStu" />
-    <RootType FullName="System.String" />
     <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
       <RootProperty Name="Name" />
       <RootProperty Name="GroupName" />
