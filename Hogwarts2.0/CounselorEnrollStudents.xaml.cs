@@ -642,6 +642,14 @@ namespace Hogwarts2._0
             {
                 FormStudentDisenrollValidSemesters.SelectedItem = null;
             }
+            if(FormA2AssignedCourses.SelectedItem != null)
+            {
+                FormA2AssignedCourses.SelectedItem = null;
+            }
+            if(FormStudentDisenrollAssignedCourses.SelectedItem != null)
+            {
+                FormStudentDisenrollAssignedCourses.SelectedItem = null;
+            }
         }
         private async void SetupCourses(object sender, SelectionChangedEventArgs e)
         {//populates courses from the selected semester and shows schedule for that semester
@@ -2392,7 +2400,6 @@ namespace Hogwarts2._0
             int _semesterID;
             List<int> mycourseIDs = new List<int>();
             List<string> coursetitles = new List<string>();
-            resetcourses();
             if (FormStudentDisenrollAssignedCourses.SelectedItem != null)
             {
                 FormStudentDisenrollAssignedCourses.SelectedItem = null;
@@ -2424,8 +2431,7 @@ namespace Hogwarts2._0
                                 }
                             }
                             if (mycourseIDs.Count > 0)
-                            {
-                                //acquire the courses name with course ID
+                            {//acquire the courses name with course ID
                                 foreach (var courseID in mycourseIDs)
                                 {
                                     using (SqlCommand cmd = sqlConn.CreateCommand())
@@ -2443,7 +2449,7 @@ namespace Hogwarts2._0
                             }
                             else
                             {
-                                FormStudentDisenrollAssignedCourses.Items.Add("Please Enroll Student in a course");
+                                FormStudentDisenrollAssignedCourses.Items.Add("Please Assign Some Courses");
                             }
                             sqlConn.Close();
                         }
@@ -2456,6 +2462,10 @@ namespace Hogwarts2._0
                         }
                     }
                 }
+            }
+            else
+            {
+                FormStudentDisenrollAssignedCourses.Items.Add("Please pick a Semester");
             }
         }
 
@@ -2484,6 +2494,67 @@ namespace Hogwarts2._0
                 }
             }
             return _semesterID;
+        }
+
+        private async void StudentDisenrollStudent_Click(object sender, RoutedEventArgs e)
+        {
+            int semesterid = 0;
+            int notvalidDisenroll=0;
+            string notvalidDisenrollMessage = "";
+            int validcourseid = 0;
+            if(FormStudentDisenrollValidSemesters.SelectedItem == null)
+            {
+                notvalidDisenroll++;
+                notvalidDisenrollMessage += "Please Select A semester\n";
+            }else if(FormStudentDisenrollValidSemesters.SelectedValue.ToString() == "There Are No Semesters")
+            {
+                notvalidDisenroll++;
+                notvalidDisenrollMessage += "Please Add a semester\n";
+            }
+            if(FormStudentDisenrollAssignedCourses.SelectedItem == null)
+            {
+                notvalidDisenroll++;
+                notvalidDisenrollMessage += "Please Select a course\n";
+            }else if(FormStudentDisenrollAssignedCourses.SelectedValue.ToString() == "Please Assign Some Courses")
+            {
+                notvalidDisenroll++;
+                notvalidDisenrollMessage += "Please Assign Some Courses\n";
+            }
+            if(notvalidDisenroll == 0)
+            {
+                semesterid = GetDisenrollSemesterID();
+                using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                {//acquire the courseid of the selected course to disenroll
+                    sqlConn.Open();
+                    if (sqlConn.State == System.Data.ConnectionState.Open)
+                    {//acquire the semesterid from the name of the semester
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {
+                            cmd.CommandText = $"SELECT CourseID FROM Courses WHERE Title = '{FormStudentDisenrollAssignedCourses.SelectedValue}';";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    validcourseid = (int)reader.GetValue(0);
+                                }
+                            }
+                        }
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand command = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE SemesterID = {semesterid} AND StudentID = {SelectedStudentHUID} AND CourseID = {validcourseid};", sqlConn);
+                        adapter.DeleteCommand = command;
+                        adapter.DeleteCommand.ExecuteNonQuery();
+                        sqlConn.Close();
+                    }
+                }
+                var DisenrollMessage = new MessageDialog("Successfully disenrolled student from course.");
+                await DisenrollMessage.ShowAsync();
+                Frame.Navigate(typeof(CounselorEnrollStudents), _userHuid);
+            }
+            else
+            {
+                var NotValidDisenroll = new MessageDialog(notvalidDisenrollMessage);
+                await NotValidDisenroll.ShowAsync();
+            }
         }
     }
 }

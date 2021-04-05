@@ -45,7 +45,7 @@
                 <Button x:Name="DisenrollSelectedHouse" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll" Click="DisenrollSelectedHouse_Click" />
             </Grid>
         </Grid>
-       
+
         <Grid x:Name="HouseEnroll" Visibility="Collapsed" >
             <Image x:Name="FormAbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
             <Grid Margin="472,19,473,689">
@@ -168,27 +168,27 @@
                 </ComboBox>
             </Grid>
         </Grid>
-        <Grid x:Name="StudentDisenrollCourse" Visibility="Visible">
-            <Image x:Name="FormStudentDisenrollbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="857"/>
-            <Grid Margin="198,32,198,711">
+        <Grid x:Name="StudentDisenrollCourse" Visibility="Collapsed">
+            <Image x:Name="FormStudentDisenrollbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="614"/>
+            <Grid Margin="198,160,198,583">
                 <TextBlock x:Name="StudentDisenrollTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Hello World" FontSize="120" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
-            <Grid Margin="290,203,960,696">
+            <Grid Margin="386,387,864,512">
                 <TextBlock x:Name="FormStudentDisenrollSemesterLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester:" Foreground="Black"/>
             </Grid>
-            <Grid Margin="388,118,588,613">
+            <Grid Margin="488,306,488,425">
                 <ComboBox Name="FormStudentDisenrollValidSemesters" SelectionChanged="SetUpDisenrollCourses" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Semester"/>
             </Grid>
-            <Grid Margin="225,171,885,513">
+            <Grid Margin="305,387,805,297">
                 <TextBlock x:Name="FormStudentDisenrollCourseLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course:" Foreground="Black" />
             </Grid>
-            <Grid Margin="408,254,592,593">
+            <Grid Margin="500,470,500,377">
                 <ComboBox Name="FormStudentDisenrollAssignedCourses" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" MaxWidth="300" Width="300" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Course" />
             </Grid>
-            <Grid Margin="415,282,636,508">
-                <Button x:Name="StudentDisenrollStudent" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll" />
+            <Grid Margin="519,558,532,232">
+                <Button x:Name="StudentDisenrollStudent" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="Disenroll" Click="StudentDisenrollStudent_Click" />
             </Grid>
-            <Grid Margin="1449,-31,-38,774">
+            <Grid Margin="1221,93,190,650">
                 <Button x:Name="StudentDisenrollScheduleCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Background="Transparent" Foreground="Black" Content="X" Click="StudentDisenrollScheduleCancel_Click" />
             </Grid>
         </Grid>
