@@ -55,7 +55,6 @@ namespace Hogwarts2._0
             List<string> mysemesters = new List<string>();
             //set ups form 2A courses
             List<string> mycourses = new List<string>();
-            //set ups form 2B semesters
             try
             {
                 using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
@@ -117,11 +116,12 @@ namespace Hogwarts2._0
                     ValidDepartmentsInput.Items.Add(deps);
                 }
             }
-            //populates the semester drop down combo box form 2A and 2B
+            //populates the semester drop down combo box form 2A and 2B and 1C
             if (mysemesters.Count() == 0)
             {
                 Form2ValidSemesters.Items.Add("There Are No Semesters");
                 AssignedSemesters.Items.Add("There Are No Semesters");
+                Form1CValidSemester.Items.Add("There Are No Semesters");
             }
             else
             {
@@ -129,6 +129,7 @@ namespace Hogwarts2._0
                 {
                     Form2ValidSemesters.Items.Add(semester);
                     AssignedSemesters.Items.Add(semester);
+                    Form1CValidSemester.Items.Add(semester);
                 }
             }
             //populates the course drop down combo box form 2A
@@ -156,7 +157,7 @@ namespace Hogwarts2._0
         }
         private void GradeCourse_Click(object sender, RoutedEventArgs e)
         {
-
+            Form1C.Visibility = Visibility.Visible;
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
@@ -264,9 +265,8 @@ namespace Hogwarts2._0
             }
             else
             {
-                //Insert course into database
                 try
-                {
+                {//Insert course into database
                     using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
                     {
                         sqlConn.Open();
@@ -470,8 +470,7 @@ namespace Hogwarts2._0
                                 adapter.InsertCommand.ExecuteNonQuery();
                                 //insert days for this semester course
                                 if (ValidMondayTimes.Count() > 0)
-                                {
-                                    //add monday to daytypes
+                                {//add monday to daytypes
                                     adapter = new SqlDataAdapter();
                                     command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Monday\');", sqlConn);
                                     adapter.InsertCommand = command;
@@ -486,8 +485,7 @@ namespace Hogwarts2._0
                                     }
                                 }
                                 if (ValidTuesdayTimes.Count() > 0)
-                                {
-                                    //add tuesday to daytypes
+                                {//add tuesday to daytypes
                                     adapter = new SqlDataAdapter();
                                     command = new SqlCommand($"INSERT INTO DayTypes VALUES ({mysemesterID},{mycourseID},\'Tuesday\');", sqlConn);
                                     adapter.InsertCommand = command;
@@ -642,8 +640,7 @@ namespace Hogwarts2._0
             AssignCourseForm.Visibility = Visibility.Collapsed;
         }
         private void Weesnaw(object sender, SelectionChangedEventArgs e)
-        {
-            //Sets the visibility of the times if you check the respective day
+        {//Sets the visibility of the times if you check the respective day
             if (form2A.Visibility == Visibility.Visible)
             {
                 if (MondayTimes.Visibility == Visibility.Visible)
@@ -920,16 +917,14 @@ namespace Hogwarts2._0
             }
             else
             {
-                //update the course: days, times, location, course info and req materials
                 try
-                {
+                {//update the course: days, times, location, course info and req materials
                     using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
                     {
                         sqlConn.Open();
                         if (sqlConn.State == System.Data.ConnectionState.Open)
                         {
                             SqlDataAdapter adapter = new SqlDataAdapter();
-                            //SqlCommand command = new SqlCommand("",sqlConn);
                             MondayExist = CheckMonday(SemesterID, CourseID);
                             TuesdayExist = CheckTuesday(SemesterID, CourseID);
                             WednesdayExist = CheckWednesday(SemesterID, CourseID);
@@ -956,8 +951,7 @@ namespace Hogwarts2._0
                                 }
                             }
                             else
-                            {
-                                //remove monday from the daytypes table
+                            {//remove monday from the daytypes table
                                 if (MondayExist == true)
                                 {
                                     adapter = new SqlDataAdapter();
@@ -972,8 +966,7 @@ namespace Hogwarts2._0
                             if (Form2BValidTuesdayTimes.Count > 0)
                             {
                                 if (TuesdayExist == false)
-                                {
-                                    //add it if it doesnt already exist
+                                {//add it if it doesnt already exist
                                     adapter = new SqlDataAdapter();
                                     SqlCommand command = new SqlCommand($"INSERT INTO DayTypes VALUES ({SemesterID},{CourseID},'Tuesday');", sqlConn);
                                     adapter.InsertCommand = command;
@@ -1494,8 +1487,7 @@ namespace Hogwarts2._0
                 AssignedCourses.Visibility = Visibility.Visible;
                 //Reveal courses based on item and make courses visible
                 if (AssignedSemesters.SelectedValue.ToString() != "There Are No Semesters")
-                {
-                    //populate the courses combo box
+                {//populate the courses combo box
                     using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
                     {
                         sqlConn.Open();
@@ -1503,8 +1495,7 @@ namespace Hogwarts2._0
                         {//acquire the semesterid from the name of the semester
                             _semesterID = GetSemesterID();
                             if (_semesterID != 0)
-                            {
-                                //acquire courseIDS from semcourses that have the semesterID
+                            {//acquire courseIDS from semcourses that have the semesterID
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {
                                     cmd.CommandText = $"SELECT CourseID FROM SemesterCourses WHERE SemesterID ={_semesterID};";
@@ -1519,8 +1510,7 @@ namespace Hogwarts2._0
                                 }
                             }
                             if (mycourseIDs.Count > 0)
-                            {
-                                //acquire the courses name with course ID
+                            {//acquire the courses name with course ID
                                 foreach (var courseID in mycourseIDs)
                                 {
                                     using (SqlCommand cmd = sqlConn.CreateCommand())
@@ -1578,21 +1568,11 @@ namespace Hogwarts2._0
         }
         private void ResetCourses()
         {
-            //int index = 0;needs more testing but should not need any the commented things
             if (AssignedCourses.SelectedItem != null)
             {
                 AssignedCourses.SelectedItem = null;
             }
             AssignedCourses.Items.Clear();
-            /*foreach (var item in AssignedCourses.Items)
-            {
-                AssignedCourses.Items.Remove(item);
-            }
-            while (AssignedCourses.Items.Count > 0)
-            {
-                AssignedCourses.Items.RemoveAt(index);
-                index++;
-            }*/
         }
         private void SetupCourseInfo(object sender, SelectionChangedEventArgs e)
         {
@@ -2475,6 +2455,26 @@ namespace Hogwarts2._0
         {
             Form2BFridayTimes.Visibility = Visibility.Collapsed;
             ResetFridayTimes();
+        }
+
+        private void Form1CCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form1C.Visibility = Visibility.Collapsed;
+            Form1CTableName.Visibility = Visibility.Collapsed;
+            //purgethelist
+        }
+
+        private void SetupCoursesTable(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = sender as ComboBox;
+            if (cb.SelectedItem != null)
+            {
+                if (cb.SelectedValue.ToString() != "There Are No Semesters")
+                {
+                    Form1CTableName.Visibility = Visibility.Visible;
+
+                }
+            }
         }
     }
 }

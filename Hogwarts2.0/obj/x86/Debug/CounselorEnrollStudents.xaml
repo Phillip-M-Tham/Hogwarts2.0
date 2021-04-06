@@ -168,7 +168,7 @@
                 </ComboBox>
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='8' x:Name="StudentDisenrollCourse" Visibility="Visible">
+        <Grid x:ConnectionId='8' x:Name="StudentDisenrollCourse" Visibility="Collapsed">
             <Image x:ConnectionId='44' x:Name="FormStudentDisenrollbackground" Source="Assets/RegisterBackground.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="614"/>
             <Grid Margin="198,160,198,583">
                 <TextBlock x:ConnectionId='51' x:Name="StudentDisenrollTitle" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Hello World" FontSize="120" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
