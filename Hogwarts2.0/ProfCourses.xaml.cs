@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -36,7 +38,7 @@ namespace Hogwarts2._0
         private int mycourseID;
         private int mysemesterID;
         const string ConnectionString = "SERVER = DESKTOP-R3J82OF\\SQLEXPRESS2019; DATABASE= Hogwarts2.0; USER ID=Cohort7; PASSWORD=tuesday313";
-
+        private int SelectedCourseID;
         public ProfCourses()
         {
             this.InitializeComponent();
@@ -2460,21 +2462,168 @@ namespace Hogwarts2._0
         private void Form1CCancel_Click(object sender, RoutedEventArgs e)
         {
             Form1C.Visibility = Visibility.Collapsed;
-            Form1CTableName.Visibility = Visibility.Collapsed;
-            //purgethelist
+            Form1CValidSemester.SelectedItem = default;
+            purgecoursetable();
         }
 
-        private void SetupCoursesTable(object sender, SelectionChangedEventArgs e)
+        private void purgecoursetable()
         {
+            CourseTable.RowDefinitions.Clear();
+            CourseTable.Children.Clear();
+            Form1CTableName.Visibility = Visibility.Collapsed;
+            CourseTable.Visibility = Visibility.Collapsed;
+        }
+
+        private async void SetupCoursesTable(object sender, SelectionChangedEventArgs e)
+        {
+            purgecoursetable();
+            List<int> unfilteredcourseids = new List<int>();
+            List<int> profcourseids = new List<int>();
+            string semesterid = "";
             ComboBox cb = sender as ComboBox;
+            List<string> nameofCourses = new List<string>();
             if (cb.SelectedItem != null)
             {
                 if (cb.SelectedValue.ToString() != "There Are No Semesters")
                 {
-                    Form1CTableName.Visibility = Visibility.Visible;
-
+                    //obtain all of the courseids from the selected semester
+                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                    {
+                        sqlConn.Open();
+                        if (sqlConn.State == System.Data.ConnectionState.Open)
+                        {//acquire the all the courses the professor has created
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT CourseID FROM Courses WHERE ProfHUID = {Int32.Parse(UserHuid)};";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        profcourseids.Add((int)reader.GetValue(0));
+                                    }
+                                }
+                            }
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {//acquire the semesterid from the name of the semester
+                                cmd.CommandText = $"SELECT SemesterID FROM Semesters WHERE Semester = '{Form1CValidSemester.SelectedValue}';";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        semesterid += reader.GetValue(0).ToString();
+                                    }
+                                }
+                            }
+                            Int32.TryParse(semesterid, out int SemesterID);
+                            if (SemesterID != 0)
+                            {//obtained a real semesterid;acquire the unfiltered courseids with the semester
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {
+                                    cmd.CommandText = $"SELECT CourseID FROM SemesterCourses WHERE SemesterID = {SemesterID};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            unfilteredcourseids.Add((int)reader.GetValue(0));
+                                        }
+                                    }
+                                }
+                                if (unfilteredcourseids.Count > 0)
+                                {//filter courses against all courses the prof has created
+                                    foreach (var unfilter in unfilteredcourseids.ToList())
+                                    {
+                                        if (profcourseids.Contains(unfilter) == false)
+                                        {
+                                            unfilteredcourseids.Remove(unfilter);
+                                        }
+                                    }
+                                    foreach (var validID in unfilteredcourseids)
+                                    {//for each valid id run this loop
+                                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                                        {
+                                            cmd.CommandText = $"SELECT Title FROM Courses WHERE CourseID = {validID};";
+                                            using (SqlDataReader reader = cmd.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    nameofCourses.Add(reader.GetValue(0).ToString());
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    var courseerror = new MessageDialog("No courses have been assigned to the selected semester");
+                                    await courseerror.ShowAsync();
+                                }
+                            }
+                            else
+                            {
+                                var semestererror = new MessageDialog("No Semesters have been created");
+                                await semestererror.ShowAsync();
+                            }
+                            sqlConn.Close();
+                        }
+                    }
+                    if (nameofCourses.Count > 0)
+                    {//populate table with the name of the courses
+                        Form1CTableName.Visibility = Visibility.Visible;
+                        CourseTable.Visibility = Visibility.Visible;
+                        int rowcounter = 0;
+                        foreach(var course in nameofCourses)
+                        {
+                            //first create a row definition
+                            RowDefinition myrow = new RowDefinition();
+                            myrow.Height = new GridLength(50);
+                            CourseTable.RowDefinitions.Add(myrow);
+                            //create a border
+                            Border myborder = new Border();
+                            myborder.BorderThickness = new Thickness(2);
+                            myborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                            myborder.SetValue(Grid.RowProperty, rowcounter);
+                            myborder.SetValue(Grid.ColumnProperty, 0);
+                            //create a button
+                            Button mybutton = new Button();
+                            mybutton.FontSize = 36;
+                            mybutton.Content = course.ToString();
+                            mybutton.Foreground = new SolidColorBrush(Colors.Black);
+                            mybutton.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                            mybutton.HorizontalAlignment = HorizontalAlignment.Center;
+                            mybutton.VerticalAlignment = VerticalAlignment.Center;
+                            mybutton.SetValue(NameProperty, unfilteredcourseids[rowcounter].ToString());
+                            mybutton.Click += SetSelectedCourse;
+                            //put the button in the border
+                            myborder.Child = mybutton;
+                            //add border to table
+                            CourseTable.Children.Add(myborder);
+                            rowcounter++;
+                        }
+                    }
+                    else
+                    {//the professor does not have any courses for the selected semester
+                        purgecoursetable();
+                        var profnosemestercourses = new MessageDialog("Please Create Some Courses for the selected semester.");
+                        await profnosemestercourses.ShowAsync();
+                    }
                 }
             }
+        }
+
+        private void SetSelectedCourse(object sender, RoutedEventArgs e)
+        {
+            
+            Form1C.Visibility = Visibility.Collapsed;
+            Form2C.Visibility = Visibility.Visible;
+            Button pressedbutton = sender as Button;
+            Int32.TryParse(pressedbutton.Name,out SelectedCourseID);
+            Form2CCourseTitle.Text = pressedbutton.Content.ToString();
+        }
+
+        private void Form2CCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form1C.Visibility = Visibility.Visible;
+            Form2C.Visibility = Visibility.Collapsed;
         }
     }
 }

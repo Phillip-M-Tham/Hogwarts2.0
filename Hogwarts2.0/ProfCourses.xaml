@@ -15,22 +15,22 @@
             <Button x:Name="AssignCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Assign A Course" Margin="0,407,0,0" VerticalAlignment="Top" Click="AssignCourse_Click"/>
             <Button x:Name="GradeCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Grade My Courses" Margin="0,536,0,0" VerticalAlignment="Top" Click="GradeCourse_Click"/>
         </Grid>
-        <Grid x:Name="Form1C" Visibility="Visible">
+        <Grid x:Name="Form1C" Visibility="Collapsed">
             <Image x:Name="Form1CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="288,137,288,680">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Grades And Assignments" Foreground="Black"/>
             </Grid>
-            <Grid Margin="154,191,938,498">
-                <TextBlock x:Name="Form1CSemesterLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Semester"/>
+            <Grid Margin="298,191,794,498">
+                <TextBlock x:Name="Form1CSemesterLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="45" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Semester"/>
             </Grid>
             <Grid Margin="484,202,528,512">
                 <ComboBox x:Name="Form1CValidSemester" SelectionChanged="SetupCoursesTable" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" VerticalAlignment="Center" PlaceholderText="Pick A Semester" FontSize="40" Width="275" />
             </Grid>
-            <Grid Margin="438,322,528,476">
-                <TextBlock x:Name="Form1CTableName" FontFamily="/Assets/HARRYP__.TTF#Harry P" VerticalAlignment="Center" Text="Courses" FontSize="50" Foreground="Black" HorizontalAlignment="Center" />
+            <Grid Margin="483,322,483,476">
+                <TextBlock x:Name="Form1CTableName" Visibility="Collapsed" FontFamily="/Assets/HARRYP__.TTF#Harry P" VerticalAlignment="Center" Text="Courses" FontSize="50" Foreground="Black" HorizontalAlignment="Center" />
             </Grid>
-            <ScrollViewer Margin="288,506,288,222">
-                <Grid x:Name="CourseTable" HorizontalAlignment="Center">
+            <ScrollViewer Margin="288,449,288,279">
+                <Grid x:Name="CourseTable" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
@@ -38,6 +38,21 @@
             </ScrollViewer>
             <Grid Margin="1198,10,-98,706">
                 <Button x:Name="Form1CCancel" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X" Click="Form1CCancel_Click"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="Form2C" Visibility="Visible">
+            <Image x:Name="Form2CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Grid Margin="288,109,288,649">
+                <TextBlock x:Name="Form2CCourseTitle" HorizontalAlignment="Center" VerticalAlignment="center" FontSize="120" Foreground="Black" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+            </Grid>
+            <Grid Margin="1344,25,53,714">
+                <Button x:Name="Form2CCancel" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X" Click="Form2CCancel_Click"/>
+            </Grid>
+            <Grid Margin="547,315,559,386">
+                <Button x:Name="Form2CAssignments" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Assignments"/>
+            </Grid>
+            <Grid Margin="541,456,565,245">
+                <Button x:Name="Form2CGrades" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Grades"/>
             </Grid>
         </Grid>
         <Grid Name="form2B" Visibility="Collapsed">
