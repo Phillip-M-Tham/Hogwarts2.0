@@ -38,7 +38,9 @@ namespace Hogwarts2._0
         private int mycourseID;
         private int mysemesterID;
         const string ConnectionString = "SERVER = DESKTOP-R3J82OF\\SQLEXPRESS2019; DATABASE= Hogwarts2.0; USER ID=Cohort7; PASSWORD=tuesday313";
-        private int SelectedCourseID;
+        private int EditSelectedSemesterID;
+        private int EditSelectedCourseID;
+        private int EditRowCounter;
         public ProfCourses()
         {
             this.InitializeComponent();
@@ -1721,6 +1723,7 @@ namespace Hogwarts2._0
                 {//acquire the semesterid from the name of the semester
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
+                        //if()
                         cmd.CommandText = $"SELECT SemesterID FROM Semesters WHERE Semester ='{AssignedSemesters.SelectedValue}';";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -2515,6 +2518,7 @@ namespace Hogwarts2._0
                                 }
                             }
                             Int32.TryParse(semesterid, out int SemesterID);
+                            EditSelectedSemesterID = SemesterID;
                             if (SemesterID != 0)
                             {//obtained a real semesterid;acquire the unfiltered courseids with the semester
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
@@ -2530,6 +2534,7 @@ namespace Hogwarts2._0
                                 }
                                 if (unfilteredcourseids.Count > 0)
                                 {//filter courses against all courses the prof has created
+
                                     foreach (var unfilter in unfilteredcourseids.ToList())
                                     {
                                         if (profcourseids.Contains(unfilter) == false)
@@ -2571,7 +2576,7 @@ namespace Hogwarts2._0
                         Form1CTableName.Visibility = Visibility.Visible;
                         CourseTable.Visibility = Visibility.Visible;
                         int rowcounter = 0;
-                        foreach(var course in nameofCourses)
+                        foreach (var course in nameofCourses)
                         {
                             //first create a row definition
                             RowDefinition myrow = new RowDefinition();
@@ -2612,11 +2617,11 @@ namespace Hogwarts2._0
 
         private void SetSelectedCourse(object sender, RoutedEventArgs e)
         {
-            
+
             Form1C.Visibility = Visibility.Collapsed;
             Form2C.Visibility = Visibility.Visible;
             Button pressedbutton = sender as Button;
-            Int32.TryParse(pressedbutton.Name,out SelectedCourseID);
+            Int32.TryParse(pressedbutton.Name, out EditSelectedCourseID);
             Form2CCourseTitle.Text = pressedbutton.Content.ToString();
         }
 
@@ -2624,6 +2629,162 @@ namespace Hogwarts2._0
         {
             Form1C.Visibility = Visibility.Visible;
             Form2C.Visibility = Visibility.Collapsed;
+        }
+
+        private void Form3CCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form3C.Visibility = Visibility.Collapsed;
+            purgeAssignmentsTable();
+        }
+
+        private void purgeAssignmentsTable()
+        {
+            AssignmentListTable.Children.Clear();
+            AssignmentListTable.RowDefinitions.Clear();
+        }
+
+        private void Form2CAssignments_Click(object sender, RoutedEventArgs e)
+        {
+            Form3C.Visibility = Visibility.Visible;
+            purgeAssignmentsTable();
+            SetupAssignmentsTable();
+        }
+
+        private void SetupAssignmentsTable()
+        {
+            List<string> Assignments = new List<string>();
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//acquire the all the courses the professor has created
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT AssignmentTitle FROM Assignments WHERE CourseID = {EditSelectedCourseID} AND SemesterID = {EditSelectedSemesterID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Assignments.Add(reader.GetValue(0).ToString());
+                            }
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            if(Assignments.Count > 0)
+            {//populate the table
+
+            }
+            else
+            {
+                RowDefinition myrow = new RowDefinition();
+                myrow.Height = new GridLength(50);
+                AssignmentListTable.RowDefinitions.Add(myrow);
+
+                Border myborder = new Border();
+                myborder.BorderThickness = new Thickness(2);
+                myborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                myborder.SetValue(Grid.RowProperty, 0);
+                myborder.SetValue(Grid.ColumnProperty, 0);
+
+                TextBlock mytxtblock = new TextBlock();
+                mytxtblock.FontSize = 36;
+                mytxtblock.Foreground = new SolidColorBrush(Colors.Black);
+                mytxtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                mytxtblock.HorizontalAlignment = HorizontalAlignment.Center;
+                mytxtblock.VerticalAlignment = VerticalAlignment.Center;
+                mytxtblock.Text = "Please Add some assignments";
+
+                myborder.Child = mytxtblock;
+                AssignmentListTable.Children.Add(myborder);
+
+                EditRowCounter = 0;
+            }
+        }
+
+        private void EditCancel_Click(object sender, RoutedEventArgs e)
+        {
+            EditAddAssignment.Visibility = Visibility.Collapsed;
+            EditRemoveAssignment.Visibility = Visibility.Collapsed;
+            EditSubmitAssignments.Visibility = Visibility.Collapsed;
+            EditCancel.Visibility = Visibility.Collapsed;
+            purgeAssignmentsTable();
+            SetupAssignmentsTable();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            EditAddAssignment.Visibility = Visibility.Visible;
+            EditRemoveAssignment.Visibility = Visibility.Visible;
+            EditSubmitAssignments.Visibility = Visibility.Visible;
+            EditCancel.Visibility = Visibility.Visible;
+            purgeAssignmentsTable();
+        }
+
+        private async void EditRemoveAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            if(EditRowCounter != 0)
+            {//get rid of the current row
+                --EditRowCounter;
+                AssignmentListTable.Children.RemoveAt(EditRowCounter);
+                AssignmentListTable.RowDefinitions.RemoveAt(EditRowCounter);
+
+                AssingmentListTableRemove.Children.RemoveAt(EditRowCounter);
+                AssingmentListTableRemove.RowDefinitions.RemoveAt(EditRowCounter);
+            }
+            else
+            {
+                var Removeassignmenterror = new MessageDialog("No assignments exist.");
+                await Removeassignmenterror.ShowAsync();
+            }
+        }
+
+        private void EditAddAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            RowDefinition newrow = new RowDefinition();
+            newrow.Height = new GridLength(50);
+            AssignmentListTable.RowDefinitions.Add(newrow);
+            RowDefinition newcheckrow = new RowDefinition();
+            newcheckrow.Height = new GridLength(50);
+            AssingmentListTableRemove.RowDefinitions.Add(newcheckrow);
+
+            TextBox txtbox = new TextBox();
+            txtbox.FontSize = 36;
+            txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
+            txtbox.PlaceholderText = "Enter Assignment title";
+            txtbox.SetValue(Grid.RowProperty, EditRowCounter);
+            txtbox.SetValue(Grid.ColumnProperty, 0);
+
+            CheckBox checkbx = new CheckBox();
+            checkbx.SetValue(Grid.RowProperty, EditRowCounter);
+            checkbx.SetValue(Grid.ColumnProperty, 0);
+            AssingmentListTableRemove.Children.Add(checkbx);
+
+            AssignmentListTable.Children.Add(txtbox);
+
+            EditRowCounter++;
+        }
+
+        private async void EditSubmitAssignments_Click(object sender, RoutedEventArgs e)
+        {
+            bool validinput = true;
+            foreach(TextBox assignment in AssignmentListTable.Children)
+            {
+                if(assignment.Text == "")
+                {
+                    validinput = false;
+                }
+            }
+            if(validinput == true)
+            {
+
+            }
+            else
+            {
+                var Removeassignmenterror = new MessageDialog("Please do not leave any assingment title empty.");
+                await Removeassignmenterror.ShowAsync();
+            }
         }
     }
 }

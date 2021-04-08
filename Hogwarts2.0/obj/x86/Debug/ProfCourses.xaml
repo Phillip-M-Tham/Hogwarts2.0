@@ -11,52 +11,94 @@
     <Grid>
         <Image x:ConnectionId='2' Name="Profbackground" Source="Assets/ProfCourseback.png" Stretch="Fill"/>
         <Grid>
-            <Button x:ConnectionId='331' x:Name="CreateCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Create A Course" Margin="0,290,0,0" VerticalAlignment="Top"                            />
-            <Button x:ConnectionId='332' x:Name="AssignCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Assign A Course" Margin="0,407,0,0" VerticalAlignment="Top"                           />
-            <Button x:ConnectionId='333' x:Name="GradeCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Grade My Courses" Margin="0,536,0,0" VerticalAlignment="Top"                          />
+            <Button x:ConnectionId='342' x:Name="CreateCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Create A Course" Margin="0,290,0,0" VerticalAlignment="Top"                            />
+            <Button x:ConnectionId='343' x:Name="AssignCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Assign A Course" Margin="0,407,0,0" VerticalAlignment="Top"                           />
+            <Button x:ConnectionId='344' x:Name="GradeCourse" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Grade My Courses" Margin="0,536,0,0" VerticalAlignment="Top"                          />
         </Grid>
         <Grid x:ConnectionId='3' x:Name="Form1C" Visibility="Collapsed">
-            <Image x:ConnectionId='325' x:Name="Form1CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Image x:ConnectionId='336' x:Name="Form1CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="288,137,288,680">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Grades And Assignments" Foreground="Black"/>
             </Grid>
             <Grid Margin="298,191,794,498">
-                <TextBlock x:ConnectionId='330' x:Name="Form1CSemesterLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="45" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Semester"/>
+                <TextBlock x:ConnectionId='341' x:Name="Form1CSemesterLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="45" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Semester"/>
             </Grid>
             <Grid Margin="484,202,528,512">
-                <ComboBox x:ConnectionId='329' x:Name="Form1CValidSemester"                                      HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" VerticalAlignment="Center" PlaceholderText="Pick A Semester" FontSize="40" Width="275" />
+                <ComboBox x:ConnectionId='340' x:Name="Form1CValidSemester"                                      HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" VerticalAlignment="Center" PlaceholderText="Pick A Semester" FontSize="40" Width="275" />
             </Grid>
             <Grid Margin="483,322,483,476">
-                <TextBlock x:ConnectionId='328' x:Name="Form1CTableName" Visibility="Collapsed" FontFamily="/Assets/HARRYP__.TTF#Harry P" VerticalAlignment="Center" Text="Courses" FontSize="50" Foreground="Black" HorizontalAlignment="Center" />
+                <TextBlock x:ConnectionId='339' x:Name="Form1CTableName" Visibility="Collapsed" FontFamily="/Assets/HARRYP__.TTF#Harry P" VerticalAlignment="Center" Text="Courses" FontSize="50" Foreground="Black" HorizontalAlignment="Center" />
             </Grid>
             <ScrollViewer Margin="288,449,288,279">
-                <Grid x:ConnectionId='327' x:Name="CourseTable" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <Grid x:ConnectionId='338' x:Name="CourseTable" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                 </Grid>
             </ScrollViewer>
             <Grid Margin="1198,10,-98,706">
-                <Button x:ConnectionId='326' x:Name="Form1CCancel" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X"                           />
+                <Button x:ConnectionId='337' x:Name="Form1CCancel" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X"                           />
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='4' x:Name="Form2C" Visibility="Visible">
-            <Image x:ConnectionId='320' x:Name="Form2CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+        <Grid x:ConnectionId='4' x:Name="Form2C" Visibility="Collapsed">
+            <Image x:ConnectionId='331' x:Name="Form2CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="288,109,288,649">
-                <TextBlock x:ConnectionId='324' x:Name="Form2CCourseTitle" HorizontalAlignment="Center" VerticalAlignment="center" FontSize="120" Foreground="Black" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                <TextBlock x:ConnectionId='335' x:Name="Form2CCourseTitle" HorizontalAlignment="Center" VerticalAlignment="center" FontSize="120" Foreground="Black" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
             </Grid>
             <Grid Margin="1344,25,53,714">
-                <Button x:ConnectionId='323' x:Name="Form2CCancel" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X"                           />
+                <Button x:ConnectionId='334' x:Name="Form2CCancel" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X"                           />
             </Grid>
             <Grid Margin="547,315,559,386">
-                <Button x:ConnectionId='322' x:Name="Form2CAssignments" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Assignments"/>
+                <Button x:ConnectionId='333' x:Name="Form2CAssignments" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Assignments"                                />
             </Grid>
             <Grid Margin="541,456,565,245">
-                <Button x:ConnectionId='321' x:Name="Form2CGrades" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Grades"/>
+                <Button x:ConnectionId='332' x:Name="Form2CGrades" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Grades"/>
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='5' Name="form2B" Visibility="Collapsed">
-            <Image x:ConnectionId='169' x:Name="Form2BBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+        <Grid x:ConnectionId='5' x:Name="Form3C" Visibility="Visible">
+            <Image x:ConnectionId='321' x:Name="Form3CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="288,16,288,611">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" Foreground="Black" Text="Assignments" FontFamily="/Assets/ReginaScript.ttf#Regina Script" />
+            </Grid>
+            <Grid Margin="1412,98,128,787">
+                <Button x:ConnectionId='330' x:Name="Form3CCancel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X"                            />
+            </Grid>
+            <Grid Margin="1246,216,172,536">
+                <Button x:ConnectionId='329' x:Name="EditAddAssignment" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="+"                                />
+            </Grid>
+            <Grid Margin="1246,306,172,446">
+                <Button x:ConnectionId='328' x:Name="EditRemoveAssignment" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="-"                                   />
+            </Grid>
+            <Grid Margin="-62,95,844,501">
+                <Button x:ConnectionId='327' HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Edit"                     />
+            </Grid>
+            <Grid Margin="384,693,633,48">
+                <Button x:ConnectionId='326' x:Name="EditSubmitAssignments" Visibility="Collapsed" HorizontalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Submit" VerticalAlignment="Center"                                    />
+            </Grid>
+            <Grid Margin="633,693,384,48">
+                <Button x:ConnectionId='325' x:Name="EditCancel" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Cancel"                         />
+            </Grid>
+            <ScrollViewer x:ConnectionId='322' x:Name="AnotherScrollViewer" Margin="486,349,486,308" >
+                <Grid>
+                    <Grid x:ConnectionId='323' x:Name="AssignmentListTable" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="500"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <Grid>
+                        <Grid Margin="129,0,650,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Grid x:ConnectionId='324' x:Name="AssingmentListTableRemove" HorizontalAlignment="Center" VerticalAlignment="top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        <Grid x:ConnectionId='6' Name="form2B" Visibility="Collapsed">
+            <Image x:ConnectionId='170' x:Name="Form2BBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="453,-44,459,572">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Update Your Courses" Foreground="Black" FontWeight="Light"/>
             </Grid>
@@ -64,20 +106,20 @@
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester" Foreground="Black"/>
             </Grid>
             <Grid Margin="288,95,288,459">
-                <ComboBox x:ConnectionId='319' Name="AssignedSemesters"                                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Semester"/>
+                <ComboBox x:ConnectionId='320' Name="AssignedSemesters"                                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Semester"/>
             </Grid>
             <Grid Margin="-58,248,1070,436">
-                <TextBlock x:ConnectionId='318' x:Name="Form2BCourseLabel" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course" Foreground="Black"/>
+                <TextBlock x:ConnectionId='319' x:Name="Form2BCourseLabel" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course" Foreground="Black"/>
             </Grid>
             <Grid Margin="288,183,288,371">
-                <ComboBox x:ConnectionId='317' Name="AssignedCourses" Visibility="Collapsed"                                    HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Course"/>
+                <ComboBox x:ConnectionId='318' Name="AssignedCourses" Visibility="Collapsed"                                    HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A Course"/>
             </Grid>
             <Grid Margin="-58,343,1070,341">
-                <TextBlock x:ConnectionId='316' x:Name="Form2BDaysLabel" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Days" Foreground="Black"/>
+                <TextBlock x:ConnectionId='317' x:Name="Form2BDaysLabel" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Days" Foreground="Black"/>
             </Grid>
-            <Grid x:ConnectionId='170' x:Name="Form2BDayInputs" Visibility="Collapsed">
-                <Grid x:ConnectionId='306' x:Name="Form2BMondayCheck" Margin="240,458,968,458">
-                    <CheckBox x:ConnectionId='315' 
+            <Grid x:ConnectionId='171' x:Name="Form2BDayInputs" Visibility="Collapsed">
+                <Grid x:ConnectionId='307' x:Name="Form2BMondayCheck" Margin="240,458,968,458">
+                    <CheckBox x:ConnectionId='316' 
                         x:Name="Form2BMoInput" 
                                                          
                                                             
@@ -87,8 +129,8 @@
                         <TextBlock Foreground="Black">Monday</TextBlock>
                     </CheckBox>
                 </Grid>
-                <Grid x:ConnectionId='307' x:Name="Form2BTuesdayCheck" Margin="402,458,806,458">
-                    <CheckBox x:ConnectionId='314' 
+                <Grid x:ConnectionId='308' x:Name="Form2BTuesdayCheck" Margin="402,458,806,458">
+                    <CheckBox x:ConnectionId='315' 
                         x:Name="Form2BTuInput"
                                                           
                                                              
@@ -98,8 +140,8 @@
                         <TextBlock Foreground="Black">Tuesday</TextBlock>
                     </CheckBox>
                 </Grid>
-                <Grid x:ConnectionId='308' x:Name="Form2BWednesdayCheck" Margin="570,458,638,458">
-                    <CheckBox x:ConnectionId='313' 
+                <Grid x:ConnectionId='309' x:Name="Form2BWednesdayCheck" Margin="570,458,638,458">
+                    <CheckBox x:ConnectionId='314' 
                         x:Name="Form2BWeInput"
                                                             
                                                                
@@ -109,8 +151,8 @@
                         <TextBlock Foreground="Black">Wednesday</TextBlock>
                     </CheckBox>
                 </Grid>
-                <Grid x:ConnectionId='309' x:Name="Form2BThursdayCheck" Margin="746,458,462,458">
-                    <CheckBox x:ConnectionId='312' 
+                <Grid x:ConnectionId='310' x:Name="Form2BThursdayCheck" Margin="746,458,462,458">
+                    <CheckBox x:ConnectionId='313' 
                         x:Name="Form2BThInput"
                                                            
                                                               
@@ -120,8 +162,8 @@
                         <TextBlock Foreground="Black">Thursday</TextBlock>
                     </CheckBox>
                 </Grid>
-                <Grid x:ConnectionId='310' x:Name="Form2BFridayCheck" Margin="920,458,288,458">
-                    <CheckBox x:ConnectionId='311' 
+                <Grid x:ConnectionId='311' x:Name="Form2BFridayCheck" Margin="920,458,288,458">
+                    <CheckBox x:ConnectionId='312' 
                         x:Name="Form2BFrInput"
                                                          
                                                             
@@ -133,172 +175,172 @@
                 </Grid>
             </Grid>
             <Grid Margin="-58,433,1070,251">
-                <TextBlock x:ConnectionId='305' x:Name="Form2BTimeLabel" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Times" Foreground="Black"/>
+                <TextBlock x:ConnectionId='306' x:Name="Form2BTimeLabel" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Times" Foreground="Black"/>
             </Grid>
             <Grid Margin="282,419,1051,244">
-                <ComboBox x:ConnectionId='280' x:Name="Form2BMondayTimes" Visibility="Collapsed"                            PlaceholderText="Monday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <CheckBox x:ConnectionId='281' 
+                <ComboBox x:ConnectionId='281' x:Name="Form2BMondayTimes" Visibility="Collapsed"                            PlaceholderText="Monday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox x:ConnectionId='282' 
                         x:Name="Form2BMondayTimeInput0" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='282' 
+                    <CheckBox x:ConnectionId='283' 
                         x:Name="Form2BMondayTimeInput1" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='283' 
+                    <CheckBox x:ConnectionId='284' 
                         x:Name="Form2BMondayTimeInput2" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='284' 
+                    <CheckBox x:ConnectionId='285' 
                         x:Name="Form2BMondayTimeInput3" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='285' 
+                    <CheckBox x:ConnectionId='286' 
                         x:Name="Form2BMondayTimeInput4" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='286' 
+                    <CheckBox x:ConnectionId='287' 
                         x:Name="Form2BMondayTimeInput5" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='287' 
+                    <CheckBox x:ConnectionId='288' 
                         x:Name="Form2BMondayTimeInput6" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='288' 
+                    <CheckBox x:ConnectionId='289' 
                         x:Name="Form2BMondayTimeInput7" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='289' 
+                    <CheckBox x:ConnectionId='290' 
                         x:Name="Form2BMondayTimeInput8" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='290' 
+                    <CheckBox x:ConnectionId='291' 
                         x:Name="Form2BMondayTimeInput9" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='291' 
+                    <CheckBox x:ConnectionId='292' 
                         x:Name="Form2BMondayTimeInput10" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='292' 
+                    <CheckBox x:ConnectionId='293' 
                         x:Name="Form2BMondayTimeInput11" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='293' 
+                    <CheckBox x:ConnectionId='294' 
                         x:Name="Form2BMondayTimeInput12" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='294' 
+                    <CheckBox x:ConnectionId='295' 
                         x:Name="Form2BMondayTimeInput13" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='295' 
+                    <CheckBox x:ConnectionId='296' 
                         x:Name="Form2BMondayTimeInput14" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='296' 
+                    <CheckBox x:ConnectionId='297' 
                         x:Name="Form2BMondayTimeInput15" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='297' 
+                    <CheckBox x:ConnectionId='298' 
                         x:Name="Form2BMondayTimeInput16" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='298' 
+                    <CheckBox x:ConnectionId='299' 
                         x:Name="Form2BMondayTimeInput17" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='299' 
+                    <CheckBox x:ConnectionId='300' 
                         x:Name="Form2BMondayTimeInput18" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='300' 
+                    <CheckBox x:ConnectionId='301' 
                         x:Name="Form2BMondayTimeInput19" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='301' 
+                    <CheckBox x:ConnectionId='302' 
                         x:Name="Form2BMondayTimeInput20" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='302' 
+                    <CheckBox x:ConnectionId='303' 
                         x:Name="Form2BMondayTimeInput21" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='303' 
+                    <CheckBox x:ConnectionId='304' 
                         x:Name="Form2BMondayTimeInput22" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='304' 
+                    <CheckBox x:ConnectionId='305' 
                         x:Name="Form2BMondayTimeInput23" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -308,169 +350,169 @@
                 </ComboBox>
             </Grid>
             <Grid Margin="466,423,867,240">
-                <ComboBox x:ConnectionId='255' x:Name="Form2BTuesdayTimes" Visibility="Collapsed"                            PlaceholderText="Tuesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <CheckBox x:ConnectionId='256' 
+                <ComboBox x:ConnectionId='256' x:Name="Form2BTuesdayTimes" Visibility="Collapsed"                            PlaceholderText="Tuesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox x:ConnectionId='257' 
                         x:Name="Form2BTuesdayTimeInput0" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='257' 
+                    <CheckBox x:ConnectionId='258' 
                         x:Name="Form2BTuesdayTimeInput1" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='258' 
+                    <CheckBox x:ConnectionId='259' 
                         x:Name="Form2BTuesdayTimeInput2" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='259' 
+                    <CheckBox x:ConnectionId='260' 
                         x:Name="Form2BTuesdayTimeInput3" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='260' 
+                    <CheckBox x:ConnectionId='261' 
                         x:Name="Form2BTuesdayTimeInput4" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='261' 
+                    <CheckBox x:ConnectionId='262' 
                         x:Name="Form2BTuesdayTimeInput5" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='262' 
+                    <CheckBox x:ConnectionId='263' 
                         x:Name="Form2BTuesdayTimeInput6" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='263' 
+                    <CheckBox x:ConnectionId='264' 
                         x:Name="Form2BTuesdayTimeInput7" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='264' 
+                    <CheckBox x:ConnectionId='265' 
                         x:Name="Form2BTuesdayTimeInput8" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='265' 
+                    <CheckBox x:ConnectionId='266' 
                         x:Name="Form2BTuesdayTimeInput9" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='266' 
+                    <CheckBox x:ConnectionId='267' 
                         x:Name="Form2BTuesdayTimeInput10" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='267' 
+                    <CheckBox x:ConnectionId='268' 
                         x:Name="Form2BTuesdayTimeInput11" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='268' 
+                    <CheckBox x:ConnectionId='269' 
                         x:Name="Form2BTuesdayTimeInput12" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='269' 
+                    <CheckBox x:ConnectionId='270' 
                         x:Name="Form2BTuesdayTimeInput13" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='270' 
+                    <CheckBox x:ConnectionId='271' 
                         x:Name="Form2BTuesdayTimeInput14" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='271' 
+                    <CheckBox x:ConnectionId='272' 
                         x:Name="Form2BTuesdayTimeInput15" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='272' 
+                    <CheckBox x:ConnectionId='273' 
                         x:Name="Form2BTuesdayTimeInput16" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='273' 
+                    <CheckBox x:ConnectionId='274' 
                         x:Name="Form2BTuesdayTimeInput17" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='274' 
+                    <CheckBox x:ConnectionId='275' 
                         x:Name="Form2BTuesdayTimeInput18" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='275' 
+                    <CheckBox x:ConnectionId='276' 
                         x:Name="Form2BTuesdayTimeInput19" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='276' 
+                    <CheckBox x:ConnectionId='277' 
                         x:Name="Form2BTuesdayTimeInput20" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='277' 
+                    <CheckBox x:ConnectionId='278' 
                         x:Name="Form2BTuesdayTimeInput21" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='278' 
+                    <CheckBox x:ConnectionId='279' 
                         x:Name="Form2BTuesdayTimeInput22" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='279' 
+                    <CheckBox x:ConnectionId='280' 
                         x:Name="Form2BTuesdayTimeInput23" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -480,169 +522,169 @@
                 </ComboBox>
             </Grid>
             <Grid Margin="644,423,689,240">
-                <ComboBox x:ConnectionId='230' x:Name="Form2BWednesdayTimes" Visibility="Collapsed"                            PlaceholderText="Wednesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <CheckBox x:ConnectionId='231' 
+                <ComboBox x:ConnectionId='231' x:Name="Form2BWednesdayTimes" Visibility="Collapsed"                            PlaceholderText="Wednesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox x:ConnectionId='232' 
                         x:Name="Form2BWednesdayTimeInput0" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='232' 
+                    <CheckBox x:ConnectionId='233' 
                         x:Name="Form2BWednesdayTimeInput1" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='233' 
+                    <CheckBox x:ConnectionId='234' 
                         x:Name="Form2BWednesdayTimeInput2" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='234' 
+                    <CheckBox x:ConnectionId='235' 
                         x:Name="Form2BWednesdayTimeInput3" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='235' 
+                    <CheckBox x:ConnectionId='236' 
                         x:Name="Form2BWednesdayTimeInput4" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='236' 
+                    <CheckBox x:ConnectionId='237' 
                         x:Name="Form2BWednesdayTimeInput5" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='237' 
+                    <CheckBox x:ConnectionId='238' 
                         x:Name="Form2BWednesdayTimeInput6" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='238' 
+                    <CheckBox x:ConnectionId='239' 
                         x:Name="Form2BWednesdayTimeInput7" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='239' 
+                    <CheckBox x:ConnectionId='240' 
                         x:Name="Form2BWednesdayTimeInput8" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='240' 
+                    <CheckBox x:ConnectionId='241' 
                         x:Name="Form2BWednesdayTimeInput9" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='241' 
+                    <CheckBox x:ConnectionId='242' 
                         x:Name="Form2BWednesdayTimeInput10" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='242' 
+                    <CheckBox x:ConnectionId='243' 
                         x:Name="Form2BWednesdayTimeInput11" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='243' 
+                    <CheckBox x:ConnectionId='244' 
                         x:Name="Form2BWednesdayTimeInput12" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='244' 
+                    <CheckBox x:ConnectionId='245' 
                         x:Name="Form2BWednesdayTimeInput13" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='245' 
+                    <CheckBox x:ConnectionId='246' 
                         x:Name="Form2BWednesdayTimeInput14" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='246' 
+                    <CheckBox x:ConnectionId='247' 
                         x:Name="Form2BWednesdayTimeInput15" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='247' 
+                    <CheckBox x:ConnectionId='248' 
                         x:Name="Form2BWednesdayTimeInput16" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='248' 
+                    <CheckBox x:ConnectionId='249' 
                         x:Name="Form2BWednesdayTimeInput17" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='249' 
+                    <CheckBox x:ConnectionId='250' 
                         x:Name="Form2BWednesdayTimeInput18" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='250' 
+                    <CheckBox x:ConnectionId='251' 
                         x:Name="Form2BWednesdayTimeInput19" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='251' 
+                    <CheckBox x:ConnectionId='252' 
                         x:Name="Form2BWednesdayTimeInput20" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='252' 
+                    <CheckBox x:ConnectionId='253' 
                         x:Name="Form2BWednesdayTimeInput21" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='253' 
+                    <CheckBox x:ConnectionId='254' 
                         x:Name="Form2BWednesdayTimeInput22" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='254' 
+                    <CheckBox x:ConnectionId='255' 
                         x:Name="Form2BWednesdayTimeInput23" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -652,169 +694,169 @@
                 </ComboBox>
             </Grid>
             <Grid Margin="824,423,509,240">
-                <ComboBox x:ConnectionId='205' x:Name="Form2BThursdayTimes" Visibility="Collapsed"                            PlaceholderText="Thursday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <CheckBox x:ConnectionId='206' 
+                <ComboBox x:ConnectionId='206' x:Name="Form2BThursdayTimes" Visibility="Collapsed"                            PlaceholderText="Thursday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox x:ConnectionId='207' 
                         x:Name="Form2BThursdayTimeInput0" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='207' 
+                    <CheckBox x:ConnectionId='208' 
                         x:Name="Form2BThursdayTimeInput1" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='208' 
+                    <CheckBox x:ConnectionId='209' 
                         x:Name="Form2BThursdayTimeInput2" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='209' 
+                    <CheckBox x:ConnectionId='210' 
                         x:Name="Form2BThursdayTimeInput3" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='210' 
+                    <CheckBox x:ConnectionId='211' 
                         x:Name="Form2BThursdayTimeInput4" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='211' 
+                    <CheckBox x:ConnectionId='212' 
                         x:Name="Form2BThursdayTimeInput5" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='212' 
+                    <CheckBox x:ConnectionId='213' 
                         x:Name="Form2BThursdayTimeInput6" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='213' 
+                    <CheckBox x:ConnectionId='214' 
                         x:Name="Form2BThursdayTimeInput7" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='214' 
+                    <CheckBox x:ConnectionId='215' 
                         x:Name="Form2BThursdayTimeInput8" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='215' 
+                    <CheckBox x:ConnectionId='216' 
                         x:Name="Form2BThursdayTimeInput9" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='216' 
+                    <CheckBox x:ConnectionId='217' 
                         x:Name="Form2BThursdayTimeInput10" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='217' 
+                    <CheckBox x:ConnectionId='218' 
                         x:Name="Form2BThursdayTimeInput11" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='218' 
+                    <CheckBox x:ConnectionId='219' 
                         x:Name="Form2BThursdayTimeInput12" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='219' 
+                    <CheckBox x:ConnectionId='220' 
                         x:Name="Form2BThursdayTimeInput13" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='220' 
+                    <CheckBox x:ConnectionId='221' 
                         x:Name="Form2BThursdayTimeInput14" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='221' 
+                    <CheckBox x:ConnectionId='222' 
                         x:Name="Form2BThursdayTimeInput15" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='222' 
+                    <CheckBox x:ConnectionId='223' 
                         x:Name="Form2BThursdayTimeInput16" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='223' 
+                    <CheckBox x:ConnectionId='224' 
                         x:Name="Form2BThursdayTimeInput17" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='224' 
+                    <CheckBox x:ConnectionId='225' 
                         x:Name="Form2BThursdayTimeInput18" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='225' 
+                    <CheckBox x:ConnectionId='226' 
                         x:Name="Form2BThursdayTimeInput19" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='226' 
+                    <CheckBox x:ConnectionId='227' 
                         x:Name="Form2BThursdayTimeInput20" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='227' 
+                    <CheckBox x:ConnectionId='228' 
                         x:Name="Form2BThursdayTimeInput21" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='228' 
+                    <CheckBox x:ConnectionId='229' 
                         x:Name="Form2BThursdayTimeInput22" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='229' 
+                    <CheckBox x:ConnectionId='230' 
                         x:Name="Form2BThursdayTimeInput23" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -824,169 +866,169 @@
                 </ComboBox>
             </Grid>
             <Grid Margin="968,423,365,240">
-                <ComboBox x:ConnectionId='180' x:Name="Form2BFridayTimes" Visibility="Collapsed"                            PlaceholderText="Friday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <CheckBox x:ConnectionId='181' 
+                <ComboBox x:ConnectionId='181' x:Name="Form2BFridayTimes" Visibility="Collapsed"                            PlaceholderText="Friday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox x:ConnectionId='182' 
                         x:Name="Form2BFridayTimeInput0" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='182' 
+                    <CheckBox x:ConnectionId='183' 
                         x:Name="Form2BFridayTimeInput1" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='183' 
+                    <CheckBox x:ConnectionId='184' 
                         x:Name="Form2BFridayTimeInput2" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='184' 
+                    <CheckBox x:ConnectionId='185' 
                         x:Name="Form2BFridayTimeInput3" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='185' 
+                    <CheckBox x:ConnectionId='186' 
                         x:Name="Form2BFridayTimeInput4" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='186' 
+                    <CheckBox x:ConnectionId='187' 
                         x:Name="Form2BFridayTimeInput5" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='187' 
+                    <CheckBox x:ConnectionId='188' 
                         x:Name="Form2BFridayTimeInput6" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='188' 
+                    <CheckBox x:ConnectionId='189' 
                         x:Name="Form2BFridayTimeInput7" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='189' 
+                    <CheckBox x:ConnectionId='190' 
                         x:Name="Form2BFridayTimeInput8" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='190' 
+                    <CheckBox x:ConnectionId='191' 
                         x:Name="Form2BFridayTimeInput9" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="0900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='191' 
+                    <CheckBox x:ConnectionId='192' 
                         x:Name="Form2BFridayTimeInput10" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='192' 
+                    <CheckBox x:ConnectionId='193' 
                         x:Name="Form2BFridayTimeInput11" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='193' 
+                    <CheckBox x:ConnectionId='194' 
                         x:Name="Form2BFridayTimeInput12" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='194' 
+                    <CheckBox x:ConnectionId='195' 
                         x:Name="Form2BFridayTimeInput13" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1300"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='195' 
+                    <CheckBox x:ConnectionId='196' 
                         x:Name="Form2BFridayTimeInput14" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1400"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='196' 
+                    <CheckBox x:ConnectionId='197' 
                         x:Name="Form2BFridayTimeInput15" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1500"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='197' 
+                    <CheckBox x:ConnectionId='198' 
                         x:Name="Form2BFridayTimeInput16" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1600"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='198' 
+                    <CheckBox x:ConnectionId='199' 
                         x:Name="Form2BFridayTimeInput17" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1700"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='199' 
+                    <CheckBox x:ConnectionId='200' 
                         x:Name="Form2BFridayTimeInput18" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1800"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='200' 
+                    <CheckBox x:ConnectionId='201' 
                         x:Name="Form2BFridayTimeInput19" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="1900"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='201' 
+                    <CheckBox x:ConnectionId='202' 
                         x:Name="Form2BFridayTimeInput20" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2000"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='202' 
+                    <CheckBox x:ConnectionId='203' 
                         x:Name="Form2BFridayTimeInput21" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2100"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='203' 
+                    <CheckBox x:ConnectionId='204' 
                         x:Name="Form2BFridayTimeInput22" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                         Content="2200"
                     >
                     </CheckBox>
-                    <CheckBox x:ConnectionId='204' 
+                    <CheckBox x:ConnectionId='205' 
                         x:Name="Form2BFridayTimeInput23" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -995,50 +1037,50 @@
                     </CheckBox>
                 </ComboBox>
             </Grid>
-            <ScrollViewer x:ConnectionId='171' Name="ReallyAnnoyingScrollBarForm2B" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Top" Height="150" Margin="0,628,0,0" Width="1282">
+            <ScrollViewer x:ConnectionId='172' Name="ReallyAnnoyingScrollBarForm2B" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Top" Height="150" Margin="0,628,0,0" Width="1282">
                 <Grid  Width="1281" Height="628">
                     <Grid Margin="0,-32,1109,537">
-                        <TextBlock x:ConnectionId='179' x:Name="Form2BLocationLabel" HorizontalAlignment="center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Location" Foreground="Black"/>
+                        <TextBlock x:ConnectionId='180' x:Name="Form2BLocationLabel" HorizontalAlignment="center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Location" Foreground="Black"/>
                     </Grid>
                     <Grid Margin="-554,-192,554,192">
-                        <TextBlock x:ConnectionId='178' x:Name="Form2BCourseInfoLabel" HorizontalAlignment="center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course Info" Foreground="Black" />
+                        <TextBlock x:ConnectionId='179' x:Name="Form2BCourseInfoLabel" HorizontalAlignment="center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course Info" Foreground="Black" />
                     </Grid>
                     <Grid Margin="-526,50,526,-50">
-                        <TextBlock x:ConnectionId='177' x:Name="Form2BRequiredMaterialLabel" HorizontalAlignment="center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Required Material" Foreground="Black" />
+                        <TextBlock x:ConnectionId='178' x:Name="Form2BRequiredMaterialLabel" HorizontalAlignment="center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Required Material" Foreground="Black" />
                     </Grid>
                     <Grid Margin="0,-279,0,279">
-                        <TextBox x:ConnectionId='176' x:Name="Form2BLocationInput" Height="50" Width="375" PlaceholderText="Enter A Location" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36"/>
+                        <TextBox x:ConnectionId='177' x:Name="Form2BLocationInput" Height="50" Width="375" PlaceholderText="Enter A Location" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36"/>
                     </Grid>
                     <Grid Margin="0,-111,0,111">
-                        <TextBox x:ConnectionId='175' x:Name="Form2BCourseInfoInput" Height="200" Width="850" PlaceholderText="Enter Course Info" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
+                        <TextBox x:ConnectionId='176' x:Name="Form2BCourseInfoInput" Height="200" Width="850" PlaceholderText="Enter Course Info" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
                     </Grid>
                     <Grid Margin="0,135,0,-135">
-                        <TextBox x:ConnectionId='174' x:Name="Form2BReqMaterialInput" Height="200" Width="850" PlaceholderText="Enter Required Material" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
+                        <TextBox x:ConnectionId='175' x:Name="Form2BReqMaterialInput" Height="200" Width="850" PlaceholderText="Enter Required Material" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
                     </Grid>
                 </Grid>
             </ScrollViewer>
             <Grid Margin="1360,25,62,723">
-                <Button x:ConnectionId='173' x:Name="Cancelform2B" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="X"                            />
+                <Button x:ConnectionId='174' x:Name="Cancelform2B" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="X"                            />
             </Grid>
             <Grid Margin="747,708,746,37">
-                <Button x:ConnectionId='172' x:Name="Submitform2B" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit"                            />
+                <Button x:ConnectionId='173' x:Name="Submitform2B" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit"                            />
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='6' Name="AssignCourseForm" Visibility="Collapsed">
-            <Image x:ConnectionId='165' x:Name="Form2Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+        <Grid x:ConnectionId='7' Name="AssignCourseForm" Visibility="Collapsed">
+            <Image x:ConnectionId='166' x:Name="Form2Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="453,-44,459,572">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Assign Your Courses" Foreground="Black" FontWeight="Light"/>
             </Grid>
             <Grid>
-                <Button x:ConnectionId='167' Name="AssignCourseForm2" HorizontalAlignment="Center" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Assign Course" Margin="0,341,0,0" VerticalAlignment="Top"                                />
-                <Button x:ConnectionId='168' Name="UpdateCourseForm2" HorizontalAlignment="Center" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Update Course" Margin="0,531,0,0" VerticalAlignment="Top"                                 />
+                <Button x:ConnectionId='168' Name="AssignCourseForm2" HorizontalAlignment="Center" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Assign Course" Margin="0,341,0,0" VerticalAlignment="Top"                                />
+                <Button x:ConnectionId='169' Name="UpdateCourseForm2" HorizontalAlignment="Center" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Update Course" Margin="0,531,0,0" VerticalAlignment="Top"                                 />
             </Grid>
             <Grid Margin="1360,25,62,723">
-                <Button x:ConnectionId='166' x:Name="Cancelform2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="X"                           />
+                <Button x:ConnectionId='167' x:Name="Cancelform2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="X"                           />
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='7' x:Name="form2A" Visibility="Collapsed">
-            <Grid x:ConnectionId='19' x:Name="form2ALabels" Margin="-173,312,752,131">
+        <Grid x:ConnectionId='8' x:Name="form2A" Visibility="Collapsed">
+            <Grid x:ConnectionId='20' x:Name="form2ALabels" Margin="-173,312,752,131">
                 <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester:" Foreground="Black" Margin="0,-38,0,38" />
                 <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Course:" Foreground="Black" Margin="0,20,0,-20" />
                 <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Days:" Foreground="Black" Margin="0,90,0,-90"/>
@@ -1046,16 +1088,16 @@
                 <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Location:" Foreground="Black" Margin="0,228,0,-228"/>
                 <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Required Materials:" Foreground="Black" Margin="0,298,0,-298" />
             </Grid>
-            <Grid x:ConnectionId='20' x:Name="Form2AInputs">
-                <Grid x:ConnectionId='23' x:Name="SemesterInput" Margin="287,-31,289,357">
-                    <ComboBox x:ConnectionId='164' Name="Form2ValidSemesters" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A semester"/>
+            <Grid x:ConnectionId='21' x:Name="Form2AInputs">
+                <Grid x:ConnectionId='24' x:Name="SemesterInput" Margin="287,-31,289,357">
+                    <ComboBox x:ConnectionId='165' Name="Form2ValidSemesters" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A semester"/>
                 </Grid>
-                <Grid x:ConnectionId='24' x:Name="CourseInput" Margin="289,111,287,356">
-                    <ComboBox x:ConnectionId='163' x:Name="Form2Mycourses" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose the Course" />
+                <Grid x:ConnectionId='25' x:Name="CourseInput" Margin="289,111,287,356">
+                    <ComboBox x:ConnectionId='164' x:Name="Form2Mycourses" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose the Course" />
                 </Grid>
-                <Grid x:ConnectionId='25' x:Name="DayInputs">
-                    <Grid x:ConnectionId='26' x:Name="MondayCheck" Margin="274,400,934,516">
-                        <CheckBox x:ConnectionId='162' 
+                <Grid x:ConnectionId='26' x:Name="DayInputs">
+                    <Grid x:ConnectionId='27' x:Name="MondayCheck" Margin="274,400,934,516">
+                        <CheckBox x:ConnectionId='163' 
                             x:Name="Form2MoInput" 
                                                        
                                                           
@@ -1065,8 +1107,8 @@
                             <TextBlock Foreground="Black">Monday</TextBlock>
                         </CheckBox>
                     </Grid>
-                    <Grid x:ConnectionId='27' x:Name="TuesdayCheck" Margin="396,400,812,516">
-                        <CheckBox x:ConnectionId='161' 
+                    <Grid x:ConnectionId='28' x:Name="TuesdayCheck" Margin="396,400,812,516">
+                        <CheckBox x:ConnectionId='162' 
                             x:Name="Form2TuInput"
                                                         
                                                            
@@ -1076,8 +1118,8 @@
                             <TextBlock Foreground="Black">Tuesday</TextBlock>
                         </CheckBox>
                     </Grid>
-                    <Grid x:ConnectionId='28' x:Name="WednesdayCheck" Margin="516,400,692,516">
-                        <CheckBox x:ConnectionId='160' 
+                    <Grid x:ConnectionId='29' x:Name="WednesdayCheck" Margin="516,400,692,516">
+                        <CheckBox x:ConnectionId='161' 
                             x:Name="Form2WeInput"
                                                           
                                                              
@@ -1087,8 +1129,8 @@
                             <TextBlock Foreground="Black">Wednesday</TextBlock>
                         </CheckBox>
                     </Grid>
-                    <Grid x:ConnectionId='29' x:Name="ThursdayCheck" Margin="650,400,558,516">
-                        <CheckBox x:ConnectionId='159' 
+                    <Grid x:ConnectionId='30' x:Name="ThursdayCheck" Margin="650,400,558,516">
+                        <CheckBox x:ConnectionId='160' 
                             x:Name="Form2ThInput"
                                                          
                                                             
@@ -1098,8 +1140,8 @@
                             <TextBlock Foreground="Black">Thursday</TextBlock>
                         </CheckBox>
                     </Grid>
-                    <Grid x:ConnectionId='30' x:Name="FridayCheck" Margin="782,400,426,516">
-                        <CheckBox x:ConnectionId='158' 
+                    <Grid x:ConnectionId='31' x:Name="FridayCheck" Margin="782,400,426,516">
+                        <CheckBox x:ConnectionId='159' 
                             x:Name="Form2FrInput"
                                                        
                                                           
@@ -1110,169 +1152,169 @@
                         </CheckBox>
                     </Grid>
                     <Grid Margin="322,337,1011,326">
-                        <ComboBox x:ConnectionId='133' x:Name="MondayTimes" Visibility="Collapsed"                            PlaceholderText="Monday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <CheckBox x:ConnectionId='134' 
+                        <ComboBox x:ConnectionId='134' x:Name="MondayTimes" Visibility="Collapsed"                            PlaceholderText="Monday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <CheckBox x:ConnectionId='135' 
                                 x:Name="Form2MondayTimeInput0" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='135' 
+                            <CheckBox x:ConnectionId='136' 
                                 x:Name="Form2MondayTimeInput1" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0100"    
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='136' 
+                            <CheckBox x:ConnectionId='137' 
                                 x:Name="Form2MondayTimeInput2" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='137' 
+                            <CheckBox x:ConnectionId='138' 
                                 x:Name="Form2MondayTimeInput3" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='138' 
+                            <CheckBox x:ConnectionId='139' 
                                 x:Name="Form2MondayTimeInput4" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='139' 
+                            <CheckBox x:ConnectionId='140' 
                                 x:Name="Form2MondayTimeInput5" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='140' 
+                            <CheckBox x:ConnectionId='141' 
                                 x:Name="Form2MondayTimeInput6" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='141' 
+                            <CheckBox x:ConnectionId='142' 
                                 x:Name="Form2MondayTimeInput7" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='142' 
+                            <CheckBox x:ConnectionId='143' 
                                 x:Name="Form2MondayTimeInput8" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='143' 
+                            <CheckBox x:ConnectionId='144' 
                                 x:Name="Form2MondayTimeInput9" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='144' 
+                            <CheckBox x:ConnectionId='145' 
                                 x:Name="Form2MondayTimeInput10" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='145' 
+                            <CheckBox x:ConnectionId='146' 
                                 x:Name="Form2MondayTimeInput11" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='146' 
+                            <CheckBox x:ConnectionId='147' 
                                 x:Name="Form2MondayTimeInput12" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='147' 
+                            <CheckBox x:ConnectionId='148' 
                                 x:Name="Form2MondayTimeInput13" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='148' 
+                            <CheckBox x:ConnectionId='149' 
                                 x:Name="Form2MondayTimeInput14" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='149' 
+                            <CheckBox x:ConnectionId='150' 
                                 x:Name="Form2MondayTimeInput15" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='150' 
+                            <CheckBox x:ConnectionId='151' 
                                 x:Name="Form2MondayTimeInput16" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='151' 
+                            <CheckBox x:ConnectionId='152' 
                                 x:Name="Form2MondayTimeInput17" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='152' 
+                            <CheckBox x:ConnectionId='153' 
                                 x:Name="Form2MondayTimeInput18" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='153' 
+                            <CheckBox x:ConnectionId='154' 
                                 x:Name="Form2MondayTimeInput19" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='154' 
+                            <CheckBox x:ConnectionId='155' 
                                 x:Name="Form2MondayTimeInput20" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='155' 
+                            <CheckBox x:ConnectionId='156' 
                                 x:Name="Form2MondayTimeInput21" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='156' 
+                            <CheckBox x:ConnectionId='157' 
                                 x:Name="Form2MondayTimeInput22" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='157' 
+                            <CheckBox x:ConnectionId='158' 
                                 x:Name="Form2MondayTimeInput23" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -1282,169 +1324,169 @@
                         </ComboBox>
                     </Grid>
                     <Grid Margin="466,337,867,326">
-                        <ComboBox x:ConnectionId='108' x:Name="TuesdayTimes" Visibility="Collapsed"                            PlaceholderText="Tuesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <CheckBox x:ConnectionId='109' 
+                        <ComboBox x:ConnectionId='109' x:Name="TuesdayTimes" Visibility="Collapsed"                            PlaceholderText="Tuesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <CheckBox x:ConnectionId='110' 
                                 x:Name="Form2TuesdayTimeInput0" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='110' 
+                            <CheckBox x:ConnectionId='111' 
                                 x:Name="Form2TuesdayTimeInput1" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='111' 
+                            <CheckBox x:ConnectionId='112' 
                                 x:Name="Form2TuesdayTimeInput2" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='112' 
+                            <CheckBox x:ConnectionId='113' 
                                 x:Name="Form2TuesdayTimeInput3" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='113' 
+                            <CheckBox x:ConnectionId='114' 
                                 x:Name="Form2TuesdayTimeInput4" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='114' 
+                            <CheckBox x:ConnectionId='115' 
                                 x:Name="Form2TuesdayTimeInput5" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='115' 
+                            <CheckBox x:ConnectionId='116' 
                                 x:Name="Form2TuesdayTimeInput6" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='116' 
+                            <CheckBox x:ConnectionId='117' 
                                 x:Name="Form2TuesdayTimeInput7" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='117' 
+                            <CheckBox x:ConnectionId='118' 
                                 x:Name="Form2TuesdayTimeInput8" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='118' 
+                            <CheckBox x:ConnectionId='119' 
                                 x:Name="Form2TuesdayTimeInput9" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='119' 
+                            <CheckBox x:ConnectionId='120' 
                                 x:Name="Form2TuesdayTimeInput10" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='120' 
+                            <CheckBox x:ConnectionId='121' 
                                 x:Name="Form2TuesdayTimeInput11" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='121' 
+                            <CheckBox x:ConnectionId='122' 
                                 x:Name="Form2TuesdayTimeInput12" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                  Content="1200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='122' 
+                            <CheckBox x:ConnectionId='123' 
                                 x:Name="Form2TuesdayTimeInput13" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                  Content="1300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='123' 
+                            <CheckBox x:ConnectionId='124' 
                                 x:Name="Form2TuesdayTimeInput14" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='124' 
+                            <CheckBox x:ConnectionId='125' 
                                 x:Name="Form2TuesdayTimeInput15" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='125' 
+                            <CheckBox x:ConnectionId='126' 
                                 x:Name="Form2TuesdayTimeInput16" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='126' 
+                            <CheckBox x:ConnectionId='127' 
                                 x:Name="Form2TuesdayTimeInput17" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='127' 
+                            <CheckBox x:ConnectionId='128' 
                                 x:Name="Form2TuesdayTimeInput18" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='128' 
+                            <CheckBox x:ConnectionId='129' 
                                 x:Name="Form2TuesdayTimeInput19" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='129' 
+                            <CheckBox x:ConnectionId='130' 
                                 x:Name="Form2TuesdayTimeInput20" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='130' 
+                            <CheckBox x:ConnectionId='131' 
                                 x:Name="Form2TuesdayTimeInput21" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='131' 
+                            <CheckBox x:ConnectionId='132' 
                                 x:Name="Form2TuesdayTimeInput22" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='132' 
+                            <CheckBox x:ConnectionId='133' 
                                 x:Name="Form2TuesdayTimeInput23" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -1454,169 +1496,169 @@
                         </ComboBox>
                     </Grid>
                     <Grid Margin="624,337,709,326">
-                        <ComboBox x:ConnectionId='83' x:Name="WednesdayTimes" Visibility="Collapsed"                            PlaceholderText="Wednesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <CheckBox x:ConnectionId='84' 
+                        <ComboBox x:ConnectionId='84' x:Name="WednesdayTimes" Visibility="Collapsed"                            PlaceholderText="Wednesday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <CheckBox x:ConnectionId='85' 
                                 x:Name="Form2WednesdayTimeInput0" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='85' 
+                            <CheckBox x:ConnectionId='86' 
                                 x:Name="Form2WednesdayTimeInput1" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='86' 
+                            <CheckBox x:ConnectionId='87' 
                                 x:Name="Form2WednesdayTimeInput2" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='87' 
+                            <CheckBox x:ConnectionId='88' 
                                 x:Name="Form2WednesdayTimeInput3" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='88' 
+                            <CheckBox x:ConnectionId='89' 
                                 x:Name="Form2WednesdayTimeInput4" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='89' 
+                            <CheckBox x:ConnectionId='90' 
                                 x:Name="Form2WednesdayTimeInput5" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='90' 
+                            <CheckBox x:ConnectionId='91' 
                                 x:Name="Form2WednesdayTimeInput6" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='91' 
+                            <CheckBox x:ConnectionId='92' 
                                 x:Name="Form2WednesdayTimeInput7" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='92' 
+                            <CheckBox x:ConnectionId='93' 
                                 x:Name="Form2WednesdayTimeInput8" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='93' 
+                            <CheckBox x:ConnectionId='94' 
                                 x:Name="Form2WednesdayTimeInput9" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='94' 
+                            <CheckBox x:ConnectionId='95' 
                                 x:Name="Form2WednesdayTimeInput10" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='95' 
+                            <CheckBox x:ConnectionId='96' 
                                 x:Name="Form2WednesdayTimeInput11" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='96' 
+                            <CheckBox x:ConnectionId='97' 
                                 x:Name="Form2WednesdayTimeInput12" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='97' 
+                            <CheckBox x:ConnectionId='98' 
                                 x:Name="Form2WednesdayTimeInput13" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='98' 
+                            <CheckBox x:ConnectionId='99' 
                                 x:Name="Form2WednesdayTimeInput14" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='99' 
+                            <CheckBox x:ConnectionId='100' 
                                 x:Name="Form2WednesdayTimeInput15" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='100' 
+                            <CheckBox x:ConnectionId='101' 
                                 x:Name="Form2WednesdayTimeInput16" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='101' 
+                            <CheckBox x:ConnectionId='102' 
                                 x:Name="Form2WednesdayTimeInput17" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='102' 
+                            <CheckBox x:ConnectionId='103' 
                                 x:Name="Form2WednesdayTimeInput18" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='103' 
+                            <CheckBox x:ConnectionId='104' 
                                 x:Name="Form2WednesdayTimeInput19" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='104' 
+                            <CheckBox x:ConnectionId='105' 
                                 x:Name="Form2WednesdayTimeInput20" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='105' 
+                            <CheckBox x:ConnectionId='106' 
                                 x:Name="Form2WednesdayTimeInput21" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='106' 
+                            <CheckBox x:ConnectionId='107' 
                                 x:Name="Form2WednesdayTimeInput22" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='107' 
+                            <CheckBox x:ConnectionId='108' 
                                 x:Name="Form2WednesdayTimeInput23" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -1626,169 +1668,169 @@
                         </ComboBox>
                     </Grid>
                     <Grid Margin="776,337,557,326">
-                        <ComboBox x:ConnectionId='58' x:Name="ThursdayTimes" Visibility="Collapsed"                            PlaceholderText="Thursday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <CheckBox x:ConnectionId='59' 
+                        <ComboBox x:ConnectionId='59' x:Name="ThursdayTimes" Visibility="Collapsed"                            PlaceholderText="Thursday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <CheckBox x:ConnectionId='60' 
                                 x:Name="Form2ThursdayTimeInput0" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='60' 
+                            <CheckBox x:ConnectionId='61' 
                                 x:Name="Form2ThursdayTimeInput1" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='61' 
+                            <CheckBox x:ConnectionId='62' 
                                 x:Name="Form2ThursdayTimeInput2" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='62' 
+                            <CheckBox x:ConnectionId='63' 
                                 x:Name="Form2ThursdayTimeInput3" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='63' 
+                            <CheckBox x:ConnectionId='64' 
                                 x:Name="Form2ThursdayTimeInput4" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='64' 
+                            <CheckBox x:ConnectionId='65' 
                                 x:Name="Form2ThursdayTimeInput5" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='65' 
+                            <CheckBox x:ConnectionId='66' 
                                 x:Name="Form2ThursdayTimeInput6" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='66' 
+                            <CheckBox x:ConnectionId='67' 
                                 x:Name="Form2ThursdayTimeInput7" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='67' 
+                            <CheckBox x:ConnectionId='68' 
                                 x:Name="Form2ThursdayTimeInput8" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='68' 
+                            <CheckBox x:ConnectionId='69' 
                                 x:Name="Form2ThursdayTimeInput9" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='69' 
+                            <CheckBox x:ConnectionId='70' 
                                 x:Name="Form2ThursdayTimeInput10" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='70' 
+                            <CheckBox x:ConnectionId='71' 
                                 x:Name="Form2ThursdayTimeInput11" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='71' 
+                            <CheckBox x:ConnectionId='72' 
                                 x:Name="Form2ThursdayTimeInput12" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='72' 
+                            <CheckBox x:ConnectionId='73' 
                                 x:Name="Form2ThursdayTimeInput13" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='73' 
+                            <CheckBox x:ConnectionId='74' 
                                 x:Name="Form2ThursdayTimeInput14" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='74' 
+                            <CheckBox x:ConnectionId='75' 
                                 x:Name="Form2ThursdayTimeInput15" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='75' 
+                            <CheckBox x:ConnectionId='76' 
                                 x:Name="Form2ThursdayTimeInput16" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='76' 
+                            <CheckBox x:ConnectionId='77' 
                                 x:Name="Form2ThursdayTimeInput17" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='77' 
+                            <CheckBox x:ConnectionId='78' 
                                 x:Name="Form2ThursdayTimeInput18" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='78' 
+                            <CheckBox x:ConnectionId='79' 
                                 x:Name="Form2ThursdayTimeInput19" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='79' 
+                            <CheckBox x:ConnectionId='80' 
                                 x:Name="Form2ThursdayTimeInput20" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='80' 
+                            <CheckBox x:ConnectionId='81' 
                                 x:Name="Form2ThursdayTimeInput21" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='81' 
+                            <CheckBox x:ConnectionId='82' 
                                 x:Name="Form2ThursdayTimeInput22" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='82' 
+                            <CheckBox x:ConnectionId='83' 
                                 x:Name="Form2ThursdayTimeInput23" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -1798,169 +1840,169 @@
                         </ComboBox>
                     </Grid>
                     <Grid Margin="916,337,417,326">
-                        <ComboBox x:ConnectionId='33' x:Name="FridayTimes" Visibility="Collapsed"                            PlaceholderText="Friday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <CheckBox x:ConnectionId='34' 
+                        <ComboBox x:ConnectionId='34' x:Name="FridayTimes" Visibility="Collapsed"                            PlaceholderText="Friday" FontSize="30" FontFamily="/Assets/HARRYP__.TTF#Harry P" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <CheckBox x:ConnectionId='35' 
                                 x:Name="Form2FridayTimeInput0" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='35' 
+                            <CheckBox x:ConnectionId='36' 
                                 x:Name="Form2FridayTimeInput1" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='36' 
+                            <CheckBox x:ConnectionId='37' 
                                 x:Name="Form2FridayTimeInput2" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='37' 
+                            <CheckBox x:ConnectionId='38' 
                                 x:Name="Form2FridayTimeInput3" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='38' 
+                            <CheckBox x:ConnectionId='39' 
                                 x:Name="Form2FridayTimeInput4" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='39' 
+                            <CheckBox x:ConnectionId='40' 
                                 x:Name="Form2FridayTimeInput5" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='40' 
+                            <CheckBox x:ConnectionId='41' 
                                 x:Name="Form2FridayTimeInput6" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='41' 
+                            <CheckBox x:ConnectionId='42' 
                                 x:Name="Form2FridayTimeInput7" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='42' 
+                            <CheckBox x:ConnectionId='43' 
                                 x:Name="Form2FridayTimeInput8" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='43' 
+                            <CheckBox x:ConnectionId='44' 
                                 x:Name="Form2FridayTimeInput9" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="0900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='44' 
+                            <CheckBox x:ConnectionId='45' 
                                 x:Name="Form2FridayTimeInput10" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='45' 
+                            <CheckBox x:ConnectionId='46' 
                                 x:Name="Form2FridayTimeInput11" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='46' 
+                            <CheckBox x:ConnectionId='47' 
                                 x:Name="Form2FridayTimeInput12" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='47' 
+                            <CheckBox x:ConnectionId='48' 
                                 x:Name="Form2FridayTimeInput13" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1300"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='48' 
+                            <CheckBox x:ConnectionId='49' 
                                 x:Name="Form2FridayTimeInput14" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1400"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='49' 
+                            <CheckBox x:ConnectionId='50' 
                                 x:Name="Form2FridayTimeInput15" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1500"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='50' 
+                            <CheckBox x:ConnectionId='51' 
                                 x:Name="Form2FridayTimeInput16" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1600"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='51' 
+                            <CheckBox x:ConnectionId='52' 
                                 x:Name="Form2FridayTimeInput17" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1700"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='52' 
+                            <CheckBox x:ConnectionId='53' 
                                 x:Name="Form2FridayTimeInput18" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1800"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='53' 
+                            <CheckBox x:ConnectionId='54' 
                                 x:Name="Form2FridayTimeInput19" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="1900"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='54' 
+                            <CheckBox x:ConnectionId='55' 
                                 x:Name="Form2FridayTimeInput20" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2000"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='55' 
+                            <CheckBox x:ConnectionId='56' 
                                 x:Name="Form2FridayTimeInput21" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2100"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='56' 
+                            <CheckBox x:ConnectionId='57' 
                                 x:Name="Form2FridayTimeInput22" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
                                 Content="2200"
                                 >
                             </CheckBox>
-                            <CheckBox x:ConnectionId='57' 
+                            <CheckBox x:ConnectionId='58' 
                                 x:Name="Form2FridayTimeInput23" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="30"
@@ -1970,30 +2012,30 @@
                         </ComboBox>
                     </Grid>
                     <Grid Margin="283,492,297,342">
-                        <TextBox x:ConnectionId='32' x:Name="Form2LocationInput" PlaceholderText="Enter Location" Height="50" Width="500" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBox x:ConnectionId='33' x:Name="Form2LocationInput" PlaceholderText="Enter Location" Height="50" Width="500" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Margin="297,488,283,68">
-                        <TextBox x:ConnectionId='31' x:Name="Form2RequiredMaterialsInput" PlaceholderText="Enter Required Materials" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" HorizontalAlignment="Center" VerticalAlignment="Center" Height="175" Width="700" TextWrapping="Wrap"/>
+                        <TextBox x:ConnectionId='32' x:Name="Form2RequiredMaterialsInput" PlaceholderText="Enter Required Materials" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" HorizontalAlignment="Center" VerticalAlignment="Center" Height="175" Width="700" TextWrapping="Wrap"/>
                     </Grid>
                 </Grid>
             </Grid>
             <Grid Margin="1359,25,63,723">
-                <Button x:ConnectionId='22' x:Name="Cancelform2A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="X"                           />
+                <Button x:ConnectionId='23' x:Name="Cancelform2A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="X"                           />
             </Grid>
             <Grid Margin="747,708,746,37">
-                <Button x:ConnectionId='21' x:Name="Submitform2A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit"                            />
+                <Button x:ConnectionId='22' x:Name="Submitform2A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit"                            />
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='8' Name="AddCourseForm" Visibility="Collapsed">
-            <Image x:ConnectionId='9' x:Name="FormBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+        <Grid x:ConnectionId='9' Name="AddCourseForm" Visibility="Collapsed">
+            <Image x:ConnectionId='10' x:Name="FormBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="453,-44,459,572">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Course Creation" Foreground="Black" FontWeight="Light"/>
             </Grid>
-            <Grid x:ConnectionId='10' x:Name="Inputfields">
-                <TextBox x:ConnectionId='15' x:Name="CourseInsertTitleInput" Height="50" Width="375" PlaceholderText="Enter Title" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Margin="0,153,0,553"/>
-                <TextBox x:ConnectionId='16' x:Name="CourseInsertTypeInput" Height="50" Width="375" PlaceholderText="Enter Course Type" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Margin="0,231,0,475"/>
-                <ComboBox x:ConnectionId='17' x:Name="ValidDepartmentsInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Pick A Department" FontSize="36" HorizontalAlignment="Center" Height="50" Width="375" Margin="0,422,0,0"/>
-                <ComboBox x:ConnectionId='18'  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" Height="40" Width="144" Margin="0,495,0,0" >
+            <Grid x:ConnectionId='11' x:Name="Inputfields">
+                <TextBox x:ConnectionId='16' x:Name="CourseInsertTitleInput" Height="50" Width="375" PlaceholderText="Enter Title" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Margin="0,153,0,553"/>
+                <TextBox x:ConnectionId='17' x:Name="CourseInsertTypeInput" Height="50" Width="375" PlaceholderText="Enter Course Type" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Margin="0,231,0,475"/>
+                <ComboBox x:ConnectionId='18' x:Name="ValidDepartmentsInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Pick A Department" FontSize="36" HorizontalAlignment="Center" Height="50" Width="375" Margin="0,422,0,0"/>
+                <ComboBox x:ConnectionId='19'  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" Height="40" Width="144" Margin="0,495,0,0" >
                     <x:Int32>1</x:Int32>
                     <x:Int32>2</x:Int32>
                     <x:Int32>3</x:Int32>
@@ -2004,9 +2046,9 @@
                 </ComboBox>
             </Grid>
             <Grid Margin="414,414,183,26">
-                <TextBox x:ConnectionId='14' x:Name="CourseInsertInfoInput" Height="200" Width="850" PlaceholderText="Enter Course Info" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
+                <TextBox x:ConnectionId='15' x:Name="CourseInsertInfoInput" Height="200" Width="850" PlaceholderText="Enter Course Info" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" TextWrapping="Wrap"/>
             </Grid>
-            <Grid x:ConnectionId='11' x:Name="Labels" Margin="-394,14,394,-14">
+            <Grid x:ConnectionId='12' x:Name="Labels" Margin="-394,14,394,-14">
                 <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text="        Title:" Margin="0,242,0,-242" />
                 <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text=" Course Type:" Margin="0,323,0,-323" />
                 <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text="   Department:" Margin="0,405,0,-405"/>
@@ -2014,10 +2056,10 @@
                 <TextBlock FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" HorizontalAlignment="Center" Foreground="Black" Text=" Course Info:" Margin="0,554,0,-554"/>
             </Grid>
             <Grid Margin="1359,26,63,722">
-                <Button x:ConnectionId='13' x:Name="Cancelform1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="X"                     />
+                <Button x:ConnectionId='14' x:Name="Cancelform1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="X"                     />
             </Grid>
             <Grid Margin="763,708,730,37">
-                <Button x:ConnectionId='12' x:Name="Submitform1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit"                            />
+                <Button x:ConnectionId='13' x:Name="Submitform1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" FontSize="36" Content="Submit"                            />
             </Grid>
         </Grid>
     </Grid>
