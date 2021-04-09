@@ -78,6 +78,9 @@
             <Grid Margin="633,693,384,48">
                 <Button x:Name="EditCancel" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Cancel" Click="EditCancel_Click"/>
             </Grid>
+            <Grid Margin="1198,411,103,371">
+                <Button x:Name="EditRemoveByCheck" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Remove Selected" Click="EditRemoveByCheck_Click" />
+            </Grid>
             <ScrollViewer x:Name="AnotherScrollViewer" Margin="486,349,486,308" >
                 <Grid>
                     <Grid x:Name="AssignmentListTable" HorizontalAlignment="Center" VerticalAlignment="Top">

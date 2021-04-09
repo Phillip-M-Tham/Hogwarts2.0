@@ -2641,6 +2641,9 @@ namespace Hogwarts2._0
         {
             AssignmentListTable.Children.Clear();
             AssignmentListTable.RowDefinitions.Clear();
+
+            AssingmentListTableRemove.Children.Clear();
+            AssingmentListTableRemove.RowDefinitions.Clear();
         }
 
         private void Form2CAssignments_Click(object sender, RoutedEventArgs e)
@@ -2709,6 +2712,7 @@ namespace Hogwarts2._0
             EditRemoveAssignment.Visibility = Visibility.Collapsed;
             EditSubmitAssignments.Visibility = Visibility.Collapsed;
             EditCancel.Visibility = Visibility.Collapsed;
+            EditRemoveByCheck.Visibility = Visibility.Collapsed;
             purgeAssignmentsTable();
             SetupAssignmentsTable();
         }
@@ -2719,6 +2723,7 @@ namespace Hogwarts2._0
             EditRemoveAssignment.Visibility = Visibility.Visible;
             EditSubmitAssignments.Visibility = Visibility.Visible;
             EditCancel.Visibility = Visibility.Visible;
+            EditRemoveByCheck.Visibility = Visibility.Visible;
             purgeAssignmentsTable();
         }
 
@@ -2751,12 +2756,14 @@ namespace Hogwarts2._0
 
             TextBox txtbox = new TextBox();
             txtbox.FontSize = 36;
+            txtbox.Name = EditRowCounter.ToString();
             txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
             txtbox.PlaceholderText = "Enter Assignment title";
             txtbox.SetValue(Grid.RowProperty, EditRowCounter);
             txtbox.SetValue(Grid.ColumnProperty, 0);
 
             CheckBox checkbx = new CheckBox();
+            checkbx.Name = EditRowCounter.ToString();
             checkbx.SetValue(Grid.RowProperty, EditRowCounter);
             checkbx.SetValue(Grid.ColumnProperty, 0);
             AssingmentListTableRemove.Children.Add(checkbx);
@@ -2783,6 +2790,67 @@ namespace Hogwarts2._0
             else
             {
                 var Removeassignmenterror = new MessageDialog("Please do not leave any assingment title empty.");
+                await Removeassignmenterror.ShowAsync();
+            }
+        }
+
+        private async void EditRemoveByCheck_Click(object sender, RoutedEventArgs e)
+        {
+            List<int> targetlist = new List<int>();
+            int count = 0;
+            foreach(CheckBox box in AssingmentListTableRemove.Children)
+            {//count how many checkboxes are checked and add the index to a list
+                if(box.IsChecked == true)
+                {
+                    targetlist.Add(count);
+                }
+                count++;
+            }
+            if(targetlist.Count > 0)
+            {//if the list of indexes is bigger than 0
+                foreach (int item in targetlist)
+                {//remove the item by index and decrement the edit row counter and row definitions
+                    --EditRowCounter;
+                    AssignmentListTable.RowDefinitions.RemoveAt(EditRowCounter);
+                    
+                    AssingmentListTableRemove.RowDefinitions.RemoveAt(EditRowCounter);
+                   
+                    foreach(TextBox txt in AssignmentListTable.Children)
+                    {
+                        if(txt.Name == $"{item}")
+                        {
+                            AssignmentListTable.Children.Remove(txt);
+                        }
+                    }
+                    
+                    foreach(CheckBox chkbox in AssingmentListTableRemove.Children)
+                    {
+                        if (chkbox.Name == $"{item}")
+                        {
+                            AssingmentListTableRemove.Children.Remove(chkbox);
+                        }
+                    }
+                }
+                EditRowCounter = 0;
+                int counter2 = 0;
+                foreach (TextBox test in AssignmentListTable.Children)
+                {//update the name and position of each textbox
+                    test.Name = EditRowCounter.ToString();
+                    test.SetValue(Grid.RowProperty, EditRowCounter);
+                    EditRowCounter++;
+                }
+                foreach(CheckBox box in AssingmentListTableRemove.Children)
+                {//update the name and position of each box
+                    box.Name = counter2.ToString();
+                    box.IsChecked = false;
+                    box.SetValue(Grid.RowProperty, counter2);
+                    counter2++;
+                }
+                
+            }
+            else
+            {//no boxes were checked
+                var Removeassignmenterror = new MessageDialog("No assignments were selected.");
                 await Removeassignmenterror.ShowAsync();
             }
         }
