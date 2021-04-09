@@ -2675,34 +2675,96 @@ namespace Hogwarts2._0
                     sqlConn.Close();
                 }
             }
-            if(Assignments.Count > 0)
+            if (Assignments.Count > 0)
             {//populate the table
+                EditRowCounter = 0;
+                if (EditAddAssignment.Visibility == Visibility.Collapsed)
+                {
+                    foreach (var item in Assignments)
+                    {
+                        RowDefinition myrow = new RowDefinition();
+                        myrow.Height = new GridLength(50);
+                        AssignmentListTable.RowDefinitions.Add(myrow);
 
+                        Border myborder = new Border();
+                        myborder.BorderThickness = new Thickness(2);
+                        myborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                        myborder.SetValue(Grid.RowProperty, EditRowCounter);
+                        myborder.SetValue(Grid.ColumnProperty, 0);
+
+                        TextBlock mytxtblock = new TextBlock();
+                        mytxtblock.FontSize = 36;
+                        mytxtblock.Foreground = new SolidColorBrush(Colors.Black);
+                        mytxtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                        mytxtblock.HorizontalAlignment = HorizontalAlignment.Center;
+                        mytxtblock.VerticalAlignment = VerticalAlignment.Center;
+                        mytxtblock.Text = item;
+
+                        myborder.Child = mytxtblock;
+                        AssignmentListTable.Children.Add(myborder);
+
+                        EditRowCounter++;
+                    }
+                }
+                else
+                {
+                    foreach(var item in Assignments)
+                    {
+                        RowDefinition myrow = new RowDefinition();
+                        myrow.Height = new GridLength(50);
+                        AssignmentListTable.RowDefinitions.Add(myrow);
+
+                        RowDefinition newcheckrow = new RowDefinition();
+                        newcheckrow.Height = new GridLength(50);
+                        AssingmentListTableRemove.RowDefinitions.Add(newcheckrow);
+
+                        TextBox txtbox = new TextBox();
+                        txtbox.FontSize = 36;
+                        txtbox.Name = EditRowCounter.ToString();
+                        txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
+                        txtbox.Text = item;
+                        txtbox.SetValue(Grid.RowProperty, EditRowCounter);
+                        txtbox.SetValue(Grid.ColumnProperty, 0);
+
+                        CheckBox checkbx = new CheckBox();
+                        checkbx.Name = EditRowCounter.ToString();
+                        checkbx.SetValue(Grid.RowProperty, EditRowCounter);
+                        checkbx.SetValue(Grid.ColumnProperty, 0);
+                        AssingmentListTableRemove.Children.Add(checkbx);
+
+                        AssignmentListTable.Children.Add(txtbox);
+
+                        EditRowCounter++;
+                    }
+                }
             }
             else
             {
-                RowDefinition myrow = new RowDefinition();
-                myrow.Height = new GridLength(50);
-                AssignmentListTable.RowDefinitions.Add(myrow);
+                if (EditAddAssignment.Visibility == Visibility.Collapsed)
+                {
+                    RowDefinition myrow = new RowDefinition();
+                    myrow.Height = new GridLength(50);
+                    AssignmentListTable.RowDefinitions.Add(myrow);
 
-                Border myborder = new Border();
-                myborder.BorderThickness = new Thickness(2);
-                myborder.BorderBrush = new SolidColorBrush(Colors.Black);
-                myborder.SetValue(Grid.RowProperty, 0);
-                myborder.SetValue(Grid.ColumnProperty, 0);
+                    Border myborder = new Border();
+                    myborder.BorderThickness = new Thickness(2);
+                    myborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                    myborder.SetValue(Grid.RowProperty, 0);
+                    myborder.SetValue(Grid.ColumnProperty, 0);
 
-                TextBlock mytxtblock = new TextBlock();
-                mytxtblock.FontSize = 36;
-                mytxtblock.Foreground = new SolidColorBrush(Colors.Black);
-                mytxtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                mytxtblock.HorizontalAlignment = HorizontalAlignment.Center;
-                mytxtblock.VerticalAlignment = VerticalAlignment.Center;
-                mytxtblock.Text = "Please Add some assignments";
+                    TextBlock mytxtblock = new TextBlock();
+                    mytxtblock.FontSize = 36;
+                    mytxtblock.Foreground = new SolidColorBrush(Colors.Black);
+                    mytxtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                    mytxtblock.HorizontalAlignment = HorizontalAlignment.Center;
+                    mytxtblock.VerticalAlignment = VerticalAlignment.Center;
+                    mytxtblock.Text = "Please Add some assignments";
 
-                myborder.Child = mytxtblock;
-                AssignmentListTable.Children.Add(myborder);
+                    myborder.Child = mytxtblock;
+                    AssignmentListTable.Children.Add(myborder);
 
-                EditRowCounter = 0;
+                    EditRowCounter = 0;
+                }
             }
         }
 
@@ -2725,11 +2787,12 @@ namespace Hogwarts2._0
             EditCancel.Visibility = Visibility.Visible;
             EditRemoveByCheck.Visibility = Visibility.Visible;
             purgeAssignmentsTable();
+            SetupAssignmentsTable();
         }
 
         private async void EditRemoveAssignment_Click(object sender, RoutedEventArgs e)
         {
-            if(EditRowCounter != 0)
+            if (EditRowCounter != 0)
             {//get rid of the current row
                 --EditRowCounter;
                 AssignmentListTable.Children.RemoveAt(EditRowCounter);
@@ -2776,20 +2839,46 @@ namespace Hogwarts2._0
         private async void EditSubmitAssignments_Click(object sender, RoutedEventArgs e)
         {
             bool validinput = true;
-            foreach(TextBox assignment in AssignmentListTable.Children)
+            foreach (TextBox assignment in AssignmentListTable.Children)
             {
-                if(assignment.Text == "")
+                if (assignment.Text == "")
                 {
                     validinput = false;
                 }
             }
-            if(validinput == true)
-            {
-
+            if (validinput == true)
+            {//remove the all assignments from the course
+             //add all the assignments created
+                using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                {
+                    sqlConn.Open();
+                    if (sqlConn.State == System.Data.ConnectionState.Open)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand command = new SqlCommand($"DELETE FROM Assignments WHERE SemesterID = {EditSelectedSemesterID} AND CourseID = {EditSelectedCourseID} ;", sqlConn);
+                        adapter.DeleteCommand = command;
+                        adapter.DeleteCommand.ExecuteNonQuery();
+                        foreach (TextBox txtbox in AssignmentListTable.Children)
+                        {
+                            adapter = new SqlDataAdapter();
+                            command = new SqlCommand($"INSERT INTO Assignments VALUES ({EditSelectedSemesterID},{EditSelectedCourseID},'{txtbox.Text}');", sqlConn);
+                            adapter.InsertCommand = command;
+                            adapter.InsertCommand.ExecuteNonQuery();
+                        }
+                        sqlConn.Close();
+                    }
+                }
+                purgeAssignmentsTable();
+                EditAddAssignment.Visibility = Visibility.Collapsed;
+                EditRemoveAssignment.Visibility = Visibility.Collapsed;
+                EditSubmitAssignments.Visibility = Visibility.Collapsed;
+                EditCancel.Visibility = Visibility.Collapsed;
+                EditRemoveByCheck.Visibility = Visibility.Collapsed;
+                SetupAssignmentsTable();
             }
             else
             {
-                var Removeassignmenterror = new MessageDialog("Please do not leave any assingment title empty.");
+                var Removeassignmenterror = new MessageDialog("Please do not leave any assignment title empty.");
                 await Removeassignmenterror.ShowAsync();
             }
         }
@@ -2798,32 +2887,30 @@ namespace Hogwarts2._0
         {
             List<int> targetlist = new List<int>();
             int count = 0;
-            foreach(CheckBox box in AssingmentListTableRemove.Children)
+            foreach (CheckBox box in AssingmentListTableRemove.Children)
             {//count how many checkboxes are checked and add the index to a list
-                if(box.IsChecked == true)
+                if (box.IsChecked == true)
                 {
                     targetlist.Add(count);
                 }
                 count++;
             }
-            if(targetlist.Count > 0)
+            if (targetlist.Count > 0)
             {//if the list of indexes is bigger than 0
                 foreach (int item in targetlist)
                 {//remove the item by index and decrement the edit row counter and row definitions
                     --EditRowCounter;
                     AssignmentListTable.RowDefinitions.RemoveAt(EditRowCounter);
-                    
                     AssingmentListTableRemove.RowDefinitions.RemoveAt(EditRowCounter);
-                   
-                    foreach(TextBox txt in AssignmentListTable.Children)
+
+                    foreach (TextBox txt in AssignmentListTable.Children)
                     {
-                        if(txt.Name == $"{item}")
+                        if (txt.Name == $"{item}")
                         {
                             AssignmentListTable.Children.Remove(txt);
                         }
                     }
-                    
-                    foreach(CheckBox chkbox in AssingmentListTableRemove.Children)
+                    foreach (CheckBox chkbox in AssingmentListTableRemove.Children)
                     {
                         if (chkbox.Name == $"{item}")
                         {
@@ -2839,14 +2926,13 @@ namespace Hogwarts2._0
                     test.SetValue(Grid.RowProperty, EditRowCounter);
                     EditRowCounter++;
                 }
-                foreach(CheckBox box in AssingmentListTableRemove.Children)
+                foreach (CheckBox box in AssingmentListTableRemove.Children)
                 {//update the name and position of each box
                     box.Name = counter2.ToString();
                     box.IsChecked = false;
                     box.SetValue(Grid.RowProperty, counter2);
                     counter2++;
                 }
-                
             }
             else
             {//no boxes were checked
