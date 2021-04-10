@@ -636,11 +636,11 @@ namespace Hogwarts2._0
             AssignCourseForm2.Visibility = Visibility.Collapsed;
             UpdateCourseForm2.Visibility = Visibility.Collapsed;
             Cancelform2.Visibility = Visibility.Collapsed;
-            form2B.Visibility = Visibility.Collapsed;
+            Form2B.Visibility = Visibility.Collapsed;
         }
         private void UpdateCourseForm2_Click(object sender, RoutedEventArgs e)
         {
-            form2B.Visibility = Visibility.Visible;
+            Form2B.Visibility = Visibility.Visible;
             AssignCourseForm.Visibility = Visibility.Collapsed;
         }
         private void Weesnaw(object sender, SelectionChangedEventArgs e)
@@ -668,7 +668,7 @@ namespace Hogwarts2._0
                     FridayTimes.SelectedValue = "Friday";
                 }
             }
-            else if (form2B.Visibility == Visibility.Visible)
+            else if (Form2B.Visibility == Visibility.Visible)
             {
                 if (Form2BMondayTimes.Visibility == Visibility.Visible)
                 {
@@ -1428,7 +1428,7 @@ namespace Hogwarts2._0
 
         private void Cancelform2B_Click(object sender, RoutedEventArgs e)
         {
-            form2B.Visibility = Visibility.Collapsed;
+            Form2B.Visibility = Visibility.Collapsed;
             AssignCourseForm.Visibility = Visibility.Visible;
             ResetForm2B();
         }
@@ -2617,23 +2617,24 @@ namespace Hogwarts2._0
 
         private void SetSelectedCourse(object sender, RoutedEventArgs e)
         {
-
             Form1C.Visibility = Visibility.Collapsed;
             Form2C.Visibility = Visibility.Visible;
             Button pressedbutton = sender as Button;
             Int32.TryParse(pressedbutton.Name, out EditSelectedCourseID);
-            Form2CCourseTitle.Text = pressedbutton.Content.ToString();
-        }
+            Form2CTitle.Text = pressedbutton.Content.ToString();
+            purgeAssignmentsTable();
+            SetupAssignmentsTable();
+        }   
 
         private void Form2CCancel_Click(object sender, RoutedEventArgs e)
         {
-            Form1C.Visibility = Visibility.Visible;
             Form2C.Visibility = Visibility.Collapsed;
-        }
-
-        private void Form3CCancel_Click(object sender, RoutedEventArgs e)
-        {
-            Form3C.Visibility = Visibility.Collapsed;
+            Form1C.Visibility = Visibility.Visible;
+            EditAddAssignment.Visibility = Visibility.Collapsed;
+            EditRemoveAssignment.Visibility = Visibility.Collapsed;
+            EditSubmitAssignments.Visibility = Visibility.Collapsed;
+            EditCancel.Visibility = Visibility.Collapsed;
+            EditRemoveByCheck.Visibility = Visibility.Collapsed;
             purgeAssignmentsTable();
         }
 
@@ -2645,17 +2646,10 @@ namespace Hogwarts2._0
             AssingmentListTableRemove.Children.Clear();
             AssingmentListTableRemove.RowDefinitions.Clear();
         }
-
-        private void Form2CAssignments_Click(object sender, RoutedEventArgs e)
-        {
-            Form3C.Visibility = Visibility.Visible;
-            purgeAssignmentsTable();
-            SetupAssignmentsTable();
-        }
-
         private void SetupAssignmentsTable()
         {
             List<string> Assignments = new List<string>();
+            List<int> AssignmentID = new List<int>();
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
@@ -2663,12 +2657,13 @@ namespace Hogwarts2._0
                 {//acquire the all the courses the professor has created
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT AssignmentTitle FROM Assignments WHERE CourseID = {EditSelectedCourseID} AND SemesterID = {EditSelectedSemesterID};";
+                        cmd.CommandText = $"SELECT AssignmentTitle,AssignmentID FROM Assignments WHERE CourseID = {EditSelectedCourseID} AND SemesterID = {EditSelectedSemesterID};";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
                                 Assignments.Add(reader.GetValue(0).ToString());
+                                AssignmentID.Add((int)reader.GetValue(1));
                             }
                         }
                     }
@@ -2692,15 +2687,17 @@ namespace Hogwarts2._0
                         myborder.SetValue(Grid.RowProperty, EditRowCounter);
                         myborder.SetValue(Grid.ColumnProperty, 0);
 
-                        TextBlock mytxtblock = new TextBlock();
-                        mytxtblock.FontSize = 36;
-                        mytxtblock.Foreground = new SolidColorBrush(Colors.Black);
-                        mytxtblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                        mytxtblock.HorizontalAlignment = HorizontalAlignment.Center;
-                        mytxtblock.VerticalAlignment = VerticalAlignment.Center;
-                        mytxtblock.Text = item;
+                        Button mybutton = new Button();
+                        mybutton.FontSize = 36;
+                        mybutton.Foreground = new SolidColorBrush(Colors.Black);
+                        mybutton.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                        mybutton.HorizontalAlignment = HorizontalAlignment.Center;
+                        mybutton.VerticalAlignment = VerticalAlignment.Center;
+                        mybutton.Content = item;
+                        mybutton.Name = AssignmentID[EditRowCounter].ToString();//assigns the id as a string to the name of the button
+                        mybutton.Click += SetupGrades;
 
-                        myborder.Child = mytxtblock;
+                        myborder.Child = mybutton;
                         AssignmentListTable.Children.Add(myborder);
 
                         EditRowCounter++;
@@ -2765,6 +2762,97 @@ namespace Hogwarts2._0
 
                     EditRowCounter = 0;
                 }
+            }
+        }
+
+        private void SetupGrades(object sender, RoutedEventArgs e)
+        {
+            Form3C.Visibility = Visibility.Visible;
+            Button thebutton = sender as Button;
+            Form3CTitle.Text = thebutton.Content.ToString();
+            SetupgradesTable();
+        }
+
+        private async void SetupgradesTable()
+        {
+            int count = 0;
+            List<int> studentids = new List<int>();
+            List<string> studentnames = new List<string>();
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//acquire the all students enrolled in the course 
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT StudentID FROM StudentEnrolledCourses WHERE CourseID = {EditSelectedCourseID} AND SemesterID = {EditSelectedSemesterID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                studentids.Add((int)reader.GetValue(0));
+                            }
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            if(studentids.Count > 0)
+            {//get the names from the acquired ids
+                using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                {
+                    sqlConn.Open();
+                    if (sqlConn.State == System.Data.ConnectionState.Open)
+                    {//acquire the all students enrolled in the course 
+                        foreach (var id in studentids)
+                        {
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT FirstName, LastName FROM Users WHERE HUID = {id};";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        studentnames.Add(reader.GetValue(0).ToString()+" "+reader.GetValue(1).ToString());
+                                    }
+                                }
+                            }
+                        }
+                        sqlConn.Close();
+                    }
+                }
+                foreach(var name in studentnames)
+                {
+                    RowDefinition rd = new RowDefinition();
+                    rd.Height = new GridLength(50);
+                    StudentNameTable.RowDefinitions.Add(rd);
+
+                    Border bd = new Border();
+                    bd.BorderThickness = new Thickness(2);
+                    bd.BorderBrush = new SolidColorBrush(Colors.Black);
+                    bd.SetValue(Grid.RowProperty, count);
+                    bd.SetValue(Grid.ColumnProperty, 0);
+
+                    Button btn = new Button();
+                    btn.FontSize = 36;
+                    btn.Foreground = new SolidColorBrush(Colors.Black);
+                    btn.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                    btn.HorizontalAlignment = HorizontalAlignment.Center;
+                    btn.VerticalAlignment = VerticalAlignment.Center;
+                    btn.Content = name;
+                    //btn.Name = AssignmentID[EditRowCounter].ToString();//assigns the id as a string to the name of the button
+                    //btn.Click += SetupGrades;
+
+                    bd.Child = btn;
+                    StudentNameTable.Children.Add(bd);
+
+                    count++;
+                }
+            }
+            else
+            {
+                var profnosemestercourses = new MessageDialog("There are no students currently enrolled in this course.");
+                await profnosemestercourses.ShowAsync();
             }
         }
 
@@ -2939,6 +3027,14 @@ namespace Hogwarts2._0
                 var Removeassignmenterror = new MessageDialog("No assignments were selected.");
                 await Removeassignmenterror.ShowAsync();
             }
+        }
+
+        private void Form3CCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form3C.Visibility = Visibility.Collapsed;
+            StudentNameTable.Children.Clear();
+            StudentNameTable.RowDefinitions.Clear();
+
         }
     }
 }

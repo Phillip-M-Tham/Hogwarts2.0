@@ -41,27 +41,12 @@
             </Grid>
         </Grid>
         <Grid x:Name="Form2C" Visibility="Collapsed">
-            <Image x:Name="Form2CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
-            <Grid Margin="288,109,288,649">
-                <TextBlock x:Name="Form2CCourseTitle" HorizontalAlignment="Center" VerticalAlignment="center" FontSize="120" Foreground="Black" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
-            </Grid>
-            <Grid Margin="1344,25,53,714">
-                <Button x:Name="Form2CCancel" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X" Click="Form2CCancel_Click"/>
-            </Grid>
-            <Grid Margin="547,315,559,386">
-                <Button x:Name="Form2CAssignments" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Assignments" Click="Form2CAssignments_Click"/>
-            </Grid>
-            <Grid Margin="541,456,565,245">
-                <Button x:Name="Form2CGrades" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Grades"/>
-            </Grid>
-        </Grid>
-        <Grid x:Name="Form3C" Visibility="Visible">
-            <Image x:Name="Form3CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Image x:Name="Form2CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="288,16,288,611">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" Foreground="Black" Text="Assignments" FontFamily="/Assets/ReginaScript.ttf#Regina Script" />
+                <TextBlock x:Name="Form2CTitle"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" Foreground="Black" Text="Assignments" FontFamily="/Assets/ReginaScript.ttf#Regina Script" />
             </Grid>
             <Grid Margin="1412,98,128,787">
-                <Button x:Name="Form3CCancel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X" Click="Form3CCancel_Click" />
+                <Button x:Name="Form2CCancel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X" Click="Form2CCancel_Click" />
             </Grid>
             <Grid Margin="1246,216,172,536">
                 <Button x:Name="EditAddAssignment" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="+" Click="EditAddAssignment_Click"/>
@@ -100,7 +85,24 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
-        <Grid Name="form2B" Visibility="Collapsed">
+        <Grid x:Name ="Form3C">
+            <Image x:Name="Form3CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Grid Margin="288,125,288,682">
+                <TextBlock x:Name="Form3CTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Hello World" FontSize="120" Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+            </Grid>
+            <Grid Margin="1145,16,-149,711">
+                <Button x:Name ="Form3CCancel"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X" Click="Form3CCancel_Click"/>
+            </Grid>
+            <ScrollViewer x:Name="Form3CScrollViewer" Margin="288,369,288,264">
+                <Grid x:Name="StudentNameTable" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="Form2B" Visibility="Collapsed">
             <Image x:Name="Form2BBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="453,-44,459,572">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120" Text="Update Your Courses" Foreground="Black" FontWeight="Light"/>
