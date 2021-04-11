@@ -26,7 +26,6 @@ namespace Hogwarts2._0
         private string _courseinfo = "";
         private int _notvalidform1 = 0;
         private int _notvalidform2A = 0;
-        //private int _totaltimes = 0;
         private string _errorform1 = "";
         private string _errorform2A = "";
         private string form1title = "";
@@ -2690,10 +2689,6 @@ namespace Hogwarts2._0
                                 }
                             }
                         }
-                        else
-                        {
-
-                        }
                     }
                     sqlConn.Close();
                 }
@@ -2753,10 +2748,10 @@ namespace Hogwarts2._0
 
                             TextBox txtbox = new TextBox();
                             txtbox.FontSize = 36;
-                            txtbox.Name = EditRowCounter.ToString();
+                            txtbox.Name = AssignmentID[EditRowCounter].ToString();
                             txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
 
-                            //need to find out if they are is a grade for the assignment id
+                            //need to find out if they is a grade for the assignment id
                             GradeExist = getstudentgrade(studentID,AssignmentID[EditRowCounter]);
                             if (GradeExist == true) {
                                 txtbox.Text = Form4CGrades[form4cindex].ToString();
@@ -2768,7 +2763,6 @@ namespace Hogwarts2._0
                             }
                             bd2.Child = txtbox;
                             Form4CCoursesTable.Children.Add(bd2);
-
                         }
                         EditRowCounter++;
                     }
@@ -3131,6 +3125,10 @@ namespace Hogwarts2._0
 
         private async void EditSubmitAssignments_Click(object sender, RoutedEventArgs e)
         {
+            string filtervalidassignment = "";
+            string validassignment = "";
+            List<int> assignmentids = new List<int>();
+            List<int> newassignmentids = new List<int>();
             bool validinput = true;
             foreach (TextBox assignment in AssignmentListTable.Children)
             {
@@ -3147,16 +3145,73 @@ namespace Hogwarts2._0
                     sqlConn.Open();
                     if (sqlConn.State == System.Data.ConnectionState.Open)
                     {
-                        SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand command = new SqlCommand($"DELETE FROM Assignments WHERE SemesterID = {EditSelectedSemesterID} AND CourseID = {EditSelectedCourseID} ;", sqlConn);
-                        adapter.DeleteCommand = command;
-                        adapter.DeleteCommand.ExecuteNonQuery();
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {
+                            cmd.CommandText = $"SELECT AssignmentID FROM Assignments WHERE SemesterID = {EditSelectedSemesterID} AND CourseID = {EditSelectedCourseID};";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    assignmentids.Add((int)reader.GetValue(0));
+                                }
+                            }
+                        }
                         foreach (TextBox txtbox in AssignmentListTable.Children)
                         {
-                            adapter = new SqlDataAdapter();
-                            command = new SqlCommand($"INSERT INTO Assignments VALUES ({EditSelectedSemesterID},{EditSelectedCourseID},'{txtbox.Text}');", sqlConn);
-                            adapter.InsertCommand = command;
-                            adapter.InsertCommand.ExecuteNonQuery();
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT AssignmentID FROM Assignments WHERE SemesterID = {EditSelectedSemesterID} AND CourseID = {EditSelectedCourseID} AND AssignmentTitle = '{txtbox.Text}';";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        validassignment += reader.GetValue(0);
+                                    }
+                                }
+                            }
+                            if(validassignment != "")
+                            {//update
+                                int assignmentid = Int32.Parse(validassignment);
+                                SqlDataAdapter adapter = new SqlDataAdapter();
+                                SqlCommand cmd2 = new SqlCommand($"UPDATE Assignments SET AssignmentTitle = '{txtbox.Text}' WHERE AssignmentID = {assignmentid};", sqlConn);
+                                adapter.UpdateCommand = cmd2;
+                                adapter.UpdateCommand.ExecuteNonQuery();
+                                newassignmentids.Add(assignmentid);//adds the assignment id of the updated assignment
+                            }
+                            else
+                            {//insert 
+                                SqlDataAdapter adapter = new SqlDataAdapter();
+                                SqlCommand command = new SqlCommand($"INSERT INTO Assignments VALUES ({EditSelectedSemesterID},{EditSelectedCourseID},'{txtbox.Text}');", sqlConn);
+                                adapter.InsertCommand = command;
+                                adapter.InsertCommand.ExecuteNonQuery();
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get the assignment id of the new inserted assignment
+                                    cmd.CommandText = $"SELECT AssignmentID FROM Assignments WHERE SemesterID = {EditSelectedSemesterID} AND CourseID = {EditSelectedCourseID} AND AssignmentTitle = '{txtbox.Text}';";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            newassignmentids.Add((int)reader.GetValue(0));
+                                        }
+                                    }
+                                }
+                            }
+                            validassignment = "";
+                        }
+                        foreach(var id in assignmentids)
+                        {
+                            if (newassignmentids.Contains(id) == false)
+                            {//if original id does not exist in the list of new ids DELETE the assignment
+                                SqlDataAdapter adapter = new SqlDataAdapter();
+                                SqlCommand command = new SqlCommand($"DELETE FROM Grades WHERE AssignmentID = {id};", sqlConn);
+                                adapter.DeleteCommand = command;
+                                adapter.DeleteCommand.ExecuteNonQuery();
+
+                                adapter = new SqlDataAdapter();
+                                command = new SqlCommand($"DELETE FROM Assignments WHERE AssignmentID = {id};", sqlConn);
+                                adapter.DeleteCommand = command;
+                                adapter.DeleteCommand.ExecuteNonQuery();
+                            }
                         }
                         sqlConn.Close();
                     }
