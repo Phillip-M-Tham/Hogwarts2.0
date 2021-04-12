@@ -119,6 +119,15 @@
             <Grid Margin="288,106,288,684">
                 <TextBlock x:Name="Form4CTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Hello World" FontSize="120" Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script" />
             </Grid>
+            <Grid Margin="240,248,336,592">
+                <TextBlock x:Name="Form4CTableTitle1" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Assignments"/>
+            </Grid>
+            <Grid Margin="766,248,273,592">
+                <TextBlock x:Name="Form4CTableTitle2" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Grade"/>
+            </Grid>
+            <Grid Margin="347,571,425,183">
+                <Button x:Name="SubmitForm4C" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Submit Changes" Click="Form4CSubmit_Click"/>
+            </Grid>
             <ScrollViewer x:Name="Form4CScrollviewer" Margin="288,329,288,335">
                 <Grid x:Name="Form4CCoursesTable" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
@@ -127,8 +136,8 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </ScrollViewer>
-            <Grid>
-                
+            <Grid Margin="0,738,406,134">
+                <TextBlock x:Name="Form4CFinalGrade" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Final Grade :" />
             </Grid>
         </Grid>
         <Grid x:Name="Form2B" Visibility="Collapsed">

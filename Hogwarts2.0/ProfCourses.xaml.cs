@@ -41,6 +41,7 @@ namespace Hogwarts2._0
         private int EditSelectedCourseID;
         private int EditRowCounter;
         private int SelectedAssignmentID;
+        private int Form4CSelectedStudentHUID;
         public ProfCourses()
         {
             this.InitializeComponent();
@@ -2623,7 +2624,7 @@ namespace Hogwarts2._0
             Int32.TryParse(pressedbutton.Name, out EditSelectedCourseID);
             Form2CTitle.Text = pressedbutton.Content.ToString();
             purgeAssignmentsTable();
-            SetupAssignmentsTable("Form2C",-1);
+            SetupAssignmentsTable("Form2C", -1);
         }
 
         private void Form2CCancel_Click(object sender, RoutedEventArgs e)
@@ -2670,7 +2671,7 @@ namespace Hogwarts2._0
                             }
                         }
                     }
-                    if(mode == "Form4C" && studentID != -1)
+                    if (mode == "Form4C" && studentID != -1)
                     {//get all the grades for the student only applicable through form4C
                         if (AssignmentID.Count > 0)
                         {//if they are assignmentIDs, gets the grade for the selected student for each assignment ID
@@ -2679,7 +2680,7 @@ namespace Hogwarts2._0
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {
                                     cmd.CommandText = $"SELECT Grade FROM Grades WHERE AssignmentID = {assignmentid} AND StudentHUID = {studentID};";
-                                    using(SqlDataReader reader = cmd.ExecuteReader())
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
                                     {
                                         while (reader.Read())
                                         {
@@ -2702,7 +2703,7 @@ namespace Hogwarts2._0
                     {
                         RowDefinition myrow = new RowDefinition();
                         myrow.Height = new GridLength(50);
-                        
+
                         Border myborder = new Border();
                         myborder.BorderThickness = new Thickness(2);
                         myborder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -2724,8 +2725,9 @@ namespace Hogwarts2._0
                             AssignmentListTable.RowDefinitions.Add(myrow);
                             myborder.Child = mybutton;
                             AssignmentListTable.Children.Add(myborder);
-                            
-                        }else if(mode == "Form4C")
+
+                        }
+                        else if (mode == "Form4C")
                         {
                             TextBlock txtblox = new TextBlock();
                             txtblox.FontSize = 36;
@@ -2751,9 +2753,10 @@ namespace Hogwarts2._0
                             txtbox.Name = AssignmentID[EditRowCounter].ToString();
                             txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
 
-                            //need to find out if they is a grade for the assignment id
-                            GradeExist = getstudentgrade(studentID,AssignmentID[EditRowCounter]);
-                            if (GradeExist == true) {
+                            //need to find out if there is a grade for the assignment id
+                            GradeExist = getstudentgrade(studentID, AssignmentID[EditRowCounter]);
+                            if (GradeExist == true)
+                            {
                                 txtbox.Text = Form4CGrades[form4cindex].ToString();
                                 form4cindex++;
                             }
@@ -2774,7 +2777,7 @@ namespace Hogwarts2._0
 
                         RowDefinition myrow = new RowDefinition();
                         myrow.Height = new GridLength(50);
-                 
+
                         RowDefinition newcheckrow = new RowDefinition();
                         newcheckrow.Height = new GridLength(50);
                         if (mode == "Form2C")
@@ -2828,7 +2831,8 @@ namespace Hogwarts2._0
                     {
                         AssignmentListTable.RowDefinitions.Add(myrow);
                         AssignmentListTable.Children.Add(myborder);
-                    }else if(mode == "Form4C")
+                    }
+                    else if (mode == "Form4C")
                     {
                         Form4CCoursesTable.RowDefinitions.Add(myrow);
                         Form4CCoursesTable.Children.Add(myborder);
@@ -2977,7 +2981,7 @@ namespace Hogwarts2._0
                     txtbox.Foreground = new SolidColorBrush(Colors.Black);
                     txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
                     txtbox.Name = allids[count].ToString();
-                    studenthasgrade = getstudentgrade(allids[count],-1);
+                    studenthasgrade = getstudentgrade(allids[count], -1);
 
                     if (studenthasgrade == true)
                     {//updates if they do have a grade and use a separate index on number of grades
@@ -3009,12 +3013,13 @@ namespace Hogwarts2._0
             int studentID = Int32.Parse(thebutton.Name);
             Form4C.Visibility = Visibility.Visible;
             Form4CTitle.Text = thebutton.Content.ToString();
+            Form4CSelectedStudentHUID = studentID;
             SetupAssignmentsTable("Form4C", studentID);
         }
 
-        
 
-        private bool getstudentgrade(int studentid,int assignmentid)
+
+        private bool getstudentgrade(int studentid, int assignmentid)
         {
             string validgrade = "";
             bool result;
@@ -3033,7 +3038,7 @@ namespace Hogwarts2._0
                         {
                             cmd.CommandText = $"SELECT Grade FROM Grades WHERE StudentHUID = {studentid} AND AssignmentID = {SelectedAssignmentID};";
                         }
-                            using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -3063,7 +3068,7 @@ namespace Hogwarts2._0
             EditCancel.Visibility = Visibility.Collapsed;
             EditRemoveByCheck.Visibility = Visibility.Collapsed;
             purgeAssignmentsTable();
-            SetupAssignmentsTable("Form2C",-1);
+            SetupAssignmentsTable("Form2C", -1);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -3074,7 +3079,7 @@ namespace Hogwarts2._0
             EditCancel.Visibility = Visibility.Visible;
             EditRemoveByCheck.Visibility = Visibility.Visible;
             purgeAssignmentsTable();
-            SetupAssignmentsTable("Form2C",-1);
+            SetupAssignmentsTable("Form2C", -1);
         }
 
         private async void EditRemoveAssignment_Click(object sender, RoutedEventArgs e)
@@ -3125,7 +3130,6 @@ namespace Hogwarts2._0
 
         private async void EditSubmitAssignments_Click(object sender, RoutedEventArgs e)
         {
-            string filtervalidassignment = "";
             string validassignment = "";
             List<int> assignmentids = new List<int>();
             List<int> newassignmentids = new List<int>();
@@ -3169,7 +3173,7 @@ namespace Hogwarts2._0
                                     }
                                 }
                             }
-                            if(validassignment != "")
+                            if (validassignment != "")
                             {//update
                                 int assignmentid = Int32.Parse(validassignment);
                                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -3198,7 +3202,7 @@ namespace Hogwarts2._0
                             }
                             validassignment = "";
                         }
-                        foreach(var id in assignmentids)
+                        foreach (var id in assignmentids)
                         {
                             if (newassignmentids.Contains(id) == false)
                             {//if original id does not exist in the list of new ids DELETE the assignment
@@ -3222,7 +3226,7 @@ namespace Hogwarts2._0
                 EditSubmitAssignments.Visibility = Visibility.Collapsed;
                 EditCancel.Visibility = Visibility.Collapsed;
                 EditRemoveByCheck.Visibility = Visibility.Collapsed;
-                SetupAssignmentsTable("Form2C",-1);
+                SetupAssignmentsTable("Form2C", -1);
             }
             else
             {
@@ -3346,14 +3350,14 @@ namespace Hogwarts2._0
                                 }
                             }
                             if (validupdate == "")
-                            {//we can update
+                            {//we can insert
                                 SqlDataAdapter adapter = new SqlDataAdapter();
                                 SqlCommand command = new SqlCommand($"INSERT INTO Grades VALUES ({SelectedAssignmentID},{id},{candidateGrades[index]});", sqlConn);
                                 adapter.InsertCommand = command;
                                 adapter.InsertCommand.ExecuteNonQuery();
                             }
                             else
-                            {//we have to insert
+                            {//we have to update
                                 SqlDataAdapter adapter = new SqlDataAdapter();
                                 SqlCommand cmd2 = new SqlCommand($"UPDATE Grades SET Grade = {candidateGrades[index]} WHERE AssignmentID = {SelectedAssignmentID} AND StudentHUID = {id};", sqlConn);
                                 adapter.UpdateCommand = cmd2;
@@ -3381,6 +3385,116 @@ namespace Hogwarts2._0
             Form4C.Visibility = Visibility.Collapsed;
             Form4CCoursesTable.Children.Clear();
             Form4CCoursesTable.RowDefinitions.Clear();
+        }
+
+        private void Form4CSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            int index = 0;
+            string grade = "";
+            List<double> candidateGrades = new List<double>();
+            List<int> assignmentids = new List<int>();
+            foreach (var item in Form4CCoursesTable.Children)
+            {
+                Border tb = item as Border;
+                TextBox txtbox = tb.Child as TextBox;
+                if (txtbox != null)
+                {
+                    if (txtbox.Text != "")
+                    {
+                        double.TryParse(txtbox.Text, out double inputgrade);
+                        candidateGrades.Add(inputgrade);
+                        Int32.TryParse(txtbox.Name, out int assignmentid);
+                        assignmentids.Add(assignmentid);
+                    }
+                }
+            }
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//acquire the all students enrolled in the course 
+                    foreach (var id in assignmentids)
+                    {
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {
+                            cmd.CommandText = $"SELECT Grade FROM Grades WHERE AssignmentID = {id} AND StudentHUID = {Form4CSelectedStudentHUID}";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    grade += reader.GetValue(0).ToString();
+                                }
+                            }
+                        }
+                        if (grade == "")
+                        {//insert the grade
+                            SqlDataAdapter adapter = new SqlDataAdapter();
+                            SqlCommand command = new SqlCommand($"INSERT INTO Grades VALUES ({id},{Form4CSelectedStudentHUID},{candidateGrades[index]});", sqlConn);
+                            adapter.InsertCommand = command;
+                            adapter.InsertCommand.ExecuteNonQuery();
+                            updateFinalGrade(candidateGrades[index],1);
+                        }
+                        else
+                        {//update the grade
+                            SqlDataAdapter adapter = new SqlDataAdapter();
+                            SqlCommand cmd2 = new SqlCommand($"UPDATE Grades SET Grade = {candidateGrades[index]} WHERE AssignmentID = {id} AND StudentHUID = {Form4CSelectedStudentHUID};", sqlConn);
+                            adapter.UpdateCommand = cmd2;
+                            adapter.UpdateCommand.ExecuteNonQuery();
+                            updateFinalGrade(candidateGrades[index], assignmentids.Count);
+                        }
+                        index++;
+                        grade = "";
+                    }
+
+                    sqlConn.Close();
+                }
+            }
+        }
+
+        private void updateFinalGrade(double insertedgrade, int totalassignments)
+        {
+            decimal currpoints = 0;
+            string grade = "";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//acquire the all students enrolled in the course 
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT CurrentGrade,CurrentPoints FROM FinalGrade WHERE CourseID = {EditSelectedCourseID} AND StudentHUID = {Form4CSelectedStudentHUID}";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                grade += reader.GetValue(0).ToString();
+                                currpoints = (decimal)reader.GetValue(1);
+                            }
+                        }
+                    }
+                    if (grade == "")
+                    {//insert
+                        double validgrade = (insertedgrade / 100) * 100;
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand command = new SqlCommand($"INSERT INTO FinalGrade VALUES ({Form4CSelectedStudentHUID},{EditSelectedCourseID},{insertedgrade},{100},{0},{validgrade});", sqlConn);
+                        adapter.InsertCommand = command;
+                        adapter.InsertCommand.ExecuteNonQuery();
+                    }
+                    else
+                    {//update need to find out how many assignments
+                        /*double totalassignmentspoints = 100 * totalassignments;
+                        currpoints = currpoints - 100 + ;
+                        
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand cmd2 = new SqlCommand($"UPDATE FinalGrades SET  CurrentPoints = {} WHERE AssignmentID = {id} AND StudentHUID = {Form4CSelectedStudentHUID};", sqlConn);
+                        adapter.UpdateCommand = cmd2;
+                        adapter.UpdateCommand.ExecuteNonQuery();*/
+                    }
+
+
+                    sqlConn.Close();
+                }
+            }
         }
     }
 }
