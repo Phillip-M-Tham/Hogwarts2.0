@@ -3016,9 +3016,6 @@ namespace Hogwarts2._0
             Form4CSelectedStudentHUID = studentID;
             SetupAssignmentsTable("Form4C", studentID);
         }
-
-
-
         private bool getstudentgrade(int studentid, int assignmentid)
         {
             string validgrade = "";
@@ -3363,6 +3360,7 @@ namespace Hogwarts2._0
                                 adapter.UpdateCommand = cmd2;
                                 adapter.UpdateCommand.ExecuteNonQuery();
                             }
+                            updateFinalGrade(candidateGrades[index], id);
                             index++;
                             validupdate = "";
                         }
@@ -3432,7 +3430,7 @@ namespace Hogwarts2._0
                             SqlCommand command = new SqlCommand($"INSERT INTO Grades VALUES ({id},{Form4CSelectedStudentHUID},{candidateGrades[index]});", sqlConn);
                             adapter.InsertCommand = command;
                             adapter.InsertCommand.ExecuteNonQuery();
-                            updateFinalGrade(candidateGrades[index],1);
+                            updateFinalGrade(candidateGrades[index],-1);
                         }
                         else
                         {//update the grade
@@ -3440,7 +3438,7 @@ namespace Hogwarts2._0
                             SqlCommand cmd2 = new SqlCommand($"UPDATE Grades SET Grade = {candidateGrades[index]} WHERE AssignmentID = {id} AND StudentHUID = {Form4CSelectedStudentHUID};", sqlConn);
                             adapter.UpdateCommand = cmd2;
                             adapter.UpdateCommand.ExecuteNonQuery();
-                            updateFinalGrade(candidateGrades[index], assignmentids.Count);
+                            updateFinalGrade(candidateGrades[index],-1);
                         }
                         index++;
                         grade = "";
@@ -3451,10 +3449,18 @@ namespace Hogwarts2._0
             }
         }
 
-        private void updateFinalGrade(double insertedgrade, int totalassignments)
+        private void updateFinalGrade(double insertedgrade , int studentHUID)
         {
             decimal currpoints = 0;
+            decimal ttlpoints = 0;
             string grade = "";
+            List<int> assignmentids = new List<int>();
+            List<decimal> grades = new List<decimal>();
+            if(studentHUID == -1)
+            {
+                studentHUID = Form4CSelectedStudentHUID;
+            }
+            
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
@@ -3462,13 +3468,14 @@ namespace Hogwarts2._0
                 {//acquire the all students enrolled in the course 
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT CurrentGrade,CurrentPoints FROM FinalGrade WHERE CourseID = {EditSelectedCourseID} AND StudentHUID = {Form4CSelectedStudentHUID}";
+                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE CourseID = {EditSelectedCourseID} AND StudentHUID = {studentHUID}";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
                                 grade += reader.GetValue(0).ToString();
-                                currpoints = (decimal)reader.GetValue(1);
+                                //currpoints = (decimal)reader.GetValue(1);
+                                //ttlpoints = (decimal)reader.GetValue(2);
                             }
                         }
                     }
@@ -3476,22 +3483,50 @@ namespace Hogwarts2._0
                     {//insert
                         double validgrade = (insertedgrade / 100) * 100;
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand command = new SqlCommand($"INSERT INTO FinalGrade VALUES ({Form4CSelectedStudentHUID},{EditSelectedCourseID},{insertedgrade},{100},{0},{validgrade});", sqlConn);
+                        SqlCommand command = new SqlCommand($"INSERT INTO FinalGrade VALUES ({studentHUID},{EditSelectedCourseID},{insertedgrade},{100},{0},{validgrade});", sqlConn);
                         adapter.InsertCommand = command;
                         adapter.InsertCommand.ExecuteNonQuery();
                     }
                     else
-                    {//update need to find out how many assignments
-                        /*double totalassignmentspoints = 100 * totalassignments;
-                        currpoints = currpoints - 100 + ;
-                        
+                    {//update
+                        //first we find out all the assignments with the courseid
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {
+                            cmd.CommandText = $"SELECT AssignmentID FROM Assignments WHERE CourseID = {EditSelectedCourseID} AND SemesterID = {EditSelectedSemesterID}";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    assignmentids.Add((int)reader.GetValue(0));
+                                }
+                            }
+                        }
+                        //find all the grades with the list of assignment ids for the selected student
+                        foreach (var assignmentid in assignmentids)
+                        {
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT Grade FROM Grades WHERE StudentHUID = {studentHUID} AND AssignmentID = {assignmentid}";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        grades.Add((decimal)reader.GetValue(0));
+                                    }
+                                }
+                            }
+                        }
+                        foreach(var g in grades)
+                        {//totals all the grade points
+                            currpoints += g;
+                        }
+                        ttlpoints = grades.Count * 100;
+                        double validgrade = (double)currpoints / (double)ttlpoints * 100;
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand cmd2 = new SqlCommand($"UPDATE FinalGrades SET  CurrentPoints = {} WHERE AssignmentID = {id} AND StudentHUID = {Form4CSelectedStudentHUID};", sqlConn);
+                        SqlCommand cmd2 = new SqlCommand($"UPDATE FinalGrade SET CurrentPoints = {currpoints}, TotalPoints = {ttlpoints}, CurvePoints = {0}, CurrentGrade = {validgrade}  WHERE CourseID = {EditSelectedCourseID} AND StudentHUID = {studentHUID};", sqlConn);
                         adapter.UpdateCommand = cmd2;
-                        adapter.UpdateCommand.ExecuteNonQuery();*/
+                        adapter.UpdateCommand.ExecuteNonQuery();
                     }
-
-
                     sqlConn.Close();
                 }
             }
