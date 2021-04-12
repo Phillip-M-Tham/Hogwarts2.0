@@ -3015,7 +3015,43 @@ namespace Hogwarts2._0
             Form4CTitle.Text = thebutton.Content.ToString();
             Form4CSelectedStudentHUID = studentID;
             SetupAssignmentsTable("Form4C", studentID);
+            SetupFinalGradeText(studentID);
         }
+
+        private async void SetupFinalGradeText(int studentID)
+        {
+            string validgrade = "";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//acquire the all students enrolled in the course 
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE StudentHUID = {studentID} AND CourseID = {EditSelectedCourseID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                validgrade += reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            if(validgrade == "")
+            {
+                Form4CStudentGrade.Text = "N/A";
+                var Removeassignmenterror = new MessageDialog("Please give this student a grade for a minimal one assignment.");
+                await Removeassignmenterror.ShowAsync();
+            }
+            else
+            {
+                Form4CStudentGrade.Text = validgrade;
+            }
+        }
+
         private bool getstudentgrade(int studentid, int assignmentid)
         {
             string validgrade = "";
@@ -3430,7 +3466,6 @@ namespace Hogwarts2._0
                             SqlCommand command = new SqlCommand($"INSERT INTO Grades VALUES ({id},{Form4CSelectedStudentHUID},{candidateGrades[index]});", sqlConn);
                             adapter.InsertCommand = command;
                             adapter.InsertCommand.ExecuteNonQuery();
-                            updateFinalGrade(candidateGrades[index],-1);
                         }
                         else
                         {//update the grade
@@ -3438,29 +3473,32 @@ namespace Hogwarts2._0
                             SqlCommand cmd2 = new SqlCommand($"UPDATE Grades SET Grade = {candidateGrades[index]} WHERE AssignmentID = {id} AND StudentHUID = {Form4CSelectedStudentHUID};", sqlConn);
                             adapter.UpdateCommand = cmd2;
                             adapter.UpdateCommand.ExecuteNonQuery();
-                            updateFinalGrade(candidateGrades[index],-1);
                         }
+                        updateFinalGrade(candidateGrades[index], -1);
                         index++;
                         grade = "";
                     }
-
                     sqlConn.Close();
                 }
             }
+            Form4CCoursesTable.Children.Clear();
+            Form4CCoursesTable.RowDefinitions.Clear();
+            SetupAssignmentsTable("Form4C", Form4CSelectedStudentHUID);
+            SetupFinalGradeText(Form4CSelectedStudentHUID);
         }
 
-        private void updateFinalGrade(double insertedgrade , int studentHUID)
+        private void updateFinalGrade(double insertedgrade, int studentHUID)
         {
             decimal currpoints = 0;
             decimal ttlpoints = 0;
             string grade = "";
             List<int> assignmentids = new List<int>();
             List<decimal> grades = new List<decimal>();
-            if(studentHUID == -1)
+            if (studentHUID == -1)
             {
                 studentHUID = Form4CSelectedStudentHUID;
             }
-            
+
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
@@ -3474,8 +3512,6 @@ namespace Hogwarts2._0
                             while (reader.Read())
                             {
                                 grade += reader.GetValue(0).ToString();
-                                //currpoints = (decimal)reader.GetValue(1);
-                                //ttlpoints = (decimal)reader.GetValue(2);
                             }
                         }
                     }
@@ -3516,7 +3552,7 @@ namespace Hogwarts2._0
                                 }
                             }
                         }
-                        foreach(var g in grades)
+                        foreach (var g in grades)
                         {//totals all the grade points
                             currpoints += g;
                         }

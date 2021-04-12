@@ -139,6 +139,9 @@
             <Grid Margin="0,738,406,134">
                 <TextBlock x:Name="Form4CFinalGrade" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Final Grade :" />
             </Grid>
+            <Grid Margin="655,668,665,58">
+                <TextBlock x:Name="Form4CStudentGrade" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Hello World" />
+            </Grid>
         </Grid>
         <Grid x:Name="Form2B" Visibility="Collapsed">
             <Image x:Name="Form2BBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
