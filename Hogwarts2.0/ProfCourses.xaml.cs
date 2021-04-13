@@ -2489,8 +2489,7 @@ namespace Hogwarts2._0
             if (cb.SelectedItem != null)
             {
                 if (cb.SelectedValue.ToString() != "There Are No Semesters")
-                {
-                    //obtain all of the courseids from the selected semester
+                {//obtain all of the courseids from the selected semester
                     using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
                     {
                         sqlConn.Open();
@@ -2674,7 +2673,7 @@ namespace Hogwarts2._0
                     if (mode == "Form4C" && studentID != -1)
                     {//get all the grades for the student only applicable through form4C
                         if (AssignmentID.Count > 0)
-                        {//if they are assignmentIDs, gets the grade for the selected student for each assignment ID
+                        {//if there are assignmentIDs, gets the grade for the selected student for each assignment ID
                             foreach (var assignmentid in AssignmentID)
                             {
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
@@ -2749,6 +2748,7 @@ namespace Hogwarts2._0
                             bd2.SetValue(Grid.ColumnProperty, 1);
 
                             TextBox txtbox = new TextBox();
+                            txtbox.Foreground = new SolidColorBrush(Colors.Black);
                             txtbox.FontSize = 36;
                             txtbox.Name = AssignmentID[EditRowCounter].ToString();
                             txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
@@ -2978,7 +2978,7 @@ namespace Hogwarts2._0
 
                     TextBox txtbox = new TextBox();
                     txtbox.FontSize = 36;
-                    txtbox.Foreground = new SolidColorBrush(Colors.Black);
+                    //txtbox.Foreground = new SolidColorBrush(Colors.Black); THIS MAKES FORM3C GRADE WHITE
                     txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
                     txtbox.Name = allids[count].ToString();
                     studenthasgrade = getstudentgrade(allids[count], -1);
@@ -3566,6 +3566,122 @@ namespace Hogwarts2._0
                     sqlConn.Close();
                 }
             }
+        }
+
+        private void Form2CAllStudents_Click(object sender, RoutedEventArgs e)
+        {//I have access to 2Csemesterid and 2c courseid
+            Form5C.Visibility = Visibility.Visible;
+            List<int> studentids = new List<int>();
+            List<string> firstlastname = new List<string>();
+            List<int> sortedstudentids = new List<int>();
+            int rowcounter = 0;
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {//Populates the form5c student roster
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//acquire the all students enrolled in the course 
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT StudentID FROM StudentEnrolledCourses WHERE CourseID = {EditSelectedCourseID} AND SemesterID = {EditSelectedSemesterID}";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                studentids.Add((int)reader.GetValue(0));
+                            }
+                        }
+                    }
+                    if(studentids.Count > 0)
+                    {//populate the table
+                        foreach(var id in studentids)
+                        {//get name of student 
+                            using(SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT FirstName, LastName FROM Users WHERE HUID = {id};";
+                                using(SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        firstlastname.Add(reader.GetValue(0)+" "+reader.GetValue(1));
+                                    }
+                                }
+                            }
+                        }
+                        firstlastname.Sort();//sorts the names alphabetically
+                        foreach(var name in firstlastname)
+                        {
+                            string[] lfname = name.Split(" ");
+                            using(SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"Select HUID FROM Users WHERE FirstName = '{lfname[0]}' AND LastName = '{lfname[1]}';";
+                                using(SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while(reader.Read())
+                                    {
+                                        sortedstudentids.Add((int)reader.GetValue(0));
+                                    }
+                                }
+                            }
+                        }
+                        foreach (var id in sortedstudentids.ToList())
+                        {//filter the ids
+                            if (studentids.Contains(id) == false)
+                            {
+                                sortedstudentids.Remove(id);
+                            }
+                        }
+                        foreach(var student in firstlastname)
+                        {
+                            RowDefinition rd = new RowDefinition();
+                            rd.Height = new GridLength(50);
+                            Form5CStudentRoster.RowDefinitions.Add(rd);
+
+                            Border myborder = new Border();
+                            myborder.BorderThickness = new Thickness(2);
+                            myborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                            myborder.SetValue(Grid.RowProperty, rowcounter);
+                            myborder.SetValue(Grid.ColumnProperty, 0);
+
+                            Button btn = new Button();
+                            btn.FontSize = 36;
+                            btn.Foreground = new SolidColorBrush(Colors.Black);
+                            btn.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                            btn.HorizontalAlignment = HorizontalAlignment.Center;
+                            btn.VerticalAlignment = VerticalAlignment.Center;
+                            btn.Content = student;
+                            btn.Name = sortedstudentids[rowcounter].ToString();//assigns student id to button name
+                            btn.Click += SetupSelectedStudentGrades;
+
+                            myborder.Child = btn;
+                            Form5CStudentRoster.Children.Add(myborder);
+                            rowcounter++;
+                        }
+                    }
+                    else
+                    {//inform the user that no students are enrolled in the course
+                        RowDefinition rd = new RowDefinition();
+                        rd.Height = new GridLength(50);
+                        Form5CStudentRoster.RowDefinitions.Add(rd);
+
+                        TextBlock txtblock = new TextBlock();
+                        txtblock.FontSize = 50;
+                        txtblock.Foreground = new SolidColorBrush(Colors.Black);
+                        txtblock.Text = "No Students are currently enrolled in this course.";
+                        txtblock.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
+                        txtblock.SetValue(Grid.RowProperty, 0);
+                        txtblock.SetValue(Grid.ColumnProperty, 0);
+                        Form5CStudentRoster.Children.Add(txtblock);
+                    }
+                    sqlConn.Close();
+                }
+            }
+        }
+
+        private void Form5CCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form5C.Visibility = Visibility.Collapsed;
+            Form5CStudentRoster.RowDefinitions.Clear();
+            Form5CStudentRoster.Children.Clear();
         }
     }
 }

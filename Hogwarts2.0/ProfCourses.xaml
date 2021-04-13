@@ -84,6 +84,9 @@
                     </Grid>
                 </Grid>
             </ScrollViewer>
+            <Grid Margin="288,185,288,587">
+                <Button x:Name="Form2CAllStudents" Foreground="black" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="All Students" FontSize="36" Click="Form2CAllStudents_Click"/>
+            </Grid>
         </Grid>
         <Grid x:Name ="Form3C" Visibility="Collapsed">
             <Image x:Name="Form3CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
@@ -111,7 +114,23 @@
                 <Button x:Name="Form3CSubmit" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Submit" Click="Form3CSubmit_Click"/>
             </Grid>
         </Grid>
-        <Grid x:Name="Form4C" Visibility="Visible">
+        <Grid x:Name="Form5C" Visibility="Collapsed">
+            <Image x:Name="Form5CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Grid Margin="441,110,440,682">
+                <TextBlock x:Name="Form5CTitle" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Student Roster"/>
+            </Grid>
+            <Grid Margin="1281,91,-2,776">
+                <Button x:Name="Form5CCancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X" Click="Form5CCancel_Click"/>
+            </Grid>
+            <ScrollViewer x:Name="Form5Cscrollviewer" Margin="288,309,288,292">
+                <Grid x:Name="Form5CStudentRoster" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="Form4C" Visibility="Collapsed">
             <Image x:Name="Form4CBackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="1145,16,-149,711">
                 <Button x:Name ="Form4CCancel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="X" Click="Form4CCancel_Click"/>
