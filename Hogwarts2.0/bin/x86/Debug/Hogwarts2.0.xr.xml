@@ -20,8 +20,8 @@
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Resources" />
       <RootProperty Name="Background" />
-      <RootProperty Name="Width" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
       <RootMethod Name="GetColumnSpan" />
       <RootMethod Name="SetColumnSpan" />
       <RootMethod Name="GetRow" />

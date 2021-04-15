@@ -2748,7 +2748,7 @@ namespace Hogwarts2._0
                             bd2.SetValue(Grid.ColumnProperty, 1);
 
                             TextBox txtbox = new TextBox();
-                            txtbox.Foreground = new SolidColorBrush(Colors.Black);
+                            //txtbox.Foreground = new SolidColorBrush(Colors.Black);TURNS GRADE FOR FORM4C BLACK
                             txtbox.FontSize = 36;
                             txtbox.Name = AssignmentID[EditRowCounter].ToString();
                             txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
@@ -2978,7 +2978,7 @@ namespace Hogwarts2._0
 
                     TextBox txtbox = new TextBox();
                     txtbox.FontSize = 36;
-                    //txtbox.Foreground = new SolidColorBrush(Colors.Black); THIS MAKES FORM3C GRADE WHITE
+                    //txtbox.Foreground = new SolidColorBrush(Colors.Black); THIS MAKES FORM3C GRADE BLACK
                     txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
                     txtbox.Name = allids[count].ToString();
                     studenthasgrade = getstudentgrade(allids[count], -1);
