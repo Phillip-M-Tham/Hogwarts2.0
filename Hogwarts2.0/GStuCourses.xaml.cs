@@ -17,6 +17,7 @@ namespace Hogwarts2._0
     public sealed partial class GStuCourses : Page
     {
         private string _userHuid;
+        private int SelectedSemesterID;
         const string ConnectionString = "SERVER = DESKTOP-R3J82OF\\SQLEXPRESS2019; DATABASE= Hogwarts2.0; USER ID=Cohort7; PASSWORD=tuesday313";
 
         public GStuCourses()
@@ -32,7 +33,6 @@ namespace Hogwarts2._0
 
         private void setupforms()
         {
-            int semestercount = 0;
             List<int> mysemesterids = new List<int>();
             List<string> semesternames = new List<string>();
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
@@ -73,55 +73,117 @@ namespace Hogwarts2._0
                     sqlConn.Close();
                 }
             }
-            if (semesternames.Count > 0)
+            Populatetable(semesternames, mysemesterids,1);
+        }
+
+        private void Populatetable(List<string> thelist,List<int> ids ,int mode)
+        {
+            int rowcounter = 0;
+            if (thelist.Count > 0)
             {
-                foreach (var name in semesternames)
-                {//populates the semester table with each semester student enrolled in
+                foreach (var name in thelist)
+                {
                     RowDefinition newrow = new RowDefinition();
                     newrow.Height = new GridLength(50);
-                    SemesterList.RowDefinitions.Add(newrow);
+                    
+                    Border buttonborder = new Border();
+                    buttonborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                    buttonborder.BorderThickness = new Thickness(2);
+                    buttonborder.SetValue(Grid.RowProperty, rowcounter);
+                    buttonborder.SetValue(Grid.ColumnProperty, 0);
 
-                    Button semester = new Button();
-                    semester.FontSize = 36;
-                    semester.Foreground = new SolidColorBrush(Colors.Black);
-                    semester.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                    semester.HorizontalAlignment = HorizontalAlignment.Center;
-                    semester.VerticalAlignment = VerticalAlignment.Center;
-                    semester.Content = name;
-                    semester.Name = mysemesterids[semestercount].ToString();
-                    semester.SetValue(Grid.RowProperty, semestercount);
-                    semester.SetValue(Grid.ColumnProperty, 0);
-                    SemesterList.Children.Add(semester);
-                    semester.Click += GotoCourses;
-                    semestercount++;
+                    Button thebutton = new Button();
+                    thebutton.FontSize = 36;
+                    thebutton.Foreground = new SolidColorBrush(Colors.Black);
+                    thebutton.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                    thebutton.HorizontalAlignment = HorizontalAlignment.Center;
+                    thebutton.VerticalAlignment = VerticalAlignment.Center;
+                    thebutton.Content = name;
+                    thebutton.Name = ids[rowcounter].ToString();
+                    buttonborder.Child = thebutton;
+
+                    if (mode == 1)
+                    {//populates the semester table with each semester student enrolled in
+                        SemesterList.RowDefinitions.Add(newrow);
+                        SemesterList.Children.Add(buttonborder);
+                        thebutton.Click += GotoCourses;
+                    }else if(mode == 2)
+                    {//populates the courses table from the selected semester student enrolled in
+                        CoursesList.RowDefinitions.Add(newrow);
+                        CoursesList.Children.Add(buttonborder);
+                        thebutton.Click += GotoGrades;
+                    }
+                    rowcounter++;
                 }
             }
             else
-            {//informs user they are not enrolled in any semester
+            {
                 RowDefinition newrow = new RowDefinition();
                 newrow.Height = new GridLength(50);
-                SemesterList.RowDefinitions.Add(newrow);
-
+                
                 TextBlock txtblck = new TextBlock();
                 txtblck.FontSize = 36;
                 txtblck.Foreground = new SolidColorBrush(Colors.Black);
                 txtblck.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
                 txtblck.HorizontalAlignment = HorizontalAlignment.Center;
                 txtblck.VerticalAlignment = VerticalAlignment.Center;
-                txtblck.Text = "You Are not currently enrolled in any semester";
                 txtblck.SetValue(Grid.RowProperty, 0);
                 txtblck.SetValue(Grid.ColumnProperty, 0);
-                SemesterList.Children.Add(txtblck);
+                
+                if(mode == 1)
+                {
+                    SemesterList.RowDefinitions.Add(newrow);
+                    txtblck.Text = "You Are not currently enrolled in any semester";
+                    SemesterList.Children.Add(txtblck);
+                }
+                else if(mode == 2)
+                {
+                    CoursesList.RowDefinitions.Add(newrow);
+                    txtblck.Text = "You Are not currently enrolled in any courses for this semester";
+                    CoursesList.Children.Add(txtblck);
+                }
             }
+        }
+
+        private void GotoGrades(object sender, RoutedEventArgs e)
+        {
+            
+            Button course = sender as Button;
+            int courseID = Int32.Parse(course.Name.ToString());
+            List<int> assignmentids = new List<int>();
+            List<string> assignmentnames = new List<string>();
+            //need assignment ids
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//grabs the semesterids for the student enrolled courses
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT AssignmentID,AssignmentTitle FROM Assignments WHERE CourseID = {courseID} AND SemesterID = {SelectedSemesterID};";
+                        {
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    assignmentids.Add((int)reader.GetValue(0));
+                                    assignmentnames.Add(reader.GetValue(0).ToString());
+                                }
+                            }
+                        }
+                    }
+                }
+                sqlConn.Close();
+            }
+            Populatetable(assignmentnames,assignmentids,3);
         }
 
         private void GotoCourses(object sender, RoutedEventArgs e)
         {
             Button pressedbutton = sender as Button;
-            int semesterID = Int32.Parse(pressedbutton.Name.ToString());
+            SelectedSemesterID = Int32.Parse(pressedbutton.Name.ToString());
             List<int> courseids = new List<int>();
             List<string> coursenames = new List<string>();
-            int coursecount = 0;
             Form2.Visibility = Visibility.Visible;
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
@@ -130,7 +192,7 @@ namespace Hogwarts2._0
                 {//grabs the semesterids for the student enrolled courses
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT CourseID FROM StudentEnrolledCourses WHERE StudentID = {_userHuid} AND SemesterID = {semesterID};";
+                        cmd.CommandText = $"SELECT CourseID FROM StudentEnrolledCourses WHERE StudentID = {_userHuid} AND SemesterID = {SelectedSemesterID};";
                         {
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
@@ -163,51 +225,20 @@ namespace Hogwarts2._0
                 sqlConn.Close();
                 }
             }
-            if(coursenames.Count > 0)
-            {
-                foreach(var name in coursenames)
-                {
-                    RowDefinition newrow = new RowDefinition();
-                    newrow.Height = new GridLength(50);
-                    CoursesList.RowDefinitions.Add(newrow);
-
-                    Button course = new Button();
-                    course.FontSize = 36;
-                    course.Foreground = new SolidColorBrush(Colors.Black);
-                    course.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                    course.HorizontalAlignment = HorizontalAlignment.Center;
-                    course.VerticalAlignment = VerticalAlignment.Center;
-                    course.Content = name;
-                    //course.Name = mysemesterids[semestercount].ToString();
-                    course.SetValue(Grid.RowProperty, coursecount);
-                    course.SetValue(Grid.ColumnProperty, 0);
-                    CoursesList.Children.Add(course);
-                    //semester.Click += GotoCourses;
-                    coursecount++;
-                }
-            }
-            else
-            {
-                RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(50);
-                CoursesList.RowDefinitions.Add(newrow);
-
-                TextBlock txtblck = new TextBlock();
-                txtblck.FontSize = 36;
-                txtblck.Foreground = new SolidColorBrush(Colors.Black);
-                txtblck.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                txtblck.HorizontalAlignment = HorizontalAlignment.Center;
-                txtblck.VerticalAlignment = VerticalAlignment.Center;
-                txtblck.Text = "You Are not currently enrolled in any courses for this semester";
-                txtblck.SetValue(Grid.RowProperty, 0);
-                txtblck.SetValue(Grid.ColumnProperty, 0);
-                CoursesList.Children.Add(txtblck);
-            }
+            Populatetable(coursenames, courseids, 2);
         }
 
         private void Form2Cancel_Click(object sender, RoutedEventArgs e)
         {
             Form2.Visibility = Visibility.Collapsed;
+            CoursesList.Children.Clear();
+            CoursesList.RowDefinitions.Clear();
+        }
+
+        private void Form3Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form3.Visibility = Visibility.Collapsed;
+
         }
     }
 }
