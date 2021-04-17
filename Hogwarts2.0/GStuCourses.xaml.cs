@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -76,9 +77,11 @@ namespace Hogwarts2._0
             Populatetable(semesternames, mysemesterids,1);
         }
 
-        private void Populatetable(List<string> thelist,List<int> ids ,int mode)
+        private void Populatetable(List<string> thelist,List<int> ids ,int mode, List<decimal> grades = null)
         {
+            Int32.TryParse(_userHuid,out int studentid);
             int rowcounter = 0;
+            bool validgrade;
             if (thelist.Count > 0)
             {
                 foreach (var name in thelist)
@@ -91,27 +94,68 @@ namespace Hogwarts2._0
                     buttonborder.BorderThickness = new Thickness(2);
                     buttonborder.SetValue(Grid.RowProperty, rowcounter);
                     buttonborder.SetValue(Grid.ColumnProperty, 0);
+                    if (mode != 3)
+                    {
+                        Button thebutton = new Button();
+                        thebutton.FontSize = 36;
+                        thebutton.Foreground = new SolidColorBrush(Colors.Black);
+                        thebutton.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                        thebutton.HorizontalAlignment = HorizontalAlignment.Center;
+                        thebutton.VerticalAlignment = VerticalAlignment.Center;
+                        thebutton.Content = name;
+                        thebutton.Name = ids[rowcounter].ToString();
+                        buttonborder.Child = thebutton;
+                        if (mode == 1)
+                        {//populates the semester table with each semester student enrolled in
+                            SemesterList.RowDefinitions.Add(newrow);
+                            SemesterList.Children.Add(buttonborder);
+                            thebutton.Click += GotoCourses;
+                        }
+                        else if (mode == 2)
+                        {//populates the courses table from the selected semester student enrolled in
+                            CoursesList.RowDefinitions.Add(newrow);
+                            CoursesList.Children.Add(buttonborder);
+                            thebutton.Click += GotoGrades;
+                        }
+                    }
+                    else
+                    {
+                        GradesList.RowDefinitions.Add(newrow);
+                        TextBlock assignment = new TextBlock();
+                        assignment.FontSize = 36;
+                        assignment.Foreground = new SolidColorBrush(Colors.Black);
+                        assignment.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                        assignment.HorizontalAlignment = HorizontalAlignment.Center;
+                        assignment.VerticalAlignment = VerticalAlignment.Center;
+                        assignment.Text = name;
+                        assignment.Name = ids[rowcounter].ToString();
 
-                    Button thebutton = new Button();
-                    thebutton.FontSize = 36;
-                    thebutton.Foreground = new SolidColorBrush(Colors.Black);
-                    thebutton.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
-                    thebutton.HorizontalAlignment = HorizontalAlignment.Center;
-                    thebutton.VerticalAlignment = VerticalAlignment.Center;
-                    thebutton.Content = name;
-                    thebutton.Name = ids[rowcounter].ToString();
-                    buttonborder.Child = thebutton;
+                        Border newborder = new Border();
+                        newborder.BorderBrush = new SolidColorBrush(Colors.Black);
+                        newborder.BorderThickness = new Thickness(2);
+                        newborder.SetValue(Grid.RowProperty, rowcounter);
+                        newborder.SetValue(Grid.ColumnProperty, 1);
 
-                    if (mode == 1)
-                    {//populates the semester table with each semester student enrolled in
-                        SemesterList.RowDefinitions.Add(newrow);
-                        SemesterList.Children.Add(buttonborder);
-                        thebutton.Click += GotoCourses;
-                    }else if(mode == 2)
-                    {//populates the courses table from the selected semester student enrolled in
-                        CoursesList.RowDefinitions.Add(newrow);
-                        CoursesList.Children.Add(buttonborder);
-                        thebutton.Click += GotoGrades;
+                        TextBlock grade = new TextBlock();
+                        grade.FontSize = 36;
+                        grade.Foreground = new SolidColorBrush(Colors.Black);
+                        grade.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
+                        grade.HorizontalAlignment = HorizontalAlignment.Center;
+                        grade.VerticalAlignment = VerticalAlignment.Center;
+                        //validgrade check here
+                        validgrade = IsValidGrade(studentid,ids[rowcounter]);
+                        if (validgrade == true)
+                        {
+                            grade.Text = grades[rowcounter].ToString();
+                        }
+                        else
+                        {
+                            grade.Text = "";
+                        }
+                        newborder.Child = grade;
+                        buttonborder.Child = assignment;
+                        GradesList.Children.Add(buttonborder);
+                        GradesList.Children.Add(newborder);
                     }
                     rowcounter++;
                 }
@@ -141,17 +185,55 @@ namespace Hogwarts2._0
                     CoursesList.RowDefinitions.Add(newrow);
                     txtblck.Text = "You Are not currently enrolled in any courses for this semester";
                     CoursesList.Children.Add(txtblck);
+                }else if(mode==3)
+                {
+                    GradesList.RowDefinitions.Add(newrow);
+                    txtblck.Text = "There are no assignments for this course currently";
+                    GradesList.Children.Add(txtblck);
                 }
             }
         }
-
+        private bool IsValidGrade(int studentid, int assignmentid)
+        {
+            string validgrade = "";
+            bool result;
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//acquire the all students enrolled in the course 
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT Grade FROM Grades WHERE StudentHUID = {studentid} AND AssignmentID = {assignmentid};";                      
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                validgrade += reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            if (validgrade == "")
+            {
+                result = false;
+            }
+            else
+            {
+                result = true;
+            }
+            return result;
+        }
         private void GotoGrades(object sender, RoutedEventArgs e)
         {
-            
+            Form3.Visibility = Visibility.Visible;
             Button course = sender as Button;
             int courseID = Int32.Parse(course.Name.ToString());
             List<int> assignmentids = new List<int>();
             List<string> assignmentnames = new List<string>();
+            List<decimal> grades = new List<decimal>();
             //need assignment ids
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
@@ -167,7 +249,24 @@ namespace Hogwarts2._0
                                 while (reader.Read())
                                 {
                                     assignmentids.Add((int)reader.GetValue(0));
-                                    assignmentnames.Add(reader.GetValue(0).ToString());
+                                    assignmentnames.Add(reader.GetValue(1).ToString());
+                                }
+                            }
+                        }
+                    }
+                    if (assignmentids.Count > 0)
+                    {
+                        foreach (var id in assignmentids)
+                        {
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT Grade From Grades WHERE StudentHUID = {_userHuid} AND AssignmentID = {id};";
+                                using(SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while(reader.Read())
+                                    {
+                                        grades.Add((decimal)reader.GetValue(0));
+                                    }
                                 }
                             }
                         }
@@ -175,7 +274,39 @@ namespace Hogwarts2._0
                 }
                 sqlConn.Close();
             }
-            Populatetable(assignmentnames,assignmentids,3);
+            Populatetable(assignmentnames,assignmentids,3,grades);
+            SetupFinalGradeText(courseID);
+        }
+        private void SetupFinalGradeText(int courseID)
+        {
+            string validgrade = "";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {//acquire the all students enrolled in the course 
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE StudentHUID = {_userHuid} AND CourseID = {courseID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                validgrade += reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            if (validgrade == "")
+            {
+                FinalGrade.Text = "N/A";
+            }
+            else
+            {
+                FinalGrade.Text = validgrade;
+            }
         }
 
         private void GotoCourses(object sender, RoutedEventArgs e)
@@ -238,7 +369,8 @@ namespace Hogwarts2._0
         private void Form3Cancel_Click(object sender, RoutedEventArgs e)
         {
             Form3.Visibility = Visibility.Collapsed;
-
+            GradesList.Children.Clear();
+            GradesList.RowDefinitions.Clear();
         }
     }
 }
