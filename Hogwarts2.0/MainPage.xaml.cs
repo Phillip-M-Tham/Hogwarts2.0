@@ -31,16 +31,6 @@ namespace Hogwarts2._0
             //SetDataConn();
         }
 
-        /*public async void SetDataConn()
-        {
-            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
-            {
-                sqlConn.Open();
-                //var message = new MessageDialog(sqlConn.State.ToString());
-                //await message.ShowAsync();
-            }
-        }*/
-
         private async void SetmySong(MediaPlayer player)
         {
             if (player.Source == null)
@@ -76,13 +66,7 @@ namespace Hogwarts2._0
                                 while (reader.Read())
                                 {
                                     queryresult += reader.GetValue(0).ToString();
-                                    //queryresult += reader.GetValue(1).ToString() + " ,";
-                                    //queryresult += reader.GetValue(2).ToString() + " ,";
-                                    //queryresult += reader.GetValue(3).ToString() + " ,";
-                                    //queryresult += reader.GetValue(4).ToString() + " ,";
                                 }
-                                //var Results = new MessageDialog(queryresult);
-                                //await Results.ShowAsync();
                                 if(queryresult==" ")
                                 {
                                     validUser = false;
@@ -196,18 +180,13 @@ namespace Hogwarts2._0
                 }
                 else if (queryresult2 == "H")
                 {
-
-                }
-                else if (queryresult2 == "E")
-                {
-
+                    Frame.Navigate(typeof(HeadMain), HUID);
                 }
                 else
                 {
                     var RoleProbMessage = new MessageDialog("THIS PERSON DOESN'T HAVE THE RIGHT ROLE SOMEWHERE");
                     await RoleProbMessage.ShowAsync();
                 }
-
             }
         }
 

@@ -198,3 +198,8 @@ C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\CounselorEnrollStudents
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\CounselorEnrollStudents.g.cs
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\CounselorEnrollStudents.xaml
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\CounselorEnrollStudents.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadMain.g.i.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadMain.g.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadMain.xaml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadMain.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadMain.xbf

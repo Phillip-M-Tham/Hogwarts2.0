@@ -10,9 +10,7 @@
 
     <Grid>
         <Grid.Resources>
-            <SolidColorBrush x:Key="NavigationViewItemForeground"
-                Color="Black" 
-            />
+            <SolidColorBrush x:Key="NavigationViewItemForeground" Color="Black" />
             <SolidColorBrush x:Key="SystemControlTransparentRevealBackgroundBrush" Color="Transparent" />
             <SolidColorBrush x:Key="SystemControlTransparentRevealBorderBrush" Color="Transparent" />
             <SolidColorBrush x:Key="GridViewItemRevealBorderBrush" Color="Transparent" />
@@ -27,12 +25,7 @@
             <SolidColorBrush x:Key="GridViewItemRevealBackgroundSelectedPointerOver" Color="Transparent" />
             <SolidColorBrush x:Key="GridViewItemRevealBackgroundSelectedPressed" Color="Transparent" />
             <SolidColorBrush x:Key="GridViewItemRevealPlaceholderBackground" Color="Transparent" />
-            <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground"
-                  BackgroundSource="Backdrop"
-                  TintColor="Transparent"
-                  TintOpacity=".3"
-                  FallbackColor="Transparent"
-                  />
+            <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" BackgroundSource="Backdrop" TintColor="Transparent" TintOpacity=".3" FallbackColor="Transparent" />
         </Grid.Resources>
 
         <NavigationView x:ConnectionId='2' Name="Navbar"                                                                                                                                PaneDisplayMode="Left" PaneTitle="Counselor Portal" IsSettingsVisible="False"                                IsBackButtonVisible="Collapsed" >
@@ -57,7 +50,5 @@
             </NavigationView.MenuItems>
         </NavigationView>
     </Grid>
-
-    
 </Page>
 

@@ -1103,7 +1103,7 @@ namespace Hogwarts2._0
                             adapter.UpdateCommand = cmd2;
                             adapter.UpdateCommand.ExecuteNonQuery();
                             sqlConn.Close();
-                            var semester = new MessageDialog($"Course {AssignedCourses.SelectedValue.ToString()} was successfully updated for {AssignedSemesters.SelectedValue.ToString()}");
+                            var semester = new MessageDialog($"Course {AssignedCourses.SelectedValue} was successfully updated for {AssignedSemesters.SelectedValue}");
                             await semester.ShowAsync();
                             Frame.Navigate(typeof(ProfCourses), UserHuid);
                         }
@@ -1679,19 +1679,7 @@ namespace Hogwarts2._0
                             }
                         }
                     }
-                    else
-                    {
-                        //no days were found 
-                    }
-                    //Sets up location
-                    if (location == "")
-                    {
-                        //this should be possible
-                    }
-                    else
-                    {
-                        Form2BLocationInput.Text = location;
-                    }
+                    Form2BLocationInput.Text = location;
                     //sets up course info
                     if (CourseInfo == "")
                     {

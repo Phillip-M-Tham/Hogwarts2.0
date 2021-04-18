@@ -190,11 +190,14 @@
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\testsong.wav">
-      <PackagePath>Assets\testsong.wav</PackagePath>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\headbanner2.jpg">
+      <PackagePath>Assets\headbanner2.jpg</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\hogwartstest1.jpg">
       <PackagePath>Assets\hogwartstest1.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\testsong.wav">
+      <PackagePath>Assets\testsong.wav</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
@@ -246,6 +249,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\GStuHome.xbf">
       <PackagePath>GStuHome.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadMain.xbf">
+      <PackagePath>HeadMain.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HStuAccount.xbf">
       <PackagePath>HStuAccount.xbf</PackagePath>
