@@ -63,9 +63,6 @@ namespace Hogwarts2._0
                 var errorMessage = new MessageDialog(ex.Message);
                 await errorMessage.ShowAsync();
             }
-            DateTime localtime = DateTime.Now;
-            var time = new MessageDialog(localtime.ToString());
-            await time.ShowAsync();
             GreetingBar.Text = $"      Hello, {_firstname} {_lastname}";
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -82,11 +79,11 @@ namespace Hogwarts2._0
             {
                 case "Home":
                     //Navbar.Opacity = .8;
-                    //ContentFrame.Navigate(typeof(ProfHome), UserHuid);
+                    ContentFrame.Navigate(typeof(HeadHome), UserHuid);
                     break;
                 case "AccountPage":
                     //Navbar.Opacity = .8;
-                    //ContentFrame.Navigate(typeof(ProfAccount), UserHuid);
+                    ContentFrame.Navigate(typeof(HeadAccount), UserHuid);
                     break;
                 case "MyCoursesPage":
                     //Navbar.Opacity = 1;
@@ -94,7 +91,7 @@ namespace Hogwarts2._0
                     break;
                 case "AccountSettings":
                     //Navbar.Opacity = 1;
-                    //ContentFrame.Navigate(typeof(ProfAccountSettings), UserHuid);
+                    ContentFrame.Navigate(typeof(HeadAccountSettings), UserHuid);
                     break;
                 case "Logout":
                     //Navbar.Opacity = .8;
@@ -104,7 +101,7 @@ namespace Hogwarts2._0
         }
         private void NavigationView_Loaded(object sender, RoutedEventArgs e)
         {
-            //ContentFrame.Navigate(typeof(HeadHome), UserHuid);
+            ContentFrame.Navigate(typeof(HeadHome), UserHuid);
         }
 
         private void ChangePaneBackgroundsize(NavigationView sender, NavigationViewPaneClosingEventArgs args)

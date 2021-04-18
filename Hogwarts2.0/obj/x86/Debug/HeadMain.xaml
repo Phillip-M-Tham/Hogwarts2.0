@@ -28,7 +28,7 @@
             <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" BackgroundSource="Backdrop" TintColor="Transparent" TintOpacity=".3" FallbackColor="Transparent" />
         </Grid.Resources>
 
-        <NavigationView x:ConnectionId='2' Name="Navbar"                                                                                                                                PaneDisplayMode="Left" PaneTitle="Counselor Portal" IsSettingsVisible="False"                                IsBackButtonVisible="Collapsed" >
+        <NavigationView x:ConnectionId='2' Name="Navbar"                                                                                                                                PaneDisplayMode="Left" PaneTitle="Headmaster Portal" IsSettingsVisible="False"                                IsBackButtonVisible="Collapsed" >
             <Grid>
                 <Grid Margin="0,0,-420,957">
                     <Image x:ConnectionId='5' Name="GreetingbarBackground" Stretch="Fill" Source="Assets/Proftest.png" Margin="0,0,417,0"/>
@@ -43,9 +43,11 @@
             </Grid>
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Home" Icon="Home" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="Home"/>
-                <NavigationViewItem Content="My Profile" Icon="People" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AccountPage"/>
-                <NavigationViewItem Content="Accept Faculty" Icon="Accept" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AcceptFaculty"/>
-                <NavigationViewItem Content="Create Departments" Icon="Folder" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="CreateDe"/>
+                <NavigationViewItem Content="My Profile" Icon="Account" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AccountPage"/>
+                <NavigationViewItem Content="Faculty" Icon="Admin" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AcceptFaculty"/>
+                <NavigationViewItem Content="Students" Icon="AddFriend" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="CreateDe"/>
+                <NavigationViewItem Content="Semesters" Icon="Folder" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="Semesters"/>
+                <NavigationViewItem Content="Departments" Icon="Folder" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="Departments"/>
                 <NavigationViewItem Content="Account Settings" Icon="Link" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AccountSettings"/>
                 <NavigationViewItem Content="Log Out" Icon="LeaveChat" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Tag="Logout" FontSize="36"/>
             </NavigationView.MenuItems>

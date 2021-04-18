@@ -144,7 +144,7 @@ namespace Hogwarts2._0
                 HUID = Int32.Parse(queryresult);//HOPEFULLY THIS WORKS 
                 //var validMessage = new MessageDialog("Username and password is correct HUID IS "+HUID);//This will be the place to put the function to move to the correct dashboard.
                 //await validMessage.ShowAsync();
-                player.Source = null;
+                //player.Source = null;
                 player.Dispose();
 
                 if (queryresult2 == "S")

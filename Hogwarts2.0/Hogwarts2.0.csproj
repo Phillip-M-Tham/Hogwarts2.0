@@ -149,6 +149,15 @@
     <Compile Include="GStuHome.xaml.cs">
       <DependentUpon>GStuHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HeadAccount.xaml.cs">
+      <DependentUpon>HeadAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HeadAccountSettings.xaml.cs">
+      <DependentUpon>HeadAccountSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HeadHome.xaml.cs">
+      <DependentUpon>HeadHome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HeadMain.xaml.cs">
       <DependentUpon>HeadMain.xaml</DependentUpon>
     </Compile>
@@ -243,7 +252,10 @@
     <Content Include="Assets\Hback.png" />
     <Content Include="Assets\Hback2.png" />
     <Content Include="Assets\Hback3.png" />
+    <Content Include="Assets\headaccountsettings.png" />
     <Content Include="Assets\headbanner2.jpg" />
+    <Content Include="Assets\headhome2.png" />
+    <Content Include="Assets\headmasterhome.jpg" />
     <Content Include="Assets\Hlogo.png" />
     <Content Include="Assets\Hstudefaultpic.png" />
     <Content Include="Assets\hufflepuffbanner.png" />
@@ -323,6 +335,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GStuHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HeadAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HeadAccountSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HeadHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

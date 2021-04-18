@@ -10,9 +10,6 @@
 
     <Grid>
         <Image Name="Counselorbackground" Source="Assets/Counselor2back.png" Stretch="Fill"/>
-        <Grid>
-            
-        </Grid>
-        <TextBlock Name="GSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="                It MATTERS NOT&#x0a;           WHAT SOMEONE IS BORN,&#x0a;        BUT WHAT THEY GROW TO BE" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#f0b906" Margin="0,77,0,0" Width="1020"/>
+        <TextBlock Name="GSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="                IT MATTERS NOT&#x0a;           WHAT SOMEONE IS BORN,&#x0a;        BUT WHAT THEY GROW TO BE" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#f0b906" Margin="0,77,0,0" Width="1020"/>
     </Grid>
 </Page>
