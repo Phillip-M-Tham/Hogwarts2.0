@@ -2129,12 +2129,62 @@ namespace Hogwarts2._0
 
         private async void DisenrollAllClassesFromSelectedSemester()
         {
+            List<int> assignmentids = new List<int>();
+            List<int> courseids = new List<int>();
             int semesterid = GetSemesterID();
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
                 if (sqlConn.State == System.Data.ConnectionState.Open)
                 {//convert HUID to StudentID
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {//get all courseids the student is enrolled in for the semester
+                        cmd.CommandText = $"SELECT CourseID FROM StudentEnrolledCourses WHERE SemesterID = {semesterid} AND StudentID = {SelectedStudentHUID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                courseids.Add((int)reader.GetValue(0));
+                            }
+                        }
+                    }
+                    if (courseids.Count > 0)
+                    {//if there are any courseids get all assignment ids from each course
+                        foreach (var id in courseids)
+                        {
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT AssignmentID FROM Assignments WHERE SemesterID = {semesterid} AND CourseID = {id};";
+                                using(SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while(reader.Read())
+                                    {
+                                        assignmentids.Add((int)reader.GetValue(0));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(assignmentids.Count > 0)
+                    {//delete each grade by assignment id
+                        foreach(var assignmentid in assignmentids)
+                        {
+                            SqlDataAdapter adapter2 = new SqlDataAdapter();
+                            SqlCommand command2 = new SqlCommand($"DELETE FROM Grades WHERE AssignmentID = {assignmentid} AND StudentHUID = {SelectedStudentHUID};", sqlConn);
+                            adapter2.DeleteCommand = command2;
+                            adapter2.DeleteCommand.ExecuteNonQuery();
+                        }
+                    }
+                    if(courseids.Count > 0)
+                    {//delete each final grade by course id
+                        foreach(var courseid in courseids)
+                        {
+                            SqlDataAdapter adapter2 = new SqlDataAdapter();
+                            SqlCommand command2 = new SqlCommand($"DELETE FROM FinalGrade WHERE CourseID = {courseid} AND StudentHUID = {SelectedStudentHUID};", sqlConn);
+                            adapter2.DeleteCommand = command2;
+                            adapter2.DeleteCommand.ExecuteNonQuery();
+                        }
+                    }
                     SqlDataAdapter adapter = new SqlDataAdapter();
                     SqlCommand command = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE SemesterID = {semesterid} AND StudentID = {SelectedStudentHUID};", sqlConn);
                     adapter.DeleteCommand = command;
@@ -2502,6 +2552,7 @@ namespace Hogwarts2._0
             int notvalidDisenroll=0;
             string notvalidDisenrollMessage = "";
             int validcourseid = 0;
+            List<int> assignmentids = new List<int>();
             if(FormStudentDisenrollValidSemesters.SelectedItem == null)
             {
                 notvalidDisenroll++;
@@ -2539,8 +2590,33 @@ namespace Hogwarts2._0
                                 }
                             }
                         }
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {//get all the assignment ids
+                            cmd.CommandText = $"SELECT AssignmentID FROM Assignments WHERE SemesterID = {semesterid} AND CourseID = {validcourseid};";
+                            using(SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while(reader.Read())
+                                {
+                                    assignmentids.Add((int)reader.GetValue(0));
+                                }
+                            }
+                        }
+                        if(assignmentids.Count > 0)
+                        {
+                            foreach(var id in assignmentids)
+                            {
+                                SqlDataAdapter adapter2 = new SqlDataAdapter();
+                                SqlCommand command2 = new SqlCommand($"DELETE FROM Grades WHERE AssignmentID = {id} AND StudentHUID = {SelectedStudentHUID};", sqlConn);
+                                adapter2.DeleteCommand = command2;
+                                adapter2.DeleteCommand.ExecuteNonQuery();
+                            }
+                        }
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand command = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE SemesterID = {semesterid} AND StudentID = {SelectedStudentHUID} AND CourseID = {validcourseid};", sqlConn);
+                        SqlCommand command = new SqlCommand($"DELETE FROM FinalGrade WHERE StudentHUID = {SelectedStudentHUID} AND CourseID = {validcourseid};", sqlConn);
+                        adapter.DeleteCommand = command;
+                        adapter.DeleteCommand.ExecuteNonQuery();
+                        adapter = new SqlDataAdapter();
+                        command = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE SemesterID = {semesterid} AND StudentID = {SelectedStudentHUID} AND CourseID = {validcourseid};", sqlConn);
                         adapter.DeleteCommand = command;
                         adapter.DeleteCommand.ExecuteNonQuery();
                         sqlConn.Close();
