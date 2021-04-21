@@ -218,3 +218,8 @@ C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadAccountSettings.g.c
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadAccountSettings.xaml
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadAccountSettings.xbf
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadAccountSettings.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadDepartments.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadDepartments.g.i.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadDepartments.g.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadDepartments.xaml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadDepartments.xbf

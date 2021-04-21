@@ -44,8 +44,8 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Home" Icon="Home" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="Home"/>
                 <NavigationViewItem Content="My Profile" Icon="Account" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AccountPage"/>
-                <NavigationViewItem Content="Faculty" Icon="Admin" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AcceptFaculty"/>
-                <NavigationViewItem Content="Students" Icon="AddFriend" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="CreateDe"/>
+                <NavigationViewItem Content="Faculty" Icon="Admin" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="Faculty"/>
+                <NavigationViewItem Content="Students" Icon="AddFriend" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="Students"/>
                 <NavigationViewItem Content="Semesters" Icon="Folder" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="Semesters"/>
                 <NavigationViewItem Content="Departments" Icon="Folder" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="Departments"/>
                 <NavigationViewItem Content="Account Settings" Icon="Link" BorderThickness="0" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AccountSettings"/>
