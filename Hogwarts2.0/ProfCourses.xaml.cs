@@ -2775,14 +2775,14 @@ namespace Hogwarts2._0
 
                             TextBox txtbox = new TextBox();
                             txtbox.FontSize = 36;
-                            txtbox.Name = EditRowCounter.ToString();
+                            txtbox.Name = AssignmentID[EditRowCounter].ToString();
                             txtbox.FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script");
                             txtbox.Text = item;
                             txtbox.SetValue(Grid.RowProperty, EditRowCounter);
                             txtbox.SetValue(Grid.ColumnProperty, 0);
 
                             CheckBox checkbx = new CheckBox();
-                            checkbx.Name = EditRowCounter.ToString();
+                            checkbx.Name = AssignmentID[EditRowCounter].ToString();
                             checkbx.SetValue(Grid.RowProperty, EditRowCounter);
                             checkbx.SetValue(Grid.ColumnProperty, 0);
 
@@ -3028,7 +3028,7 @@ namespace Hogwarts2._0
                     sqlConn.Close();
                 }
             }
-            if(validgrade == "")
+            if (validgrade == "")
             {
                 Form4CStudentGrade.Text = "N/A";
                 var Removeassignmenterror = new MessageDialog("Please give this student a grade for a minimal one assignment.");
@@ -3258,54 +3258,45 @@ namespace Hogwarts2._0
 
         private async void EditRemoveByCheck_Click(object sender, RoutedEventArgs e)
         {
-            List<int> targetlist = new List<int>();
-            int count = 0;
+            List<CheckBox> targetlist = new List<CheckBox>();
+            int targetid;
             foreach (CheckBox box in AssingmentListTableRemove.Children)
             {//count how many checkboxes are checked and add the index to a list
                 if (box.IsChecked == true)
                 {
-                    targetlist.Add(count);
+                    targetlist.Add(box);
                 }
-                count++;
             }
             if (targetlist.Count > 0)
             {//if the list of indexes is bigger than 0
-                foreach (int item in targetlist)
+                foreach (CheckBox target in targetlist)
                 {//remove the item by index and decrement the edit row counter and row definitions
-                    --EditRowCounter;
-                    AssignmentListTable.RowDefinitions.RemoveAt(EditRowCounter);
-                    AssingmentListTableRemove.RowDefinitions.RemoveAt(EditRowCounter);
+                    Int32.TryParse(target.Name, out targetid);
+                    using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                    {
+                        sqlConn.Open();
+                        if (sqlConn.State == System.Data.ConnectionState.Open)
+                        {
+                            SqlDataAdapter adapter = new SqlDataAdapter();
+                            SqlCommand command = new SqlCommand($"DELETE FROM Grades WHERE AssignmentID = {targetid};", sqlConn);
+                            adapter.DeleteCommand = command;
+                            adapter.DeleteCommand.ExecuteNonQuery();
 
-                    foreach (TextBox txt in AssignmentListTable.Children)
-                    {
-                        if (txt.Name == $"{item}")
-                        {
-                            AssignmentListTable.Children.Remove(txt);
-                        }
-                    }
-                    foreach (CheckBox chkbox in AssingmentListTableRemove.Children)
-                    {
-                        if (chkbox.Name == $"{item}")
-                        {
-                            AssingmentListTableRemove.Children.Remove(chkbox);
+                            adapter = new SqlDataAdapter();
+                            command = new SqlCommand($"DELETE FROM Assignments WHERE AssignmentID = {targetid};", sqlConn);
+                            adapter.DeleteCommand = command;
+                            adapter.DeleteCommand.ExecuteNonQuery();
+                            sqlConn.Close();
                         }
                     }
                 }
-                EditRowCounter = 0;
-                int counter2 = 0;
-                foreach (TextBox test in AssignmentListTable.Children)
-                {//update the name and position of each textbox
-                    test.Name = EditRowCounter.ToString();
-                    test.SetValue(Grid.RowProperty, EditRowCounter);
-                    EditRowCounter++;
-                }
-                foreach (CheckBox box in AssingmentListTableRemove.Children)
-                {//update the name and position of each box
-                    box.Name = counter2.ToString();
-                    box.IsChecked = false;
-                    box.SetValue(Grid.RowProperty, counter2);
-                    counter2++;
-                }
+                purgeAssignmentsTable();
+                EditAddAssignment.Visibility = Visibility.Collapsed;
+                EditRemoveAssignment.Visibility = Visibility.Collapsed;
+                EditSubmitAssignments.Visibility = Visibility.Collapsed;
+                EditCancel.Visibility = Visibility.Collapsed;
+                EditRemoveByCheck.Visibility = Visibility.Collapsed;
+                SetupAssignmentsTable("Form2C", -1);
             }
             else
             {//no boxes were checked
@@ -3579,32 +3570,32 @@ namespace Hogwarts2._0
                             }
                         }
                     }
-                    if(studentids.Count > 0)
+                    if (studentids.Count > 0)
                     {//populate the table
-                        foreach(var id in studentids)
+                        foreach (var id in studentids)
                         {//get name of student 
-                            using(SqlCommand cmd = sqlConn.CreateCommand())
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
                             {
                                 cmd.CommandText = $"SELECT FirstName, LastName FROM Users WHERE HUID = {id};";
-                                using(SqlDataReader reader = cmd.ExecuteReader())
+                                using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
                                     while (reader.Read())
                                     {
-                                        firstlastname.Add(reader.GetValue(0)+" "+reader.GetValue(1));
+                                        firstlastname.Add(reader.GetValue(0) + " " + reader.GetValue(1));
                                     }
                                 }
                             }
                         }
                         firstlastname.Sort();//sorts the names alphabetically
-                        foreach(var name in firstlastname)
+                        foreach (var name in firstlastname)
                         {
                             string[] lfname = name.Split(" ");
-                            using(SqlCommand cmd = sqlConn.CreateCommand())
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
                             {
                                 cmd.CommandText = $"Select HUID FROM Users WHERE FirstName = '{lfname[0]}' AND LastName = '{lfname[1]}';";
-                                using(SqlDataReader reader = cmd.ExecuteReader())
+                                using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
-                                    while(reader.Read())
+                                    while (reader.Read())
                                     {
                                         sortedstudentids.Add((int)reader.GetValue(0));
                                     }
@@ -3618,7 +3609,7 @@ namespace Hogwarts2._0
                                 sortedstudentids.Remove(id);
                             }
                         }
-                        foreach(var student in firstlastname)
+                        foreach (var student in firstlastname)
                         {
                             RowDefinition rd = new RowDefinition();
                             rd.Height = new GridLength(50);
