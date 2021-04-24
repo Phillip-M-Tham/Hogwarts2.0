@@ -184,18 +184,14 @@ namespace Hogwarts2._0
             {
                 DepartmentsTable1A.RowDefinitions.Clear();
                 DepartmentsTable1A.Children.Clear();
-                //DepartmentsTable1A.Visibility = Visibility.Collapsed;
             }
             else
             {
                 DepartmentsTable2A.Children.Clear();
                 DepartmentsTable2A.RowDefinitions.Clear();
 
-
                 DepartmentsTable2Achecks.Children.Clear();
                 DepartmentsTable2Achecks.RowDefinitions.Clear();
-                // DepartmentsTable2Achecks.Visibility = Visibility.Collapsed;
-
             }
         }
 
@@ -217,12 +213,14 @@ namespace Hogwarts2._0
                     Int32.TryParse(target.Name, out targetid);
                     DeleteDepartmentbyID(targetid);
                 }
+                var ValidRemoveassignment = new MessageDialog("Successfully Updated Departments");
+                await ValidRemoveassignment.ShowAsync();
                 Purgedepartmentlist(2);
                 setupdepartments(2);
             }
             else
             {
-                var Removeassignmenterror = new MessageDialog("No assignments were selected.");
+                var Removeassignmenterror = new MessageDialog("No Departments were selected.");
                 await Removeassignmenterror.ShowAsync();
             }
         }
@@ -323,6 +321,8 @@ namespace Hogwarts2._0
                 }
                 if (needsDelete == true)
                 {
+                    var ValidRemoveassignment = new MessageDialog("Successfully Updated Departments");
+                    await ValidRemoveassignment.ShowAsync();
                     Purgedepartmentlist(2);
                     setupdepartments(2);
                 }
@@ -484,7 +484,6 @@ namespace Hogwarts2._0
             bd.BorderBrush = new SolidColorBrush(Colors.Black);
             bd.SetValue(Grid.RowProperty, DepartmentRowCounter);
             bd.SetValue(Grid.ColumnProperty, 0);
-
 
             TextBox txtbox = new TextBox();
             txtbox.FontSize = 36;

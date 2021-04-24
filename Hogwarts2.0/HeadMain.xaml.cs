@@ -85,6 +85,9 @@ namespace Hogwarts2._0
                     //Navbar.Opacity = .8;
                     ContentFrame.Navigate(typeof(HeadAccount), UserHuid);
                     break;
+                case "Semesters":
+                    ContentFrame.Navigate(typeof(HeadSemesters), UserHuid);
+                    break;
                 case "Departments":
                     //Navbar.Opacity = 1;
                     ContentFrame.Navigate(typeof(HeadDepartments), UserHuid);

@@ -197,6 +197,7 @@
     <RootType FullName="Hogwarts2._0.HeadDepartments" />
     <RootType FullName="Hogwarts2._0.HeadHome" />
     <RootType FullName="Hogwarts2._0.HeadMain" />
+    <RootType FullName="Hogwarts2._0.HeadSemesters" />
     <RootType FullName="Hogwarts2._0.HStuAccount" />
     <RootType FullName="Hogwarts2._0.HStuAccountSettings" />
     <RootType FullName="Hogwarts2._0.HStuCourses" />

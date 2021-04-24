@@ -293,7 +293,7 @@ namespace Hogwarts2._0
                 {//acquire the all students enrolled in the course 
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE StudentHUID = {_userHuid} AND CourseID = {courseID};";
+                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE StudentHUID = {_userHuid} AND CourseID = {courseID} AND SemesterID = {SelectedSemesterID};";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -312,6 +313,7 @@ namespace Hogwarts2._0
             form2validcourseID = "";
             mysemesterID = 0;
             mycourseID = 0;
+            string friendlyReqMats="";
             //Get list of each day for times
             //conduct a lot of error checking
             List<string> ValidMondayTimes;
@@ -552,8 +554,12 @@ namespace Hogwarts2._0
                                 adapter.InsertCommand = command;
                                 adapter.InsertCommand.ExecuteNonQuery();
                                 //Insert RequiredMaterial
+                                if(Form2RequiredMaterialsInput.Text != "")
+                                {
+                                   friendlyReqMats = ConverttoFriendly(Form2RequiredMaterialsInput.Text);
+                                }
                                 adapter = new SqlDataAdapter();
-                                command = new SqlCommand($"INSERT INTO ReqMaterials VALUES ({mysemesterID},{mycourseID},'{Form2RequiredMaterialsInput.Text}');", sqlConn);
+                                command = new SqlCommand($"INSERT INTO ReqMaterials VALUES ({mysemesterID},{mycourseID},'{friendlyReqMats}');", sqlConn);
                                 adapter.InsertCommand = command;
                                 adapter.InsertCommand.ExecuteNonQuery();
                                 var semester = new MessageDialog($"Course {form2course} was successfully assigned to {form2semester}");
@@ -566,6 +572,19 @@ namespace Hogwarts2._0
                     }
                 }
             }
+        }
+        private string ConverttoFriendly(string badstring)
+        {
+            var goodstring = new StringBuilder();
+            foreach (var char1 in badstring)
+            {
+                goodstring.Append(char1);
+                if (char1 == '\'')
+                {
+                    goodstring.Append('\'');
+                }
+            }
+            return goodstring.ToString();
         }
         private List<string> GetValidFTimes()
         {
@@ -849,6 +868,7 @@ namespace Hogwarts2._0
             bool FridayExist = false;
             int _notvalidform2B = 0;
             string _errorform2B = "";
+            string validReqMats = "";
             List<string> Form2BValidMondayTimes;
             List<string> Form2BValidTuesdayTimes;
             List<string> Form2BValidWednesdayTimes;
@@ -1098,8 +1118,12 @@ namespace Hogwarts2._0
                             adapter.UpdateCommand = cmd2;
                             adapter.UpdateCommand.ExecuteNonQuery();
                             //Update reqMaterials
+                            if(Form2BReqMaterialInput.Text != "")
+                            {
+                                validReqMats = ConverttoFriendly(Form2BReqMaterialInput.Text);
+                            }
                             adapter = new SqlDataAdapter();
-                            cmd2 = new SqlCommand($"UPDATE ReqMaterials SET Materials = '{Form2BReqMaterialInput.Text}' WHERE SemesterID = {SemesterID} AND CourseID = {CourseID};", sqlConn);
+                            cmd2 = new SqlCommand($"UPDATE ReqMaterials SET Materials = '{validReqMats}' WHERE SemesterID = {SemesterID} AND CourseID = {CourseID};", sqlConn);
                             adapter.UpdateCommand = cmd2;
                             adapter.UpdateCommand.ExecuteNonQuery();
                             sqlConn.Close();
@@ -3016,7 +3040,7 @@ namespace Hogwarts2._0
                 {//acquire the all students enrolled in the course 
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE StudentHUID = {studentID} AND CourseID = {EditSelectedCourseID};";
+                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE StudentHUID = {studentID} AND CourseID = {EditSelectedCourseID} AND SemesterID = {EditSelectedSemesterID};";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -3241,6 +3265,8 @@ namespace Hogwarts2._0
                         sqlConn.Close();
                     }
                 }
+                var Removeassignmentvalid = new MessageDialog("Successfully Updated Assignments.");
+                await Removeassignmentvalid.ShowAsync();
                 purgeAssignmentsTable();
                 EditAddAssignment.Visibility = Visibility.Collapsed;
                 EditRemoveAssignment.Visibility = Visibility.Collapsed;
@@ -3290,6 +3316,8 @@ namespace Hogwarts2._0
                         }
                     }
                 }
+                var Removeassignmentvalid = new MessageDialog("Successfully Updated Assignments.");
+                await Removeassignmentvalid.ShowAsync();
                 purgeAssignmentsTable();
                 EditAddAssignment.Visibility = Visibility.Collapsed;
                 EditRemoveAssignment.Visibility = Visibility.Collapsed;
@@ -3485,7 +3513,7 @@ namespace Hogwarts2._0
                 {//acquire the all students enrolled in the course 
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE CourseID = {EditSelectedCourseID} AND StudentHUID = {studentHUID}";
+                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE CourseID = {EditSelectedCourseID} AND StudentHUID = {studentHUID} AND SemesterID = {EditSelectedSemesterID}";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -3498,7 +3526,7 @@ namespace Hogwarts2._0
                     {//insert
                         double validgrade = (insertedgrade / 100) * 100;
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand command = new SqlCommand($"INSERT INTO FinalGrade VALUES ({studentHUID},{EditSelectedCourseID},{insertedgrade},{100},{0},{validgrade});", sqlConn);
+                        SqlCommand command = new SqlCommand($"INSERT INTO FinalGrade VALUES ({studentHUID},{EditSelectedSemesterID},{EditSelectedCourseID},{insertedgrade},{100},{0},{validgrade});", sqlConn);
                         adapter.InsertCommand = command;
                         adapter.InsertCommand.ExecuteNonQuery();
                     }
@@ -3538,7 +3566,7 @@ namespace Hogwarts2._0
                         ttlpoints = grades.Count * 100;
                         double validgrade = (double)currpoints / (double)ttlpoints * 100;
                         SqlDataAdapter adapter = new SqlDataAdapter();
-                        SqlCommand cmd2 = new SqlCommand($"UPDATE FinalGrade SET CurrentPoints = {currpoints}, TotalPoints = {ttlpoints}, CurvePoints = {0}, CurrentGrade = {validgrade}  WHERE CourseID = {EditSelectedCourseID} AND StudentHUID = {studentHUID};", sqlConn);
+                        SqlCommand cmd2 = new SqlCommand($"UPDATE FinalGrade SET CurrentPoints = {currpoints}, TotalPoints = {ttlpoints}, CurvePoints = {0}, CurrentGrade = {validgrade}  WHERE CourseID = {EditSelectedCourseID} AND StudentHUID = {studentHUID} AND SemesterID ={EditSelectedSemesterID};", sqlConn);
                         adapter.UpdateCommand = cmd2;
                         adapter.UpdateCommand.ExecuteNonQuery();
                     }

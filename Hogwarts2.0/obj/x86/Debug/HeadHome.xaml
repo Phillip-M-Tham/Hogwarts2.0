@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Image x:ConnectionId='2' Name="Counselorbackground" Source="Assets/headhome2.png" Stretch="Fill"/>
+        <Image x:ConnectionId='2' Name="HeadHomebackground" Source="Assets/headhome2.png" Stretch="Fill"/>
         <TextBlock x:ConnectionId='3' Name="GSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="    IT IS OUR CHOICES THAT&#x0a; SHOW WHAT WE TRULY ARE,&#x0a;FAR MORE THAN OUR ABILITIES  " FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#f0b906" Margin="0,105,0,0"/>
     </Grid>
 </Page>
