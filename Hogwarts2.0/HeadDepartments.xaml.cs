@@ -233,16 +233,20 @@ namespace Hogwarts2._0
             List<string> InputDeptTitles = new List<string>();
             List<int> originalDeptIDs = new List<int>();
             List<int> newDeptIDs = new List<int>();
-            foreach (Border bd in DepartmentsTable2A.Children)
+            foreach (var bd in DepartmentsTable2A.Children)
             {
-                TextBox tbx = bd.Child as TextBox;
-                if (tbx.Text == "")
+                Border test = bd as Border;
+                if (test != null)
                 {
-                    validinput = false;
-                }
-                else
-                {
-                    InputDeptTitles.Add(tbx.Text);
+                    TextBox tbx = test.Child as TextBox;
+                    if (tbx.Text == "")
+                    {
+                        validinput = false;
+                    }
+                    else
+                    {
+                        InputDeptTitles.Add(tbx.Text);
+                    }
                 }
             }
             if (validinput == true)

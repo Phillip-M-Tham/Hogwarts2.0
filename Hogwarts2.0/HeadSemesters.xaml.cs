@@ -419,7 +419,7 @@ namespace Hogwarts2._0
                     adapter2.DeleteCommand.ExecuteNonQuery();
 
                     adapter2 = new SqlDataAdapter();
-                    command2 = new SqlCommand($"DELETE FROM FinalGrade WHERE SemesterID = {id} AND SemesterID = {id};", sqlConn);
+                    command2 = new SqlCommand($"DELETE FROM FinalGrade WHERE SemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 

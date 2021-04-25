@@ -146,6 +146,7 @@
       <RootProperty Name="FontSize" />
       <RootProperty Name="PlaceholderText" />
       <RootProperty Name="Items" />
+      <RootProperty Name="Foreground" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Visibility" />
       <RootEvent Name="SelectionChanged" />
@@ -194,6 +195,7 @@
     <RootType FullName="Hogwarts2._0.GStuHome" />
     <RootType FullName="Hogwarts2._0.HeadAccount" />
     <RootType FullName="Hogwarts2._0.HeadAccountSettings" />
+    <RootType FullName="Hogwarts2._0.HeadCourses" />
     <RootType FullName="Hogwarts2._0.HeadDepartments" />
     <RootType FullName="Hogwarts2._0.HeadHome" />
     <RootType FullName="Hogwarts2._0.HeadMain" />

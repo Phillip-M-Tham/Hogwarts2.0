@@ -20,6 +20,7 @@ Assets\Hback2.png
 Assets\Hback3.png
 Assets\headaccountsettings.png
 Assets\headbanner2.jpg
+Assets\HeadCourses.jpg
 Assets\headdepartments.png
 Assets\headhome2.png
 Assets\headmasterhome.jpg
@@ -74,6 +75,7 @@ GStuCourses.xbf
 GStuHome.xbf
 HeadAccount.xbf
 HeadAccountSettings.xbf
+HeadCourses.xbf
 HeadDepartments.xbf
 HeadHome.xbf
 HeadMain.xbf

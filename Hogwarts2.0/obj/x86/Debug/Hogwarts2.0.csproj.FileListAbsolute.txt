@@ -228,3 +228,8 @@ C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadSemesters.g.i.cs
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadSemesters.g.cs
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadSemesters.xaml
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadSemesters.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadCourses.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadCourses.g.i.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadCourses.g.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadCourses.xaml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadCourses.xbf

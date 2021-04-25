@@ -205,6 +205,9 @@
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\headbanner2.jpg">
       <PackagePath>Assets\headbanner2.jpg</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\HeadCourses.jpg">
+      <PackagePath>Assets\HeadCourses.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\headmasterhome.jpg">
       <PackagePath>Assets\headmasterhome.jpg</PackagePath>
     </AppxPackagedFile>
@@ -270,6 +273,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadAccountSettings.xbf">
       <PackagePath>HeadAccountSettings.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadCourses.xbf">
+      <PackagePath>HeadCourses.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadDepartments.xbf">
       <PackagePath>HeadDepartments.xbf</PackagePath>
