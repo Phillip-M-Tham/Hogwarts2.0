@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -88,7 +79,7 @@ namespace Hogwarts2._0
 
                         CoursesTable1A.Children.Add(textblock);
                     }
-                    else if(mode ==2)
+                    else if (mode == 2)
                     {
                         RowDefinition newrow2 = new RowDefinition();
                         newrow2.Height = new GridLength(50);
@@ -139,6 +130,7 @@ namespace Hogwarts2._0
                 textblock.VerticalAlignment = VerticalAlignment.Center;
                 textblock.Foreground = new SolidColorBrush(Colors.Black);
                 textblock.FontSize = 36;
+                textblock.Text = "No Courses Available";
                 textblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
 
                 if (mode == 1)
@@ -146,7 +138,7 @@ namespace Hogwarts2._0
                     CoursesTable1A.RowDefinitions.Add(newrow);
                     CoursesTable1A.Children.Add(textblock);
                 }
-                else if(mode == 2)
+                else if (mode == 2)
                 {
                     CoursesTable2A.RowDefinitions.Add(newrow);
                     CoursesTable2A.Children.Add(textblock);
@@ -180,6 +172,7 @@ namespace Hogwarts2._0
 
         private async void SetupForm2A()
         {//populate profs and deps
+            int count = 0;
             List<int> ProfHUIDs = new List<int>();
             List<string> Professors = new List<string>();
             List<string> Departments = new List<string>();
@@ -199,9 +192,9 @@ namespace Hogwarts2._0
                             }
                         }
                     }
-                    if(ProfHUIDs.Count > 0)
+                    if (ProfHUIDs.Count > 0)
                     {//get names from huids
-                        foreach(var id in ProfHUIDs)
+                        foreach (var id in ProfHUIDs)
                         {
                             using (SqlCommand cmd = sqlConn.CreateCommand())
                             {
@@ -230,22 +223,27 @@ namespace Hogwarts2._0
                     sqlConn.Close();
                 }
             }
-            if(ProfHUIDs.Count > 0)
+            if (ProfHUIDs.Count > 0)
             {
                 foreach (var name in Professors)
                 {
-                    Form2AProfessor.Items.Add(name);
+                    TextBlock prof = new TextBlock();
+                    prof.Name = ProfHUIDs[count].ToString();
+                    prof.Text = name;
+                    prof.Foreground = new SolidColorBrush(Colors.White);
+                    Form2AProfessor.Items.Add(prof);
+                    count++;
                 }
             }
             else
             {
-                Form2AProfessor.Items.Add("No professors found");
+                Form2AProfessor.Items.Add("No Professors Found");
                 var ermessage = new MessageDialog("No Professors Have Been Hired");
                 await ermessage.ShowAsync();
             }
             if (Departments.Count > 0)
             {
-                foreach(var dept in Departments)
+                foreach (var dept in Departments)
                 {
                     ValidDepartmentsInput.Items.Add(dept);
                 }
@@ -258,14 +256,195 @@ namespace Hogwarts2._0
             }
         }
 
-        private void EditRemoveCourse_Click(object sender, RoutedEventArgs e)
+        private async void EditRemoveCourse_Click(object sender, RoutedEventArgs e)
         {
+            if (CourseRowCounter != 0)
+            {//get rid of the current row
+                --CourseRowCounter;
+                CoursesTable2A.Children.RemoveAt(CourseRowCounter);
+                CoursesTable2A.RowDefinitions.RemoveAt(CourseRowCounter);
 
+                CoursesTable2Achecks.Children.RemoveAt(CourseRowCounter);
+                CoursesTable2Achecks.RowDefinitions.RemoveAt(CourseRowCounter);
+            }
+            else
+            {
+                var Removeassignmenterror = new MessageDialog("No Courses exist.");
+                await Removeassignmenterror.ShowAsync();
+            }
         }
 
-        private void EditSubmitCourses_Click(object sender, RoutedEventArgs e)
+        private async void EditSubmitCourses_Click(object sender, RoutedEventArgs e)
         {
+            bool validinput = true;
+            List<string> InputCourseTitles = new List<string>();
+            List<int> OriginalCourseIDs = new List<int>();
+            int selectedCrsID = -1;
+            bool needsDelete = false;
+            List<int> NewCourseIDs = new List<int>();
+            foreach (var bd in CoursesTable2A.Children)
+            {
+                Border test = bd as Border;
+                if (test != null)
+                {
+                    TextBox tbx = test.Child as TextBox;
+                    if (tbx.Text == "")
+                    {
+                        validinput = false;
+                    }
+                    else
+                    {
+                        InputCourseTitles.Add(tbx.Text);
+                    }
+                }
+            }
+            if (validinput == true)
+            {
+                using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                {
+                    sqlConn.Open();
+                    if (sqlConn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {
+                            cmd.CommandText = $"SELECT CourseID FROM Courses;";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    OriginalCourseIDs.Add((int)reader.GetValue(0));
+                                }
+                            }
+                        }
+                        foreach (var title in InputCourseTitles)
+                        {
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT CourseID FROM Courses WHERE Title = '{title}';";
+                                {
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            selectedCrsID = (int)reader.GetValue(0);
+                                        }
+                                    }
+                                }
+                            }
+                            if (selectedCrsID != -1)
+                            {//update
+                                needsDelete = true;
+                                SqlDataAdapter adapter = new SqlDataAdapter();
+                                SqlCommand cmd2 = new SqlCommand($"UPDATE Courses SET Title = '{title}' WHERE CourseID = {selectedCrsID};", sqlConn);
+                                adapter.UpdateCommand = cmd2;
+                                adapter.UpdateCommand.ExecuteNonQuery();
+                                NewCourseIDs.Add(selectedCrsID);
+                            }
+                            selectedCrsID = -1;
+                        }
+                        foreach (var id in OriginalCourseIDs)
+                        {
+                            if (NewCourseIDs.Contains(id) == false)
+                            {
+                                needsDelete = true;
+                                DeleteCoursebyID(id);
+                            }
+                        }
+                        sqlConn.Close();
+                    }
+                }
+                if (needsDelete == true)
+                {
+                    var ValidRemoveassignment = new MessageDialog("Successfully Updated Semesters");
+                    await ValidRemoveassignment.ShowAsync();
+                    PurgeCourselist(2);
+                    setupCourses(2);
+                }
+            }
+            else
+            {
+                var Removeassignmenterror = new MessageDialog("Please do not leave any Course titles empty.");
+                await Removeassignmenterror.ShowAsync();
+            }
+        }
 
+        private void DeleteCoursebyID(int id)
+        {
+            List<int> RemoveAssingmentIDs = new List<int>();
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT AssignmentID FROM Assignments WHERE CourseID = {id};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                RemoveAssingmentIDs.Add((int)reader.GetValue(0));
+                            }
+                        }
+                    }
+                    if (RemoveAssingmentIDs.Count > 0)
+                    {
+                        foreach (var AssignmentID in RemoveAssingmentIDs)
+                        {//DELETES THE GRADES ASSOCIATED TO COURSEID 
+                            SqlDataAdapter adapter = new SqlDataAdapter();
+                            SqlCommand command = new SqlCommand($"DELETE FROM Grades WHERE AssignmentID = {AssignmentID};", sqlConn);
+                            adapter.DeleteCommand = command;
+                            adapter.DeleteCommand.ExecuteNonQuery();
+                        }
+                    }
+                    SqlDataAdapter adapter2 = new SqlDataAdapter();
+                    SqlCommand command2 = new SqlCommand($"DELETE FROM Times WHERE CourseID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    adapter2 = new SqlDataAdapter();
+                    command2 = new SqlCommand($"DELETE FROM Locations WHERE CourseID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    adapter2 = new SqlDataAdapter();
+                    command2 = new SqlCommand($"DELETE FROM ReqMaterials WHERE CourseID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    adapter2 = new SqlDataAdapter();
+                    command2 = new SqlCommand($"DELETE FROM DayTypes WHERE CourseID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    adapter2 = new SqlDataAdapter();
+                    command2 = new SqlCommand($"DELETE FROM Assignments WHERE CourseID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    adapter2 = new SqlDataAdapter();
+                    command2 = new SqlCommand($"DELETE FROM FinalGrade WHERE CourseID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    adapter2 = new SqlDataAdapter();
+                    command2 = new SqlCommand($"DELETE FROM SemesterCourses WHERE CourseID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    adapter2 = new SqlDataAdapter();
+                    command2 = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE CourseID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    adapter2 = new SqlDataAdapter();
+                    command2 = new SqlCommand($"DELETE FROM Courses WHERE CourseID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    sqlConn.Close();
+                }
+            }
         }
 
         private void EditCancel_Click(object sender, RoutedEventArgs e)
@@ -284,7 +463,7 @@ namespace Hogwarts2._0
 
         private void PurgeCourselist(int mode)
         {
-            if(mode == 1)
+            if (mode == 1)
             {
                 CoursesTable1A.RowDefinitions.Clear();
                 CoursesTable1A.Children.Clear();
@@ -298,26 +477,62 @@ namespace Hogwarts2._0
             }
         }
 
-        private void EditRemoveByCheck_Click(object sender, RoutedEventArgs e)
+        private async void EditRemoveByCheck_Click(object sender, RoutedEventArgs e)
         {
-
+            List<CheckBox> targetlist = new List<CheckBox>();
+            foreach (CheckBox box in CoursesTable2Achecks.Children)
+            {//count how many checkboxes are checked and add the index to a list
+                if (box.IsChecked == true)
+                {
+                    targetlist.Add(box);
+                }
+            }
+            if (targetlist.Count > 0)
+            {
+                foreach (CheckBox target in targetlist)
+                {
+                    Int32.TryParse(target.Name, out int targetid);
+                    DeleteCoursebyID(targetid);
+                }
+                var ValidRemoveassignment = new MessageDialog("Successfully Updated Courses");
+                await ValidRemoveassignment.ShowAsync();
+                PurgeCourselist(2);
+                setupCourses(2);
+            }
+            else
+            {
+                var Removeassignmenterror = new MessageDialog("No Courses were selected.");
+                await Removeassignmenterror.ShowAsync();
+            }
         }
 
         private void Form2ACancel_Click(object sender, RoutedEventArgs e)
         {
             Form2A.Visibility = Visibility.Collapsed;
             Form1A.Visibility = Visibility.Visible;
-            ValidDepartmentsInput.Items.Clear();
+            ResetForm2A();
+            PurgeCourselist(2);
+            setupCourses(2);
+        }
+
+        private void ResetForm2A()
+        {
             Form2AProfessor.Items.Clear();
+            CourseInsertTitleInput.Text = "";
+            CourseInsertTypeInput.Text = "";
+            ValidDepartmentsInput.Items.Clear();
+            YearlevelInput.SelectedItem = default;
+            CourseInsertInfoInput.Text = "";
         }
 
         private async void SubmitCreateCourse_Click(object sender, RoutedEventArgs e)
         {
             int validCourseInput = 0;
             string errormessage = "";
-            if(Form2AProfessor.SelectedValue != null)
+            bool isvalidTitle;
+            if (Form2AProfessor.SelectedValue != null)
             {
-                if(Form2AProfessor.SelectedValue.ToString() == "No professors found")
+                if (Form2AProfessor.SelectedValue.ToString() == "No Professors Found")
                 {
                     errormessage += "\nPlease Add Proffesors to Faculty";
                 }
@@ -327,18 +542,100 @@ namespace Hogwarts2._0
                 errormessage += "\nPlease Select A Professor";
                 validCourseInput++;
             }
-            
-            
-            
-            if(validCourseInput == 0)
+            if (CourseInsertTitleInput.Text != "")
             {
-                
+                isvalidTitle = CheckCourseTitle(CourseInsertTitleInput.Text);
+                if (isvalidTitle == false)
+                {
+                    errormessage += "\nCourse Title Already Taken. Please Provide A Different Course Title";
+                    validCourseInput++;
+                }
+            }
+            else
+            {
+                errormessage += "\nPlease Provide A Course Title";
+                validCourseInput++;
+            }
+            if (CourseInsertTypeInput.Text == "")
+            {
+                errormessage += "\nPlease Provide A Course Type";
+                validCourseInput++;
+            }
+            if (ValidDepartmentsInput.SelectedItem != null)
+            {
+                if (ValidDepartmentsInput.SelectedValue.ToString() == "No Departments Found")
+                {
+                    errormessage += "\nPlease Create Some Departments";
+                }
+            }
+            else
+            {
+                errormessage += "\nPlease Select A Department";
+                validCourseInput++;
+            }
+            if (YearlevelInput.SelectedItem == null)
+            {
+                errormessage += "\nPlease Select A Year Level";
+                validCourseInput++;
+            }
+
+
+            if (validCourseInput == 0)
+            {
+                TextBlock test = Form2AProfessor.SelectedItem as TextBlock;
+                int.TryParse(test.Name, out int ProfHuid);
+                using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                {
+                    sqlConn.Open();
+                    if (sqlConn.State == System.Data.ConnectionState.Open)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand command = new SqlCommand($"INSERT INTO Courses VALUES ({ProfHuid},'{CourseInsertTitleInput.Text}','{CourseInsertTypeInput.Text}','{ValidDepartmentsInput.SelectedValue}',{YearlevelInput.SelectedValue},'{CourseInsertInfoInput.Text}');", sqlConn);
+                        adapter.InsertCommand = command;
+                        adapter.InsertCommand.ExecuteNonQuery();
+                        var coursecreated = new MessageDialog($"Course {CourseInsertTitleInput.Text} successfully created");
+                        await coursecreated.ShowAsync();
+                        sqlConn.Close();
+                    }
+                }
+                ResetForm2A();
             }
             else
             {
                 var ermessage2 = new MessageDialog(errormessage);
                 await ermessage2.ShowAsync();
             }
+
+        }
+
+        private bool CheckCourseTitle(string coursename)
+        {
+            bool validname = true;
+            string result = "";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT Title FROM Courses WHERE Title = '{coursename}';";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result = reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            if (result != "")
+            {
+                validname = false;
+            }
+            return validname;
         }
     }
 }

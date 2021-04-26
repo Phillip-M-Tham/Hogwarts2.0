@@ -53,7 +53,7 @@
                 <Button x:ConnectionId='20' x:Name="EditRemoveByCheck" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Content="Remove Selected"                                 />
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='4' x:Name="Form2A" Visibility="Visible">
+        <Grid x:ConnectionId='4' x:Name="Form2A" Visibility="Collapsed">
             <Image x:ConnectionId='5' x:Name="Form2ABackground" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="288,105,288,685">
                 <TextBlock x:ConnectionId='17' x:Name="Form2ATitle" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Create A Course" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="120"/>

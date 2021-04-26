@@ -163,6 +163,7 @@ namespace Hogwarts2._0
                 textblock.VerticalAlignment = VerticalAlignment.Center;
                 textblock.Foreground = new SolidColorBrush(Colors.Black);
                 textblock.FontSize = 36;
+                textblock.Text = "No Semesters Available";
                 textblock.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
 
                 if (mode == 1)
