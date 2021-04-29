@@ -36,7 +36,7 @@ namespace Hogwarts2._0
         private int TTWednesdayCount = 2;
         private int TTThursdayCount = 2;
         private int TTFridayCount = 2;
-        private int TTTotoalRowCount = 0;
+        private int TTTotoalRowCount;
         private string SelectedHouse;
         public CounselorEnrollStudents()
         {

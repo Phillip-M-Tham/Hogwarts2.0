@@ -1,0 +1,71 @@
+﻿<Page
+    x:Class="Hogwarts2._0.HeadStudents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hogwarts2._0"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Image x:Name="headdepartmentsbackground" Source="Assets/HeadStudents.png" Stretch="Fill"/>
+        <Grid x:Name="Form2" Visibility="Visible">
+            <Image x:Name="Form2Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="288,74,288,663">
+                <TextBlock HorizontalAlignment="Center" Text="Houses" VerticalAlignment="Center" FontSize="120" Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+            </Grid>
+            <Grid Margin="121,552,1095,0" Height="412" VerticalAlignment="Top">
+                <TextBlock x:Name="Hufflepufftitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Hufflepuff" />
+            </Grid>
+            <Grid Margin="442,552,774,0" Height="412" VerticalAlignment="Top">
+                <TextBlock x:Name="Ravenclawtitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Ravenclaw" />
+            </Grid>
+            <Grid Margin="769,552,447,0" Height="412" VerticalAlignment="Top">
+                <TextBlock x:Name="Slytherintitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Slytherin" />
+            </Grid>
+            <Grid Margin="1096,552,120,0" Height="412" VerticalAlignment="Top">
+                <TextBlock x:Name="Gryffindortitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="40" FontFamily="/Assets/HarryP__.TTF#Harry P" Text="Gryffindor" />
+            </Grid>
+            <Grid Margin="43,266,1017,266">
+                <Button x:Name="Hufflepuff" Height="339" Width="306" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Form2AHufflepuff_Click">
+                    <Image Source="Assets/studentlogos.png" />
+                </Button>
+            </Grid>
+            <Grid Margin="367,266,693,266">
+                <Button x:Name="Ravenclaw" Height="339" Width="306" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Form2ARavenclaw_Click">
+                    <Image Source="Assets/studentlogos2.png" />
+                </Button>
+            </Grid>
+            <Grid Margin="691,266,369,266">
+                <Button x:Name="Slytherin" Height="339" Width="306" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Form2ASlytherin_Click">
+                    <Image Source="Assets/studentlogos3.png" />
+                </Button>
+            </Grid>
+            <Grid Margin="1018,266,42,266">
+                <Button x:Name="Gryffindor" Height="339" Width="306" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Form2AGryffindor_Click">
+                    <Image Source="Assets/studentlogos4.png" />
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid x:Name="Form3" Visibility="Visible">
+            <Image x:Name="Form3Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="288,108,288,709">
+                <TextBlock x:Name="Form3title" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+            </Grid>
+            <Grid Margin="1286,186,184,611">
+                <Button x:Name="Form3Filter" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="36" Content="Filter" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="1295,-6,13,678">
+                <Button x:Name="Form3Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"  FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="X" Click="Form3Cancel_Click"/>
+            </Grid>
+            <ScrollViewer x:Name="Form3ScrollViewer" Margin="288,284,288,292">
+                <Grid x:Name="Form3StudentList" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

@@ -170,6 +170,9 @@
     <Compile Include="HeadSemesters.xaml.cs">
       <DependentUpon>HeadSemesters.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HeadStudents.xaml.cs">
+      <DependentUpon>HeadStudents.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HStuAccount.xaml.cs">
       <DependentUpon>HStuAccount.xaml</DependentUpon>
     </Compile>
@@ -268,6 +271,7 @@
     <Content Include="Assets\headhome2.png" />
     <Content Include="Assets\headmasterhome.jpg" />
     <Content Include="Assets\headsemesters2.png" />
+    <Content Include="Assets\HeadStudents.png" />
     <Content Include="Assets\Hlogo.png" />
     <Content Include="Assets\Hstudefaultpic.png" />
     <Content Include="Assets\hufflepuffbanner.png" />
@@ -289,6 +293,10 @@
     <Content Include="Assets\Slogo.png" />
     <Content Include="Assets\slytherinbanner.png" />
     <Content Include="Assets\Sstudefaultpic.png" />
+    <Content Include="Assets\studentlogos.png" />
+    <Content Include="Assets\studentlogos2.png" />
+    <Content Include="Assets\studentlogos3.png" />
+    <Content Include="Assets\studentlogos4.png" />
     <Content Include="Assets\testsong.wav" />
     <Content Include="Assets\hogwartslogo.png" />
     <Content Include="Assets\hogwartstest1.jpg" />
@@ -375,6 +383,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HeadSemesters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HeadStudents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
