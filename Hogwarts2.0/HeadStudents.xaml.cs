@@ -22,6 +22,7 @@ namespace Hogwarts2._0
         const string ConnectionString = "SERVER = DESKTOP-R3J82OF\\SQLEXPRESS2019; DATABASE= Hogwarts2.0; USER ID=Cohort7; PASSWORD=tuesday313";
         private int StudentRowCounter = 0;
         private string SelectedHouse;
+        private int SelectedStudentHUID;
         public HeadStudents()
         {
             this.InitializeComponent();
@@ -30,6 +31,7 @@ namespace Hogwarts2._0
         {
             base.OnNavigatedTo(e);
             _userHuid = e.Parameter.ToString();
+            resetform3filter();
         }
 
         private void Form2AHufflepuff_Click(object sender, RoutedEventArgs e)
@@ -66,9 +68,10 @@ namespace Hogwarts2._0
             SelectedHouse = "Gryffindor";
             setupForm3("default", 0);
         }
-        private async void setupForm3(string filter, int year)
+        private void setupForm3(string filter, int year)
         {
             StudentRowCounter = 0;
+            List<int> UnfilteredyearIDs = new List<int>();
             List<int> myids = new List<int>();
             List<string> StudentNames = new List<string>();
             List<int> yearlevel = new List<int>();
@@ -184,26 +187,26 @@ namespace Hogwarts2._0
                         }
                         else
                         {
-                           /* using (SqlCommand cmd = sqlConn.CreateCommand())
+                           using (SqlCommand cmd = sqlConn.CreateCommand())
                             {//get all ids from the selected year
                                 cmd.CommandText = $"SELECT HUID FROM Students WHERE StudentYear = {year};";
                                 using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
                                     while (reader.Read())
                                     {
-                                        filterdYearStudentIDs.Add((int)reader.GetValue(0));
+                                        UnfilteredyearIDs.Add((int)reader.GetValue(0));
                                     }
                                 }
                             }
-                            foreach (var unfilteredID in filterdYearStudentIDs.ToList())
+                            foreach (var unfilteredID in UnfilteredyearIDs.ToList())
                             {//filter the yearIDS to the studentIDs in the selected house
-                                if (UnfilteredStudentIDs.Contains(unfilteredID) == false)
+                                if (myids.Contains(unfilteredID) == false)
                                 {
-                                    filterdYearStudentIDs.Remove(unfilteredID);
+                                    UnfilteredyearIDs.Remove(unfilteredID);
                                 }
                             }
 
-                            foreach (var id in filterdYearStudentIDs)
+                            foreach (var id in UnfilteredyearIDs)
                             {
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {//get all names from the acquired ids
@@ -221,14 +224,14 @@ namespace Hogwarts2._0
                             {//do this if they choose to filter by HUID
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {//get all year levels from acquired ids
-                                    foreach (var id in filterdYearStudentIDs)
+                                    foreach (var id in UnfilteredyearIDs)
                                     {//ensures we only grab the student years from the selected year filter
                                         cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id} AND StudentYear = {year};";
                                         using (SqlDataReader reader = cmd.ExecuteReader())
                                         {
                                             while (reader.Read())
                                             {
-                                                UnfilteredYears.Add((int)reader.GetValue(0));
+                                                yearlevel.Add((int)reader.GetValue(0));
                                             }
                                         }
                                     }
@@ -247,33 +250,33 @@ namespace Hogwarts2._0
                                         {
                                             while (reader.Read())
                                             {
-                                                AlphaStudentIDs.Add((int)reader.GetValue(0));
+                                                sortedIDs.Add((int)reader.GetValue(0));
                                             }
                                         }
                                     }
-                                    foreach (var unfilteredID in AlphaStudentIDs.ToList())
+                                    foreach (var unfilteredID in sortedIDs.ToList())
                                     {//filter ids against yearids incase we got a HUID thats not a student of the selected year
-                                        if (UnfilteredStudentIDs.Contains(unfilteredID) == false)
+                                        if (UnfilteredyearIDs.Contains(unfilteredID) == false)
                                         {
-                                            AlphaStudentIDs.Remove(unfilteredID);
+                                            sortedIDs.Remove(unfilteredID);
                                         }
                                     }
                                 }
                                 using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {//get all year levels from acquired ids
-                                    foreach (var id in AlphaStudentIDs)
+                                    foreach (var id in sortedIDs)
                                     {//double tap by ensuring we select by specified student year
                                         cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id} AND StudentYear = {year};";
                                         using (SqlDataReader reader = cmd.ExecuteReader())
                                         {
                                             while (reader.Read())
                                             {
-                                                AlphaYears.Add((int)reader.GetValue(0));
+                                                yearlevel.Add((int)reader.GetValue(0));
                                             }
                                         }
                                     }
                                 }
-                            }*/
+                            }
                         }
 
                     }
@@ -311,9 +314,20 @@ namespace Hogwarts2._0
                     mybutton.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
                     mybutton.HorizontalAlignment = HorizontalAlignment.Center;
                     mybutton.VerticalAlignment = VerticalAlignment.Center;
-                    mybutton.SetValue(NameProperty, myids[StudentRowCounter].ToString());
-                    //mybutton.Click += SetSelectedCourse;
-                    //put the button in the border
+                    if (filter == "default" && year == 0)
+                    {
+                        mybutton.SetValue(NameProperty, myids[StudentRowCounter].ToString());
+                    }else if(filter =="alph" && year == 0)
+                    {
+                        mybutton.SetValue(NameProperty, sortedIDs[StudentRowCounter].ToString());
+                    }else if(filter =="default" && year !=0) 
+                    {
+                        mybutton.SetValue(NameProperty, UnfilteredyearIDs[StudentRowCounter].ToString());
+                    }else if(filter =="alph" && year != 0)
+                    {
+                        mybutton.SetValue(NameProperty, sortedIDs[StudentRowCounter].ToString());
+                    }
+                    mybutton.Click += SetSelectedStudent;
 
                     TextBlock txtblck = new TextBlock();
                     txtblck.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
@@ -350,7 +364,19 @@ namespace Hogwarts2._0
             }
         }
 
-        private void setupform3filter()
+        private async void SetSelectedStudent(object sender, RoutedEventArgs e)
+        {
+            Form3Filter.Visibility = Visibility.Collapsed;
+            Form4.Visibility = Visibility.Visible;
+            Form3.Visibility = Visibility.Collapsed;
+            Button SelectedStudent = sender as Button;
+            Int32.TryParse(SelectedStudent.Name, out SelectedStudentHUID);
+            Form4Title.Text = SelectedStudent.Content.ToString();
+            var NotValidMessage = new MessageDialog(SelectedStudentHUID.ToString());
+            await NotValidMessage.ShowAsync();
+        }
+
+        private void resetform3filter()
         {
             YearlevelInput.SelectedValue = "All years";
             FilterbyReg.IsChecked = true;
@@ -363,7 +389,7 @@ namespace Hogwarts2._0
             Form3.Visibility = Visibility.Collapsed;
             Form2.Visibility = Visibility.Visible;
             Form3Filter.Visibility = Visibility.Collapsed;
-            setupform3filter();
+            resetform3filter();
             purgeForm3StudentList();
         }
 
@@ -424,6 +450,11 @@ namespace Hogwarts2._0
             {
                 setupForm3("alph", year);
             }
+        }
+        private void Form4Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form4.Visibility = Visibility.Collapsed;
+            Form3.Visibility = Visibility.Visible;
         }
     }
 }
