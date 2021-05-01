@@ -123,7 +123,7 @@
                 </CheckBox>
             </Grid>
             <Grid Margin="1182,475,48,274">
-                <ComboBox x:ConnectionId='57'  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="144"                                                     >
+                <ComboBox x:ConnectionId='57'  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="144"                                                   >
                     <x:Int32>1</x:Int32>
                     <x:Int32>2</x:Int32>
                     <x:Int32>3</x:Int32>

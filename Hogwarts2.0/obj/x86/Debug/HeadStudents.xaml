@@ -48,7 +48,7 @@
                 </Button>
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='4' x:Name="Form3" Visibility="Visible">
+        <Grid x:ConnectionId='4' x:Name="Form3" Visibility="Collapsed">
             <Image x:ConnectionId='11' x:Name="Form3Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="288,108,288,709">
                 <TextBlock x:ConnectionId='18' x:Name="Form3title" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
@@ -95,7 +95,7 @@
                 </CheckBox>
             </Grid>
             <Grid Margin="1152,415,78,334">
-                <ComboBox x:ConnectionId='6'  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="144">
+                <ComboBox x:ConnectionId='6'  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="144"                                                   >
                     <x:Int32>1</x:Int32>
                     <x:Int32>2</x:Int32>
                     <x:Int32>3</x:Int32>

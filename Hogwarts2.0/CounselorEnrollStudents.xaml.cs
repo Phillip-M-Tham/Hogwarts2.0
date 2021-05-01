@@ -425,7 +425,6 @@ namespace Hogwarts2._0
                                         }
                                     }
                                 }
-
                             }
                         }
                         sqlConn.Close();

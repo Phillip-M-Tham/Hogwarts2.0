@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -19,7 +20,7 @@ namespace Hogwarts2._0
     {
         private string _userHuid;
         const string ConnectionString = "SERVER = DESKTOP-R3J82OF\\SQLEXPRESS2019; DATABASE= Hogwarts2.0; USER ID=Cohort7; PASSWORD=tuesday313";
-        private int StudentRowCounter=0;
+        private int StudentRowCounter = 0;
         private string SelectedHouse;
         public HeadStudents()
         {
@@ -29,9 +30,8 @@ namespace Hogwarts2._0
         {
             base.OnNavigatedTo(e);
             _userHuid = e.Parameter.ToString();
-            setupform3filter();
         }
-  
+
         private void Form2AHufflepuff_Click(object sender, RoutedEventArgs e)
         {//setup the filter page based on the house click
             purgeForm3StudentList();
@@ -46,7 +46,7 @@ namespace Hogwarts2._0
             Form3.Visibility = Visibility.Visible;
             Form2.Visibility = Visibility.Collapsed;
             SelectedHouse = "Ravenclaw";
-            setupForm3("default",0);
+            setupForm3("default", 0);
         }
 
         private void Form2ASlytherin_Click(object sender, RoutedEventArgs e)
@@ -55,7 +55,7 @@ namespace Hogwarts2._0
             Form3.Visibility = Visibility.Visible;
             Form2.Visibility = Visibility.Collapsed;
             SelectedHouse = "Slytherin";
-            setupForm3("default",0);
+            setupForm3("default", 0);
         }
 
         private void Form2AGryffindor_Click(object sender, RoutedEventArgs e)
@@ -64,14 +64,16 @@ namespace Hogwarts2._0
             Form3.Visibility = Visibility.Visible;
             Form2.Visibility = Visibility.Collapsed;
             SelectedHouse = "Gryffindor";
-            setupForm3("default",0);
+            setupForm3("default", 0);
         }
-        private void setupForm3(string filter, int year)
+        private async void setupForm3(string filter, int year)
         {
             StudentRowCounter = 0;
-            List<int> UnfilteredStudentIDs = new List<int>();
+            List<int> myids = new List<int>();
             List<string> StudentNames = new List<string>();
-            List<int> UnfilteredYears = new List<int>();
+            List<int> yearlevel = new List<int>();
+            List<int> sortedIDs = new List<int>();
+          
             if (SelectedHouse == "Hufflepuff")
             {
                 Form3title.Text = "Hufflepuff";
@@ -100,46 +102,190 @@ namespace Hogwarts2._0
                         {
                             while (reader.Read())
                             {
-                                UnfilteredStudentIDs.Add((int)reader.GetValue(0));
+                                myids.Add((int)reader.GetValue(0));
                             }
                         }
                     }
-                    if(UnfilteredStudentIDs.Count > 0)
+                    if (myids.Count > 0)
                     {
-                        foreach(var id in UnfilteredStudentIDs)
+                        if (year == 0)
                         {
-                            using(SqlCommand cmd = sqlConn.CreateCommand())
-                            {
-                                cmd.CommandText = $"SELECT Firstname,Lastname FROM Users WHERE HUID = {id};";
-                                using(SqlDataReader reader = cmd.ExecuteReader())
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {//get all names from the acquired ids
+                                foreach (var id in myids)
                                 {
-                                    while (reader.Read())
+                                    cmd.CommandText = $"SELECT FirstName, LastName FROM Users WHERE HUID = {id};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
                                     {
-                                        StudentNames.Add(reader.GetValue(0).ToString() +" "+ reader.GetValue(1).ToString());
+                                        while (reader.Read())
+                                        {
+                                            StudentNames.Add(reader.GetValue(0).ToString() + " " + reader.GetValue(1).ToString());
+                                        }
                                     }
                                 }
                             }
-                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            if (filter == "default")
                             {
-                                cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id};";
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all year levels from acquired ids
+                                    foreach (var id in myids)
+                                    {
+                                        cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                yearlevel.Add((int)reader.GetValue(0));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {//alphabettically sorted
+                                StudentNames.Sort();
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all names from the acquired ids
+                                    foreach (var name in StudentNames)
+                                    {//sort the names alphabetically and get all users HUID with matching names
+                                        string[] firstlast = name.Split(" ");
+                                        cmd.CommandText = $"SELECT HUID FROM Users WHERE FirstName = '{firstlast[0]}' AND LastName = '{firstlast[1]}';";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                sortedIDs.Add((int)reader.GetValue(0));
+                                            }
+                                        }
+                                    }
+                                    foreach (var unfilteredID in sortedIDs.ToList())
+                                    {//filter ids against students table incase we got a HUID thats not a student
+                                        if (myids.Contains(unfilteredID) == false)
+                                        {
+                                            sortedIDs.Remove(unfilteredID);
+                                        }
+                                    }
+                                }
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all year levels from acquired ids
+                                    foreach (var id in sortedIDs)
+                                    {
+                                        cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                yearlevel.Add((int)reader.GetValue(0));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                           /* using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {//get all ids from the selected year
+                                cmd.CommandText = $"SELECT HUID FROM Students WHERE StudentYear = {year};";
                                 using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
                                     while (reader.Read())
                                     {
-                                        UnfilteredYears.Add((int)reader.GetValue(0));
+                                        filterdYearStudentIDs.Add((int)reader.GetValue(0));
                                     }
                                 }
                             }
+                            foreach (var unfilteredID in filterdYearStudentIDs.ToList())
+                            {//filter the yearIDS to the studentIDs in the selected house
+                                if (UnfilteredStudentIDs.Contains(unfilteredID) == false)
+                                {
+                                    filterdYearStudentIDs.Remove(unfilteredID);
+                                }
+                            }
 
+                            foreach (var id in filterdYearStudentIDs)
+                            {
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all names from the acquired ids
+                                    cmd.CommandText = $"SELECT FirstName, LastName FROM Users WHERE HUID = {id};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            StudentNames.Add(reader.GetValue(0).ToString() + " " + reader.GetValue(1).ToString());
+                                        }
+                                    }
+                                }
+                            }
+                            if (FilterbyReg.IsChecked == true)
+                            {//do this if they choose to filter by HUID
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all year levels from acquired ids
+                                    foreach (var id in filterdYearStudentIDs)
+                                    {//ensures we only grab the student years from the selected year filter
+                                        cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id} AND StudentYear = {year};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                UnfilteredYears.Add((int)reader.GetValue(0));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {//alphabetically is checked
+                                StudentNames.Sort();
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all names from the acquired ids
+                                    foreach (var name in StudentNames)
+                                    {//sort the names alphabetically and get all users HUID with matching names
+                                        string[] firstlast = name.Split(" ");
+                                        cmd.CommandText = $"SELECT HUID FROM Users WHERE FirstName = '{firstlast[0]}' AND LastName = '{firstlast[1]}';";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                AlphaStudentIDs.Add((int)reader.GetValue(0));
+                                            }
+                                        }
+                                    }
+                                    foreach (var unfilteredID in AlphaStudentIDs.ToList())
+                                    {//filter ids against yearids incase we got a HUID thats not a student of the selected year
+                                        if (UnfilteredStudentIDs.Contains(unfilteredID) == false)
+                                        {
+                                            AlphaStudentIDs.Remove(unfilteredID);
+                                        }
+                                    }
+                                }
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {//get all year levels from acquired ids
+                                    foreach (var id in AlphaStudentIDs)
+                                    {//double tap by ensuring we select by specified student year
+                                        cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {id} AND StudentYear = {year};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                AlphaYears.Add((int)reader.GetValue(0));
+                                            }
+                                        }
+                                    }
+                                }
+                            }*/
                         }
+
                     }
                     sqlConn.Close();
                 }
             }
-            if(StudentNames.Count > 0)
+            
+            if (StudentNames.Count > 0)
             {//post the name of each student as a clickable button
                 Form3StudentTitle.Visibility = Visibility.Visible;
                 Form3YearTitle.Visibility = Visibility.Visible;
+                StudentRowCounter = 0;
                 foreach (var name in StudentNames)
                 {
                     RowDefinition newrow = new RowDefinition();
@@ -165,18 +311,17 @@ namespace Hogwarts2._0
                     mybutton.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
                     mybutton.HorizontalAlignment = HorizontalAlignment.Center;
                     mybutton.VerticalAlignment = VerticalAlignment.Center;
-                    mybutton.SetValue(NameProperty, UnfilteredStudentIDs[StudentRowCounter].ToString());
+                    mybutton.SetValue(NameProperty, myids[StudentRowCounter].ToString());
                     //mybutton.Click += SetSelectedCourse;
                     //put the button in the border
-                    
+
                     TextBlock txtblck = new TextBlock();
                     txtblck.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
                     txtblck.FontSize = 36;
                     txtblck.Foreground = new SolidColorBrush(Colors.Black);
                     txtblck.HorizontalAlignment = HorizontalAlignment.Center;
                     txtblck.VerticalAlignment = VerticalAlignment.Center;
-                    txtblck.Text = UnfilteredYears[StudentRowCounter].ToString();
-
+                    txtblck.Text = yearlevel[StudentRowCounter].ToString();
                     bdyear.Child = txtblck;
                     bd.Child = mybutton;
                     Form3StudentList.Children.Add(bd);
@@ -208,8 +353,8 @@ namespace Hogwarts2._0
         private void setupform3filter()
         {
             YearlevelInput.SelectedValue = "All years";
-            FilterbyAlph.IsChecked = false;
             FilterbyReg.IsChecked = true;
+            FilterbyAlph.IsChecked = false;
         }
 
         private void Form3Cancel_Click(object sender, RoutedEventArgs e)
@@ -218,6 +363,7 @@ namespace Hogwarts2._0
             Form3.Visibility = Visibility.Collapsed;
             Form2.Visibility = Visibility.Visible;
             Form3Filter.Visibility = Visibility.Collapsed;
+            setupform3filter();
             purgeForm3StudentList();
         }
 
@@ -262,6 +408,21 @@ namespace Hogwarts2._0
                 (sender as CheckBox).IsChecked = true;
                 var NotValidMessage = new MessageDialog("Please select a filter that is not currently in use.");
                 await NotValidMessage.ShowAsync();
+            }
+        }
+
+        private void YearlevelInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int year;
+            Int32.TryParse(YearlevelInput.SelectedValue.ToString(), out year);
+            purgeForm3StudentList();
+            if (FilterbyReg.IsChecked == true)
+            {
+                setupForm3("default", year);
+            }
+            else
+            {
+                setupForm3("alph", year);
             }
         }
     }
