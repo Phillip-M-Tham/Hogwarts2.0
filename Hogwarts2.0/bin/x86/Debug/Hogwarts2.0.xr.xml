@@ -82,9 +82,9 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
+      <RootProperty Name="Visibility" />
       <RootProperty Name="FontWeight" />
       <RootProperty Name="Inlines" />
-      <RootProperty Name="Visibility" />
       <RootProperty Name="RenderTransformOrigin" />
     </RootType>
     <RootType FullName="Hogwarts2._0.CounselorAccount" />
