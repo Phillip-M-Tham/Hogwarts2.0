@@ -118,14 +118,17 @@
             </Grid>
             <ScrollViewer x:Name="Form4Scrollviewer" Margin="288,293,288,234" >
                 <Grid x:Name="StudentProfile" Height="auto">
-                    <Grid x:Name="ProfilePic" Margin="0,-108,0,1145" >
-                        <Image Source="Assets/Rstudefaultpic.png" Stretch="Uniform" Height="369" Width="432" />
+                    <Grid Margin="0,-108,0,1145" >
+                        <Image x:Name="ProfilePic" Source="Assets/Rstudefaultpic.png" Stretch="Uniform" Height="369" Width="432" />
                     </Grid>
                     <Grid Margin="-10,276,10,1043" >
                         <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Student Biography"/>
                     </Grid>
                     <Grid Margin="0,462,0,645">
-                        <TextBlock x:Name="StudentBio" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" VerticalAlignment="Center" Width="950" Height="400" TextWrapping="Wrap" />
+                        <TextBlock x:Name="StudentBio" HorizontalAlignment="Center" Foreground="Black" FontSize="30" FontFamily="/Assets/ReginaScript.ttf#Regina Script" VerticalAlignment="Center" Width="950" Height="500" TextWrapping="Wrap" />
+                    </Grid>
+                    <Grid Margin="143,703,175,502">
+                        <TextBlock x:Name="ChartTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="GPA Progress"/>
                     </Grid>
                     <Grid Margin="-329,926,650,279">
                         <TextBlock x:Name="ChartYTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="GPA" RenderTransformOrigin="0.5,0.5">
@@ -142,6 +145,50 @@
                             <Charting:LineSeries x:Name="ReallyAnnoyingChart" Margin="0" IndependentValuePath="Semester" DependentValuePath="GPA" Title="StudentName" IsSelectionEnabled="True">
                             </Charting:LineSeries>
                         </Charting:Chart>
+                    </Grid>
+                    <Grid Margin="0,1244,0,-63">
+                        <Button x:Name="Form4UpdateYearButton" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Update Year Level" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form4UpdateYearLevel_click"/>
+                    </Grid>
+                    <Grid Margin="0,1325,0,-144">
+                        <Button x:Name="Form4ExpellStudentButton" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Expell Student" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form4ExpellStudent_click"/>
+                    </Grid>
+                    <Grid x:Name="Form4AUpdateYear" Margin="72,1209,71,-207" Visibility="Collapsed">
+                        <Image x:Name="Form4ABackground" HorizontalAlignment="Center" Height="200" Width="382" VerticalAlignment="Center" Stretch="Fill" Source="Assets/EnrollFilterBack.png" />
+                        <Grid Margin="245,115,238,358">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontSize="50" Text="Student Year" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="0,126,0,0"/>
+                        </Grid>
+                        <Grid Margin="260,203,254,205">
+                            <ComboBox  Name="CurrentYearlevel" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="144" >
+                                <x:Int32>1</x:Int32>
+                                <x:Int32>2</x:Int32>
+                                <x:Int32>3</x:Int32>
+                                <x:Int32>4</x:Int32>
+                                <x:Int32>5</x:Int32>
+                                <x:Int32>6</x:Int32>
+                                <x:Int32>7</x:Int32>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="568,142,223,292">
+                            <Button x:Name="Form4ACancel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="X" FontSize="36" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form4ACancel_Click" />
+                        </Grid>
+                        <Grid Margin="353,266,359,146">
+                            <Button x:Name="Form4ASubmit" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Update" FontSize="36" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form4ASubmit_Click" />
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="Form4ExpellStudentWarning" Visibility="Collapsed" Margin="1,1298,-1,-199" >
+                        <Image x:Name="WarningBackground" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/TimeTunerBackground.png" Height="272" Width="500" />
+                        <Grid Margin="417,286,416,494">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" FontSize="36" Text="WARNING" FontFamily="Assets/HARRYP__.TTF#Harry P"/>
+                        </Grid>
+                        <Grid Margin="251,380,253,400" >
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="    Expelling a student will remove student from the&#x0a;          system and delete all associated data of &#x0a;        selected student. Do you wish to conitnue?" />
+                        </Grid>
+                        <Grid Margin="496,383,260,180">
+                            <Button x:Name="CancelForm4B" Foreground="Black" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="No" Click="CancelForm4B_Click" />
+                        </Grid>
+                        <Grid Margin="283,383,473,180">
+                            <Button x:Name="ExpellStudent" Foreground="Black" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Yes" Click="ExpellStudent_Click" />
+                        </Grid>
                     </Grid>
                 </Grid>
             </ScrollViewer>

@@ -24,6 +24,7 @@ namespace Hogwarts2._0
         private int StudentRowCounter = 0;
         private string SelectedHouse;
         private int SelectedStudentHUID;
+        private int SelectedStudentYear;
         public HeadStudents()
         {
             this.InitializeComponent();
@@ -382,7 +383,7 @@ namespace Hogwarts2._0
         }
 
         private void SetSelectedStudent(object sender, RoutedEventArgs e)
-        {
+        {//THIS IS WHERE WE SHOULD SET UP THE PROFILE PIC
             Form3Filter.Visibility = Visibility.Collapsed;
             Form4.Visibility = Visibility.Visible;
             Form3.Visibility = Visibility.Collapsed;
@@ -390,16 +391,58 @@ namespace Hogwarts2._0
             Int32.TryParse(SelectedStudent.Name, out SelectedStudentHUID);
             Form4Title.Text = SelectedStudent.Content.ToString();
             ReallyAnnoyingChart.Title = SelectedStudent.Content + "'s " + "GPA";
+            Form4Scrollviewer.ChangeView(null, 0,null,true);
+            setupForm4();
             getChartData();
         }
+
+        private void setupForm4()
+        {
+            string aboutme="";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT AboutInfo FROM Users WHERE HUID = {SelectedStudentHUID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                aboutme = reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT StudentYear FROM Students WHERE HUID = {SelectedStudentHUID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                SelectedStudentYear = (int)reader.GetValue(0);
+                            }
+                        }
+                    }
+                }
+            }
+            CurrentYearlevel.SelectedValue = SelectedStudentYear;
+            if(aboutme != "")
+            {
+                StudentBio.Text = aboutme; 
+            }
+            else
+            {
+                StudentBio.Text = "No Biography Available";
+            }
+        }
+
         public class Records  
         {  
             public string Semester {get; set;}
             public double GPA { get; set; }
-            public Records()
-            {
-
-            }
             public Records(string Sem, double gpa)
             {
                 Semester = Sem;
@@ -463,6 +506,10 @@ namespace Hogwarts2._0
                             }
                             Grades.Clear();
                         }
+                    }
+                    else
+                    {
+                        validGPA.Add(new Records("N/A", 0.0));
                     }
                     sqlConn.Close();
                 }
@@ -534,7 +581,6 @@ namespace Hogwarts2._0
 
         private void Form3Cancel_Click(object sender, RoutedEventArgs e)
         {
-            //need to purgestudent list
             Form3.Visibility = Visibility.Collapsed;
             Form2.Visibility = Visibility.Visible;
             Form3Filter.Visibility = Visibility.Collapsed;
@@ -604,13 +650,115 @@ namespace Hogwarts2._0
         {
             Form4.Visibility = Visibility.Collapsed;
             Form3.Visibility = Visibility.Visible;
-            Resetchart();
         }
 
-        private void Resetchart()
+        private void Form4UpdateYearLevel_click(object sender, RoutedEventArgs e)
         {
-            // lineChart.ClearValue();
-            (lineChart.Series[0] as LineSeries).ItemsSource = null;
+            Form4AUpdateYear.Visibility = Visibility.Visible;
+            Form4ExpellStudentButton.Visibility = Visibility.Collapsed;
+            Form4UpdateYearButton.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void Form4ACancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form4AUpdateYear.Visibility = Visibility.Collapsed;
+            Form4ExpellStudentButton.Visibility = Visibility.Visible;
+            Form4UpdateYearButton.Visibility = Visibility.Visible;
+            CurrentYearlevel.SelectedItem = SelectedStudentYear;
+        }
+
+        private async void Form4ASubmit_Click(object sender, RoutedEventArgs e)
+        {
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    SqlCommand command = new SqlCommand($"UPDATE Students SET StudentYear = {CurrentYearlevel.SelectedValue} WHERE HUID ={SelectedStudentHUID};", sqlConn);
+                    adapter.UpdateCommand = command;
+                    adapter.UpdateCommand.ExecuteNonQuery();
+                }
+                sqlConn.Close();
+            }
+            SelectedStudentYear = (int)CurrentYearlevel.SelectedValue;
+            var NotValidMessage = new MessageDialog("Student Year Successfully Updated");
+            await NotValidMessage.ShowAsync();
+            Form4AUpdateYear.Visibility = Visibility.Collapsed;
+            Form4ExpellStudentButton.Visibility = Visibility.Visible;
+            Form4UpdateYearButton.Visibility = Visibility.Visible;
+        }
+
+        private void Form4ExpellStudent_click(object sender, RoutedEventArgs e)
+        {
+            Form4ExpellStudentWarning.Visibility = Visibility.Visible;
+            Form4ExpellStudentButton.Visibility = Visibility.Collapsed;
+            Form4UpdateYearButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelForm4B_Click(object sender, RoutedEventArgs e)
+        {
+            Form4ExpellStudentWarning.Visibility = Visibility.Collapsed;
+            Form4ExpellStudentButton.Visibility = Visibility.Visible;
+            Form4UpdateYearButton.Visibility = Visibility.Visible;
+        }
+
+        private async void ExpellStudent_Click(object sender, RoutedEventArgs e)
+        {
+            using(SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    SqlCommand command = new SqlCommand($"DELETE FROM FinalGrade WHERE StudentHUID = {SelectedStudentHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    adapter = new SqlDataAdapter();
+                    command = new SqlCommand($"DELETE FROM Grades WHERE StudentHUID = {SelectedStudentHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    adapter = new SqlDataAdapter();
+                    command = new SqlCommand($"DELETE FROM Houses WHERE HUID = {SelectedStudentHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    adapter = new SqlDataAdapter();
+                    command = new SqlCommand($"DELETE FROM Positions WHERE HUID = {SelectedStudentHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    adapter = new SqlDataAdapter();
+                    command = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE StudentID = {SelectedStudentHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    adapter = new SqlDataAdapter();
+                    command = new SqlCommand($"DELETE FROM Students WHERE HUID = {SelectedStudentHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    adapter = new SqlDataAdapter();
+                    command = new SqlCommand($"DELETE FROM Users WHERE HUID = {SelectedStudentHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                }
+                sqlConn.Close();
+            }
+            var NotValidDelete = new MessageDialog("Student Successfully Expelled");
+            await NotValidDelete.ShowAsync();
+            Form4.Visibility = Visibility.Collapsed;
+            Form3.Visibility = Visibility.Visible;
+            Form4ExpellStudentWarning.Visibility = Visibility.Collapsed;
+            Form4ExpellStudentButton.Visibility = Visibility.Visible;
+            Form4UpdateYearButton.Visibility = Visibility.Visible;
+            purgeForm3StudentList();
+            
+            setupForm3("default", 0);
         }
     }
 }
