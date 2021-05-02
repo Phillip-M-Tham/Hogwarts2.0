@@ -171,11 +171,6 @@ namespace Hogwarts2._0
                     SemestersTable1A.RowDefinitions.Add(newrow);
                     SemestersTable1A.Children.Add(textblock);
                 }
-                else if (mode == 2)
-                {
-                    SemestersTable2A.RowDefinitions.Add(newrow);
-                    SemestersTable2A.Children.Add(textblock);
-                }
             }
         }
 

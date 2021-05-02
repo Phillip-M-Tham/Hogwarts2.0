@@ -154,11 +154,6 @@ namespace Hogwarts2._0
                     DepartmentsTable1A.RowDefinitions.Add(newrow);
                     DepartmentsTable1A.Children.Add(textblock);
                 }
-                else if (mode == 2)
-                {
-                    DepartmentsTable2A.RowDefinitions.Add(newrow);
-                    DepartmentsTable2A.Children.Add(textblock);
-                }
             }
         }
 

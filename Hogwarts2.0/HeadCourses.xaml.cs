@@ -138,16 +138,12 @@ namespace Hogwarts2._0
                     CoursesTable1A.RowDefinitions.Add(newrow);
                     CoursesTable1A.Children.Add(textblock);
                 }
-                else if (mode == 2)
-                {
-                    CoursesTable2A.RowDefinitions.Add(newrow);
-                    CoursesTable2A.Children.Add(textblock);
-                }
             }
         }
 
         private void Edit1A(object sender, RoutedEventArgs e)
         {
+            
             if (CoursesTable2A.Visibility == Visibility.Collapsed)
             {
                 CoursesTable2Achecks.Visibility = Visibility.Visible;

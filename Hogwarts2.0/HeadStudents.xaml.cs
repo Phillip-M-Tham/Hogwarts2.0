@@ -379,6 +379,8 @@ namespace Hogwarts2._0
                 txtblck.Text = "No Students Found";
                 txtblck.SetValue(Grid.RowProperty, 0);
                 txtblck.SetValue(Grid.ColumnProperty, 0);
+
+                Form3StudentList.Children.Add(txtblck);
             }
         }
 

@@ -247,3 +247,8 @@ C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\WinRTXamlToolkit.Contro
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\WinRTXamlToolkit.pri.xml
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\WinRTXamlToolkit.Controls.DataVisualization.pri.xml
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\WinRTXamlToolkit.Controls.DataVisualization\en-US\WinRTXamlToolkit.Controls.DataVisualization.Properties.Resources.resw
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadFaculty.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadFaculty.g.i.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadFaculty.g.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadFaculty.xaml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadFaculty.xbf
