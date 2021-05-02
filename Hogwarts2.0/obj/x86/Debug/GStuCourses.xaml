@@ -11,12 +11,12 @@
     <Grid>
         <Image x:ConnectionId='2' Name="redbackground" Source="Assets/Gback.png" Stretch="Fill"/>
         <Grid x:ConnectionId='3' x:Name="Form1">
-            <Image x:ConnectionId='18' x:Name="Form1Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
+            <Image x:ConnectionId='19' x:Name="Form1Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="452,93,451,692">
-                <TextBlock x:ConnectionId='21' x:Name="Form1Title" Foreground="Black" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Semesters"/>
+                <TextBlock x:ConnectionId='22' x:Name="Form1Title" Foreground="Black" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Semesters"/>
             </Grid>
-            <ScrollViewer x:ConnectionId='19' x:Name="Form1ScrollViewer" Margin="288,255,288,335">
-                <Grid x:ConnectionId='20' x:Name="SemesterList" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <ScrollViewer x:ConnectionId='20' x:Name="Form1ScrollViewer" Margin="288,255,288,335">
+                <Grid x:ConnectionId='21' x:Name="SemesterList" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="500"/>
                     </Grid.ColumnDefinitions>
@@ -26,15 +26,18 @@
         <Grid x:ConnectionId='4' x:Name="Form2" Visibility="Collapsed">
             <Image x:ConnectionId='13' x:Name="Form2Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="756"/>
             <Grid Margin="453,113,452,722">
-                <TextBlock x:ConnectionId='17' x:Name="Form2Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="My Courses" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                <TextBlock x:ConnectionId='18' x:Name="Form2Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="My Courses" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
             </Grid>
             <ScrollViewer x:ConnectionId='14' x:Name="Form2scrollviewer" Margin="288,255,288,335">
-                <Grid x:ConnectionId='16' x:Name="CoursesList" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid x:ConnectionId='17' x:Name="CoursesList" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="500"/>
                     </Grid.ColumnDefinitions>
                 </Grid>
             </ScrollViewer>
+            <Grid Margin="407,712,668,80">
+                <TextBlock x:ConnectionId='16' x:Name="Form2GPA" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="50" Text="Semester GPA: "/>
+            </Grid>
             <Grid Margin="1330,49,34,750">
                 <Button x:ConnectionId='15' x:Name="Form2Cancel" Content="X" Foreground="Black" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P"                          />
             </Grid>

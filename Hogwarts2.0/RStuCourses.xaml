@@ -35,6 +35,9 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </ScrollViewer>
+            <Grid Margin="407,712,668,80">
+                <TextBlock x:Name="Form2GPA" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="50" Text="Semester GPA: "/>
+            </Grid>
             <Grid Margin="1330,49,34,750">
                 <Button x:Name="Form2Cancel" Content="X" Foreground="Black" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form2Cancel_Click"/>
             </Grid>

@@ -389,7 +389,7 @@ namespace Hogwarts2._0
             Button SelectedStudent = sender as Button;
             Int32.TryParse(SelectedStudent.Name, out SelectedStudentHUID);
             Form4Title.Text = SelectedStudent.Content.ToString();
-            ReallyAnnoyingChart.Title = SelectedStudent.Content + " " + "GPA";
+            ReallyAnnoyingChart.Title = SelectedStudent.Content + "'s " + "GPA";
             getChartData();
         }
         public class Records  
@@ -408,92 +408,121 @@ namespace Hogwarts2._0
         }
     private void getChartData()
         {
-            List<Records> numbers = new List<Records>();
+            List<int> semesterIDs = new List<int>();
+            List<decimal> Grades = new List<decimal>();
+            List<Records> validGPA = new List<Records>();
+            string semestername="";
+            //get the distinct semesterids the student is enrolled in
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                { //puts info from database for semesters in a list
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT DISTINCT SemesterID FROM StudentEnrolledCourses WHERE StudentID = {SelectedStudentHUID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                semesterIDs.Add((int)reader.GetValue(0));
+                            }
+                        }
+                    }
+                    if(semesterIDs.Count > 0)
+                    {
+                        foreach (var id in semesterIDs)
+                        {
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE StudentHUID = {SelectedStudentHUID} AND SemesterID = {id};";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        Grades.Add((decimal)reader.GetValue(0));
+                                    }
+                                }
+                            }
+                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            {
+                                cmd.CommandText = $"SELECT Semester FROM Semesters WHERE SemesterID = {id};";
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        semestername = reader.GetValue(0).ToString();
+                                    }
+                                }
+                            }
+                            //we obtain all the grades, for the selected semester, we need to create a GPA and create a Record with it
+                            Records myrecord = createRecord(Grades,semestername);
+                            if(myrecord.Semester != "bad")
+                            {//valid record to be added to list of valid records
+                                validGPA.Add(myrecord);
+                            }
+                            Grades.Clear();
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            (lineChart.Series[0] as LineSeries).ItemsSource = validGPA;
            
-            numbers.Add(new Records()
-            {
-                Semester = "Spring 2014",
-                GPA = 3.4
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Fall 2014",
-                GPA = 3.6
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Spring 2015",
-                GPA = 3.2
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Fall 2015",
-                GPA = 2.9
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Spring 2016",
-                GPA = 3.0
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Fall 2016",
-                GPA = 3.6
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Spring 2017",
-                GPA = 2.4
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Fall 2017",
-                GPA = 3.7
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Spring 2018",
-                GPA = 3.78
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Fall 2018",
-                GPA = 3.43
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Spring 2019",
-                GPA = 2.4
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Fall 2019",
-                GPA = 3.4
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Spring 2020",
-                GPA = 3.6
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Fall 2020",
-                GPA = 3.5
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Spring 2021",
-                GPA = 3.42
-            });
-            numbers.Add(new Records()
-            {
-                Semester = "Fall 2021",
-                GPA = 3.97
-            });
-            //mycharttest.ItemsSource = numbers;
-            
-            (lineChart.Series[0] as LineSeries).ItemsSource = numbers;
+        }
+
+        private Records createRecord(List<decimal> grades, string semestername)
+        {
            
+            double GPA;
+            double totalpoints = 0.0;
+            double gradepoint;
+            int credit = 0;
+            if (grades.Count > 0)
+            {
+                foreach (var item in grades)
+                {
+                    gradepoint = getGradePoint(item);
+                    totalpoints += gradepoint;
+                    credit += 3;
+                }
+                GPA = totalpoints / credit;
+                Records myrecord = new Records(semestername,GPA);
+                return myrecord;
+            }
+            else
+            {
+                Records records = new Records("bad",0.0);
+                return records;
+            }
+
+        }
+
+        private double getGradePoint(decimal item)
+        {
+            double gradepoint;
+            if (item >= (decimal)90.00)
+            {//4.0
+                gradepoint = 4.0;
+            }
+            else if (item >= (decimal)80.00 && item < (decimal)90.00)
+            {//3.0
+                gradepoint = 3.0;
+            }
+            else if (item >= (decimal)70.00 && item < (decimal)80.00)
+            {//2.0
+                gradepoint = 2.0;
+            }
+            else if (item >= (decimal)60.00 && item < (decimal)70.00)
+            {//1.0
+                gradepoint = 1.0;
+            }
+            else
+            {
+                gradepoint = 0.0;
+            }
+            gradepoint *= 3;
+            return gradepoint;
         }
 
         private void resetform3filter()

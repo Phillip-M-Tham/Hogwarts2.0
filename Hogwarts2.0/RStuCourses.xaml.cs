@@ -322,6 +322,7 @@ namespace Hogwarts2._0
             SelectedSemesterID = Int32.Parse(pressedbutton.Name.ToString());
             List<int> courseids = new List<int>();
             List<string> coursenames = new List<string>();
+            List<decimal> GPA = new List<decimal>();
             Form2.Visibility = Visibility.Visible;
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
@@ -360,12 +361,73 @@ namespace Hogwarts2._0
                             }
                         }
                     }
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT CurrentGrade FROM FinalGrade WHERE StudentHUID = {_userHuid} AND SemesterID = {SelectedSemesterID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                GPA.Add((decimal)reader.GetValue(0));
+                            }
+                        }
+                    }
                     sqlConn.Close();
                 }
             }
             Populatetable(coursenames, courseids, 2);
+            PopulateSemesterGPA(GPA);
         }
 
+        private void PopulateSemesterGPA(List<decimal> GradesforGPA)
+        {
+            double GPA;
+            double totalpoints = 0.0;
+            double gradepoint;
+            int credit = 0;
+            if (GradesforGPA.Count > 0)
+            {
+                foreach (var item in GradesforGPA)
+                {
+                    gradepoint = getGradePoint(item);
+                    totalpoints += gradepoint;
+                    credit += 3;
+                }
+                GPA = totalpoints / credit;
+                Form2GPA.Text = $"Semester GPA: {GPA}";
+            }
+            else
+            {
+                Form2GPA.Text = "Semester GPA: N/A";
+            }
+        }
+
+        private double getGradePoint(decimal item)
+        {
+            double gradepoint;
+            if (item >= (decimal)90.00)
+            {//4.0
+                gradepoint = 4.0;
+            }
+            else if (item >= (decimal)80.00 && item < (decimal)90.00)
+            {//3.0
+                gradepoint = 3.0;
+            }
+            else if (item >= (decimal)70.00 && item < (decimal)80.00)
+            {//2.0
+                gradepoint = 2.0;
+            }
+            else if (item >= (decimal)60.00 && item < (decimal)70.00)
+            {//1.0
+                gradepoint = 1.0;
+            }
+            else
+            {
+                gradepoint = 0.0;
+            }
+            gradepoint *= 3;
+            return gradepoint;
+        }
         private void Form2Cancel_Click(object sender, RoutedEventArgs e)
         {
             Form2.Visibility = Visibility.Collapsed;
