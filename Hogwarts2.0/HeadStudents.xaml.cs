@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WinRTXamlToolkit.Controls.DataVisualization.Charting;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -32,6 +33,22 @@ namespace Hogwarts2._0
             base.OnNavigatedTo(e);
             _userHuid = e.Parameter.ToString();
             resetform3filter();
+            Setupchart();
+        }
+
+        private void Setupchart()
+        {
+            (lineChart.Series[0] as LineSeries).DependentRangeAxis = new LinearAxis
+            {
+                FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script"),
+                FontSize = 25,
+                Foreground = new SolidColorBrush(Colors.Black),
+                Minimum = 0.0,
+                Maximum = 4.0,
+                Interval = .5,
+                Orientation = AxisOrientation.Y,
+                ShowGridLines = true
+            };
         }
 
         private void Form2AHufflepuff_Click(object sender, RoutedEventArgs e)
@@ -364,7 +381,7 @@ namespace Hogwarts2._0
             }
         }
 
-        private async void SetSelectedStudent(object sender, RoutedEventArgs e)
+        private void SetSelectedStudent(object sender, RoutedEventArgs e)
         {
             Form3Filter.Visibility = Visibility.Collapsed;
             Form4.Visibility = Visibility.Visible;
@@ -372,8 +389,111 @@ namespace Hogwarts2._0
             Button SelectedStudent = sender as Button;
             Int32.TryParse(SelectedStudent.Name, out SelectedStudentHUID);
             Form4Title.Text = SelectedStudent.Content.ToString();
-            var NotValidMessage = new MessageDialog(SelectedStudentHUID.ToString());
-            await NotValidMessage.ShowAsync();
+            ReallyAnnoyingChart.Title = SelectedStudent.Content + " " + "GPA";
+            getChartData();
+        }
+        public class Records  
+        {  
+            public string Semester {get; set;}
+            public double GPA { get; set; }
+            public Records()
+            {
+
+            }
+            public Records(string Sem, double gpa)
+            {
+                Semester = Sem;
+                GPA = gpa;
+            }
+        }
+    private void getChartData()
+        {
+            List<Records> numbers = new List<Records>();
+           
+            numbers.Add(new Records()
+            {
+                Semester = "Spring 2014",
+                GPA = 3.4
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Fall 2014",
+                GPA = 3.6
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Spring 2015",
+                GPA = 3.2
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Fall 2015",
+                GPA = 2.9
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Spring 2016",
+                GPA = 3.0
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Fall 2016",
+                GPA = 3.6
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Spring 2017",
+                GPA = 2.4
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Fall 2017",
+                GPA = 3.7
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Spring 2018",
+                GPA = 3.78
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Fall 2018",
+                GPA = 3.43
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Spring 2019",
+                GPA = 2.4
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Fall 2019",
+                GPA = 3.4
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Spring 2020",
+                GPA = 3.6
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Fall 2020",
+                GPA = 3.5
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Spring 2021",
+                GPA = 3.42
+            });
+            numbers.Add(new Records()
+            {
+                Semester = "Fall 2021",
+                GPA = 3.97
+            });
+            //mycharttest.ItemsSource = numbers;
+            
+            (lineChart.Series[0] as LineSeries).ItemsSource = numbers;
+           
         }
 
         private void resetform3filter()
@@ -455,6 +575,13 @@ namespace Hogwarts2._0
         {
             Form4.Visibility = Visibility.Collapsed;
             Form3.Visibility = Visibility.Visible;
+            Resetchart();
+        }
+
+        private void Resetchart()
+        {
+            // lineChart.ClearValue();
+            (lineChart.Series[0] as LineSeries).ItemsSource = null;
         }
     }
 }

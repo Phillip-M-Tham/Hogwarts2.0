@@ -238,3 +238,12 @@ C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadStudents.g.i.cs
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadStudents.g.cs
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadStudents.xaml
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadStudents.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\WinRTXamlToolkit\WinRTXamlToolkit.xr.xml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\WinRTXamlToolkit\Properties\WinRTXamlToolkit.rd.xml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\WinRTXamlToolkit.Controls.DataVisualization\WinRTXamlToolkit.Controls.DataVisualization.xr.xml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\WinRTXamlToolkit.Controls.DataVisualization\Properties\WinRTXamlToolkit.Controls.DataVisualization.rd.xml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\WinRTXamlToolkit.dll
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\WinRTXamlToolkit.Controls.DataVisualization.dll
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\WinRTXamlToolkit.pri.xml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\WinRTXamlToolkit.Controls.DataVisualization.pri.xml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\WinRTXamlToolkit.Controls.DataVisualization\en-US\WinRTXamlToolkit.Controls.DataVisualization.Properties.Resources.resw

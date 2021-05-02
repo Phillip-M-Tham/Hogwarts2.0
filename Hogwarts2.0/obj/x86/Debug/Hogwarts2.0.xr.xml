@@ -82,10 +82,11 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
+      <RootProperty Name="RenderTransformOrigin" />
+      <RootProperty Name="RenderTransform" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="FontWeight" />
       <RootProperty Name="Inlines" />
-      <RootProperty Name="RenderTransformOrigin" />
     </RootType>
     <RootType FullName="Hogwarts2._0.CounselorAccount" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
@@ -200,6 +201,24 @@
     <RootType FullName="Hogwarts2._0.HeadHome" />
     <RootType FullName="Hogwarts2._0.HeadMain" />
     <RootType FullName="Hogwarts2._0.HeadSemesters" />
+    <RootType FullName="WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Series" />
+    </RootType>
+    <RootType FullName="WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="IndependentValuePath" />
+      <RootProperty Name="DependentValuePath" />
+      <RootProperty Name="Title" />
+      <RootProperty Name="IsSelectionEnabled" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.CompositeTransform">
+      <RootProperty Name="Rotation" />
+    </RootType>
     <RootType FullName="Hogwarts2._0.HeadStudents" />
     <RootType FullName="Hogwarts2._0.HStuAccount" />
     <RootType FullName="Hogwarts2._0.HStuAccountSettings" />

@@ -5,6 +5,7 @@
     xmlns:local="using:Hogwarts2._0"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -66,7 +67,7 @@
                 <TextBlock x:Name="Form3YearTitle" Visibility="Collapsed" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="40" Text="Year"/>
             </Grid>
             <ScrollViewer x:Name="Form3ScrollViewer" Margin="288,284,288,292">
-                <Grid x:Name="Form3StudentList" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid x:Name="Form3StudentList" HorizontalAlignment="Center" VerticalAlignment="Top" Height="auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="500"/>
                         <ColumnDefinition Width="100"/>
@@ -107,7 +108,7 @@
                 </ComboBox>
             </Grid>
         </Grid>
-        <Grid x:Name="Form4">
+        <Grid x:Name="Form4" Visibility="Visible">
             <Image x:Name="Form4Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="288,102,288,703">
                 <TextBlock x:Name="Form4Title" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Hello World"/>
@@ -115,6 +116,35 @@
             <Grid Margin="1332,57,41,748">
                 <Button x:Name="Form4FilterCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"  FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="X" Click="Form4Cancel_Click" />
             </Grid>
+            <ScrollViewer x:Name="Form4Scrollviewer" Margin="288,293,288,234" >
+                <Grid x:Name="StudentProfile" Height="auto">
+                    <Grid x:Name="ProfilePic" Margin="0,-108,0,1145" >
+                        <Image Source="Assets/Rstudefaultpic.png" Stretch="Uniform" Height="369" Width="432" />
+                    </Grid>
+                    <Grid Margin="-10,276,10,1043" >
+                        <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Student Biography"/>
+                    </Grid>
+                    <Grid Margin="0,462,0,645">
+                        <TextBlock x:Name="StudentBio" HorizontalAlignment="Center" FontFamily="/Assets/ReginaScript.ttf#Regina Script" VerticalAlignment="Center" Width="950" Height="400" TextWrapping="Wrap" />
+                    </Grid>
+                    <Grid Margin="-329,926,650,279">
+                        <TextBlock x:Name="ChartYTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="GPA" RenderTransformOrigin="0.5,0.5">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform Rotation="-90"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Margin="143,1191,175,14">
+                        <TextBlock x:Name="ChartXTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester"/>
+                    </Grid>
+                    <Grid Margin="17,930,3,246">
+                        <Charting:Chart x:Name="lineChart" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1" Height="500" Width="950" >
+                            <Charting:LineSeries x:Name="ReallyAnnoyingChart" Margin="0" IndependentValuePath="Semester" DependentValuePath="GPA" Title="StudentName" IsSelectionEnabled="True">
+                            </Charting:LineSeries>
+                        </Charting:Chart>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Page>
