@@ -291,8 +291,6 @@
                     <x:String>Professor</x:String>
                     <x:String>Counselor</x:String>
                     <x:String>Headmaster</x:String>
-                    <x:String>Headmistress</x:String>
-                    <x:String>Executive</x:String>
                 </ComboBox>
                 <Button x:ConnectionId='27' Name="FacultyRegisterCancel" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Cancel" Height="50" Width="100" FontSize="36" Foreground="Black" Margin="57,672,0,0" VerticalAlignment="Top"                                     />
                 <Button x:ConnectionId='28' Name="FacultyRegister" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Register" Height="50" Width="140" FontSize="36" Foreground="Black" Margin="433,672,0,0" VerticalAlignment="Top"                              />

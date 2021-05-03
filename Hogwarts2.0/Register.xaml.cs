@@ -212,8 +212,8 @@ namespace Hogwarts2._0
                 }
                 else
                 {
-                    var validStuMessage1 = new MessageDialog($"first name is {stuFirstName} \nlast name is {stuLastName} \nusername is {stuUserName} \npassword is {stuPassword}");
-                    await validStuMessage1.ShowAsync();
+                    /*var validStuMessage1 = new MessageDialog($"first name is {stuFirstName} \nlast name is {stuLastName} \nusername is {stuUserName} \npassword is {stuPassword}");
+                    await validStuMessage1.ShowAsync();*/
                     StudentRegisterForm.Visibility = Visibility.Collapsed;
                     StudentRegisterForm2.Visibility = Visibility.Visible;
                 }
@@ -383,7 +383,7 @@ namespace Hogwarts2._0
                                             {
                                                 //Set HUID TO AN ACTUAL HUID HERE
                                                 huid = Int32.TryParse(reader.GetValue(0).ToString(), out HUID);
-                                                if (huid == true)
+                                                /*if (huid == true)
                                                 {
                                                     var vmessage = new MessageDialog($"Inserted Index is {HUID}");
                                                     await vmessage.ShowAsync();
@@ -393,15 +393,19 @@ namespace Hogwarts2._0
                                                     //Parse the HUID did not work and will trigger this
                                                     var ermessage = new MessageDialog("Weesnaw");
                                                     await ermessage.ShowAsync();
-                                                }
+                                                }*/
                                             }
                                         }
+                                        SqlCommand command2 = new SqlCommand($"INSERT INTO FacultyCandidate VALUES ({HUID},'{frole}','{facPosType}');", sqlConn);
+                                        adapter.InsertCommand = command2;
+                                        adapter.InsertCommand.ExecuteNonQuery();
+                                        /*
                                         SqlCommand command2 = new SqlCommand($"INSERT INTO Positions VALUES ({HUID},'{frole}','{facPosType}');", sqlConn);
                                         adapter.InsertCommand = command2;
                                         adapter.InsertCommand.ExecuteNonQuery();
                                         SqlCommand command3 = new SqlCommand($"INSERT INTO Faculty VALUES({ HUID },'{facPosType}');", sqlConn);
                                         adapter.InsertCommand = command3;
-                                        adapter.InsertCommand.ExecuteNonQuery();
+                                        adapter.InsertCommand.ExecuteNonQuery();*/
                                     }
                                 }
                                 sqlConn.Close();
@@ -421,7 +425,7 @@ namespace Hogwarts2._0
                     }
                     if (huid == true && usernameexist == false)
                     {
-                        var ValidFacMessage = new MessageDialog("Faculty Account Successfully Created");
+                        var ValidFacMessage = new MessageDialog("Faculty application submitted. Application will be reviewed for approval.");
                         await ValidFacMessage.ShowAsync();
                         //INSERT DATA TO THE DATABASE HERE
                         Frame.Navigate(typeof(MainPage));
@@ -451,13 +455,9 @@ namespace Hogwarts2._0
             {
                 type = 'C';
             }
-            else if (frole == "Headmaster" || frole == "Headmistress")
+            else if (frole == "Headmaster")
             {
                 type = 'H';
-            }
-            else if (frole == "Executive")
-            {
-                type = 'E';
             }
             else
             {
@@ -913,9 +913,9 @@ namespace Hogwarts2._0
             else
             {
                 calculateHouse(Gpoints, Rpoints, Spoints, Hpoints);
-                mymessage += $"\npet is {pet} Slytherin is {Spoints}, Ravenclaw is {Rpoints}, Gryffindor is {Gpoints} and Hufflepuff is {Hpoints}\nYOU ARE IN {house}\n {stuFirstName}, {stuLastName},{stuUserName},{stuPassword}";
+                /*mymessage += $"\npet is {pet} Slytherin is {Spoints}, Ravenclaw is {Rpoints}, Gryffindor is {Gpoints} and Hufflepuff is {Hpoints}\nYOU ARE IN {house}\n {stuFirstName}, {stuLastName},{stuUserName},{stuPassword}";
                 var ValidStuMessage = new MessageDialog(mymessage);
-                await ValidStuMessage.ShowAsync();
+                await ValidStuMessage.ShowAsync();*/
                 //INSERT THE DATA TO THE DATABASE HERE
                 string InsertUserQuery = $"INSERT INTO Users VALUES ('{stuFirstName}','{stuLastName}','{stuUserName}','{stuPassword}',NULL);";
                 try
@@ -939,7 +939,7 @@ namespace Hogwarts2._0
                                     {
                                         //Set HUID TO AN ACTUAL HUID HERE
                                         huid = Int32.TryParse(reader.GetValue(0).ToString(), out HUID);
-                                        if (huid == true)
+                                        /*if (huid == true)
                                         {
                                             var vmessage = new MessageDialog($"Inserted Index is {HUID}");
                                             await vmessage.ShowAsync();
@@ -948,7 +948,7 @@ namespace Hogwarts2._0
                                         {
                                             var ermessage = new MessageDialog("Weesnaw");
                                             await ermessage.ShowAsync();
-                                        }
+                                        }*/
                                     }
                                 }
                             }
