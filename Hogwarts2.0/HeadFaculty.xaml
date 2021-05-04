@@ -13,7 +13,7 @@
         <Grid x:Name="Form1">
             <Image x:Name="Form1Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="0,-42,0,553">
-                <TextBlock x:Name="Form1Title" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Faculty Management"/> 
+                <TextBlock x:Name="Form1Title" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Faculty Management"/>
             </Grid>
             <Grid Margin="288,306,288,456">
                 <Button x:Name="Form1ViewFaculty" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="View Faculty" Click="Form1ViewFaculty_Click"/>
@@ -22,19 +22,48 @@
                 <Button x:Name="Form1ViewApplications" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="View Applications" Click="Form1ViewApplications_Click"/>
             </Grid>
         </Grid>
-        <Grid x:Name="Form2">
+        <Grid x:Name="Form2" Visibility="Collapsed">
             <Image x:Name="Form2Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="288,88,288,686">
                 <TextBlock x:Name="Form2Title" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Applications"/>
             </Grid>
             <Grid Margin="1160,-18,-126,668">
-                <Button Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Button_Click"/>
+                <Button x:Name="Form2Cancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form2Cancel_Click"/>
             </Grid>
             <ScrollViewer x:Name="Form2Scrollviewer" Margin="288,324,288,288">
-                <Grid x:Name="ApplicationList" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid>
+                    <Grid x:Name="ApplicationList" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="700"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <Grid x:Name="ApplicationListChecks" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-650,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+            <Grid Margin="431,668,714,106">
+                <Button x:Name="Form2Accept" HorizontalAlignment="Center" FontSize="36" VerticalAlignment="Center" Content="Accept" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form2Accept_Click"/>
+            </Grid>
+            <Grid Margin="743,668,402,106">
+                <Button x:Name="Form2Decline" HorizontalAlignment="Center" FontSize="36" VerticalAlignment="Center" Content="Decline" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form2Decline_Click"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="form3">
+            <Image x:Name="Form3Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="288,114,288,706">
+                <TextBlock x:Name="Form3Title" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Faculty"/>
+            </Grid>
+            <Grid Margin="1160,-18,-126,668">
+                <Button x:Name="Form3Cancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form3Cancel_Click"/>
+            </Grid>
+            <ScrollViewer x:Name="Form3ScrollViewer" Margin="288,250,288,243">
+                <Grid x:Name="FacultyList" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="700"/>
+                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
                 </Grid>
             </ScrollViewer>

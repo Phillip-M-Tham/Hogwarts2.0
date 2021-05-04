@@ -409,42 +409,34 @@ namespace Hogwarts2._0
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 
-                    adapter2 = new SqlDataAdapter();
                     command2 = new SqlCommand($"DELETE FROM Assignments WHERE SemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 
-                    adapter2 = new SqlDataAdapter();
                     command2 = new SqlCommand($"DELETE FROM FinalGrade WHERE SemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 
-                    adapter2 = new SqlDataAdapter();
                     command2 = new SqlCommand($"DELETE FROM ReqMaterials WHERE SemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 
-                    adapter2 = new SqlDataAdapter();
                     command2 = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE SemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 
-                    adapter2 = new SqlDataAdapter();
                     command2 = new SqlCommand($"DELETE FROM SemesterCourses WHERE SemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 
-                    adapter2 = new SqlDataAdapter();
                     command2 = new SqlCommand($"DELETE FROM DayTypes WHERE SemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 
-                    adapter2 = new SqlDataAdapter();
                     command2 = new SqlCommand($"DELETE FROM Times WHERE SemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 
-                    adapter2 = new SqlDataAdapter();
                     command2 = new SqlCommand($"DELETE FROM Semesters WHERE SemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
