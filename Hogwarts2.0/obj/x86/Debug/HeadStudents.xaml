@@ -114,7 +114,7 @@
                 <TextBlock x:ConnectionId='29' x:Name="Form4Title" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Hello World"/>
             </Grid>
             <Grid Margin="1332,57,41,748">
-                <Button x:ConnectionId='28' x:Name="Form4FilterCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"  FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="X"                           />
+                <Button x:ConnectionId='28' x:Name="Form4Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"  FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="X"                           />
             </Grid>
             <ScrollViewer x:ConnectionId='8' x:Name="Form4Scrollviewer" Margin="288,293,288,234" >
                 <Grid x:ConnectionId='9' x:Name="StudentProfile" Height="auto">

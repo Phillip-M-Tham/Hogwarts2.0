@@ -29,6 +29,7 @@ namespace Hogwarts2._0
         const string ConnectionString = "SERVER = DESKTOP-R3J82OF\\SQLEXPRESS2019; DATABASE= Hogwarts2.0; USER ID=Cohort7; PASSWORD=tuesday313";
         private int FacultyApplicationsRow = 0;
         private int FacultyListRow = 0;
+        private bool FilterOn = false;
         public HeadFaculty()
         {
             this.InitializeComponent();
@@ -41,15 +42,29 @@ namespace Hogwarts2._0
 
         private void Form1ViewFaculty_Click(object sender, RoutedEventArgs e)
         {
-            form3.Visibility = Visibility.Visible;
+            Form3.Visibility = Visibility.Visible;
             Form1.Visibility = Visibility.Collapsed;
-            setupForm3("default","all");
+            if (Form3Filter.Visibility == Visibility.Collapsed)
+            {
+                Form3Filter.Visibility = Visibility.Visible;
+            }
+            ResetForm3Filter();
+        }
+
+        private void ResetForm3Filter()
+        {
+            RoleInput.SelectedItem = "All Roles";
+            FilterbyReg.IsChecked = true;
+            FilterbyAlph.IsChecked = false;
+            setupForm3("default","All Roles");
         }
 
         private void setupForm3(string mode,string type)
         {
+            PurgeFacultyList();
             FacultyListRow = 0;
             List<int> FacID = new List<int>();
+            List<int> AlphFacIDs = new List<int>();
             List<string> FacNames = new List<string>();
             List<string> FacRoles = new List<string>();
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
@@ -69,32 +84,171 @@ namespace Hogwarts2._0
                         }
                     }
                     if(FacID.Count > 0)
-                    {
-                        foreach(var ID in FacID)
-                        {//should only work with default and all
+                    {//should only work with default and all
+                        if (type == "All Roles")
+                        {
+                            foreach (var ID in FacID)
+                            {
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {
+                                    cmd.CommandText = $"SELECT FirstName,LastName FROM Users WHERE HUID = {ID};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            FacNames.Add(reader.GetValue(0).ToString() + " " + reader.GetValue(1).ToString());
+                                        }
+                                    }
+                                }
+                                if (mode == "default")
+                                {//populate facroles with default all names and ids
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {
+                                        cmd.CommandText = $"SELECT PositionName FROM Positions WHERE HUID = {ID};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                FacRoles.Add(reader.GetValue(0).ToString());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if(mode == "alph")
+                            {//this is alphabetical
+                                FacNames.Sort();
+                                foreach (var name in FacNames)
+                                {
+                                    string[] firstlast = name.Split(" ");
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {
+                                        cmd.CommandText = $"SELECT HUID FROM Users WHERE FirstName = '{firstlast[0]}' AND LastName = '{firstlast[1]}';";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                AlphFacIDs.Add((int)reader.GetValue(0));
+                                            }
+                                        }
+                                    }
+                                }
+                                foreach (var id in AlphFacIDs.ToList())
+                                {//filters the obtained ids for non faculty ids
+                                    if (!FacID.Contains(id))
+                                    {
+                                        AlphFacIDs.Remove(id);
+                                    }
+                                }
+                                foreach (var id in AlphFacIDs)
+                                {
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {
+                                        cmd.CommandText = $"SELECT PositionName FROM Positions WHERE HUID = {id};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                FacRoles.Add(reader.GetValue(0).ToString());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            FacID.Clear();
+                            string Role = "";
+                            if(type == "Professor")
+                            {
+                                Role = "P";
+                            }else if(type == "Counselor")
+                            {
+                                Role = "C";
+                            }else if(type == "Headmaster")
+                            {
+                                Role = "H";
+                            }
                             using (SqlCommand cmd = sqlConn.CreateCommand())
                             {
-                                cmd.CommandText = $"SELECT FirstName,LastName FROM Users WHERE HUID = {ID};";
+                                cmd.CommandText = $"SELECT HUID FROM Faculty WHERE PositionType = '{Role}';";
                                 using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
                                     while (reader.Read())
                                     {
-                                        FacNames.Add(reader.GetValue(0).ToString()+" "+reader.GetValue(1).ToString());
+                                        FacID.Add((int)reader.GetValue(0));
                                     }
                                 }
                             }
-                            using (SqlCommand cmd = sqlConn.CreateCommand())
+                            foreach (var ID in FacID)
                             {
-                                cmd.CommandText = $"SELECT PositionName FROM Positions WHERE HUID = {ID};";
-                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
                                 {
-                                    while (reader.Read())
+                                    cmd.CommandText = $"SELECT FirstName,LastName FROM Users WHERE HUID = {ID};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
                                     {
-                                        FacRoles.Add(reader.GetValue(0).ToString());
+                                        while (reader.Read())
+                                        {
+                                            FacNames.Add(reader.GetValue(0).ToString() + " " + reader.GetValue(1).ToString());
+                                        }
+                                    }
+                                }
+                                if (mode == "default")
+                                {//populate facroles with default all names and ids
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {
+                                        cmd.CommandText = $"SELECT PositionName FROM Positions WHERE HUID = {ID};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                FacRoles.Add(reader.GetValue(0).ToString());
+                                            }
+                                        }
                                     }
                                 }
                             }
-
+                            if (mode == "alph")
+                            {//this is alphabetical
+                                FacNames.Sort();
+                                foreach (var name in FacNames)
+                                {
+                                    string[] firstlast = name.Split(" ");
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {
+                                        cmd.CommandText = $"SELECT HUID FROM Users WHERE FirstName = '{firstlast[0]}' AND LastName = '{firstlast[1]}';";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                AlphFacIDs.Add((int)reader.GetValue(0));
+                                            }
+                                        }
+                                    }
+                                }
+                                foreach (var id in AlphFacIDs.ToList())
+                                {//filters the obtained ids for non faculty ids
+                                    if (!FacID.Contains(id))
+                                    {
+                                        AlphFacIDs.Remove(id);
+                                    }
+                                }
+                                foreach (var id in AlphFacIDs)
+                                {
+                                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                                    {
+                                        cmd.CommandText = $"SELECT PositionName FROM Positions WHERE HUID = {id};";
+                                        using (SqlDataReader reader = cmd.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                FacRoles.Add(reader.GetValue(0).ToString());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     sqlConn.Close();
@@ -116,12 +270,19 @@ namespace Hogwarts2._0
 
                     Button FacName = new Button();
                     FacName.Foreground = new SolidColorBrush(Colors.Black);
-                    FacName.Name = FacID[FacultyListRow].ToString();//this is for default,all
+                    if (mode == "default")
+                    {
+                        FacName.Name = FacID[FacultyListRow].ToString();//this is for default,all
+                    }else if (mode == "alph")
+                    {
+                        FacName.Name = AlphFacIDs[FacultyListRow].ToString();//this is for alpha,all
+                    }
                     FacName.FontSize = 36;
                     FacName.FontFamily = new FontFamily("/Assets/HARRYP__.TTF#Harry P");
                     FacName.VerticalAlignment = VerticalAlignment.Center;
                     FacName.HorizontalAlignment = HorizontalAlignment.Center;
                     FacName.Content = name;
+                    FacName.Click += ViewSelectedFac;
                     FacName.SetValue(Grid.RowProperty, FacultyListRow);
                     FacName.SetValue(Grid.ColumnProperty, 0);
                     bdName.Child = FacName;
@@ -165,6 +326,17 @@ namespace Hogwarts2._0
                 txtblk.SetValue(Grid.ColumnProperty, 0);
                 txtblk.Text = "No faculty members exist";
             }
+        }
+
+        private async void ViewSelectedFac(object sender, RoutedEventArgs e)
+        {
+            Button mybutton = sender as Button;
+            Int32.TryParse(mybutton.Name, out int FacID);
+            var DeclineValid = new MessageDialog(FacID.ToString());
+            await DeclineValid.ShowAsync();
+            Form5.Visibility = Visibility.Visible;
+            Form3.Visibility = Visibility.Collapsed;
+            Form4Filter.Visibility = Visibility.Collapsed;
         }
 
         private void Form1ViewApplications_Click(object sender, RoutedEventArgs e)
@@ -395,8 +567,11 @@ namespace Hogwarts2._0
 
         private void Form3Cancel_Click(object sender, RoutedEventArgs e)
         {
-            form3.Visibility = Visibility.Collapsed;
+            Form3.Visibility = Visibility.Collapsed;
             Form1.Visibility = Visibility.Visible;
+            Form4Filter.Visibility = Visibility.Collapsed;
+            FilterOn = false;
+            ResetForm3Filter();
             PurgeFacultyList();
         }
 
@@ -404,6 +579,75 @@ namespace Hogwarts2._0
         {
             FacultyList.RowDefinitions.Clear();
             FacultyList.Children.Clear();
+        }
+
+        private void Form3Filter_Click(object sender, RoutedEventArgs e)
+        {
+            Form4Filter.Visibility = Visibility.Visible;
+            Form3Filter.Visibility = Visibility.Collapsed;
+            FilterOn = true;
+        }
+
+        private void Form4FilterCancel_Click(object sender, RoutedEventArgs e)
+        {
+            FilterOn = false;
+            Form4Filter.Visibility = Visibility.Collapsed;
+            Form3Filter.Visibility = Visibility.Visible;
+        }
+
+        private void RoleInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PurgeFacultyList();
+            if (FilterbyReg.IsChecked == true)
+            {
+                setupForm3("default", RoleInput.SelectedValue.ToString());
+            }
+            else
+            {
+                setupForm3("alph", RoleInput.SelectedValue.ToString());
+            }
+        }
+
+        private void SetFilter(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).Name == "FilterbyAlph")
+            {
+                FilterbyReg.IsChecked = false;
+                PurgeFacultyList();
+                setupForm3("alph", RoleInput.SelectedValue.ToString());
+            }
+            else if ((sender as CheckBox).Name == "FilterbyReg")
+            {
+                FilterbyAlph.IsChecked = false;
+                PurgeFacultyList();
+                setupForm3("default", RoleInput.SelectedValue.ToString());
+            }
+        }
+
+        private async void FilterAttemptUncheck(object sender, RoutedEventArgs e)
+        {
+            if (FilterbyAlph.IsChecked == false && FilterbyReg.IsChecked == false)
+            {
+                (sender as CheckBox).IsChecked = true;
+                var NotValidMessage = new MessageDialog("Please select a filter that is not currently in use.");
+                await NotValidMessage.ShowAsync();
+            }
+        }
+
+        private void Form5Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form5.Visibility = Visibility.Collapsed;
+            //Form4Filter.Visibility = Visibility.Collapsed;
+            //Form3Filter.Visibility = Visibility.Visible;
+            if(FilterOn == true)
+            {
+                Form4Filter.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Form3Filter.Visibility = Visibility.Visible;
+            }
+            Form3.Visibility = Visibility.Visible;
         }
     }
 }

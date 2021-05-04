@@ -51,7 +51,7 @@
                 <Button x:Name="Form2Decline" HorizontalAlignment="Center" FontSize="36" VerticalAlignment="Center" Content="Decline" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form2Decline_Click"/>
             </Grid>
         </Grid>
-        <Grid x:Name="form3">
+        <Grid x:Name="Form3" Visibility="Collapsed">
             <Image x:Name="Form3Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="288,114,288,706">
                 <TextBlock x:Name="Form3Title" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Text="Faculty"/>
@@ -59,7 +59,7 @@
             <Grid Margin="1160,-18,-126,668">
                 <Button x:Name="Form3Cancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form3Cancel_Click"/>
             </Grid>
-            <ScrollViewer x:Name="Form3ScrollViewer" Margin="288,250,288,243">
+            <ScrollViewer x:Name="Form3ScrollViewer" Margin="288,302,288,191">
                 <Grid x:Name="FacultyList" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="500"/>
@@ -67,6 +67,47 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </ScrollViewer>
+            <Grid Margin="1113,162,114,587">
+                <Button x:Name="Form3Filter" HorizontalAlignment="Center" Foreground="Black" VerticalAlignment="Center" Content="Filter" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="50" Click="Form3Filter_Click"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="Form4Filter" Visibility="Collapsed">
+            <Grid Margin="943,157,-14,301">
+                <Image x:Name="FilterBack" Source="Assets/EnrollFilterBack.png" HorizontalAlignment="Center" Stretch="UniformToFill" Height="400" Width="250" VerticalAlignment="Center" />
+            </Grid>
+            <Grid Margin="1212,141,247,600">
+                <TextBlock x:Name="FilterTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="Filter" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="1274,155,99,650">
+                <Button x:Name="Form4FilterCancel" FontSize="36" HorizontalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="X" Click="Form4FilterCancel_Click" VerticalAlignment="Center" />
+            </Grid>
+            <Grid Margin="1201,229,219,501" >
+                <CheckBox x:Name="FilterbyReg" HorizontalAlignment="Center" Checked="SetFilter" Unchecked="FilterAttemptUncheck" VerticalAlignment="Center">
+                    <TextBlock FontSize="33" Text="Registration Order"  Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                </CheckBox>
+            </Grid>
+            <Grid Margin="1188,315,232,415" >
+                <CheckBox  x:Name="FilterbyAlph" HorizontalAlignment="Center" Checked="SetFilter" Unchecked="FilterAttemptUncheck" VerticalAlignment="Center">
+                    <TextBlock FontSize="33" Text="Alphabetical" Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                </CheckBox>
+            </Grid>
+            <Grid Margin="1108,415,122,334">
+                <ComboBox  Name="RoleInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Role" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="144" SelectionChanged="RoleInput_SelectionChanged">
+                    <x:String>Professor</x:String>
+                    <x:String>Counselor</x:String>
+                    <x:String>Headmaster</x:String>
+                    <x:String>All Roles</x:String>
+                </ComboBox>
+            </Grid>
+        </Grid>
+        <Grid x:Name="Form5" Visibility="Collapsed">
+            <Image x:Name="Form5Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="288,100,288,710">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+            </Grid>
+            <Grid Margin="1160,-18,-126,668">
+                <Button x:Name="Form5Cancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form5Cancel_Click"/>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

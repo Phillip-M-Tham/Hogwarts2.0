@@ -25,6 +25,7 @@ namespace Hogwarts2._0
         private string SelectedHouse;
         private int SelectedStudentHUID;
         private int SelectedStudentYear;
+        private bool FilterOn = false;
         public HeadStudents()
         {
             this.InitializeComponent();
@@ -55,6 +56,7 @@ namespace Hogwarts2._0
         private void Form2AHufflepuff_Click(object sender, RoutedEventArgs e)
         {//setup the filter page based on the house click
             purgeForm3StudentList();
+            Form3FilterButton.Visibility = Visibility;
             Form3.Visibility = Visibility.Visible;
             Form2.Visibility = Visibility.Collapsed;
             SelectedHouse = "Hufflepuff";
@@ -63,6 +65,7 @@ namespace Hogwarts2._0
         private void Form2ARavenclaw_Click(object sender, RoutedEventArgs e)
         {
             purgeForm3StudentList();
+            Form3FilterButton.Visibility = Visibility;
             Form3.Visibility = Visibility.Visible;
             Form2.Visibility = Visibility.Collapsed;
             SelectedHouse = "Ravenclaw";
@@ -72,6 +75,7 @@ namespace Hogwarts2._0
         private void Form2ASlytherin_Click(object sender, RoutedEventArgs e)
         {
             purgeForm3StudentList();
+            Form3FilterButton.Visibility = Visibility;
             Form3.Visibility = Visibility.Visible;
             Form2.Visibility = Visibility.Collapsed;
             SelectedHouse = "Slytherin";
@@ -81,6 +85,7 @@ namespace Hogwarts2._0
         private void Form2AGryffindor_Click(object sender, RoutedEventArgs e)
         {
             purgeForm3StudentList();
+            Form3FilterButton.Visibility = Visibility;
             Form3.Visibility = Visibility.Visible;
             Form2.Visibility = Visibility.Collapsed;
             SelectedHouse = "Gryffindor";
@@ -583,6 +588,8 @@ namespace Hogwarts2._0
 
         private void Form3Cancel_Click(object sender, RoutedEventArgs e)
         {
+            FilterOn = false;
+            //Form3FilterButton.Visibility = Visibility;
             Form3.Visibility = Visibility.Collapsed;
             Form2.Visibility = Visibility.Visible;
             Form3Filter.Visibility = Visibility.Collapsed;
@@ -599,11 +606,15 @@ namespace Hogwarts2._0
         private void Form3Filter_click(object sender, RoutedEventArgs e)
         {
             Form3Filter.Visibility = Visibility.Visible;
+            Form3FilterButton.Visibility = Visibility.Collapsed;
+            FilterOn = true;
         }
 
         private void Form3FilterCancel_Click(object sender, RoutedEventArgs e)
         {
+            Form3FilterButton.Visibility = Visibility.Visible;
             Form3Filter.Visibility = Visibility.Collapsed;
+            FilterOn = false;
         }
 
         private void SetFilter(object sender, RoutedEventArgs e)
@@ -652,6 +663,14 @@ namespace Hogwarts2._0
         {
             Form4.Visibility = Visibility.Collapsed;
             Form3.Visibility = Visibility.Visible;
+            if(FilterOn == true)
+            {
+                Form3Filter.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Form3FilterButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void Form4UpdateYearLevel_click(object sender, RoutedEventArgs e)
@@ -668,6 +687,14 @@ namespace Hogwarts2._0
             Form4ExpellStudentButton.Visibility = Visibility.Visible;
             Form4UpdateYearButton.Visibility = Visibility.Visible;
             CurrentYearlevel.SelectedItem = SelectedStudentYear;
+            /*if(FilterOn == true)
+            {
+                Form3Filter.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Form3FilterButton.Visibility = Visibility.Visible;
+            }*/
         }
 
         private async void Form4ASubmit_Click(object sender, RoutedEventArgs e)
