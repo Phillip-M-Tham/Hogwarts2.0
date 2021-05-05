@@ -30,6 +30,7 @@ namespace Hogwarts2._0
         private int FacultyApplicationsRow = 0;
         private int FacultyListRow = 0;
         private bool FilterOn = false;
+        int SelectedFacultyHUID;
         public HeadFaculty()
         {
             this.InitializeComponent();
@@ -328,15 +329,47 @@ namespace Hogwarts2._0
             }
         }
 
-        private async void ViewSelectedFac(object sender, RoutedEventArgs e)
+        private void ViewSelectedFac(object sender, RoutedEventArgs e)
         {
             Button mybutton = sender as Button;
-            Int32.TryParse(mybutton.Name, out int FacID);
-            var DeclineValid = new MessageDialog(FacID.ToString());
-            await DeclineValid.ShowAsync();
+            Int32.TryParse(mybutton.Name, out SelectedFacultyHUID);
             Form5.Visibility = Visibility.Visible;
             Form3.Visibility = Visibility.Collapsed;
             Form4Filter.Visibility = Visibility.Collapsed;
+            Form5Title.Text = mybutton.Content.ToString();
+            SetupAboutMe();
+        }
+
+        private void SetupAboutMe()
+        {
+            string userinfo = "";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT AboutInfo FROM Users WHERE HUID ={SelectedFacultyHUID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                userinfo = reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            if(userinfo != "")
+            {
+                AboutMe.Text = userinfo;
+            }
+            else
+            {
+                AboutMe.Text = "No Biography Available";
+            }
         }
 
         private void Form1ViewApplications_Click(object sender, RoutedEventArgs e)
@@ -419,7 +452,6 @@ namespace Hogwarts2._0
                     txtblock.Foreground = new SolidColorBrush(Colors.Black);
                     txtblock.VerticalAlignment = VerticalAlignment.Center;
                     txtblock.HorizontalAlignment = HorizontalAlignment.Center;
-                    //txtblock.TextAlignment = TextAlignment.Center;
                     txtblock.Text = name + $" Requested Role : {FacRoles[FacultyApplicationsRow]}";
                     bd2.Child = txtblock;
 
@@ -637,8 +669,6 @@ namespace Hogwarts2._0
         private void Form5Cancel_Click(object sender, RoutedEventArgs e)
         {
             Form5.Visibility = Visibility.Collapsed;
-            //Form4Filter.Visibility = Visibility.Collapsed;
-            //Form3Filter.Visibility = Visibility.Visible;
             if(FilterOn == true)
             {
                 Form4Filter.Visibility = Visibility.Visible;

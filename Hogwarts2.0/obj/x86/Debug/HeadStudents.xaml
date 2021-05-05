@@ -124,8 +124,8 @@
                     <Grid Margin="-10,276,10,1043" >
                         <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Student Biography"/>
                     </Grid>
-                    <Grid Margin="0,462,0,645">
-                        <TextBlock x:ConnectionId='26' x:Name="StudentBio" HorizontalAlignment="Center" Foreground="Black" FontSize="30" FontFamily="/Assets/ReginaScript.ttf#Regina Script" VerticalAlignment="Center" Width="950" Height="500" TextWrapping="Wrap" />
+                    <Grid Margin="0,414,0,693">
+                        <TextBlock x:ConnectionId='26' x:Name="StudentBio" HorizontalAlignment="Center" Foreground="Black" FontSize="30" FontFamily="/Assets/ReginaScript.ttf#Regina Script" VerticalAlignment="Center" Width="950" Height="auto" TextWrapping="Wrap" />
                     </Grid>
                     <Grid Margin="143,703,175,502">
                         <TextBlock x:ConnectionId='25' x:Name="ChartTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="GPA Progress"/>

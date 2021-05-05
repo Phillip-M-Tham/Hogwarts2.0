@@ -6,6 +6,7 @@ using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WinRTXamlToolkit.Controls.DataVisualization.Charting;
@@ -589,7 +590,6 @@ namespace Hogwarts2._0
         private void Form3Cancel_Click(object sender, RoutedEventArgs e)
         {
             FilterOn = false;
-            //Form3FilterButton.Visibility = Visibility;
             Form3.Visibility = Visibility.Collapsed;
             Form2.Visibility = Visibility.Visible;
             Form3Filter.Visibility = Visibility.Collapsed;
@@ -678,7 +678,6 @@ namespace Hogwarts2._0
             Form4AUpdateYear.Visibility = Visibility.Visible;
             Form4ExpellStudentButton.Visibility = Visibility.Collapsed;
             Form4UpdateYearButton.Visibility = Visibility.Collapsed;
-
         }
 
         private void Form4ACancel_Click(object sender, RoutedEventArgs e)
@@ -687,14 +686,6 @@ namespace Hogwarts2._0
             Form4ExpellStudentButton.Visibility = Visibility.Visible;
             Form4UpdateYearButton.Visibility = Visibility.Visible;
             CurrentYearlevel.SelectedItem = SelectedStudentYear;
-            /*if(FilterOn == true)
-            {
-                Form3Filter.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Form3FilterButton.Visibility = Visibility.Visible;
-            }*/
         }
 
         private async void Form4ASubmit_Click(object sender, RoutedEventArgs e)
