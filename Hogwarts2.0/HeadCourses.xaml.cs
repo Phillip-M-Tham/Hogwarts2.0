@@ -595,6 +595,7 @@ namespace Hogwarts2._0
                     }
                 }
                 ResetForm2A();
+                SetupForm2A();
             }
             else
             {

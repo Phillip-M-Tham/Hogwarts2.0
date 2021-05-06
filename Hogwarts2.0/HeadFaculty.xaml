@@ -109,21 +109,36 @@
                 <Button x:Name="Form5Cancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form5Cancel_Click"/>
             </Grid>
             <ScrollViewer x:Name="Form5Scrollviewer" Margin="288,235,288,272">
-                <Grid x:Name="FacultyProfile" Height="1264">
-                    <Grid Margin="0,0,0,727">
+                <Grid x:Name="FacultyProfile" Height="1400">
+                    <Grid Margin="0,0,0,926">
                         <Image x:Name="ProfilePic" Source="Assets/Plogo.png" Stretch="Uniform" Height="369" Width="432" />
                     </Grid>
-                    <Grid Margin="0,298,0,562">
+                    <Grid Margin="0,298,0,734">
                         <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="Faculty Biography" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
                     </Grid>
-                    <Grid Margin="0,474,0,218">
+                    <Grid Margin="0,474,0,316">
                         <TextBlock x:Name="AboutMe" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="30" TextWrapping="Wrap" Height="auto" Width="1000" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
                     </Grid>
                     <Grid Margin="0,920,0,106">
                         <Button x:Name="SetHouseMaster" VerticalAlignment="Center" Content="Assign Head of House" HorizontalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black"/>
                     </Grid>
                     <Grid Margin="0,1060,0,-34">
-                        <Button x:Name="ReliefMember" VerticalAlignment="Center" Content="Terminate Employment" HorizontalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black"/>
+                        <Button x:Name="ReliefMember" VerticalAlignment="Center" Content="Terminate Employment" HorizontalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Click="ReliefMember_Click"/>
+                    </Grid>
+                    <Grid x:Name="Form5B" Margin="0,958,0,-110">
+                        <Image x:Name="WarningBackground" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/TimeTunerBackground.png" Height="408" Width="552" />
+                        <Grid Margin="416,-28,417,247">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" FontSize="36" Text="WARNING" FontFamily="Assets/HARRYP__.TTF#Harry P"/>
+                        </Grid>
+                        <Grid Margin="230,67,274,104" >
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="                 Terminating a faculty member will remove &#x0a;              them member from the system and delete all &#x0a;                 associated data of selected member. This &#x0a;                         includes, courses and grades. &#x0a;                            Do you wish to conitnue?" />
+                        </Grid>
+                        <Grid Margin="466,272,290,20">
+                            <Button x:Name="CancelForm5B" Foreground="Black" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="No" Click="CancelForm5B_Click" Margin="255,0,0,0" />
+                        </Grid>
+                        <Grid Margin="310,283,446,24">
+                            <Button x:Name="TerminateFaculty" Foreground="Black" FontSize="40" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Yes" Click="Terminatefaculty_Click" Margin="255,0,0,0" />
+                        </Grid>
                     </Grid>
                 </Grid>
             </ScrollViewer>

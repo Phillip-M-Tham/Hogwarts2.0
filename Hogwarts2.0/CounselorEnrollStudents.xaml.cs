@@ -1990,7 +1990,7 @@ namespace Hogwarts2._0
                     {//safety check to move to next page after inserting the course
                         var CourseEnrolled = new MessageDialog("Successfully enrolled student in course");
                         await CourseEnrolled.ShowAsync();
-                        Frame.Navigate(typeof(CounselorEnrollStudents), _userHuid);
+                        SetupCourses(null, null);
                     }
                 }
             }

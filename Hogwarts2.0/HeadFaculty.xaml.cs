@@ -31,6 +31,7 @@ namespace Hogwarts2._0
         private int FacultyListRow = 0;
         private bool FilterOn = false;
         int SelectedFacultyHUID;
+        string SelecetedFacultyRoleType;
         public HeadFaculty()
         {
             this.InitializeComponent();
@@ -343,6 +344,7 @@ namespace Hogwarts2._0
         private void SetupAboutMe()
         {
             string userinfo = "";
+            string PositionType="";
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
@@ -350,12 +352,23 @@ namespace Hogwarts2._0
                 {
                     using (SqlCommand cmd = sqlConn.CreateCommand())
                     {
-                        cmd.CommandText = $"SELECT AboutInfo FROM Users WHERE HUID ={SelectedFacultyHUID};";
+                        cmd.CommandText = $"SELECT AboutInfo FROM Users WHERE HUID = {SelectedFacultyHUID};";
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
                                 userinfo = reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                    using(SqlCommand cmd= sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT PositionType FROM Faculty WHERE HUID = {SelectedFacultyHUID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                SelecetedFacultyRoleType = reader.GetValue(0).ToString();
                             }
                         }
                     }
@@ -369,6 +382,14 @@ namespace Hogwarts2._0
             else
             {
                 AboutMe.Text = "No Biography Available";
+            }
+            if(SelecetedFacultyRoleType == "P")
+            {
+                SetHouseMaster.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                SetHouseMaster.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -677,7 +698,150 @@ namespace Hogwarts2._0
             {
                 Form3Filter.Visibility = Visibility.Visible;
             }
+            SetHouseMaster.Visibility = Visibility.Collapsed;
             Form3.Visibility = Visibility.Visible;
+            Form5B.Visibility = Visibility.Collapsed;
+            ReliefMember.Visibility = Visibility.Visible;
+            Form5Scrollviewer.ChangeView(null, 0, null, true);
+            
+        }
+
+        private void CancelForm5B_Click(object sender, RoutedEventArgs e)
+        {
+            Form5B.Visibility = Visibility.Collapsed;
+            ReliefMember.Visibility = Visibility.Visible;
+        }
+
+        private async void Terminatefaculty_Click(object sender, RoutedEventArgs e)
+        {
+            List<int> TargetCourseID = new List<int>();
+            List<int> TargetAssignmentID = new List<int>();
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    if (SelecetedFacultyRoleType == "P")
+                    {
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {//get all the courses this professor teaches
+                            cmd.CommandText = $"SELECT CourseID FROM Courses WHERE ProfHUID = {SelectedFacultyHUID};";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    TargetCourseID.Add((int)reader.GetValue(0));
+                                }
+                            }
+                        }
+                        if(TargetCourseID.Count > 0)
+                        {
+                            foreach(var course in TargetCourseID)
+                            {//get all the assingment ids for each course
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {
+                                    cmd.CommandText = $"SELECT AssignmentID FROM Assignments WHERE CourseID = {course}";
+                                    using(SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read()) 
+                                        {
+                                            TargetAssignmentID.Add((int)reader.GetValue(0));
+                                        }
+                                    }
+                                }
+                            }
+                            if (TargetAssignmentID.Count > 0)
+                            {
+                                foreach (var assignment in TargetAssignmentID)
+                                {//delete all grades foreach selected assignment id
+                                    SqlDataAdapter adapter2 = new SqlDataAdapter();
+                                    SqlCommand command2 = new SqlCommand($"DELETE FROM Grades WHERE AssignmentID = {assignment};", sqlConn);
+                                    adapter2.DeleteCommand = command2;
+                                    adapter2.DeleteCommand.ExecuteNonQuery();
+                                }
+                            }
+                            foreach(var courseid in TargetCourseID)
+                            {//delete all finalgrades,time, location,daytype,reqmaterials,studentenrolledcourses,assignments,semestercourses, and courses for each courseid
+                                SqlDataAdapter adapter3 = new SqlDataAdapter();
+                                SqlCommand command3 = new SqlCommand($"DELETE FROM FinalGrade WHERE CourseID = {courseid};", sqlConn);
+                                adapter3.DeleteCommand = command3;
+                                adapter3.DeleteCommand.ExecuteNonQuery();
+
+                                command3 = new SqlCommand($"DELETE FROM Times WHERE CourseID = {courseid};", sqlConn);
+                                adapter3.DeleteCommand = command3;
+                                adapter3.DeleteCommand.ExecuteNonQuery();
+
+                                command3 = new SqlCommand($"DELETE FROM Locations WHERE CourseID = {courseid};", sqlConn);
+                                adapter3.DeleteCommand = command3;
+                                adapter3.DeleteCommand.ExecuteNonQuery();
+
+                                command3 = new SqlCommand($"DELETE FROM DayTypes WHERE CourseID = {courseid};", sqlConn);
+                                adapter3.DeleteCommand = command3;
+                                adapter3.DeleteCommand.ExecuteNonQuery();
+
+                                command3 = new SqlCommand($"DELETE FROM ReqMaterials WHERE CourseID = {courseid};", sqlConn);
+                                adapter3.DeleteCommand = command3;
+                                adapter3.DeleteCommand.ExecuteNonQuery();
+
+                                command3 = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE CourseID = {courseid};", sqlConn);
+                                adapter3.DeleteCommand = command3;
+                                adapter3.DeleteCommand.ExecuteNonQuery();
+
+                                command3 = new SqlCommand($"DELETE FROM Assignments WHERE CourseID = {courseid};", sqlConn);
+                                adapter3.DeleteCommand = command3;
+                                adapter3.DeleteCommand.ExecuteNonQuery();
+
+                                command3 = new SqlCommand($"DELETE FROM SemesterCourses WHERE CourseID = {courseid};", sqlConn);
+                                adapter3.DeleteCommand = command3;
+                                adapter3.DeleteCommand.ExecuteNonQuery();
+
+                                command3 = new SqlCommand($"DELETE FROM Courses WHERE CourseID = {courseid};", sqlConn);
+                                adapter3.DeleteCommand = command3;
+                                adapter3.DeleteCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                    //delete matching, user, faculty, position
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    SqlCommand command = new SqlCommand($"DELETE FROM Positions WHERE HUID = {SelectedFacultyHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    command = new SqlCommand($"DELETE FROM Faculty WHERE HUID = {SelectedFacultyHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    command = new SqlCommand($"DELETE FROM Users WHERE HUID = {SelectedFacultyHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    sqlConn.Close();
+                }
+            }
+            var NotValidMessage = new MessageDialog("Faculty member has been successfully removed.");
+            await NotValidMessage.ShowAsync();
+            Form5.Visibility = Visibility.Collapsed;
+            if (FilterOn == true)
+            {
+                Form4Filter.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Form3Filter.Visibility = Visibility.Visible;
+            }
+            SetHouseMaster.Visibility = Visibility.Collapsed;
+            Form3.Visibility = Visibility.Visible;
+            Form5B.Visibility = Visibility.Collapsed;
+            ReliefMember.Visibility = Visibility.Visible;
+            Form5Scrollviewer.ChangeView(null, 0, null, true);
+            PurgeFacultyList();
+            ResetForm3Filter();
+        }
+
+        private void ReliefMember_Click(object sender, RoutedEventArgs e)
+        {
+            Form5B.Visibility = Visibility.Visible;
+            ReliefMember.Visibility = Visibility.Collapsed;
         }
     }
 }
