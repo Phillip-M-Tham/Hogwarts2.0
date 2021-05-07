@@ -206,6 +206,9 @@
     <Compile Include="ProfessorMain.xaml.cs">
       <DependentUpon>ProfessorMain.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProfHeadofHouse.xaml.cs">
+      <DependentUpon>ProfHeadofHouse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProfHome.xaml.cs">
       <DependentUpon>ProfHome.xaml</DependentUpon>
     </Compile>
@@ -285,6 +288,7 @@
     <Content Include="Assets\ProfAccountSettingsBack.png" />
     <Content Include="Assets\ProfCourseback.png" />
     <Content Include="Assets\Profdefaultpic.png" />
+    <Content Include="Assets\ProfHoHback.png" />
     <Content Include="Assets\Proftest.png" />
     <Content Include="Assets\ravenclawbanner.png" />
     <Content Include="Assets\Rback.png" />
@@ -435,6 +439,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProfessorMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProfHeadofHouse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

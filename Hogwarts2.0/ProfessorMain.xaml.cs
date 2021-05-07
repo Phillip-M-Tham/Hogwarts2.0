@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
 using System.Data.SqlClient;
+using Windows.UI;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -71,7 +72,45 @@ namespace Hogwarts2._0
             UserHuid = e.Parameter.ToString();
             //Navbar.Opacity = .8;
             UpdatetopBar();
+            checkforHead();
         }
+
+        private void checkforHead()
+        {
+            string HeadofHouse="";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                { 
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {//checks if the logged in Professor is a head of a house
+                        cmd.CommandText = $"SELECT HouseName FROM HouseHead WHERE ProfHUID = {UserHuid};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                HeadofHouse=(reader.GetValue(0).ToString());
+                            }
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            if(HeadofHouse != "")
+            {//they are a head of a house
+                Navbar.MenuItems.Insert(Navbar.MenuItems.Count-1,new NavigationViewItem
+                {//add the head of house button to navbar
+                    Content = $"Head of {HeadofHouse}",
+                    Foreground = new SolidColorBrush(Colors.Black),
+                    Icon = new SymbolIcon(Symbol.Admin),
+                    FontFamily = new FontFamily("/Assets/ReginaScript.ttf#Regina Script"),
+                    Tag = "HeadOfHouse",
+                    FontSize = 36
+                }) ;
+            }
+        }
+
         private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             NavigationViewItem item = args.SelectedItem as NavigationViewItem;
@@ -92,6 +131,9 @@ namespace Hogwarts2._0
                 case "AccountSettings":
                     //Navbar.Opacity = 1;
                     ContentFrame.Navigate(typeof(ProfAccountSettings), UserHuid);
+                    break;
+                case "HeadOfHouse":
+                    ContentFrame.Navigate(typeof(ProfHeadofHouse), UserHuid);
                     break;
                 case "Logout":
                     //Navbar.Opacity = .8;

@@ -40,6 +40,7 @@ Assets\ProfAccount.png
 Assets\ProfAccountSettingsBack.png
 Assets\ProfCourseback.png
 Assets\Profdefaultpic.png
+Assets\ProfHoHback.png
 Assets\Proftest.png
 Assets\ravenclawbanner.png
 Assets\Rback.png
@@ -99,6 +100,7 @@ ProfAccount.xbf
 ProfAccountSettings.xbf
 ProfCourses.xbf
 ProfessorMain.xbf
+ProfHeadofHouse.xbf
 ProfHome.xbf
 RavenclawStu.xbf
 Register.xbf

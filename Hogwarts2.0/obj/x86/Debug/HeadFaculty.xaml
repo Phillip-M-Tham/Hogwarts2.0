@@ -100,7 +100,7 @@
                 </ComboBox>
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='7' x:Name="Form5" Visibility="Visible">
+        <Grid x:ConnectionId='7' x:Name="Form5" Visibility="Collapsed">
             <Image x:ConnectionId='8' x:Name="Form5Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="288,100,288,710">
                 <TextBlock x:ConnectionId='27' x:Name="Form5Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
