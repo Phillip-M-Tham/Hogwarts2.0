@@ -120,10 +120,33 @@
                         <TextBlock x:Name="AboutMe" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="30" TextWrapping="Wrap" Height="auto" Width="1000" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
                     </Grid>
                     <Grid Margin="0,920,0,106">
-                        <Button x:Name="SetHouseMaster" VerticalAlignment="Center" Content="Assign Head of House" HorizontalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black"/>
+                        <Button x:Name="SetHouseMaster" VerticalAlignment="Center" Content="Assign Head of House" HorizontalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Click="SetHouseMaster_Click"/>
                     </Grid>
                     <Grid Margin="0,1060,0,-34">
                         <Button x:Name="ReliefMember" VerticalAlignment="Center" Content="Terminate Employment" HorizontalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Click="ReliefMember_Click"/>
+                    </Grid>
+                    <Grid x:Name="Form5A" Margin="0,958,0,-110">
+                        <Image x:Name="Form5ABackground" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/TimeTunerBackground.png" Height="408" Width="552" />
+                        <Grid Margin="454,-22,-58,264">
+                            <Button x:Name="Form5ACancel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Content="X" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form5ACancel_Click" />
+                        </Grid>
+                        <Grid Margin="0,4,0,260">
+                            <TextBlock x:Name="Form5Atitle" Foreground="Black" FontSize="50" FontFamily="Assets/HARRYP__.TTF#Harry P" Text="Head of House Management" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Margin="0,-44,0,44">
+                            <TextBlock x:Name="Form5description" Foreground="Black" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Please select a house to update the head of the selected house &#x0a; If the head of house is already assigned, the selected member &#x0a; will replace the previous head of house." FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                        </Grid>
+                        <Grid Margin="0,52,0,-52">
+                            <ComboBox  Name="HouseInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Select A House" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50">
+                                <x:String>Gryffindor</x:String>
+                                <x:String>Slytherin</x:String>
+                                <x:String>Hufflepuff</x:String>
+                                <x:String>Ravenclaw</x:String>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="0,124,0,-124">
+                            <Button x:Name="Form5AUpdateSubmit" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="Assets/HARRYP__.TTF#Harry P" FontSize="50" Click="Form5AUpdateSubmit_Click" Content="Update"/>
+                        </Grid>
                     </Grid>
                     <Grid x:Name="Form5B" Margin="0,958,0,-110">
                         <Image x:Name="WarningBackground" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/TimeTunerBackground.png" Height="408" Width="552" />

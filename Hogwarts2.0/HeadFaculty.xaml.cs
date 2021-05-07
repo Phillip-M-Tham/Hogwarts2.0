@@ -710,6 +710,10 @@ namespace Hogwarts2._0
         {
             Form5B.Visibility = Visibility.Collapsed;
             ReliefMember.Visibility = Visibility.Visible;
+            if (SelecetedFacultyRoleType == "P")
+            {
+                SetHouseMaster.Visibility = Visibility.Visible;
+            }
         }
 
         private async void Terminatefaculty_Click(object sender, RoutedEventArgs e)
@@ -842,6 +846,110 @@ namespace Hogwarts2._0
         {
             Form5B.Visibility = Visibility.Visible;
             ReliefMember.Visibility = Visibility.Collapsed;
+            if(SelecetedFacultyRoleType == "P")
+            {
+                SetHouseMaster.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void SetHouseMaster_Click(object sender, RoutedEventArgs e)
+        {
+            Form5A.Visibility = Visibility.Visible;
+            ReliefMember.Visibility = Visibility.Collapsed;
+            SetHouseMaster.Visibility = Visibility.Collapsed;
+            SetupForm5A();
+        }
+
+        private void SetupForm5A()
+        {
+            string selectedHouse="";
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                sqlConn.Open();
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {//get all the courses this professor teaches
+                        cmd.CommandText = $"SELECT HouseName FROM HouseHead WHERE ProfHUID = {SelectedFacultyHUID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                selectedHouse=reader.GetValue(0).ToString();
+                            }
+                        }
+                    }
+                    sqlConn.Close();
+                }
+            }
+            if(selectedHouse != "")
+            {
+                HouseInput.SelectedValue = selectedHouse;
+            }
+            else
+            {
+                HouseInput.SelectedItem = null;
+            }
+        }
+
+        private void Form5ACancel_Click(object sender, RoutedEventArgs e)
+        {
+            Form5A.Visibility = Visibility.Collapsed;
+            ReliefMember.Visibility = Visibility.Visible;
+            SetHouseMaster.Visibility = Visibility.Visible;
+        }
+
+        private async void Form5AUpdateSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            int currentProfHUID=0;
+            if(HouseInput.SelectedItem != null)
+            {
+                using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+                {
+                    sqlConn.Open();
+                    if (sqlConn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {//get all the courses this professor teaches
+                            cmd.CommandText = $"SELECT ProfHUID FROM HouseHead WHERE HouseName = '{HouseInput.SelectedValue}';";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    currentProfHUID = (int)reader.GetValue(0);
+                                }
+                            }
+                        }
+                        if(currentProfHUID != 0)
+                        {//update
+                            SqlDataAdapter adapter = new SqlDataAdapter();
+                            SqlCommand command = new SqlCommand($"UPDATE HouseHead SET ProfHUID = {SelectedFacultyHUID} WHERE HouseName ='{HouseInput.SelectedValue}';", sqlConn);
+                            adapter.UpdateCommand = command;
+                            adapter.UpdateCommand.ExecuteNonQuery();
+                            var ValidUpdate = new MessageDialog($"Head of {HouseInput.SelectedValue} successfully updated.");
+                            await ValidUpdate.ShowAsync();
+                        }
+                        else
+                        {//insert
+                            SqlDataAdapter adapter = new SqlDataAdapter();
+                            SqlCommand command = new SqlCommand($"INSERT INTO HouseHead VALUES ('{HouseInput.SelectedValue}',{SelectedFacultyHUID});", sqlConn);
+                            adapter.InsertCommand = command;
+                            adapter.InsertCommand.ExecuteNonQuery();
+                            var ValidInsert = new MessageDialog($"Head of {HouseInput.SelectedValue} successfully assigned.");
+                            await ValidInsert.ShowAsync();
+                        }
+                        sqlConn.Close();
+                    }
+                }
+                Form5A.Visibility = Visibility.Collapsed;
+                ReliefMember.Visibility = Visibility.Visible;
+                SetHouseMaster.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                var NotValidMessage = new MessageDialog("Please select a house to assign this member to become the head of.");
+                await NotValidMessage.ShowAsync();
+            }
         }
     }
 }
