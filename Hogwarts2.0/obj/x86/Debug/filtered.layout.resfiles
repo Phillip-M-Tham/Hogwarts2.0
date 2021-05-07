@@ -24,6 +24,7 @@ Assets\HeadCourses.jpg
 Assets\headdepartments.png
 Assets\headfacultyback.png
 Assets\headhome2.png
+Assets\HeadHousePointsBack.png
 Assets\headmasterhome.jpg
 Assets\headsemesters2.png
 Assets\HeadStudents.png
@@ -86,6 +87,7 @@ HeadCourses.xbf
 HeadDepartments.xbf
 HeadFaculty.xbf
 HeadHome.xbf
+HeadHousePoints.xbf
 HeadMain.xbf
 HeadSemesters.xbf
 HeadStudents.xbf

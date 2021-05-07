@@ -94,6 +94,9 @@ namespace Hogwarts2._0
                 case "Courses":
                     ContentFrame.Navigate(typeof(HeadCourses), UserHuid);
                     break;
+                case "HousePoints":
+                    ContentFrame.Navigate(typeof(HeadHousePoints), UserHuid);
+                    break;
                 case "Semesters":
                     ContentFrame.Navigate(typeof(HeadSemesters), UserHuid);
                     break;

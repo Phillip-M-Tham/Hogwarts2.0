@@ -257,3 +257,8 @@ C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\ProfHeadofHouse.g.i.cs
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\ProfHeadofHouse.g.cs
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\ProfHeadofHouse.xaml
 C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\ProfHeadofHouse.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\HeadHousePoints.xbf
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadHousePoints.g.i.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadHousePoints.g.cs
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadHousePoints.xaml
+C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\obj\x86\Debug\HeadHousePoints.xbf

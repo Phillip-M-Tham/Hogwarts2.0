@@ -167,6 +167,9 @@
     <Compile Include="HeadHome.xaml.cs">
       <DependentUpon>HeadHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HeadHousePoints.xaml.cs">
+      <DependentUpon>HeadHousePoints.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HeadMain.xaml.cs">
       <DependentUpon>HeadMain.xaml</DependentUpon>
     </Compile>
@@ -276,6 +279,7 @@
     <Content Include="Assets\headdepartments.png" />
     <Content Include="Assets\headfacultyback.png" />
     <Content Include="Assets\headhome2.png" />
+    <Content Include="Assets\HeadHousePointsBack.png" />
     <Content Include="Assets\headmasterhome.jpg" />
     <Content Include="Assets\headsemesters2.png" />
     <Content Include="Assets\HeadStudents.png" />
@@ -387,6 +391,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HeadHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HeadHousePoints.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
