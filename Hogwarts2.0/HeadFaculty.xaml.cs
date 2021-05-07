@@ -344,7 +344,7 @@ namespace Hogwarts2._0
         private void SetupAboutMe()
         {
             string userinfo = "";
-            string PositionType="";
+            //string PositionType="";
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();

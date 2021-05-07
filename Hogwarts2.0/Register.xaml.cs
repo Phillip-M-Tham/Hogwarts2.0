@@ -913,8 +913,7 @@ namespace Hogwarts2._0
             else
             {
                 calculateHouse(Gpoints, Rpoints, Spoints, Hpoints);
-                /*mymessage += $"\npet is {pet} Slytherin is {Spoints}, Ravenclaw is {Rpoints}, Gryffindor is {Gpoints} and Hufflepuff is {Hpoints}\nYOU ARE IN {house}\n {stuFirstName}, {stuLastName},{stuUserName},{stuPassword}";
-                var ValidStuMessage = new MessageDialog(mymessage);
+                /*var ValidStuMessage = new MessageDialog(mymessage);
                 await ValidStuMessage.ShowAsync();*/
                 //INSERT THE DATA TO THE DATABASE HERE
                 string InsertUserQuery = $"INSERT INTO Users VALUES ('{stuFirstName}','{stuLastName}','{stuUserName}','{stuPassword}',NULL);";
@@ -978,7 +977,8 @@ namespace Hogwarts2._0
                 }
                 if (huid == true)
                 {
-                    var StudentSuccessCreation = new MessageDialog("Student Account Successfully Created");
+                    mymessage = $"Student Account Successfully Created\nYOU ARE IN {house}\nCongratulations {stuFirstName} {stuLastName}\nUsername :{stuUserName}\nPassword :{stuPassword}";
+                    var StudentSuccessCreation = new MessageDialog(mymessage);
                     await StudentSuccessCreation.ShowAsync();
                     Frame.Navigate(typeof(MainPage));
                 }

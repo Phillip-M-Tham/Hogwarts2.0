@@ -5,12 +5,145 @@
     xmlns:local="using:Hogwarts2._0"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Image x:ConnectionId='2' x:Name="ProfHohbackground" Source="Assets/ProfHoHback.png" Stretch="Fill"/>
-
+        <Grid x:ConnectionId='3' x:Name="Form1">
+            <Image x:ConnectionId='34' x:Name="Form1Background" Opacity=".85" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="288,76,288,636">
+                <TextBlock x:ConnectionId='38' x:Name="Form1Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script" /> 
+            </Grid>
+            <ScrollViewer x:ConnectionId='35' x:Name="Form1ScrollViewer" Margin="288,346,288,255">
+                <Grid x:ConnectionId='37' x:Name="StudentList" HorizontalAlignment="Center" VerticalAlignment="Top" Height="auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500" />
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
+            <Grid Margin="1234,172,190,650">
+                <Button x:ConnectionId='36' x:Name="EnableFilter" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontFamily="/Assets/HarryP__.TTF#Harry P" Content="Filter"                           />
+            </Grid>
+        </Grid>
+        <Grid x:ConnectionId='4' x:Name="FilterForm" Visibility="Collapsed" Margin="1121,135,101,349">
+            <Image x:ConnectionId='29' x:Name="FilterBack" Source="Assets/EnrollFilterBack.png" HorizontalAlignment="Center" Stretch="UniformToFill" Height="400" Width="250" VerticalAlignment="Center" />
+            <Grid Margin="6,21,-6,277">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Filter Options"/>
+            </Grid>
+            <Grid Margin="215,-83,9,259" >
+                <Button x:ConnectionId='33' x:Name="FilterCancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"  FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="X"                            />
+            </Grid>
+            <Grid Margin="0,-21,0,68">
+                <CheckBox x:ConnectionId='32' x:Name="FilterbyReg" HorizontalAlignment="Center"                                                      VerticalAlignment="Center">
+                    <TextBlock FontSize="33" Text="Registration Order"  Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                </CheckBox>
+            </Grid>
+            <Grid Margin="-18,45,18,-45" >
+                <CheckBox x:ConnectionId='31'  x:Name="FilterbyAlph" HorizontalAlignment="Center"                                                      VerticalAlignment="Center">
+                    <TextBlock FontSize="33" Text="Alphabetical"  Foreground="Black" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                </CheckBox>
+            </Grid>
+            <Grid Margin="0,126,0,-126">
+                <ComboBox x:ConnectionId='30'  Name="YearlevelInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="144"                                                   >
+                    <x:Int32>1</x:Int32>
+                    <x:Int32>2</x:Int32>
+                    <x:Int32>3</x:Int32>
+                    <x:Int32>4</x:Int32>
+                    <x:Int32>5</x:Int32>
+                    <x:Int32>6</x:Int32>
+                    <x:Int32>7</x:Int32>
+                    <x:String>All Years</x:String>
+                </ComboBox>
+            </Grid>
+        </Grid>
+        <Grid x:ConnectionId='5' x:Name="Form2">
+            <Image x:ConnectionId='6' x:Name="Form2Background" Opacity=".85" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="0,0,0,540">
+                <TextBlock x:ConnectionId='28' x:Name="Form2Title" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="120" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+            </Grid>
+            <Grid Margin="1265,1,-18,695" >
+                <Button x:ConnectionId='27' x:Name="Form2Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"  FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="X"                           />
+            </Grid>
+            <ScrollViewer x:ConnectionId='7' x:Name="Form2ScrollViewer" Margin="288,321,288,233">
+                <Grid x:ConnectionId='8' x:Name="StudentProfile" Height="auto">
+                    <Grid Margin="0,-108,0,1145" >
+                        <Image x:ConnectionId='26' x:Name="ProfilePic" Source="Assets/Rstudefaultpic.png" Stretch="Uniform" Height="369" Width="432" />
+                    </Grid>
+                    <Grid Margin="-10,276,10,1043" >
+                        <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Student Biography"/>
+                    </Grid>
+                    <Grid Margin="0,414,0,693">
+                        <TextBlock x:ConnectionId='25' x:Name="StudentBio" HorizontalAlignment="Center" Foreground="Black" FontSize="30" FontFamily="/Assets/ReginaScript.ttf#Regina Script" VerticalAlignment="Center" Width="950" Height="auto" TextWrapping="Wrap" />
+                    </Grid>
+                    <Grid Margin="143,703,175,502">
+                        <TextBlock x:ConnectionId='24' x:Name="ChartTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="GPA Progress"/>
+                    </Grid>
+                    <Grid Margin="-329,926,650,279">
+                        <TextBlock x:ConnectionId='23' x:Name="ChartYTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="GPA" RenderTransformOrigin="0.5,0.5">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform Rotation="-90"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Margin="143,1191,175,14">
+                        <TextBlock x:ConnectionId='22' x:Name="ChartXTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Text="Semester"/>
+                    </Grid>
+                    <Grid Margin="17,930,3,246">
+                        <Charting:Chart x:ConnectionId='20' x:Name="lineChart" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1" Height="500" Width="950" >
+                            <Charting:LineSeries x:ConnectionId='21' x:Name="ReallyAnnoyingChart" Margin="0" IndependentValuePath="Semester" DependentValuePath="GPA" Title="StudentName" IsSelectionEnabled="True">
+                            </Charting:LineSeries>
+                        </Charting:Chart>
+                    </Grid>
+                    <Grid Margin="0,1244,0,-63">
+                        <Button x:ConnectionId='19' x:Name="Form2UpdateYearButton" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Update Year Level" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P"                                   />
+                    </Grid>
+                    <Grid Margin="0,1325,0,-144">
+                        <Button x:ConnectionId='18' x:Name="Form2ExpellStudentButton" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Expell Student" Foreground="Black" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P"                                 />
+                    </Grid>
+                    <Grid x:ConnectionId='9' x:Name="Form2AUpdateYear" Margin="72,1209,71,-207" Visibility="Collapsed">
+                        <Image x:ConnectionId='14' x:Name="Form4ABackground" HorizontalAlignment="Center" Height="200" Width="382" VerticalAlignment="Center" Stretch="Fill" Source="Assets/EnrollFilterBack.png" />
+                        <Grid Margin="245,115,238,358">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontSize="50" Text="Student Year" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Margin="0,126,0,0"/>
+                        </Grid>
+                        <Grid Margin="260,203,254,205">
+                            <ComboBox x:ConnectionId='17'  Name="CurrentYearlevel" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Year Level" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="144" >
+                                <x:Int32>1</x:Int32>
+                                <x:Int32>2</x:Int32>
+                                <x:Int32>3</x:Int32>
+                                <x:Int32>4</x:Int32>
+                                <x:Int32>5</x:Int32>
+                                <x:Int32>6</x:Int32>
+                                <x:Int32>7</x:Int32>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="568,142,223,292">
+                            <Button x:ConnectionId='16' x:Name="Form2ACancel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="X" FontSize="36" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P"                            />
+                        </Grid>
+                        <Grid Margin="353,266,359,146">
+                            <Button x:ConnectionId='15' x:Name="Form2ASubmit" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Update" FontSize="36" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P"                            />
+                        </Grid>
+                    </Grid>
+                    <Grid x:ConnectionId='10' x:Name="Form2ExpellStudentWarning" Visibility="Collapsed" Margin="1,1298,-1,-199" >
+                        <Image x:ConnectionId='11' x:Name="WarningBackground" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/TimeTunerBackground.png" Height="272" Width="500" />
+                        <Grid Margin="417,286,416,494">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" FontSize="36" Text="WARNING" FontFamily="Assets/HARRYP__.TTF#Harry P"/>
+                        </Grid>
+                        <Grid Margin="251,380,253,400" >
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" Text="    Expelling a student will remove student from the&#x0a;          system and delete all associated data of &#x0a;        selected student. Do you wish to conitnue?" />
+                        </Grid>
+                        <Grid Margin="496,383,260,180">
+                            <Button x:ConnectionId='13' x:Name="CancelForm2B" Foreground="Black" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="No"                            />
+                        </Grid>
+                        <Grid Margin="283,383,473,180">
+                            <Button x:ConnectionId='12' x:Name="ExpellStudent" Foreground="Black" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Yes"                             />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>
 

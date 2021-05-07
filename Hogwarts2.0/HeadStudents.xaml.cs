@@ -457,7 +457,7 @@ namespace Hogwarts2._0
                 GPA = gpa;
             }
         }
-    private void getChartData()
+        private void getChartData()
         {
             List<int> semesterIDs = new List<int>();
             List<decimal> Grades = new List<decimal>();
