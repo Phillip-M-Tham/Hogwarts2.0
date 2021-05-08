@@ -106,7 +106,6 @@ namespace Hogwarts2._0
                     Form3SemesterInput.Items.Add(semester);
                 }
             }
-            
         }
         private void SetSemester_Click(object sender, RoutedEventArgs e)
         {

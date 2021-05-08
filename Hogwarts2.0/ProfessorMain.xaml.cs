@@ -128,6 +128,9 @@ namespace Hogwarts2._0
                     //Navbar.Opacity = 1;
                     ContentFrame.Navigate(typeof(ProfCourses), UserHuid);
                     break;
+                case "HousePoints":
+                    ContentFrame.Navigate(typeof(ProfHousePoints), UserHuid);
+                    break;
                 case "AccountSettings":
                     //Navbar.Opacity = 1;
                     ContentFrame.Navigate(typeof(ProfAccountSettings), UserHuid);

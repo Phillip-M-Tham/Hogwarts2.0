@@ -38,6 +38,7 @@
                 <NavigationViewItem Content="Home" Icon="Home" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="Home"/>
                 <NavigationViewItem Content="My Profile" Icon="People" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AccountPage"/>
                 <NavigationViewItem Content="My Courses" Icon="Map" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="MyCoursesPage"/>
+                <NavigationViewItem Content="House Points" Icon="Favorite" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="HousePoints"/>
                 <NavigationViewItem Content="Account Settings" Icon="Link" FontFamily="/Assets/ReginaScript.ttf#Regina Script" FontSize="36" Tag="AccountSettings"/>
                 <NavigationViewItem Content="Log Out" Icon="LeaveChat" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Tag="Logout" FontSize="36"/>
             </NavigationView.MenuItems>

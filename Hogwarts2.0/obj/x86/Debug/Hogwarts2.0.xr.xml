@@ -236,6 +236,7 @@
     <RootType FullName="Hogwarts2._0.ProfessorMain" />
     <RootType FullName="Hogwarts2._0.ProfHeadofHouse" />
     <RootType FullName="Hogwarts2._0.ProfHome" />
+    <RootType FullName="Hogwarts2._0.ProfHousePoints" />
     <RootType FullName="Hogwarts2._0.RavenclawStu" />
     <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
       <RootProperty Name="Name" />

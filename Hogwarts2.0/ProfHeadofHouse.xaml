@@ -59,7 +59,7 @@
                 </ComboBox>
             </Grid>
         </Grid>
-        <Grid x:Name="Form2">
+        <Grid x:Name="Form2" Visibility="Collapsed">
             <Image x:Name="Form2Background" Opacity=".85" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="0,0,0,540">
                 <TextBlock x:Name="Form2Title" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="120" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>

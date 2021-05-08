@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="Hogwarts2._0.ProfHousePoints"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hogwarts2._0"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Image Source="Assets/ProfHousePointsBack.png" Stretch="Fill"/>
+        <Grid x:ConnectionId='2' x:Name="Form1">
+            <Image x:ConnectionId='3' x:Name="Form1Background" Opacity=".80" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="0,0,0,540">
+                <TextBlock x:ConnectionId='11' x:Name="Form1Title" Text="Hello World" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+            </Grid>
+            <Grid Margin="82,162,1052,455">
+                <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" Text="Gryffindor" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="416,163,718,454">
+                <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" Text="Ravenclaw" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="762,163,372,454">
+                <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" Text="Hufflepuff" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="1055,163,79,454">
+                <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" Text="Slytherin" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="187,386,1157,386">
+                <TextBlock x:ConnectionId='10' x:Name="Gpoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="1000000" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="521,386,823,386">
+                <TextBlock x:ConnectionId='9' x:Name="Rpoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="0" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="867,386,477,386">
+                <TextBlock x:ConnectionId='8' x:Name="Hpoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="0" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="1160,386,184,386">
+                <TextBlock x:ConnectionId='7' x:Name="Spoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="1000000" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+            </Grid>
+            <Grid Margin="0,197,0,0">
+                <ComboBox x:ConnectionId='6'  Name="HouseInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Select A House" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200">
+                    <x:String>Gryffindor</x:String>
+                    <x:String>Ravenclaw</x:String>
+                    <x:String>Hufflepuff</x:String>
+                    <x:String>Slytherin</x:String>
+                </ComboBox>
+            </Grid>
+            <Grid Margin="0,344,0,-84">
+                <TextBox x:ConnectionId='5' x:Name="PointInput" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" PlaceholderForeground="White" TextAlignment="Center" Width="400" Height="50" PlaceholderText="Enter a value to apply to a house" FontSize="36" />
+            </Grid>
+            <Grid Margin="0,625,0,0">
+                <Button x:ConnectionId='4' x:Name="ApplyPoints" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="50" Content="Apply Value"                          />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
+

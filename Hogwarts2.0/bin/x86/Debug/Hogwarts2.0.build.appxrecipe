@@ -154,6 +154,9 @@
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\ProfHoHback.png">
       <PackagePath>Assets\ProfHoHback.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\ProfHousePointsBack.png">
+      <PackagePath>Assets\ProfHousePointsBack.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\Assets\Proftest.png">
       <PackagePath>Assets\Proftest.png</PackagePath>
     </AppxPackagedFile>
@@ -375,6 +378,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\ProfHome.xbf">
       <PackagePath>ProfHome.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\ProfHousePoints.xbf">
+      <PackagePath>ProfHousePoints.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\phill\MSSA2021\CSharp\Hogwarts2.0\bin\x86\Debug\RavenclawStu.xbf">
       <PackagePath>RavenclawStu.xbf</PackagePath>
