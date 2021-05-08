@@ -10,8 +10,27 @@
 
     <Grid >
         <Image x:ConnectionId='2' Name="greenbackground" Source="Assets/Sback3.png" Stretch="Fill"/>
-        <Image x:ConnectionId='3' Name="Slogo" Stretch="none" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Slogo.png" Margin="0,341,0,0"/>
-        <TextBlock x:ConnectionId='4' Name="GSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="          OR PERHAPS IN SLYTHERIN,&#x0a;       YOU'LL MAKE YOUR REAL FRIENDS,&#x0a;   THOSE CUNNING FOLK USE ANY MEANS&#x0a;          TO ACHIEVE THEIR ENDS" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#c7c7c7" Margin="0,77,0,0" Width="1020"/>
+        <ScrollViewer Margin="234,10,235,0">
+            <Grid x:ConnectionId='3' x:Name="SlytherinHomePage" Height="1700">
+                <Image x:ConnectionId='4' Name="Slogo" Stretch="none" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Slogo.png" Margin="0,341,0,0"/>
+                <TextBlock x:ConnectionId='5' Name="GSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="          OR PERHAPS IN SLYTHERIN,&#x0a;       YOU'LL MAKE YOUR REAL FRIENDS,&#x0a;   THOSE CUNNING FOLK USE ANY MEANS&#x0a;          TO ACHIEVE THEIR ENDS" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#c7c7c7" Margin="0,77,0,0" Width="1020"/>
+                <Grid Margin="220,240,218,218">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Head of Slytherin" FontSize="60" Foreground="#c7c7c7"/>
+                </Grid>
+                <Grid Margin="0,762,0,0">
+                    <Image x:ConnectionId='9' Name="HeadProfProfilePic" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Profdefaultpic.png" Height="369" Width="432" Margin="0,129,0,0"/>
+                </Grid>
+                <Grid Margin="220,642,218,-184">
+                    <TextBlock x:ConnectionId='8' x:Name="HeadName" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Professor" FontSize="50" Foreground="#c7c7c7"/>
+                </Grid>
+                <Grid Margin="0,1010,0,-66">
+                    <TextBlock x:ConnectionId='7' x:Name="SemesterName" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="CurrentSemester" FontSize="100" Foreground="#c7c7c7"/>
+                </Grid>
+                <Grid Margin="0,1166,0,-222">
+                    <TextBlock x:ConnectionId='6' x:Name="CurrentHousePoints" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="HousePoints" FontSize="80" Foreground="#c7c7c7"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>
 

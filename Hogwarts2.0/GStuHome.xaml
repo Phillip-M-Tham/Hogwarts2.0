@@ -10,7 +10,26 @@
 
     <Grid>
         <Image Name="redbackground" Source="Assets/Gback.png" Stretch="Fill"/>
-        <Image Name="Glogo" Stretch="none" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Glogo.png" Margin="0,341,0,0"/>
-        <TextBlock Name="GSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="    YOU MIGHT BELONG IN GRYFFINDOR,&#x0a;   WHERE DWELL THE BRAVE AT HEART,&#x0a;   THEIR DARING, NERVE, AND CHIVALRY&#x0a;          SET GRYFFINDORS APART" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#f0b906" Margin="0,77,0,0" Width="1020"/>
+        <ScrollViewer Margin="234,10,235,0">
+            <Grid x:Name="GryffindorHomePage" Height="1700">
+                <Image Name="Glogo" Stretch="none" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Glogo.png" Margin="0,341,0,0"/>
+                <TextBlock Name="GSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="    YOU MIGHT BELONG IN GRYFFINDOR,&#x0a;   WHERE DWELL THE BRAVE AT HEART,&#x0a;   THEIR DARING, NERVE, AND CHIVALRY&#x0a;          SET GRYFFINDORS APART" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#f0b906" Margin="0,77,0,0" Width="1020"/>
+                <Grid Margin="220,294,218,164">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Head of Gryffindor" FontSize="60" Foreground="#f0b906"/>
+                </Grid>
+                <Grid Margin="0,813,0,-51">
+                    <Image Name="HeadProfProfilePic" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Profdefaultpic.png" Height="369" Width="432" Margin="0,129,0,0"/>
+                </Grid>
+                <Grid Margin="220,687,218,-229">
+                    <TextBlock x:Name="HeadName" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Professor" FontSize="50" Foreground="#f0b906"/>
+                </Grid>
+                <Grid Margin="0,1058,0,-114">
+                    <TextBlock x:Name="SemesterName" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="CurrentSemester" FontSize="100" Foreground="#f0b906"/>
+                </Grid>
+                <Grid Margin="0,1184,0,-240">
+                    <TextBlock x:Name="CurrentHousePoints" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="HousePoints" FontSize="80" Foreground="#f0b906"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

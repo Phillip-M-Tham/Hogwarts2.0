@@ -10,9 +10,26 @@
 
     <Grid>
         <Image Name="greenbackground" Source="Assets/Hback3.png" Stretch="Fill"/>
-        <Image Name="Hlogo" Stretch="none" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Hlogo.png" Margin="0,341,0,0"/>
-        <Grid Margin="290,46,255,633">
-            <TextBlock Name="GSlogan" VerticalAlignment="Center" HorizontalAlignment="Center" Text="    YOU MIGHT BELONG IN HUFFLEPUFF,&#x0a;    WHERE THEY ARE JUST AND LOYAL,&#x0a; THOSE PATIENT HUFFLEPUFFS ARE TRUE&#x0a;          AND UNAFRAID OF TOIL" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#9f4813"/>
-        </Grid>
+        <ScrollViewer Margin="234,10,235,0">
+            <Grid x:Name="HufflepuffHomePage" Height="1700">
+                <Image Name="Hlogo" Stretch="none" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Hlogo.png" Margin="0,341,0,0"/>
+                <TextBlock Name="HSlogan" VerticalAlignment="Top" HorizontalAlignment="Center" Text="    YOU MIGHT BELONG IN HUFFLEPUFF,&#x0a;    WHERE THEY ARE JUST AND LOYAL,&#x0a; THOSE PATIENT HUFFLEPUFFS ARE TRUE&#x0a;          AND UNAFRAID OF TOIL" FontSize="60" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="#9f4813" Margin="0,75,0,0"/>
+                <Grid Margin="220,294,218,164">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Head of Hufflepuff" FontSize="60" Foreground="#9f4813"/>
+                </Grid>
+                <Grid Margin="0,813,0,-51">
+                    <Image Name="HeadProfProfilePic" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Profdefaultpic.png" Height="369" Width="432" Margin="0,129,0,0"/>
+                </Grid>
+                <Grid Margin="220,687,218,-229">
+                    <TextBlock x:Name="HeadName" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Professor" FontSize="50" Foreground="#9f4813"/>
+                </Grid>
+                <Grid Margin="0,1058,0,-114">
+                    <TextBlock x:Name="SemesterName" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="CurrentSemester" FontSize="100" Foreground="#9f4813"/>
+                </Grid>
+                <Grid Margin="0,1184,0,-240">
+                    <TextBlock x:Name="CurrentHousePoints" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="HousePoints" FontSize="80" Foreground="#9f4813"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

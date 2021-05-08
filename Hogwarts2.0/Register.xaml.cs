@@ -42,7 +42,6 @@ namespace Hogwarts2._0
         {
             this.InitializeComponent();
             //SetDataConn();
-
         }
 
         public void SetDataConn()
