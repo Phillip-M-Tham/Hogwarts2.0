@@ -11,24 +11,24 @@
     <Grid>
         <Image x:ConnectionId='2' Name="HeadSemesterbackground" Source="Assets/HeadHousePointsBack.png" Stretch="Fill" />
         <Grid x:ConnectionId='3' x:Name="Form1">
-            <Image x:ConnectionId='15' x:Name="Form1Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Image x:ConnectionId='21' x:Name="Form1Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="0,0,0,540">
-                <TextBlock x:ConnectionId='18' x:Name="Form1Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="House Points" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                <TextBlock x:ConnectionId='24' x:Name="Form1Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="House Points" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
             </Grid>
             <Grid Margin="0,302,0,0">
-                <Button x:ConnectionId='17' x:Name="SetSemester" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" Content="Set Current Semester" FontFamily="/Assets/HARRYP__.TTF#Harry P"                          />
+                <Button x:ConnectionId='23' x:Name="SetSemester" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" Content="Set Current Semester" FontFamily="/Assets/HARRYP__.TTF#Harry P"                          />
             </Grid>
             <Grid Margin="0,122,0,180">
-                <Button x:ConnectionId='16' x:Name="UpdatePoints" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" Content="Update Points" FontFamily="/Assets/HARRYP__.TTF#Harry P"                           />
+                <Button x:ConnectionId='22' x:Name="UpdatePoints" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="50" Content="Update Points" FontFamily="/Assets/HARRYP__.TTF#Harry P"                           />
             </Grid>
         </Grid>
         <Grid x:ConnectionId='4' x:Name="Form2" Visibility="Collapsed">
-            <Image x:ConnectionId='5' x:Name="Form2Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Image x:ConnectionId='11' x:Name="Form2Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
             <Grid Margin="0,0,0,540">
-                <TextBlock x:ConnectionId='14' x:Name="Form2Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+                <TextBlock x:ConnectionId='20' x:Name="Form2Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="Hello World" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
             </Grid>
             <Grid Margin="1160,-18,-126,668">
-                <Button x:ConnectionId='13' x:Name="Form2Cancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P"                          />
+                <Button x:ConnectionId='19' x:Name="Form2Cancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P"                          />
             </Grid>
             <Grid Margin="82,162,1052,455">
                 <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" Text="Gryffindor" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
@@ -43,19 +43,19 @@
                 <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" Text="Slytherin" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
             </Grid>
             <Grid Margin="187,386,1157,386">
-                <TextBlock x:ConnectionId='12' x:Name="Gpoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="1000000" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                <TextBlock x:ConnectionId='18' x:Name="Gpoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="1000000" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
             </Grid>
             <Grid Margin="521,386,823,386">
-                <TextBlock x:ConnectionId='11' x:Name="Rpoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="0" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                <TextBlock x:ConnectionId='17' x:Name="Rpoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="0" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
             </Grid>
             <Grid Margin="867,386,477,386">
-                <TextBlock x:ConnectionId='10' x:Name="Hpoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="0" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                <TextBlock x:ConnectionId='16' x:Name="Hpoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="0" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
             </Grid>
             <Grid Margin="1160,386,184,386">
-                <TextBlock x:ConnectionId='9' x:Name="Spoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="1000000" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
+                <TextBlock x:ConnectionId='15' x:Name="Spoints" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="1000000" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>
             </Grid>
             <Grid Margin="0,197,0,0">
-                <ComboBox x:ConnectionId='8'  Name="HouseInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Select A House" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200">
+                <ComboBox x:ConnectionId='14'  Name="HouseInput" FontFamily="/Assets/ReginaScript.ttf#Regina Script" PlaceholderText="Select A House" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="200">
                     <x:String>Gryffindor</x:String>
                     <x:String>Ravenclaw</x:String>
                     <x:String>Hufflepuff</x:String>
@@ -63,10 +63,28 @@
                 </ComboBox>
             </Grid>
             <Grid Margin="0,344,0,-84">
-                <TextBox x:ConnectionId='7' x:Name="PointInput" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" PlaceholderForeground="White" TextAlignment="Center" Width="400" Height="50" PlaceholderText="Enter a value to apply to a house" FontSize="36" />
+                <TextBox x:ConnectionId='13' x:Name="PointInput" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" PlaceholderForeground="White" TextAlignment="Center" Width="400" Height="50" PlaceholderText="Enter a value to apply to a house" FontSize="36" />
             </Grid>
             <Grid Margin="0,625,0,0">
-                <Button x:ConnectionId='6' x:Name="ApplyPoints" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="50" Content="Apply Value"                          />
+                <Button x:ConnectionId='12' x:Name="ApplyPoints" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="50" Content="Apply Value"                          />
+            </Grid>
+        </Grid>
+        <Grid x:ConnectionId='5' x:Name="Form3" Visibility="Collapsed">
+            <Image x:ConnectionId='6' x:Name="Form3Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="0,0,0,540">
+                <TextBlock x:ConnectionId='10' x:Name="Form3Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="Set Semester" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+            </Grid>
+            <Grid Margin="1160,-18,-126,668">
+                <Button x:ConnectionId='9' x:Name="Form3Cancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P"                          />
+            </Grid>
+            <Grid Margin="0,0,0,162">
+                <TextBlock FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" Text="Semester"/> 
+            </Grid>
+            <Grid>
+                <ComboBox x:ConnectionId='8' Name="Form3SemesterInput" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A semester"/>
+            </Grid>
+            <Grid Margin="0,315,0,10">
+                <Button x:ConnectionId='7' x:Name="Form3Submit" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Submit"                          />
             </Grid>
         </Grid>
     </Grid>

@@ -69,5 +69,23 @@
                 <Button x:Name="ApplyPoints" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="50" Content="Apply Value" Click="ApplyPoints_Click"/>
             </Grid>
         </Grid>
+        <Grid x:Name="Form3" Visibility="Collapsed">
+            <Image x:Name="Form3Background" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" VerticalAlignment="center" Height="756" />
+            <Grid Margin="0,0,0,540">
+                <TextBlock x:Name="Form3Title" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="120" Text="Set Semester" FontFamily="/Assets/ReginaScript.ttf#Regina Script"/>
+            </Grid>
+            <Grid Margin="1160,-18,-126,668">
+                <Button x:Name="Form3Cancel" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P" Click="Form3Cancel_Click"/>
+            </Grid>
+            <Grid Margin="0,0,0,162">
+                <TextBlock FontFamily="/Assets/ReginaScript.ttf#Regina Script" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" Text="Semester"/> 
+            </Grid>
+            <Grid>
+                <ComboBox Name="Form3SemesterInput" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" PlaceholderText="Choose A semester"/>
+            </Grid>
+            <Grid Margin="0,315,0,10">
+                <Button x:Name="Form3Submit" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black" Content="Submit" Click="Form3Submit_Click"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

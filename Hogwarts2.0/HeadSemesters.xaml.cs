@@ -71,7 +71,7 @@ namespace Hogwarts2._0
                     }
                     if (Semesters.Count > 0)
                     {
-                        Semesters.Sort();
+                        //Semesters.Sort();
                         foreach (var sem in Semesters)
                         {
                             using (SqlCommand cmd = sqlConn.CreateCommand())
@@ -406,6 +406,10 @@ namespace Hogwarts2._0
                     
                     SqlDataAdapter adapter2 = new SqlDataAdapter();
                     SqlCommand command2 = new SqlCommand($"DELETE FROM Locations WHERE SemesterID = {id};", sqlConn);
+                    adapter2.DeleteCommand = command2;
+                    adapter2.DeleteCommand.ExecuteNonQuery();
+
+                    command2 = new SqlCommand($"DELETE FROM HousePoints WHERE CurrentSemesterID = {id};", sqlConn);
                     adapter2.DeleteCommand = command2;
                     adapter2.DeleteCommand.ExecuteNonQuery();
 

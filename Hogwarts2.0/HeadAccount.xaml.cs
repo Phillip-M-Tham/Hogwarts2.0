@@ -107,8 +107,8 @@ namespace Hogwarts2._0
                             SqlCommand command = new SqlCommand($"UPDATE Users SET AboutInfo = '{_updateaboutme}' WHERE HUID ={_userHuid};", sqlConn);
                             adapter.UpdateCommand = command;
                             adapter.UpdateCommand.ExecuteNonQuery();
+                            sqlConn.Close();
                         }
-                        sqlConn.Close();
                     }
                 }
                 catch (Exception ex)
