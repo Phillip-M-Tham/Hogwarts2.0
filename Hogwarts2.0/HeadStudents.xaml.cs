@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using WinRTXamlToolkit.Controls.DataVisualization.Charting;
 
@@ -404,9 +407,10 @@ namespace Hogwarts2._0
             getChartData();
         }
 
-        private void setupForm4()
+        private async void setupForm4()
         {
             string aboutme="";
+            byte[] result = default(byte[]);
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
@@ -434,6 +438,18 @@ namespace Hogwarts2._0
                             }
                         }
                     }
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT ProfilePic FROM ProfilePics WHERE HUID ={SelectedStudentHUID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result = (byte[])reader.GetValue(0);
+                            }
+                        }
+                    }
+                    sqlConn.Close();
                 }
             }
             CurrentYearlevel.SelectedValue = SelectedStudentYear;
@@ -444,6 +460,17 @@ namespace Hogwarts2._0
             else
             {
                 StudentBio.Text = "No Biography Available";
+            }
+            if (result != null)
+            {
+                BitmapImage biSource = new BitmapImage();
+                using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+                {
+                    await stream.WriteAsync(result.AsBuffer());
+                    stream.Seek(0);
+                    await biSource.SetSourceAsync(stream);
+                }
+                SelectedStudentProfilePic.Source = biSource;
             }
         }
 
@@ -671,6 +698,8 @@ namespace Hogwarts2._0
             {
                 Form3FilterButton.Visibility = Visibility.Visible;
             }
+            Form4Scrollviewer.ChangeView(null, 0, null, true);
+            SelectedStudentProfilePic.Source = new BitmapImage(new Uri(base.BaseUri, @"/Assets/Plogo.png"));
         }
 
         private void Form4UpdateYearLevel_click(object sender, RoutedEventArgs e)
@@ -736,36 +765,33 @@ namespace Hogwarts2._0
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
+                    command = new SqlCommand($"DELETE FROM ProfilePics WHERE HUID = {SelectedStudentHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
                     command = new SqlCommand($"DELETE FROM Grades WHERE StudentHUID = {SelectedStudentHUID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM Houses WHERE HUID = {SelectedStudentHUID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM Positions WHERE HUID = {SelectedStudentHUID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE StudentID = {SelectedStudentHUID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM Students WHERE HUID = {SelectedStudentHUID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM Users WHERE HUID = {SelectedStudentHUID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
-
                 }
                 sqlConn.Close();
             }

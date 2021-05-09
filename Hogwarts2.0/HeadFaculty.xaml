@@ -111,7 +111,7 @@
             <ScrollViewer x:Name="Form5Scrollviewer" Margin="288,235,288,272">
                 <Grid x:Name="FacultyProfile" Height="1400">
                     <Grid Margin="0,0,0,926">
-                        <Image x:Name="ProfilePic" Source="Assets/Plogo.png" Stretch="Uniform" Height="369" Width="432" />
+                        <Image x:Name="SelectedFacultyProfilePic" Source="Assets/Plogo.png" Stretch="Uniform" Height="369" Width="432" />
                     </Grid>
                     <Grid Margin="0,298,0,734">
                         <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="Faculty Biography" FontFamily="/Assets/HARRYP__.TTF#Harry P"/>

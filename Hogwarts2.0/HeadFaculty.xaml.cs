@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -341,9 +343,10 @@ namespace Hogwarts2._0
             SetupAboutMe();
         }
 
-        private void SetupAboutMe()
+        private async void SetupAboutMe()
         {
             string userinfo = "";
+            byte[] result = default(byte[]);
             //string PositionType="";
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
@@ -372,6 +375,17 @@ namespace Hogwarts2._0
                             }
                         }
                     }
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT ProfilePic FROM ProfilePics WHERE HUID ={SelectedFacultyHUID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result = (byte[])reader.GetValue(0);
+                            }
+                        }
+                    }
                     sqlConn.Close();
                 }
             }
@@ -390,6 +404,17 @@ namespace Hogwarts2._0
             else
             {
                 SetHouseMaster.Visibility = Visibility.Collapsed;
+            }
+            if (result != null)
+            {
+                BitmapImage biSource = new BitmapImage();
+                using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+                {
+                    await stream.WriteAsync(result.AsBuffer());
+                    stream.Seek(0);
+                    await biSource.SetSourceAsync(stream);
+                }
+                SelectedFacultyProfilePic.Source = biSource;
             }
         }
 
@@ -703,7 +728,7 @@ namespace Hogwarts2._0
             Form5B.Visibility = Visibility.Collapsed;
             ReliefMember.Visibility = Visibility.Visible;
             Form5Scrollviewer.ChangeView(null, 0, null, true);
-            
+            SelectedFacultyProfilePic.Source = new BitmapImage(new Uri(base.BaseUri, @"/Assets/Plogo.png"));
         }
 
         private void CancelForm5B_Click(object sender, RoutedEventArgs e)
@@ -808,6 +833,10 @@ namespace Hogwarts2._0
                     //delete matching, user, faculty, position
                     SqlDataAdapter adapter = new SqlDataAdapter();
                     SqlCommand command = new SqlCommand($"DELETE FROM Positions WHERE HUID = {SelectedFacultyHUID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
+                    command = new SqlCommand($"DELETE FROM ProfilePics WHERE HUID = {SelectedFacultyHUID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 

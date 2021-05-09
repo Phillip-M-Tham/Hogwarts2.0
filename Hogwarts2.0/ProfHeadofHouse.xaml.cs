@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using WinRTXamlToolkit.Controls.DataVisualization.Charting;
 
@@ -427,9 +429,10 @@ namespace Hogwarts2._0
             getChartData();
         }
 
-        private void setupForm2()
+        private async void setupForm2()
         {
             string aboutme = "";
+            byte[] result = default(byte[]);
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
@@ -457,6 +460,18 @@ namespace Hogwarts2._0
                             }
                         }
                     }
+                    using (SqlCommand cmd = sqlConn.CreateCommand())
+                    {
+                        cmd.CommandText = $"SELECT ProfilePic FROM ProfilePics WHERE HUID ={SelectedStudentID};";
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result = (byte[])reader.GetValue(0);
+                            }
+                        }
+                    }
+                    sqlConn.Close();
                 }
             }
             CurrentYearlevel.SelectedValue = SelectedStudentYear;
@@ -467,6 +482,17 @@ namespace Hogwarts2._0
             else
             {
                 StudentBio.Text = "No Biography Available";
+            }
+            if (result != null)
+            {
+                BitmapImage biSource = new BitmapImage();
+                using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+                {
+                    await stream.WriteAsync(result.AsBuffer());
+                    stream.Seek(0);
+                    await biSource.SetSourceAsync(stream);
+                }
+                SelectedStudentProfilePic.Source = biSource;
             }
         }
 
@@ -551,7 +577,6 @@ namespace Hogwarts2._0
 
         private Records createRecord(List<decimal> grades, string semestername)
         {
-
             double GPA;
             double totalpoints = 0.0;
             double gradepoint;
@@ -573,7 +598,6 @@ namespace Hogwarts2._0
                 Records records = new Records("bad", 0.0);
                 return records;
             }
-
         }
 
         private double getGradePoint(decimal item)
@@ -628,6 +652,23 @@ namespace Hogwarts2._0
             {
                 FilterForm.Visibility = Visibility.Visible;
             }
+            Form2ScrollViewer.ChangeView(null, 0, null, true);
+            if (SelectedHouse == "Gryffindor")
+            {
+                SelectedStudentProfilePic.Source = new BitmapImage(new Uri(base.BaseUri, @"Assets/Gstudefaultpic.png"));
+            }
+            else if (SelectedHouse == "Hufflepuff")
+            {
+                SelectedStudentProfilePic.Source = new BitmapImage(new Uri(base.BaseUri, @"Assets/Hstudefaultpic.png"));
+            }
+            else if(SelectedHouse == "Ravenclaw")
+            {
+                SelectedStudentProfilePic.Source = new BitmapImage(new Uri(base.BaseUri, @"Assets/Rstudefaultpic.png"));
+            }
+            else
+            {
+                SelectedStudentProfilePic.Source = new BitmapImage(new Uri(base.BaseUri, @"Assets/Sstudefaultpic.png"));
+            }
         }
 
         private void Form2UpdateYearLevel_click(object sender, RoutedEventArgs e)
@@ -652,32 +693,30 @@ namespace Hogwarts2._0
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM Grades WHERE StudentHUID = {SelectedStudentID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
+                    command = new SqlCommand($"DELETE FROM ProfilePics WHERE HUID = {SelectedStudentID};", sqlConn);
+                    adapter.DeleteCommand = command;
+                    adapter.DeleteCommand.ExecuteNonQuery();
+
                     command = new SqlCommand($"DELETE FROM Houses WHERE HUID = {SelectedStudentID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM Positions WHERE HUID = {SelectedStudentID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM StudentEnrolledCourses WHERE StudentID = {SelectedStudentID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM Students WHERE HUID = {SelectedStudentID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();
 
-                    adapter = new SqlDataAdapter();
                     command = new SqlCommand($"DELETE FROM Users WHERE HUID = {SelectedStudentID};", sqlConn);
                     adapter.DeleteCommand = command;
                     adapter.DeleteCommand.ExecuteNonQuery();

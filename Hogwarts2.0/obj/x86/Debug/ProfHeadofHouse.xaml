@@ -70,7 +70,7 @@
             <ScrollViewer x:ConnectionId='7' x:Name="Form2ScrollViewer" Margin="288,321,288,233">
                 <Grid x:ConnectionId='8' x:Name="StudentProfile" Height="auto">
                     <Grid Margin="0,-108,0,1145" >
-                        <Image x:ConnectionId='26' x:Name="ProfilePic" Source="Assets/Rstudefaultpic.png" Stretch="Uniform" Height="369" Width="432" />
+                        <Image x:ConnectionId='26' x:Name="SelectedStudentProfilePic" Source="Assets/Rstudefaultpic.png" Stretch="Uniform" Height="369" Width="432" />
                     </Grid>
                     <Grid Margin="-10,276,10,1043" >
                         <TextBlock Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Student Biography"/>
