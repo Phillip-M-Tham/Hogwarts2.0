@@ -41,14 +41,14 @@
       <RootProperty Name="Opacity" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
-      <RootProperty Name="Name" />
-      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Foreground" />
       <RootProperty Name="Content" />
       <RootProperty Name="FontFamily" />
       <RootProperty Name="FontSize" />
+      <RootProperty Name="Name" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="Foreground" />
       <RootProperty Name="Background" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="Height" />

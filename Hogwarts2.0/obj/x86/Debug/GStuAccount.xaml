@@ -11,29 +11,32 @@
     <Grid>
         <Image x:ConnectionId='2' Name="red" Source="Assets/Gback.png" Stretch="Fill" />
         <Grid>
-            <Image x:ConnectionId='8' Name="paperback" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" Stretch="Uniform" VerticalAlignment="Center" Height="857" />
+            <Image x:ConnectionId='9' Name="paperback" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" Stretch="Uniform" VerticalAlignment="Center" Height="857" />
             <Grid>
                 <Grid>
-                    <Image x:ConnectionId='11' Name="StudentProfilePic" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Gstudefaultpic.png" Height="369" Width="432" Margin="0,129,0,0"/>
+                    <Image x:ConnectionId='12' x:Name="StudentProfilePic" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Gstudefaultpic.png" Height="369" Width="432" Margin="0,129,0,0"/>
                 </Grid>
-                <TextBlock x:ConnectionId='9' Name="UserInfoBox" TextWrapping="Wrap" Margin="0,540,0,0" Text=" Hello World" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" FontSize="30" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Width="1372" Height="349"></TextBlock>
-                <Grid Margin="-157,41,1359,848">
-                    <Button x:ConnectionId='10' Name="EditInfo" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Edit" Margin="52,0,0,0"                        />
+                <TextBlock x:ConnectionId='10' Name="UserInfoBox" TextWrapping="Wrap" Margin="0,540,0,0" Text=" Hello World" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" FontSize="30" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Width="1372" Height="349"></TextBlock>
+                <Grid Margin="-130,41,1332,848">
+                    <Button x:ConnectionId='11' Name="EditInfo" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P" Content="Edit"                        />
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:ConnectionId='3' x:Name="Editform" Visibility="Collapsed" Margin="201,111,201,111">
+        <Grid x:ConnectionId='3' x:Name="Editform" Visibility="Collapsed" >
             <Grid Margin="-205,333,1032,313">
-                <TextBlock x:ConnectionId='7' VerticalAlignment="Center" HorizontalAlignment="Center" Name="EditUserInfo" Text="User Info:" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" Foreground="Black"  />
+                <TextBlock x:ConnectionId='8' VerticalAlignment="Center" HorizontalAlignment="Center" Name="EditUserInfo" Text="User Info:" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="40" Foreground="Black"  />
             </Grid>
             <Grid Margin="-126,390,-124,-44">
-                <TextBox x:ConnectionId='6' VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Enter Your Information Here" TextWrapping="Wrap" Name="EditUserInfoInput" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Width="1371" Height="363"/>
+                <TextBox x:ConnectionId='7' VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Enter Your Information Here" TextWrapping="Wrap" Name="EditUserInfoInput" FontSize="36" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Width="1371" Height="363"/>
             </Grid>
-            <Grid Margin="719,-404,-719,404">
-                <Button x:ConnectionId='5' VerticalAlignment="Center" HorizontalAlignment="Center" Name="CancelUpdate" Content="Cancel" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36"                           />
+            <Grid Margin="740,-404,-740,404">
+                <Button x:ConnectionId='6' VerticalAlignment="Center" HorizontalAlignment="Center" Name="CancelUpdate" Content="X" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36"                           />
             </Grid>
             <Grid Margin="-1,627,1,-284">
-                <Button x:ConnectionId='4' VerticalAlignment="Center" HorizontalAlignment="Center" Name="SubmitStuUpdate" Content="Submit" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36"                              />
+                <Button x:ConnectionId='5' VerticalAlignment="Center" HorizontalAlignment="Center" Name="SubmitStuUpdate" Content="Submit" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36"                              />
+            </Grid>
+            <Grid Margin="275,-141,274,649">
+                <Button x:ConnectionId='4' x:Name="Form2BrowsePictures" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Content="Browse" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36"                                   />
             </Grid>
         </Grid>
     </Grid>

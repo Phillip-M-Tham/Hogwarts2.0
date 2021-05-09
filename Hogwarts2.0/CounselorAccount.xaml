@@ -35,6 +35,9 @@
             <Grid Margin="-1,627,1,-284">
                 <Button VerticalAlignment="Center" HorizontalAlignment="Center" Name="SubmitStuUpdate" Content="Submit" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Click="SubmitStuUpdate_Click"/>
             </Grid>
+            <Grid Margin="275,-141,274,649">
+                <Button x:Name="Form2BrowsePictures" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Content="Browse" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Click="Form2BrowsePictures_Click" />
+            </Grid>
         </Grid>
     </Grid>
 </Page>

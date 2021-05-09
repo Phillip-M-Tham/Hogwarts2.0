@@ -14,7 +14,7 @@
             <Image Name="paperback" Source="Assets/RegisterBackground.png" HorizontalAlignment="Center" Stretch="Uniform" VerticalAlignment="Center" Height="857" />
             <Grid>
                 <Grid>
-                    <Image Name="CounselorProfilePic" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Plogo.png" Height="369" Width="432" Margin="0,129,0,0"/>
+                    <Image Name="HeadProfilePic" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Plogo.png" Height="369" Width="432" Margin="0,129,0,0"/>
                 </Grid>
                 <TextBlock Name="UserInfoBox" TextWrapping="Wrap" Margin="0,540,0,0" Text=" Hello World" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" FontSize="30" FontFamily="/Assets/ReginaScript.ttf#Regina Script" Width="1372" Height="349"></TextBlock>
                 <Grid Margin="-157,41,1359,848">
@@ -34,6 +34,9 @@
             </Grid>
             <Grid Margin="-1,627,1,-284">
                 <Button VerticalAlignment="Center" HorizontalAlignment="Center" Name="SubmitStuUpdate" Content="Submit" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Click="SubmitStuUpdate_Click"/>
+            </Grid>
+            <Grid Margin="275,-141,274,649">
+                <Button x:Name="Form2BrowsePictures" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Content="Browse" FontFamily="/Assets/HARRYP__.TTF#Harry P" FontSize="36" Click="Form2BrowsePictures_Click" />
             </Grid>
         </Grid>
     </Grid>

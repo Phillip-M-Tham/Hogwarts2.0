@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using System.Data.SqlClient;
-using Windows.UI.Popups;
-using System.Text;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,7 +27,7 @@ namespace Hogwarts2._0
         private string _userinfo = "";
         private string _updateaboutme = "";
         const string ConnectionString = "SERVER = DESKTOP-R3J82OF\\SQLEXPRESS2019; DATABASE= Hogwarts2.0; USER ID=Cohort7; PASSWORD=tuesday313";
-
+        private byte[] ReallyAnnoyingByteArray;
         public GStuAccount()
         {
             this.InitializeComponent();
@@ -39,12 +37,13 @@ namespace Hogwarts2._0
         {
             base.OnNavigatedTo(e);
             _userHuid = e.Parameter.ToString();
-            Setuserinfo(_userHuid);
+            Setuserinfo();
             //we can add one for the picture here
         }
 
-        private async void Setuserinfo(string myuserhuid)
+        private async void Setuserinfo()
         {
+            byte[] profilepic = default(byte[]);
             try
             {
                 using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
@@ -54,12 +53,24 @@ namespace Hogwarts2._0
                     {
                         using (SqlCommand cmd = sqlConn.CreateCommand())
                         {
-                            cmd.CommandText = $"SELECT AboutInfo FROM Users WHERE HUID ={myuserhuid};";
+                            cmd.CommandText = $"SELECT AboutInfo FROM Users WHERE HUID ={_userHuid};";
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
                                 while (reader.Read())
                                 {
                                     _userinfo += reader.GetValue(0).ToString();
+                                }
+                            }
+                        }
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {
+                            cmd.CommandText = $"SELECT ProfilePic FROM ProfilePics WHERE HUID = {_userHuid}";
+                            //profilepic = (byte[])cmd.ExecuteScalar();
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    profilepic = (byte[])reader.GetValue(0);
                                 }
                             }
                         }
@@ -81,8 +92,19 @@ namespace Hogwarts2._0
                 UserInfoBox.Text = _userinfo;
                 EditUserInfoInput.Text = _userinfo;
             }
+            if (profilepic != null)
+            {//they have a profile pic
+                BitmapImage biSource = new BitmapImage();
+                using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+                {
+                    await stream.WriteAsync(profilepic.AsBuffer());
+                    stream.Seek(0);
+                    await biSource.SetSourceAsync(stream);
+                }
+                StudentProfilePic.Source = biSource;
+            }
         }
-
+       
         private void EditInfo_Click(object sender, RoutedEventArgs e)
         {
             Editform.Visibility = Visibility.Visible;
@@ -98,6 +120,9 @@ namespace Hogwarts2._0
             if (_updateaboutme != "")
             {
                 _updateaboutme = ConverttoFriendly(_updateaboutme);
+                byte[] result = default(byte[]);
+                //var mypic = StudentProfilePic.Source;
+
                 try
                 {
                     using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
@@ -109,8 +134,38 @@ namespace Hogwarts2._0
                             SqlCommand command = new SqlCommand($"UPDATE Users SET AboutInfo = '{_updateaboutme}' WHERE HUID ={_userHuid};", sqlConn);
                             adapter.UpdateCommand = command;
                             adapter.UpdateCommand.ExecuteNonQuery();
+                            if (ReallyAnnoyingByteArray != null)
+                            {
+                                using (SqlCommand cmd = sqlConn.CreateCommand())
+                                {
+                                    cmd.CommandText = $"SELECT ProfilePic FROM ProfilePics WHERE HUID ={_userHuid};";
+                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            result = (byte[])reader.GetValue(0);
+                                        }
+                                    }
+                                }
+                                if (result == null)
+                                {//this is an insert*/
+                                    command = new SqlCommand($"INSERT INTO ProfilePics(HUID,ProfilePic) VALUES (@id,@image);", sqlConn);
+                                    command.Parameters.AddWithValue("id", _userHuid);
+                                    command.Parameters.AddWithValue("image", ReallyAnnoyingByteArray);
+                                    adapter.InsertCommand = command;
+                                    adapter.InsertCommand.ExecuteNonQuery();
+                                }
+                                else
+                                {//update
+                                    command = new SqlCommand($"UPDATE ProfilePics SET ProfilePic = @image WHERE HUID ={_userHuid};", sqlConn);
+                                    command.Parameters.AddWithValue("image", ReallyAnnoyingByteArray);
+                                    adapter.UpdateCommand = command;
+                                    adapter.UpdateCommand.ExecuteNonQuery();
+                                }
+                            }
+                            sqlConn.Close();
                         }
-                        sqlConn.Close();
+
                     }
                 }
                 catch (Exception ex)
@@ -146,6 +201,38 @@ namespace Hogwarts2._0
             Editform.Visibility = Visibility.Collapsed;
             EditInfo.Visibility = Visibility.Visible;
             UserInfoBox.Visibility = Visibility.Visible;
+        }
+
+        private async void Form2BrowsePictures_Click(object sender, RoutedEventArgs e)
+        {
+            BitmapImage bitmapImage = new BitmapImage();
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.Thumbnail;
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".jpeg");
+            openPicker.FileTypeFilter.Add(".png");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            if (file != null)
+            {
+                using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
+                {
+                    // Set the image source to the selected bitmap.
+                    bitmapImage.SetSource(fileStream);
+                }
+                RandomAccessStreamReference streamRef = RandomAccessStreamReference.CreateFromFile(file);
+                IRandomAccessStreamWithContentType streamWithContent = await streamRef.OpenReadAsync();
+                byte[] buffer = new byte[streamWithContent.Size];
+                await streamWithContent.ReadAsync(buffer.AsBuffer(), (uint)streamWithContent.Size, InputStreamOptions.None);
+                ReallyAnnoyingByteArray = buffer;
+                StudentProfilePic.Source = bitmapImage;
+
+            }
+            else
+            {
+                //OutputTextBlock.Text = "Operation cancelled.";
+            }
         }
     }
 }
