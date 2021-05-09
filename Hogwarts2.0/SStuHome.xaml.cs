@@ -6,12 +6,14 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -31,13 +33,14 @@ namespace Hogwarts2._0
             setuphomepage();
         }
 
-        private void setuphomepage()
+        private async void setuphomepage()
         {
             int headhouseid=0;
             int CurrentSemesterID=0;
             int CurrentPoints=0;
             string LastName = "";
             string CurrentSemesterName = "";
+            byte[] result = default(byte[]);
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 sqlConn.Open();
@@ -64,6 +67,17 @@ namespace Hogwarts2._0
                                 while (reader.Read())
                                 {
                                     LastName = reader.GetValue(0).ToString();
+                                }
+                            }
+                        }
+                        using (SqlCommand cmd = sqlConn.CreateCommand())
+                        {
+                            cmd.CommandText = $"SELECT ProfilePic FROM ProfilePics WHERE HUID ={headhouseid};";
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    result = (byte[])reader.GetValue(0);
                                 }
                             }
                         }
@@ -100,6 +114,17 @@ namespace Hogwarts2._0
             if(headhouseid != 0)
             {//there is head of house
                 HeadName.Text = $"Professor {LastName}";
+                if(result != null)
+                {
+                    BitmapImage biSource = new BitmapImage();
+                    using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+                    {
+                        await stream.WriteAsync(result.AsBuffer());
+                        stream.Seek(0);
+                        await biSource.SetSourceAsync(stream);
+                    }
+                    HeadProfProfilePic.Source = biSource;
+                }
             }
             else
             {//no one is assigned the postion currently

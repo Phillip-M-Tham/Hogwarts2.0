@@ -20,13 +20,13 @@
                 <Grid Margin="0,813,0,-51">
                     <Image Name="HeadProfProfilePic" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Source="Assets/Profdefaultpic.png" Height="369" Width="432" Margin="0,129,0,0"/>
                 </Grid>
-                <Grid Margin="220,687,218,-229">
+                <Grid Margin="220,726,218,-268">
                     <TextBlock x:Name="HeadName" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="Professor" FontSize="50" Foreground="#9f4813"/>
                 </Grid>
-                <Grid Margin="0,1058,0,-114">
+                <Grid Margin="0,1094,0,-150">
                     <TextBlock x:Name="SemesterName" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="CurrentSemester" FontSize="100" Foreground="#9f4813"/>
                 </Grid>
-                <Grid Margin="0,1184,0,-240">
+                <Grid Margin="0,1208,0,-264">
                     <TextBlock x:Name="CurrentHousePoints" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Assets/HARRYP__.TTF#Harry P" Text="HousePoints" FontSize="80" Foreground="#9f4813"/>
                 </Grid>
             </Grid>

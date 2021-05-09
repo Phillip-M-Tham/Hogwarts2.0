@@ -125,7 +125,7 @@
                     <Grid Margin="0,1060,0,-34">
                         <Button x:ConnectionId='22' x:Name="ReliefMember" VerticalAlignment="Center" Content="Terminate Employment" HorizontalAlignment="Center" FontSize="50" FontFamily="/Assets/HARRYP__.TTF#Harry P" Foreground="Black"                           />
                     </Grid>
-                    <Grid x:ConnectionId='11' x:Name="Form5A" Margin="0,958,0,-110">
+                    <Grid x:ConnectionId='11' x:Name="Form5A" Margin="0,958,0,-110" Visibility="Collapsed">
                         <Image x:ConnectionId='16' x:Name="Form5ABackground" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/TimeTunerBackground.png" Height="408" Width="552" />
                         <Grid Margin="454,-22,-58,264">
                             <Button x:ConnectionId='21' x:Name="Form5ACancel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Content="X" FontSize="36" FontFamily="/Assets/HARRYP__.TTF#Harry P"                            />
@@ -148,7 +148,7 @@
                             <Button x:ConnectionId='17' x:Name="Form5AUpdateSubmit" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="Assets/HARRYP__.TTF#Harry P" FontSize="50"                                  Content="Update"/>
                         </Grid>
                     </Grid>
-                    <Grid x:ConnectionId='12' x:Name="Form5B" Margin="0,958,0,-110">
+                    <Grid x:ConnectionId='12' x:Name="Form5B" Margin="0,958,0,-110" Visibility="Collapsed">
                         <Image x:ConnectionId='13' x:Name="WarningBackground" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/TimeTunerBackground.png" Height="408" Width="552" />
                         <Grid Margin="416,-28,417,247">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" FontSize="36" Text="WARNING" FontFamily="Assets/HARRYP__.TTF#Harry P"/>
